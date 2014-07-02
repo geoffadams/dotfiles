@@ -18,6 +18,13 @@ rescue
     puts 'Error installing homebrew bundle.'
 end
 
+begin
+    puts 'Installing oh-my-zsh...'
+    system 'curl -L http://install.ohmyz.sh | sh'
+rescue
+    puts 'Error installing oh-my-zsh'
+end
+
 email = Readline.readline('Email address: ')
 
 begin
