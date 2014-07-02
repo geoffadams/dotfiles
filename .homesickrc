@@ -1,5 +1,23 @@
 require 'readline'
 
+unless system 'which brew'
+    begin
+        puts 'Installing homebrew...'
+        system 'ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"'
+    rescue
+        puts 'Error installing homebrew.'
+    end
+else
+    puts 'Homebrew already installed.'    
+end
+
+begin
+    puts 'Installing homebrew bundle...'
+    system 'brew bundle ~/Brewfile'
+rescue
+    puts 'Error installing homebrew bundle.'
+end
+
 email = Readline.readline('Email address: ')
 
 begin
@@ -8,4 +26,3 @@ begin
 rescue
     puts 'Error setting email address in git.'
 end
-
