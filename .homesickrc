@@ -1,9 +1,3 @@
-# TODO: Set up iTerm2
-# TODO: Use cask to install other applications
-# TODO: Install colour schemes etc
-# TODO: vim configuration
-# TODO: A nice command line
-
 require 'readline'
 
 unless system 'which brew'
