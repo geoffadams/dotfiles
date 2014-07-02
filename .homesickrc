@@ -1,35 +1,47 @@
 require 'readline'
 
 unless system 'which brew'
-    begin
-        puts 'Installing homebrew...'
-        system 'ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"'
-    rescue
+    puts 'Installing homebrew...'
+    brew_ret = system 'ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"'
+
+    if brew_ret
+        puts 'homebrew successfully installed!'
+    else
         puts 'Error installing homebrew.'
     end
 else
-    puts 'Homebrew already installed.'    
+    puts 'homebrew already installed.'    
 end
 
-begin
-    puts 'Installing homebrew bundle...'
-    system 'brew bundle ~/Brewfile'
-rescue
+
+
+puts 'Installing homebrew bundle...'
+brew_bundle_ret = system 'brew bundle ~/Brewfile'
+
+if brew_bundle_ret
+    puts 'homebrew bundle successfully installed!'
+else
     puts 'Error installing homebrew bundle.'
 end
 
-begin
-    puts 'Installing oh-my-zsh...'
-    system 'curl -L http://install.ohmyz.sh | sh'
-rescue
+
+
+puts 'Installing oh-my-zsh...'
+ohmyzsh_ret = system 'curl -L http://install.ohmyz.sh | sh'
+
+if ohmyzsh_ret
+    puts 'oh-my-zsh installed!'
+else
     puts 'Error installing oh-my-zsh'
 end
 
-email = Readline.readline('Email address: ')
 
-begin
-    system "git config --global user.email #{email}"
+
+email = Readline.readline('Email address: ')
+gitconfig_ret = system "git config --global user.email #{email}"
+
+if gitconfig_ret
     puts 'Email address set in git global configuration'
-rescue
+else
     puts 'Error setting email address in git.'
 end
