@@ -1,0 +1,11 @@
+require 'readline'
+
+email = Readline.readline('Email address: ')
+
+begin
+    system "git config --global user.email #{email}"
+    puts 'Email address set in git global configuration'
+rescue
+    puts 'Error setting email address in git.'
+end
+
