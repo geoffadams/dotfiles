@@ -1,0 +1,12 @@
+install openssl
+install git
+install curl
+install wget
+install zsh
+install zsh-completions
+install zsh-syntax-highlighting
+install vim
+install rbenv
+install rbenv-gem-rehash
+
+cleanup
