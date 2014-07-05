@@ -1,4 +1,5 @@
 require 'readline'
+require 'pathname'
 
 unless system 'which brew'
     puts 'Installing homebrew...'
@@ -25,14 +26,19 @@ else
 end
 
 
+ohmyzsh_path = Pathname.new "#{Dir.home}/.oh-my-zsh"
 
-puts 'Installing oh-my-zsh...'
-ohmyzsh_ret = system 'curl -L http://install.ohmyz.sh | sh'
+unless ohmyzsh_path.exist?
+    puts 'Installing oh-my-zsh...'
+    ohmyzsh_ret = system 'curl -L http://install.ohmyz.sh | sh'
 
-if ohmyzsh_ret
-    puts 'oh-my-zsh installed!'
+    if ohmyzsh_ret
+        puts 'oh-my-zsh installed!'
+    else
+        puts 'Error installing oh-my-zsh'
+    end
 else
-    puts 'Error installing oh-my-zsh'
+    puts 'oh-my-zsh already installed.'
 end
 
 
