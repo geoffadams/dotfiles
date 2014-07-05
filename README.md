@@ -12,12 +12,12 @@
 - Installs homebrew
 - Installs a bunch of homebrew packages
 - Sets up git
+- Installs oh-my-zsh
 - Sets up zsh
 - Populates configuration with private information
 
 ## TODO
 
-- Install oh-my-zsh
 - vim configuration
 - Use cask to install other applications
 - Set up iTerm2
