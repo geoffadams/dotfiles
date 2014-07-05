@@ -2,6 +2,10 @@
 scriptencoding utf-8
 set encoding=utf-8
 
+" Pathogen
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+execute pathogen#infect()
+
 " Syntax highlighting
 syntax enable
 
