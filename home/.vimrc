@@ -12,6 +12,9 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 
+# Whitespace
+set nowrap
+
 # Search
 set ignorecase
 set incsearch
