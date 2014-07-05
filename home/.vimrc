@@ -8,6 +8,8 @@ execute pathogen#infect()
 
 " Syntax highlighting
 syntax enable
+set background=dark
+colorscheme solarized
 
 " Tabs
 set autoindent
