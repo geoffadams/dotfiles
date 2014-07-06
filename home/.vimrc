@@ -25,3 +25,8 @@ set nowrap
 set ignorecase
 set incsearch
 set hlsearch
+
+" Interface
+set cursorline
+set number
+set ruler
