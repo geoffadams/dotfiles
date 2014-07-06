@@ -6,6 +6,7 @@ install zsh
 install zsh-completions
 install zsh-syntax-highlighting
 install vim
+install macvim
 install rbenv
 install rbenv-gem-rehash
 
