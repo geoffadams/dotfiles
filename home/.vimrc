@@ -27,6 +27,9 @@ set softtabstop=4
 " Whitespace
 set nowrap
 
+" Backspace
+set backspace=indent,eol,start
+
 " Search
 set ignorecase
 set incsearch
