@@ -26,8 +26,8 @@ else
 end
 
 
-ohmyzsh_path = Pathname.new "#{Dir.home}/.oh-my-zsh"
 
+ohmyzsh_path = Pathname.new "#{Dir.home}/.oh-my-zsh"
 unless ohmyzsh_path.exist?
     puts 'Installing oh-my-zsh...'
     ohmyzsh_ret = system 'curl -L http://install.ohmyz.sh | sh'
