@@ -44,8 +44,8 @@ au BufNewFile,BufRead .homesickrc set filetype=ruby
 
 " GitGutter
 let g:gitgutter_sign_column_always=1
-highlight SignColumn ctermbg=8 guibg=8
-highlight GitGutterAdd ctermbg=8 guibg=8 ctermfg=2
-highlight GitGutterChange ctermbg=8 guibg=8 ctermfg=4
-highlight GitGutterDelete ctermbg=8 guibg=8 ctermfg=1
-highlight GitGutterChangeDelete ctermbg=8 guibg=8 ctermfg=4
+highlight SignColumn ctermbg=8 guibg=#002b36
+highlight GitGutterAdd ctermbg=8 ctermfg=2 guibg=#002b36 guifg=#859900
+highlight GitGutterChange ctermbg=8 ctermfg=4 guibg=#002b36 guifg=#268bd2
+highlight GitGutterDelete ctermbg=8 ctermfg=1 guibg=#002b36 guifg=#dc322f
+highlight GitGutterChangeDelete ctermbg=8 ctermfg=4 guibg=#002b36 guifg=#268bd2
