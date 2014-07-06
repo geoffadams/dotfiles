@@ -14,6 +14,7 @@ set directory=~/.vim/backup
 syntax enable
 set background=dark
 colorscheme solarized
+let g:solarized_termcolors=256
 
 " Tabs
 set autoindent
