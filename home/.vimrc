@@ -6,6 +6,10 @@ set encoding=utf-8
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
 
+" Directories for swp files
+set backupdir=~/.vim/backup
+set directory=~/.vim/backup
+
 " Syntax highlighting
 syntax enable
 set background=dark
