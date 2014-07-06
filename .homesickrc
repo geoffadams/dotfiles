@@ -1,6 +1,9 @@
 require 'readline'
 require 'pathname'
 
+
+
+# homebrew installation
 unless system 'which brew'
     puts 'Installing homebrew...'
     brew_ret = system 'ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"'
@@ -16,6 +19,7 @@ end
 
 
 
+# homebrew bundle
 puts 'Installing homebrew bundle...'
 brew_bundle_ret = system 'brew bundle ~/Brewfile'
 
@@ -27,6 +31,7 @@ end
 
 
 
+# oh-my-zsh installation
 ohmyzsh_path = Pathname.new "#{Dir.home}/.oh-my-zsh"
 unless ohmyzsh_path.exist?
     puts 'Installing oh-my-zsh...'
@@ -43,6 +48,14 @@ end
 
 
 
+# iTerm2 prefs
+FileUtils.rm "#{Dir.home}/Library/Preferences/com.googlecode.iterm2.plist"
+FileUtils.ln_s "#{Dir.home}/.homesick/repos/dotfiles/preferences/com.googlecode.iterm2.plist "
+    + "#{Dir.home}/Library/Preferences/com.googlecode.iterm2.plist"
+
+
+
+# Private info prompts
 email = Readline.readline('Email address: ')
 gitconfig_ret = system "git config --global user.email #{email}"
 
