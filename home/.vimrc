@@ -41,6 +41,7 @@ set ruler
 
 " Extensions
 au BufNewFile,BufRead .homesickrc set filetype=ruby
+au BufNewFile,BufRead *.json set filetype=javascript
 
 " GitGutter
 let g:gitgutter_sign_column_always=1
