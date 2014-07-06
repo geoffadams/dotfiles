@@ -49,7 +49,7 @@ end
 
 
 # iTerm2 prefs
-FileUtils.rm "#{Dir.home}/Library/Preferences/com.googlecode.iterm2.plist"
+FileUtils.rm_f "#{Dir.home}/Library/Preferences/com.googlecode.iterm2.plist"
 FileUtils.ln_s "#{Dir.home}/.homesick/repos/dotfiles/preferences/com.googlecode.iterm2.plist", "#{Dir.home}/Library/Preferences/com.googlecode.iterm2.plist"
 
 
