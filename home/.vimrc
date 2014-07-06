@@ -41,6 +41,7 @@ set ruler
 au BufNewFile,BufRead .homesickrc set filetype=ruby
 
 " GitGutter
+let g:gitgutter_sign_column_always=1
 highlight SignColumn ctermbg=8 guibg=8
 highlight GitGutterAdd ctermbg=8 guibg=8 ctermfg=2
 highlight GitGutterChange ctermbg=8 guibg=8 ctermfg=4
