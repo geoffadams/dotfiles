@@ -39,3 +39,10 @@ set ruler
 
 " Extensions
 au BufNewFile,BufRead .homesickrc set filetype=ruby
+
+" GitGutter
+highlight SignColumn ctermbg=8 guibg=8
+highlight GitGutterAdd ctermbg=8 guibg=8 ctermfg=2
+highlight GitGutterChange ctermbg=8 guibg=8 ctermfg=4
+highlight GitGutterDelete ctermbg=8 guibg=8 ctermfg=1
+highlight GitGutterChangeDelete ctermbg=8 guibg=8 ctermfg=4
