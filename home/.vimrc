@@ -35,3 +35,6 @@ set hlsearch
 set cursorline
 set number
 set ruler
+
+" Extensions
+au BufNewFile,BufRead .homesickrc set filetype=ruby
