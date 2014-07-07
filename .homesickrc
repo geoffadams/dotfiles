@@ -21,13 +21,17 @@ end
 
 
 # homebrew bundle
-puts 'Installing homebrew bundle...'
-brew_bundle_ret = system 'brew bundle ~/Brewfile'
+install_homebrew_bundle = Readline.readline('Install homebrew bundle? ')
 
-if brew_bundle_ret
+if install_homebrew_bundle == 'y'
+  puts 'Installing homebrew bundle...'
+  brew_bundle_ret = system 'brew bundle ~/Brewfile'
+
+  if brew_bundle_ret
     puts 'homebrew bundle successfully installed!'
-else
+  else
     puts 'Error installing homebrew bundle.'
+  end
 end
 
 
