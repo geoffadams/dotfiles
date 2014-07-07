@@ -61,7 +61,7 @@ FileUtils.ln_sf "#{Dir.home}/.homesick/repos/dotfiles/preferences/com.googlecode
 
 # Private info prompts
 email = Readline.readline('Email address: ')
-gitconfig_ret = system "git config --global user.email #{email}"
+gitconfig_ret = system "git config --file ~/.gitconfig-private user.email #{email}"
 
 if gitconfig_ret
     puts 'Email address set in git global configuration'
