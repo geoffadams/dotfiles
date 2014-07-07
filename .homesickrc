@@ -55,7 +55,7 @@ end
 
 # iTerm2 prefs
 FileUtils.rm_f "#{Dir.home}/Library/Preferences/com.googlecode.iterm2.plist"
-FileUtils.ln_s "#{Dir.home}/.homesick/repos/dotfiles/preferences/com.googlecode.iterm2.plist", "#{Dir.home}/Library/Preferences/com.googlecode.iterm2.plist"
+FileUtils.ln_sf "#{Dir.home}/.homesick/repos/dotfiles/preferences/com.googlecode.iterm2.plist", "#{Dir.home}/Library/Preferences/com.googlecode.iterm2.plist"
 
 
 
@@ -76,6 +76,6 @@ at_work = Readline.readline('Link work configuration? ')
 
 if at_work == 'y'
   puts 'Linking work configuration...'
-  FileUtils.ln_s "#{Dir.home}/.homesick/repos/dotfiles/work/.gitconfig", "#{Dir.home}/.gitconfig-local"
+  FileUtils.ln_sf "#{Dir.home}/.homesick/repos/dotfiles/work/.gitconfig", "#{Dir.home}/.gitconfig-local"
   puts 'Work configuration linked successfully.'
 end
