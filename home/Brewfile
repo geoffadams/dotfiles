@@ -11,5 +11,7 @@ install vim
 install macvim
 install rbenv
 install rbenv-gem-rehash
+install trash
+install ack
 
 cleanup
