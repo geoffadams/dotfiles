@@ -38,3 +38,6 @@
 	db = "!sh -c 'git branch -d $1 && git remote prune origin' -"
 
 	find = log -S
+[include]
+  path = ~/.gitconfig-local
+

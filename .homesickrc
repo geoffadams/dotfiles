@@ -64,3 +64,14 @@ if gitconfig_ret
 else
     puts 'Error setting email address in git.'
 end
+
+
+
+# Local settings prompts
+at_work = Readline.readline('Link work configuration? ')
+
+if at_work == 'y'
+  puts 'Linking work configuration...'
+  FileUtils.ln_s "#{Dir.home}/.homesick/repos/dotfiles/work/.gitconfig", "#{Dir.home}/.gitconfig-local"
+  puts 'Work configuration linked successfully.'
+end
