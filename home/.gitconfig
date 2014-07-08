@@ -3,7 +3,7 @@
 [core]
 	eol = lf
 	autocrlf = input
-	editor = mvim 
+	editor = vim
 	pager = less -r
 	excludesfile = ~/.gitignore_global
 [credential]
