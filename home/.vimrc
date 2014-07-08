@@ -51,3 +51,9 @@ highlight GitGutterAdd ctermbg=8 ctermfg=2 guibg=#002b36 guifg=#859900
 highlight GitGutterChange ctermbg=8 ctermfg=4 guibg=#002b36 guifg=#268bd2
 highlight GitGutterDelete ctermbg=8 ctermfg=1 guibg=#002b36 guifg=#dc322f
 highlight GitGutterChangeDelete ctermbg=8 ctermfg=4 guibg=#002b36 guifg=#268bd2
+
+" Disable arrow keys
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
