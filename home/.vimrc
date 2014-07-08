@@ -25,6 +25,7 @@ set softtabstop=2
 
 " Whitespace
 set nowrap
+set list listchars=tab:·\ ,trail:·
 
 " Backspace
 set backspace=indent,eol,start
