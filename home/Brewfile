@@ -12,6 +12,6 @@ install macvim
 install rbenv
 install rbenv-gem-rehash
 install trash
-install ack
+install the_silver_searcher
 
 cleanup
