@@ -1,10 +1,12 @@
+os_name=$(uname)
+
 IS_LINUX=0
-if [[ $(uname) == 'Linux' ]]; then
+if [[ "$os_name" == 'Linux' ]]; then
     IS_LINUX=1
 fi
 
 IS_MAC=0
-if [[ $(uname) == 'Darwin' ]]; then
+if [[ "$os_name" == 'Darwin' ]]; then
     IS_MAC=1
 fi
 
