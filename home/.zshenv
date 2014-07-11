@@ -1,6 +1,7 @@
 PERSONAL_ZSH=$HOME/.zsh
 
 source $PERSONAL_ZSH/environment.zsh
+source $PERSONAL_ZSH/machines.zsh
 
 export HISTSIZE=10000
 export SAVEHIST=9000
