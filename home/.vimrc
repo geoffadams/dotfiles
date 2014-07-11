@@ -57,3 +57,6 @@ noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
+
+" Use system clipboard
+set clipboard=unnamed
