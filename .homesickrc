@@ -6,16 +6,16 @@ require 'fileutils'
 
 # homebrew installation
 unless system 'which brew'
-    puts 'Installing homebrew...'
-    brew_ret = system 'ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"'
+  puts 'Installing homebrew...'
+  brew_ret = system 'ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"'
 
-    if brew_ret
-        puts 'homebrew successfully installed!'
-    else
-        puts 'Error installing homebrew.'
-    end
+  if brew_ret
+    puts 'homebrew successfully installed!'
+  else
+     puts 'Error installing homebrew.'
+   end
 else
-    puts 'homebrew already installed.'    
+  puts 'homebrew already installed.'
 end
 
 
@@ -39,16 +39,16 @@ end
 # oh-my-zsh installation
 ohmyzsh_path = Pathname.new "#{Dir.home}/.oh-my-zsh"
 unless ohmyzsh_path.exist?
-    puts 'Installing oh-my-zsh...'
-    ohmyzsh_ret = system 'curl -L http://install.ohmyz.sh | sh'
+  puts 'Installing oh-my-zsh...'
+  ohmyzsh_ret = system 'curl -L http://install.ohmyz.sh | sh'
 
-    if ohmyzsh_ret
-        puts 'oh-my-zsh installed!'
-    else
-        puts 'Error installing oh-my-zsh'
-    end
+  if ohmyzsh_ret
+    puts 'oh-my-zsh installed!'
+  else
+    puts 'Error installing oh-my-zsh'
+  end
 else
-    puts 'oh-my-zsh already installed.'
+  puts 'oh-my-zsh already installed.'
 end
 
 
@@ -64,9 +64,9 @@ email = Readline.readline('Email address: ')
 gitconfig_ret = system "git config --file ~/.gitconfig-private user.email #{email}"
 
 if gitconfig_ret
-    puts 'Email address set in git global configuration'
+  puts 'Email address set in git global configuration'
 else
-    puts 'Error setting email address in git.'
+  puts 'Error setting email address in git.'
 end
 
 
