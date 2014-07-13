@@ -55,3 +55,7 @@ fi
 alias py="python"
 alias py2="python"
 alias py3="python3"
+
+# proxies
+alias disable_proxies="unset http_proxy https_proxy ALL_PROXY HTTP_PROXY HTTPS_PROXY"
+
