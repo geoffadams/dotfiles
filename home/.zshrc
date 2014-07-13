@@ -17,8 +17,6 @@ source $HOME/.zsh/iterm2.zsh
 
 source $HOME/.zsh/aliases.zsh
 
-source $HOME/.zsh/helpfiles.zsh
-
 source $HOME/.zsh/rbenv.zsh
 
 source $HOME/.zsh/go.zsh
