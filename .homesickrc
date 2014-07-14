@@ -5,32 +5,34 @@ require 'fileutils'
 
 
 # homebrew installation
-unless system 'which brew'
-  puts 'Installing homebrew...'
-  brew_ret = system 'ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"'
+if ENV['IS_MAC'] == '1'
+  unless system 'which brew'
+    puts 'Installing homebrew...'
+    brew_ret = system 'ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"'
 
-  if brew_ret
-    puts 'homebrew successfully installed!'
+    if brew_ret
+      puts 'homebrew successfully installed!'
+    else
+       puts 'Error installing homebrew.'
+     end
   else
-     puts 'Error installing homebrew.'
-   end
-else
-  puts 'homebrew already installed.'
-end
+    puts 'homebrew already installed.'
+  end
 
 
 
-# homebrew bundle
-install_homebrew_bundle = Readline.readline('Install homebrew bundle? ')
+  # homebrew bundle
+  install_homebrew_bundle = Readline.readline('Install homebrew bundle? ')
 
-if install_homebrew_bundle == 'y'
-  puts 'Installing homebrew bundle...'
-  brew_bundle_ret = system 'brew bundle ~/Brewfile'
+  if install_homebrew_bundle == 'y'
+    puts 'Installing homebrew bundle...'
+    brew_bundle_ret = system 'brew bundle ~/Brewfile'
 
-  if brew_bundle_ret
-    puts 'homebrew bundle successfully installed!'
-  else
-    puts 'Error installing homebrew bundle.'
+    if brew_bundle_ret
+      puts 'homebrew bundle successfully installed!'
+    else
+      puts 'Error installing homebrew bundle.'
+    end
   end
 end
 
@@ -54,8 +56,10 @@ end
 
 
 # iTerm2 prefs
-FileUtils.rm_f "#{Dir.home}/Library/Preferences/com.googlecode.iterm2.plist"
-FileUtils.ln_sf "#{Dir.home}/.homesick/repos/dotfiles/preferences/com.googlecode.iterm2.plist", "#{Dir.home}/Library/Preferences/com.googlecode.iterm2.plist"
+if ENV['IS_MAC'] == '1'
+  FileUtils.rm_f "#{Dir.home}/Library/Preferences/com.googlecode.iterm2.plist"
+  FileUtils.ln_sf "#{Dir.home}/.homesick/repos/dotfiles/preferences/com.googlecode.iterm2.plist", "#{Dir.home}/Library/Preferences/com.googlecode.iterm2.plist"
+end
 
 
 
