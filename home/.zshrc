@@ -1,7 +1,13 @@
 # oh-my-zsh configuration
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="agnoster"
-DEFAULT_USER="geoff"
+
+if [[ "$IS_WORK_MACHINE" == 1 ]]; then
+  DEFAULT_USER="adamsg06"
+else;
+  DEFAULT_USER="geoff"
+fi
+
 plugins=(rvm brew bundler composer gem gitfast phing pip screen)
 
 source $ZSH/oh-my-zsh.sh
