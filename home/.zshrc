@@ -8,7 +8,7 @@ else;
   DEFAULT_USER="geoff"
 fi
 
-plugins=(rvm brew bundler composer gem gitfast phing pip screen)
+plugins=(brew bundler composer gem gitfast screen)
 
 source $ZSH/oh-my-zsh.sh
 
