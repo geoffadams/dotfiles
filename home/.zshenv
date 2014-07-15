@@ -2,6 +2,7 @@ PERSONAL_ZSH=$HOME/.zsh
 
 source $PERSONAL_ZSH/environment.zsh
 source $PERSONAL_ZSH/machines.zsh
+source $PERSONAL_ZSH/location.zsh
 
 HISTSIZE=10000
 SAVEHIST=9000
