@@ -42,3 +42,5 @@
   path = ~/.gitconfig-local
   path = ~/.gitconfig-private
 
+[tag]
+	sort = version:refname
