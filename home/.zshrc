@@ -13,7 +13,7 @@ plugins=(brew bundler composer gem gitfast screen)
 source $ZSH/oh-my-zsh.sh
 
 # extend completions and highlighting
-fpath=(/usr/local/share/zsh-completions $fpath)
+fpath=(/usr/local/share/zsh-completions /usr/local/share/zsh/site-functions $fpath)
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 source $HOME/.zsh/options.zsh
