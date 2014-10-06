@@ -61,7 +61,8 @@ if ENV['IS_MAC'] == '1'
   iterm2_prefs_dest = "#{Dir.home}/Library/Preferences/com.googlecode.iterm2.plist"
   FileUtils.rm_f iterm2_prefs_dest
   FileUtils.cp iterm2_prefs_source, iterm2_prefs_dest
-  system("plutil -convert binary1 #{iterm2_prefs_dest}")
+  system "plutil -convert binary1 #{iterm2_prefs_dest}"
+  system "defaults read com.googlecode.iterm2"
 end
 
 
