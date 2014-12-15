@@ -8,7 +8,7 @@ export JAVA_OPTS="
 
 # Comment out the following if you aren't on Reith
 export JAVA_OPTS="
-  $MAVEN_OPTS \
+  $JAVA_OPTS \
   -Dhttp.proxyHost=www-cache.reith.bbc.co.uk
   -Dhttp.proxyPort=80 \
   -Dhttps.proxyHost=www-cache.reith.bbc.co.uk
