@@ -1,0 +1,14 @@
+openssl
+git
+curl
+wget
+zsh
+zsh-completions
+zsh-syntax-highlighting
+vim
+macvim
+rbenv
+rbenv-gem-rehash
+trash
+the_silver_searcher
+

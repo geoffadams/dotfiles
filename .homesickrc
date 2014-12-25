@@ -18,22 +18,6 @@ if ENV['IS_MAC'] == '1'
   else
     puts 'homebrew already installed.'
   end
-
-
-
-  # homebrew bundle
-  install_homebrew_bundle = Readline.readline('Install homebrew bundle? ')
-
-  if install_homebrew_bundle == 'y'
-    puts 'Installing homebrew bundle...'
-    brew_bundle_ret = system 'brew bundle ~/Brewfile'
-
-    if brew_bundle_ret
-      puts 'homebrew bundle successfully installed!'
-    else
-      puts 'Error installing homebrew bundle.'
-    end
-  end
 end
 
 
