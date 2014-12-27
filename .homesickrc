@@ -51,6 +51,13 @@ end
 
 
 
+# Install powerline-fonts
+if ENV['IS_MAC'] == '1'
+  FileUtils.cp Dir.glob("./vendor/powerline-fonts/SourceCodePro/*.otf"), "#{Dir.home}/Library/Fonts/"
+end
+
+
+
 # Private info prompts
 email = Readline.readline('Email address: ')
 gitconfig_ret = system "git config --file ~/.gitconfig-private user.email #{email}"
