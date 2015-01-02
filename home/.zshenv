@@ -1,9 +1,9 @@
 PERSONAL_ZSH=$HOME/.zsh
+WORK_ZSH=$HOME/.zsh-work
 
 source $PERSONAL_ZSH/environment.zsh
 source $PERSONAL_ZSH/machines.zsh
 source $PERSONAL_ZSH/location.zsh
-source $PERSONAL_ZSH/work/maven.zsh
 
 HISTSIZE=10000
 SAVEHIST=9000

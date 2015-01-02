@@ -64,5 +64,6 @@ at_work = Readline.readline('Link work configuration? ')
 if at_work == 'y'
   puts 'Linking work configuration...'
   FileUtils.ln_sf "#{Dir.home}/.homesick/repos/dotfiles/work/.gitconfig", "#{Dir.home}/.gitconfig-local"
+  FileUtils.ln_sf "#{Dir.home}/.homesick/repos/dotfiles/work/.zsh", "#{Dir.home}/.zsh-work"
   puts 'Work configuration linked successfully.'
 end
