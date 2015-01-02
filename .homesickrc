@@ -59,11 +59,18 @@ end
 
 
 # Local settings prompts
-at_work = Readline.readline('Link work configuration? ')
+at_work = Readline.readline('Apply work configuration? ')
 
 if at_work == 'y'
   puts 'Linking work configuration...'
   FileUtils.ln_sf "#{Dir.home}/.homesick/repos/dotfiles/work/.gitconfig", "#{Dir.home}/.gitconfig-local"
   FileUtils.ln_sf "#{Dir.home}/.homesick/repos/dotfiles/work/.zsh", "#{Dir.home}/.zsh-work"
   puts 'Work configuration linked successfully.'
+
+  puts 'Enter certificate password: '
+  cert_password = STDIN.noecho(&:gets).chomp
+
+  File.open "#{Dir.home}/.zshenv-work", "w" do | file |
+    file.puts "CERT_PASSWORD=#{cert_password}"
+  end
 end

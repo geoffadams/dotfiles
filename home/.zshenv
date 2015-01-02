@@ -1,6 +1,9 @@
 PERSONAL_ZSH=$HOME/.zsh
 WORK_ZSH=$HOME/.zsh-work
 
+if [ -f "$HOME/.zshenv-work" ]; then
+  source $HOME/.zshenv-work
+fi
 source $PERSONAL_ZSH/environment.zsh
 source $PERSONAL_ZSH/machines.zsh
 source $PERSONAL_ZSH/location.zsh

@@ -1,8 +1,7 @@
-# notmypassword.jpg
 export JAVA_OPTS="
   -Xms256m -Xmx512m \
   -Djavax.net.ssl.keyStore=$HOME/Documents/certs/dev.bbc.co.uk.p12 \
-  -Djavax.net.ssl.keyStorePassword=spanglyhorsecoconut \
+  -Djavax.net.ssl.keyStorePassword=$CERT_PASSWORD \
   -Djavax.net.ssl.keyStoreType=PKCS12 \
   -Djavax.net.ssl.trustStore=$HOME/Documents/certs/jssecacerts \
   "
