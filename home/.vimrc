@@ -60,3 +60,8 @@ noremap <Right> <NOP>
 
 " Use system clipboard
 set clipboard=unnamed
+
+" Automatic word wrapping
+set tw=79
+set formatoptions+=t
+
