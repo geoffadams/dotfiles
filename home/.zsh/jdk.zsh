@@ -7,7 +7,7 @@ function set_jdk() {
       remove_from_path "$JAVA_HOME"
     fi
 
-    export JAVA_HOME=`/usr/libexec/java_home -v $@`
+    export JAVA_HOME=`/usr/libexec/java_home -v 1.$@`
     export PATH=$JAVA_HOME/bin:$PATH
   fi
 }
