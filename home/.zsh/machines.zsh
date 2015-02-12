@@ -6,6 +6,6 @@ if [[ "$hostname" == "macwarrior" ]]; then
 fi
 
 export IS_WORK_MACHINE=0
-if [[ "$hostname" == "mc-s083179" ]]; then
+if [[ "$hostname" == "mc-s083333" ]]; then
   export IS_WORK_MACHINE=1
 fi
