@@ -19,3 +19,8 @@ color-ssh() {
 compdef _ssh color-ssh=ssh
  
 alias ssh="color-ssh"
+
+# Navigation using Control-Shift-[Arrow]
+bindkey -e
+bindkey '^[[1;6C' forward-word
+bindkey '^[[1;6D' backward-word
