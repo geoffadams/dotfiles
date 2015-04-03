@@ -59,3 +59,6 @@ alias py3="python3"
 # proxies
 alias disable_proxies="unset http_proxy https_proxy ALL_PROXY HTTP_PROXY HTTPS_PROXY"
 
+whatsonport() {
+  lsof -i tcp:$*
+}
