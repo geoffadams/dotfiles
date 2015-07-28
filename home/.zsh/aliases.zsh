@@ -62,3 +62,7 @@ alias disable_proxies="unset http_proxy https_proxy ALL_PROXY HTTP_PROXY HTTPS_P
 whatsonport() {
   lsof -i tcp:$*
 }
+
+pbfile() {
+  cat $1 | pbcopy
+}
