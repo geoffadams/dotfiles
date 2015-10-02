@@ -3,3 +3,6 @@ export CLICOLOR=1
 
 if which grunt > /dev/null; then eval "$(grunt --completion=zsh -)"; fi
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+PS1='$(printf "%$((COLUMNS-1))s\r")'$PS1
+
