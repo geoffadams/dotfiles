@@ -18,26 +18,35 @@
     autosetuprebase = always
 [alias]
     st = status -sb
-    ci = commit
-    br = branch
-    co = checkout
 
-    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 
-    df = diff
     changes = diff --name-status
-    unmerged = branch --no-merged master
-    unpushed = branch --no-merged origin/master
+    unmerged-branches = branch --no-merged master
+    unpushed-branches = branch --no-merged origin/master
 
-    who = shortlog -s --
-    whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
-    whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
+    who-committed = shortlog -s --
+    who-is = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
+    what-is = show -s --pretty='tformat:%h (%s, %ad)' --date=short
 
-    cb = "!sh -c 'git checkout -b $1 && git branch --set-upstream-to=origin/master $1' -"
-    ceb = "!sh -c 'git checkout $1 && git branch --set-upstream-to=origin/master $1' -"
-    db = "!sh -c 'git branch -d $1 && git remote prune origin' -"
+    create-branch-tracking-master = "!sh -c 'git checkout -b $1 && git branch --set-upstream-to=origin/master $1' -"
+    checkout-existing-branch = "!sh -c 'git checkout $1 && git branch --set-upstream-to=origin/master $1' -"
+    delete-branch = "!sh -c 'git branch -d $1 && git remote prune origin' -"
 
-    find = log -S
+    search-log = log -S
+
+    branches = branch -a
+    tags = tag
+    stashes = stash list
+
+    unstage = reset -q HEAD --
+    discard = checkout --
+    uncommit = reset --mixed HEAD~
+    amend = commit --amend
+
+    scrap-it = !git reset --hard HEAD && git clean -d -f
+
+    precommit = diff --cached --diff-algorithm=minimal -w
 [include]
   path = ~/.gitconfig-local
   path = ~/.gitconfig-private
