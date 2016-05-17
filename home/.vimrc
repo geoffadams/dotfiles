@@ -12,7 +12,7 @@ set directory=~/.vim/backup
 
 " Syntax highlighting
 syntax enable
-set background=dark
+set background=light
 colorscheme solarized
 
 " Tabs
