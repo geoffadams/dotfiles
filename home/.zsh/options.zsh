@@ -6,3 +6,5 @@ setopt hist_find_no_dups
 setopt correct
 
 setopt prompt_subst
+
+_comp_options+=(globdots)
