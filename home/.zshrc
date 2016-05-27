@@ -8,7 +8,7 @@ else;
   DEFAULT_USER="geoff"
 fi
 
-plugins=(brew bundler composer gem gitfast screen)
+plugins=(brew gitfast screen)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -20,6 +20,6 @@ source $HOME/.zsh/options.zsh
 source $HOME/.zsh/interactive.zsh
 source $HOME/.zsh/iterm2.zsh
 source $HOME/.zsh/aliases.zsh
-source $HOME/.zsh/go.zsh
-source $HOME/.zsh/jdk.zsh
 source $HOME/.zsh/nvm.zsh
+source $HOME/.zsh/jdk.zsh
+source $HOME/.zsh/go.zsh
