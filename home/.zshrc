@@ -22,3 +22,4 @@ source $HOME/.zsh/iterm2.zsh
 source $HOME/.zsh/aliases.zsh
 source $HOME/.zsh/go.zsh
 source $HOME/.zsh/jdk.zsh
+source $HOME/.zsh/nvm.zsh
