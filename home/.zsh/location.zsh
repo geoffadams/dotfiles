@@ -6,8 +6,3 @@ else
   export ENABLE_REITH_PROXIES=0
 fi
 
-if [[ "$IS_WORK_MACHINE" == 1 ]]; then
-  source $WORK_ZSH/proxies.zsh
-  source $WORK_ZSH/maven.zsh
-fi
-

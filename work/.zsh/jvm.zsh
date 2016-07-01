@@ -1,5 +1,5 @@
 export JAVA_OPTS="
-  -Xms256m -Xmx512m \
+  $JAVA_OPTS \
   -Djavax.net.ssl.keyStore=$HOME/Documents/certs/dev.bbc.co.uk.p12 \
   -Djavax.net.ssl.keyStorePassword=$CERT_PASSWORD \
   -Djavax.net.ssl.keyStoreType=PKCS12 \
@@ -18,6 +18,6 @@ if [ "$ENABLE_REITH_PROXIES" = 1 ]; then
     "
 fi
 
-export MAVEN_OPTS="$JAVA_OPTS"
-export SBT_OPTS="$MAVEN_OPTS -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256m"
+export MAVEN_OPTS="$JAVA_OPTS $MAVEN_OPTS"
+export SBT_OPTS="$JAVA_OPTS $SBT_OPTS"
 export SERVER_ENV="sandbox"
