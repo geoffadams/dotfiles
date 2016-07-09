@@ -26,4 +26,4 @@ if [[ "$IS_WORK_MACHINE" == 1 ]]; then
   source $WORK_ZSH/jvm.zsh
 fi
 
-PATH=$HOME/.rbenv/shims:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Applications/adt-bundle-mac-x86_64-20140321/sdk/platform-tools:$PATH
+PATH=$HOME/.rbenv/shims:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:$PATH
