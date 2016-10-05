@@ -1,9 +1,9 @@
 export JAVA_OPTS="
   $JAVA_OPTS \
-  -Djavax.net.ssl.keyStore=$HOME/Documents/certs/dev.bbc.co.uk.p12 \
+  -Djavax.net.ssl.keyStore=$HOME/Credentials/dev-cert.p12 \
   -Djavax.net.ssl.keyStorePassword=$CERT_PASSWORD \
   -Djavax.net.ssl.keyStoreType=PKCS12 \
-  -Djavax.net.ssl.trustStore=$HOME/Documents/certs/jssecacerts \
+  -Djavax.net.ssl.trustStore=$HOME/Credentials/CA/jssecacerts \
   "
 
 if [ "$ENABLE_REITH_PROXIES" = 1 ]; then
