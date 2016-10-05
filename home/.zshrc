@@ -8,7 +8,7 @@ else;
   DEFAULT_USER="geoff"
 fi
 
-plugins=(brew gitfast screen)
+plugins=(screen)
 
 source $ZSH/oh-my-zsh.sh
 
