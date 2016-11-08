@@ -22,8 +22,10 @@ JAVA_OPTS="-Xss2M -Xms256M -Xmx2G \
   -XX:MaxPermSize=2G -Xss2M"
 
 if [[ "$IS_WORK_MACHINE" == 1 ]]; then
+  source $HOME/.connections/certificates.sh
+  source $HOME/.connections/environment.sh
   source $WORK_ZSH/proxies.zsh
-  source $WORK_ZSH/jvm.zsh
+  source $WORK_ZSH/jvm_proxies.zsh
 fi
 
 PATH=$HOME/.rbenv/shims:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:$PATH
