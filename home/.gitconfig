@@ -32,6 +32,7 @@
     create-branch-tracking-master = "!sh -c 'git checkout -b $1 && git branch --set-upstream-to=origin/master $1' -"
     checkout-existing-branch = "!sh -c 'git checkout $1 && git branch --set-upstream-to=origin/master $1' -"
     delete-branch = "!sh -c 'git branch -d $1 && git remote prune origin' -"
+    track-branch = "!sh -c 'git branch --set-upstream-to=origin/$1' -"
 
     search-log = log -S
 
