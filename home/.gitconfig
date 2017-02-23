@@ -56,3 +56,5 @@
 
 [tag]
     sort = version:refname
+[commit]
+	gpgsign = true
