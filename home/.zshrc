@@ -1,3 +1,5 @@
+# zmodload zsh/zprof
+
 # oh-my-zsh configuration
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="agnoster"
@@ -9,7 +11,7 @@ else;
 fi
 
 plugins=(screen)
-
+DISABLE_UPDATE_PROMPT=true
 source $ZSH/oh-my-zsh.sh
 
 # extend completions and highlighting
@@ -23,3 +25,5 @@ source $HOME/.zsh/aliases.zsh
 source $HOME/.zsh/nvm.zsh
 source $HOME/.zsh/jdk.zsh
 source $HOME/.zsh/go.zsh
+source $HOME/.zsh/compinit.zsh
+
