@@ -1,4 +1,4 @@
-# zmodload zsh/zprof
+#zmodload zsh/zprof
 
 # oh-my-zsh configuration
 ZSH=$HOME/.oh-my-zsh
@@ -27,3 +27,5 @@ source $HOME/.zsh/jdk.zsh
 source $HOME/.zsh/go.zsh
 source $HOME/.zsh/compinit.zsh
 
+#zprof
+#zmodload -u zsh/zprof
