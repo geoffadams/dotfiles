@@ -2,61 +2,55 @@ require 'readline'
 require 'pathname'
 require 'fileutils'
 
-
-
 # homebrew installation
 if ENV['IS_MAC'] == '1'
   unless system 'which brew'
     puts 'Installing homebrew...'
-    brew_ret = system 'ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"'
-
-    if brew_ret
-      puts 'homebrew successfully installed!'
-    else
-       puts 'Error installing homebrew.'
-     end
+    unless system 'ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"'
+      raise 'Error installing homebrew.'
+    end
+    puts 'homebrew successfully installed!'
   else
     puts 'homebrew already installed.'
   end
+
+  puts 'Tapping brew-bundle...'
+  unless system 'brew tap Homebrew/bundle'
+    raise 'Error tapping Homebrew/bundle.'
+  end
+  puts 'brew-bundle successfully installed!'
 end
 
-
+# Brewfile installation
+puts 'Installing Brewfile bundle...'
+unless system 'brew bundle'
+  raise 'Error installing Brewfile bundle.'
+end
+puts 'Brewfile bundle successfully installed!'
 
 # oh-my-zsh installation
 ohmyzsh_path = Pathname.new "#{Dir.home}/.oh-my-zsh"
 unless ohmyzsh_path.exist?
   puts 'Installing oh-my-zsh...'
-  ohmyzsh_ret = system 'curl -L http://install.ohmyz.sh | sh'
-
-  if ohmyzsh_ret
-    puts 'oh-my-zsh installed!'
-  else
-    puts 'Error installing oh-my-zsh'
+  unless system 'curl -L http://install.ohmyz.sh | sh'
+    raise 'Error installing oh-my-zsh'
   end
+  puts 'oh-my-zsh installed!'
 else
   puts 'oh-my-zsh already installed.'
 end
-
-
 
 # Install powerline-fonts
 if ENV['IS_MAC'] == '1'
   FileUtils.cp Dir.glob("./vendor/powerline-fonts/SourceCodePro/*.otf"), "#{Dir.home}/Library/Fonts/"
 end
 
-
-
 # Private info prompts
 email = Readline.readline('Email address: ')
-gitconfig_ret = system "git config --file ~/.gitconfig-private user.email #{email}"
-
-if gitconfig_ret
-  puts 'Email address set in git global configuration'
-else
-  puts 'Error setting email address in git.'
+unless system "git config --file ~/.gitconfig-private user.email #{email}"
+  raise 'Error setting email address in git.'
 end
-
-
+puts 'Email address set in git global configuration'
 
 # Local settings prompts
 at_work = Readline.readline('Apply work configuration? ')
@@ -64,6 +58,7 @@ at_work = Readline.readline('Apply work configuration? ')
 if at_work == 'y'
   puts 'Linking work configuration...'
   FileUtils.ln_sf "#{Dir.home}/.homesick/repos/dotfiles/work/.gitconfig", "#{Dir.home}/.gitconfig-local"
+  FileUtils.rm "#{Dir.home}/.zsh-work"
   FileUtils.ln_sf "#{Dir.home}/.homesick/repos/dotfiles/work/.zsh", "#{Dir.home}/.zsh-work"
   puts 'Work configuration linked successfully.'
 
@@ -73,4 +68,5 @@ if at_work == 'y'
   File.open "#{Dir.home}/.zshenv-work", "w" do | file |
     file.puts "CERT_PASSWORD=#{cert_password}"
   end
+  puts "Certificate password written to environment."
 end
