@@ -2,9 +2,9 @@
     "workbench.colorTheme": "Solarized Light",
     "files.autoSave": "onFocusChange",
     "files.trimTrailingWhitespace": true,
-    "eslint.nodePath": "/Users/adamsg06/.nvm/versions/node/v6.10.3/lib/node_modules",
+    "eslint.nodePath": "./node_modules",
     "eslint.enable": false,
-    "standard.nodePath":  "/Users/adamsg06/.nvm/versions/node/v6.10.3/lib/node_modules",
+    "standard.nodePath":  "./node_modules",
     "standard.enable": false,
     "files.exclude": {
         "**/.git": true,
