@@ -1,0 +1,23 @@
+{
+    "workbench.colorTheme": "Solarized Light",
+    "files.autoSave": "onFocusChange",
+    "files.trimTrailingWhitespace": true,
+    "eslint.nodePath": "/Users/adamsg06/.nvm/versions/node/v6.10.3/lib/node_modules",
+    "eslint.enable": false,
+    "standard.nodePath":  "/Users/adamsg06/.nvm/versions/node/v6.10.3/lib/node_modules",
+    "standard.enable": false,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/.idea": true
+    },
+    "terminal.external.osxExec": "iTerm.app",
+    "terminal.integrated.fontFamily": "Source Code Pro for Powerline",
+    "terminal.integrated.fontSize": 13,
+    "terminal.integrated.lineHeight": 1.4,
+    "window.zoomLevel": 0,
+    "editor.tabSize": 2
+}
