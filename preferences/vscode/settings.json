@@ -5,7 +5,7 @@
     "eslint.nodePath": "./node_modules",
     "eslint.enable": false,
     "standard.nodePath":  "./node_modules",
-    "standard.enable": false,
+    "standard.enable": true,
     "files.exclude": {
         "**/.git": true,
         "**/.svn": true,
@@ -19,5 +19,6 @@
     "terminal.integrated.fontSize": 13,
     "terminal.integrated.lineHeight": 1.4,
     "window.zoomLevel": 0,
-    "editor.tabSize": 2
+    "editor.tabSize": 2,
+    "workbench.startupEditor": "newUntitledFile"
 }
