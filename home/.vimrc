@@ -39,6 +39,8 @@ set hlsearch
 set cursorline
 set number
 set ruler
+set showcmd
+set showmatch
 
 " Extensions
 au BufNewFile,BufRead .homesickrc set filetype=ruby
@@ -65,3 +67,5 @@ set clipboard=unnamed
 set tw=79
 set formatoptions+=t
 
+" Helpers
+set wildmenu
