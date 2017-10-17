@@ -39,9 +39,7 @@ else
 end
 
 # Install powerline-fonts
-if ENV['IS_MAC'] == '1'
-  FileUtils.cp Dir.glob("./vendor/powerline-fonts/SourceCodePro/*.otf"), "#{Dir.home}/Library/Fonts/"
-end
+FileUtils.cp Dir.glob("./vendor/powerline-fonts/SourceCodePro/*.otf"), "#{Dir.home}/Library/Fonts/"
 
 # Symlinking things which need it
 puts 'Linking VSCode configuration...'
