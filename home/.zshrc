@@ -2,12 +2,7 @@
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="agnoster"
 
-if [[ "$IS_WORK_MACHINE" == 1 ]]; then
-  DEFAULT_USER="adamsg06"
-else;
-  DEFAULT_USER="geoff"
-fi
-
+DEFAULT_USER=$(whoami)
 plugins=()
 DISABLE_UPDATE_PROMPT=true
 source $ZSH/oh-my-zsh.sh
