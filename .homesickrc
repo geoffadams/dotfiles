@@ -52,22 +52,3 @@ unless system "git config --file ~/.gitconfig-private user.email #{email}"
   raise 'Error setting email address in git.'
 end
 puts 'Email address set in git global configuration'
-
-# Local settings prompts
-at_work = Readline.readline('Apply work configuration? ')
-
-if at_work == 'y'
-  puts 'Linking work configuration...'
-  FileUtils.ln_sf "#{Dir.home}/.homesick/repos/dotfiles/work/.gitconfig", "#{Dir.home}/.gitconfig-local"
-  FileUtils.rm "#{Dir.home}/.zsh-work"
-  FileUtils.ln_sf "#{Dir.home}/.homesick/repos/dotfiles/work/.zsh", "#{Dir.home}/.zsh-work"
-  puts 'Work configuration linked successfully.'
-
-  puts 'Enter certificate password: '
-  cert_password = STDIN.noecho(&:gets).chomp
-
-  File.open "#{Dir.home}/.zshenv-work", "w" do | file |
-    file.puts "CERT_PASSWORD=#{cert_password}"
-  end
-  puts "Certificate password written to environment."
-end
