@@ -3,23 +3,21 @@ require 'pathname'
 require 'fileutils'
 
 # homebrew installation
-if ENV['IS_MAC'] == '1'
-  unless system 'which brew'
-    puts 'Installing homebrew...'
-    unless system 'ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"'
-      raise 'Error installing homebrew.'
-    end
-    puts 'homebrew successfully installed!'
-  else
-    puts 'homebrew already installed.'
+unless system 'which brew'
+  puts 'Installing homebrew...'
+  unless system 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
+    raise 'Error installing homebrew.'
   end
-
-  puts 'Tapping brew-bundle...'
-  unless system 'brew tap Homebrew/bundle'
-    raise 'Error tapping Homebrew/bundle.'
-  end
-  puts 'brew-bundle successfully installed!'
+  puts 'homebrew successfully installed!'
+else
+  puts 'homebrew already installed.'
 end
+
+puts 'Tapping brew-bundle...'
+unless system 'brew tap Homebrew/bundle'
+  raise 'Error tapping Homebrew/bundle.'
+end
+puts 'brew-bundle successfully installed!'
 
 # Brewfile installation
 puts 'Installing Brewfile bundle...'
