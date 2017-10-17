@@ -15,7 +15,7 @@ brew "ruby"
 brew "subversion"
 brew "the_silver_searcher"
 brew "trash"
-brew "vim", args: ["with-client-server"]
+brew "vim"
 brew "wget"
 brew "xz"
 brew "yarn"
