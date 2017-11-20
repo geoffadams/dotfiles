@@ -1128,12 +1128,10 @@
 	<true/>
 	<key>MaxVertically</key>
 	<false/>
-	<key>NSFontPanelAttributes</key>
-	<string>1, 0</string>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/Downloads/mbadolato-iTerm2-Color-Schemes-a646a1d/schemes</string>
+	<string>~/.homesick/repos/dotfiles/preferences</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
-	<string>{1031, 459}</string>
+	<string>{712, 448}</string>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
 	<key>NSRepeatCountBinding</key>
@@ -1149,7 +1147,7 @@
 	gAKACoAN0xAJChEVGVdOUy5rZXlzoxITFIADgASABaMWFxiABoAHgAiACVpJZGVudGlm
 	aWVyVVdpZHRoVkhpZGRlblEwI0BowAAAAAAACNIhIiMkWiRjbGFzc25hbWVYJGNsYXNz
 	ZXNcTlNEaWN0aW9uYXJ5oiMlWE5TT2JqZWN00xAJCicrGaMSExSAA4AEgAWjLC0YgAuA
-	DIAIgAlRMSNAdKAAAAAAANIhIjM0Xk5TTXV0YWJsZUFycmF5ozM1JVdOU0FycmF5XxAP
+	DIAIgAlRMSNAdKGdsi0OVtIhIjM0Xk5TTXV0YWJsZUFycmF5ozM1JVdOU0FycmF5XxAP
 	TlNLZXllZEFyY2hpdmVy0Tg5VUFycmF5gAEACAARABoAIwAtADIANwBGAEwAUQBcAGMA
 	ZgBoAGoAbABzAHsAfwCBAIMAhQCJAIsAjQCPAJEAnACiAKkAqwC0ALUAugDFAM4A2wDe
 	AOcA7gDyAPQA9gD4APwA/gEAAQIBBAEGAQ8BFAEjAScBLwFBAUQBSgAAAAAAAAIBAAAA
@@ -1170,22 +1168,40 @@
 		<key>TB Is Shown</key>
 		<integer>1</integer>
 	</dict>
-	<key>NSWindow Frame NSFontPanel</key>
-	<string>1404 153 445 155 0 0 1920 1177 </string>
-	<key>NSWindow Frame Preferences</key>
-	<string>980 471 606 456 0 0 1920 1177 </string>
-	<key>NSWindow Frame SUStatusFrame</key>
-	<string>760 787 400 129 0 0 1920 1178 </string>
+	<key>NSTouchBarConfig: regular</key>
+	<dict>
+		<key>CurrentItems</key>
+		<array>
+			<string>iTermTouchBarIdentifierManPage</string>
+			<string>iTermTouchBarIdentifierStatus</string>
+			<string>NSTouchBarItemIdentifierFlexibleSpace</string>
+			<string>NSTouchBarItemIdentifierOtherItemsProxy</string>
+			<string>iTermTouchBarIdentifierAddMark</string>
+			<string>iTermTouchBarIdentifierPreviousMark</string>
+			<string>iTermTouchBarIdentifierNextMark</string>
+		</array>
+		<key>DefaultItems</key>
+		<array>
+			<string>iTermTouchBarIdentifierManPage</string>
+			<string>iTermTouchBarIdentifierColorPreset</string>
+			<string>iTermTouchBarIdentifierFunctionKeys</string>
+			<string>NSTouchBarItemIdentifierFlexibleSpace</string>
+			<string>NSTouchBarItemIdentifierOtherItemsProxy</string>
+			<string>iTermTouchBarIdentifierAddMark</string>
+			<string>iTermTouchBarIdentifierPreviousMark</string>
+			<string>iTermTouchBarIdentifierNextMark</string>
+		</array>
+	</dict>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>650 590 620 392 0 0 1920 1178 </string>
-	<key>NSWindow Frame SessionsPreferences</key>
-	<string>269 126 606 469 0 0 1920 1178 </string>
+	<string>650 500 620 392 0 0 1920 1058 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>269 213 796 473 0 0 1920 1178 </string>
+	<string>269 262 918 512 0 0 1680 1028 </string>
+	<key>NSWindow Frame UKCrashReporter</key>
+	<string>127 444 592 584 0 0 1680 1028 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>305 192 1060 688 0 0 1920 1178 </string>
+	<string>0 789 1 22 0 0 1920 1058 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>295 7 970 768 0 0 1920 1177 </string>
+	<string>660 109 970 730 0 0 1920 1058 </string>
 	<key>NeverWarnAboutShortLivedSessions_F9D80E81-3269-4E62-8FAB-27496AE2010C</key>
 	<true/>
 	<key>New Bookmarks</key>
@@ -1883,7 +1899,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>SauceCodePowerline-Regular 13</string>
+			<string>SourceCodeProForPowerline-Regular 13</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -2065,30 +2081,15 @@
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
-	<string>CD2C378C-4D8B-4C70-9C6C-DC19A9F0AF7D</string>
-	<key>NoSyncLastTipTime</key>
-	<real>480890825.42606699</real>
-	<key>NoSyncNeverRemindPrefsChangesCopy</key>
-	<true/>
+	<string>ECD3A943-5A94-4C1A-A8A9-2B35252C2F5A</string>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
 	<integer>0</integer>
 	<key>NoSyncPermissionToShowTip</key>
-	<true/>
+	<false/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
-	<real>478042359.23142499</real>
-	<key>NoSyncTimeOfLastPromo</key>
-	<real>454368949.523588</real>
-	<key>NoSyncTimeOfLastPromoDownload</key>
-	<real>477871800.01114601</real>
-	<key>NoSyncTipsDisabled</key>
-	<true/>
-	<key>NoSyncTipsToNotShow</key>
-	<array>
-		<string>000</string>
-		<string>0000</string>
-	</array>
+	<real>529937722.96154398</real>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
 	<key>OpenArrangementAtStartup</key>
@@ -2157,11 +2158,13 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/final.xml?shard=32</string>
+	<string>https://iterm2.com/appcasts/final.xml?shard=84</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-10-08T18:30:37Z</date>
+	<date>2017-11-07T16:49:54Z</date>
+	<key>SUSendProfileInfo</key>
+	<false/>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
@@ -2169,7 +2172,7 @@
 	<key>ShowBookmarkName</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
-	<false/>
+	<true/>
 	<key>ShowPaneTitles</key>
 	<true/>
 	<key>SmartPlacement</key>
@@ -2194,6 +2197,8 @@
 	</array>
 	<key>TripleClickSelectsFullWrappedLines</key>
 	<false/>
+	<key>UKCrashReporterLastCrashReportDate</key>
+	<real>1508875392</real>
 	<key>URLHandlersByGuid</key>
 	<dict/>
 	<key>UseBorder</key>
@@ -3116,7 +3121,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.1.3</string>
+	<string>3.1.4</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
