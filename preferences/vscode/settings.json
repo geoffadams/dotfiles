@@ -24,6 +24,9 @@
     "standard.nodePath":  "./node_modules",
     "standard.enable": true,
 
+    "tslint.nodePath": "./node_modules",
+    "tslint.enable": true,
+
     "terminal.external.osxExec": "iTerm.app",
     "terminal.integrated.fontFamily": "Source Code Pro for Powerline",
     "terminal.integrated.fontSize": 13,
