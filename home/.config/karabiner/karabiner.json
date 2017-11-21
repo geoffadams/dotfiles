@@ -220,7 +220,7 @@
                         "key_code": "f1"
                     },
                     "to": {
-                        "consumer_key_code": "display_brightness_decrement"
+                        "key_code": "f1"
                     }
                 },
                 {
@@ -228,7 +228,7 @@
                         "key_code": "f2"
                     },
                     "to": {
-                        "consumer_key_code": "display_brightness_increment"
+                        "key_code": "f2"
                     }
                 },
                 {
@@ -252,7 +252,7 @@
                         "key_code": "f5"
                     },
                     "to": {
-                        "key_code": "illumination_decrement"
+                        "key_code": "f5"
                     }
                 },
                 {
@@ -260,7 +260,7 @@
                         "key_code": "f6"
                     },
                     "to": {
-                        "key_code": "illumination_increment"
+                        "key_code": "f6"
                     }
                 },
                 {
