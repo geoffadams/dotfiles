@@ -47,11 +47,6 @@ end
 # Install powerline-fonts
 FileUtils.cp Dir.glob("./vendor/powerline-fonts/SourceCodePro/*.otf"), "#{Dir.home}/Library/Fonts/"
 
-# Symlinking things which need it
-puts 'Linking VSCode configuration...'
-FileUtils.ln_sf "#{Dir.home}/.homesick/repos/dotfiles/preferences/vscode/settings.json", "#{Dir.home}/Library/Application\ Support/Code/User/settings.json"
-puts 'VSCode configuration linked successfully.'
-
 # Private info prompts
 email = Readline.readline('Email address: ')
 unless system "git config --file ~/.gitconfig-private user.email #{email}"
