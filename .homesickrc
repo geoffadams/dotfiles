@@ -2,6 +2,12 @@ require 'readline'
 require 'pathname'
 require 'fileutils'
 
+# Keyboard preferences
+unless system 'defaults write -g InitialKeyRepeat -int 25 && defaults write -g KeyRepeat -int 2 && defaults write -g ApplePressAndHoldEnabled -bool false'
+  raise 'Error setting keyboard preferences.'
+end
+puts 'Keyboard preferences set successfully'
+
 # homebrew installation
 unless system 'which brew'
   puts 'Installing homebrew...'
