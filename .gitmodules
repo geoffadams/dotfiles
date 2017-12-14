@@ -18,4 +18,4 @@
 	url = https://github.com/airblade/vim-gitgutter.git
 [submodule "vendor/powerline-fonts"]
 	path = vendor/powerline-fonts
-	url = https://github.com/Lokaltog/powerline-fonts
+	url = https://github.com/powerline/fonts.git
