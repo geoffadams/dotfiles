@@ -6,7 +6,7 @@ tab-color() {
 tab-reset() {
     echo -ne "\033]6;1;bg;*;default\a"
 }
- 
+
 # Change the color of the tab when using SSH
 # reset the color after the connection closes
 color-ssh() {
@@ -17,10 +17,5 @@ color-ssh() {
     ssh $*
 }
 compdef _ssh color-ssh=ssh
- 
-alias ssh="color-ssh"
 
-# Navigation using Control-Shift-[Arrow]
-bindkey -e
-bindkey '^[[1;6C' forward-word
-bindkey '^[[1;6D' backward-word
+alias ssh="color-ssh"
