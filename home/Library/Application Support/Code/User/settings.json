@@ -42,5 +42,6 @@
     "terminal.integrated.fontSize": 13,
     "terminal.integrated.lineHeight": 1.4,
 
-    "vim.useSystemClipboard": true
+    "vim.useSystemClipboard": true,
+    "telemetry.enableTelemetry": false
 }
