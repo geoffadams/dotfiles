@@ -36,7 +36,7 @@ puts 'Brewfile bundle successfully installed!'
 ohmyzsh_path = Pathname.new "#{Dir.home}/.oh-my-zsh"
 unless ohmyzsh_path.exist?
   puts 'Installing oh-my-zsh...'
-  unless system 'curl -L http://install.ohmyz.sh | sh'
+  unless system 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
     raise 'Error installing oh-my-zsh'
   end
   puts 'oh-my-zsh installed!'
