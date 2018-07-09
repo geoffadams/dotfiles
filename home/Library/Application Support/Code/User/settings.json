@@ -1,19 +1,22 @@
 {
     "workbench.colorTheme": "Solarized Light",
     "workbench.startupEditor": "newUntitledFile",
+    "workbench.sideBar.location": "left",
 
     "window.zoomLevel": 0,
+
+    "terminal.external.osxExec": "iTerm.app",
+    "terminal.integrated.fontFamily": "Source Code Pro for Powerline",
+    "terminal.integrated.fontSize": 13,
+    "terminal.integrated.lineHeight": 1,
+
+    "telemetry.enableTelemetry": false,
 
     "editor.tabSize": 2,
     "editor.minimap.enabled": false,
     "editor.parameterHints": false,
     "editor.wordWrap": "off",
     "editor.wordWrapColumn": 120,
-
-    "[markdown]": {
-        "editor.wordWrap": "wordWrapColumn",
-        "editor.quickSuggestions": false
-    },
 
     "extensions.ignoreRecommendations": true,
 
@@ -37,11 +40,13 @@
     "tslint.nodePath": "./node_modules",
     "tslint.enable": true,
 
-    "terminal.external.osxExec": "iTerm.app",
-    "terminal.integrated.fontFamily": "Source Code Pro for Powerline",
-    "terminal.integrated.fontSize": 13,
-    "terminal.integrated.lineHeight": 1.4,
-
     "vim.useSystemClipboard": true,
-    "telemetry.enableTelemetry": false
+
+    "[markdown]": {
+        "editor.wordWrap": "wordWrapColumn",
+        "editor.quickSuggestions": false
+    },
+    "[sql]": {
+
+    }
 }
