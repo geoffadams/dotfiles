@@ -19,5 +19,7 @@ PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin":$HOME/.rb
 if [ -f "$HOME/.zshenv-work" ]; then
   source $HOME/.zshenv-work
 fi
-source $PERSONAL_ZSH/environment.zsh
 
+for f in $PERSONAL_ZSH/env/*; do
+   . $f
+done
