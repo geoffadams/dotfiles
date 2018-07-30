@@ -59,6 +59,7 @@ alias py3="python3"
 # proxies
 alias disable_proxies="unset http_proxy https_proxy ALL_PROXY HTTP_PROXY HTTPS_PROXY"
 
+## Tools
 whatsonport() {
   lsof -i tcp:$*
 }
@@ -66,6 +67,8 @@ whatsonport() {
 pbfile() {
   cat $1 | pbcopy
 }
+
+alias directory-size='du -h -d 1 | sort -h'
 
 # Docker
 alias docker-image-prune='docker rmi $(docker images -f "dangling=true" -q)'
