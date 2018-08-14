@@ -48,5 +48,6 @@
     },
     "[sql]": {
 
-    }
+    },
+    "breadcrumbs.enabled": true
 }
