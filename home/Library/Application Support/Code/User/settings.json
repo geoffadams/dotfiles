@@ -31,13 +31,13 @@
     },
     "files.trimTrailingWhitespace": true,
 
-    "eslint.nodePath": "./node_modules",
+    // "eslint.nodePath": "./node_modules",
     "eslint.enable": false,
 
-    "standard.nodePath":  "./node_modules",
+    // "standard.nodePath":  "./node_modules",
     "standard.enable": true,
 
-    "tslint.nodePath": "./node_modules",
+    // "tslint.nodePath": "./node_modules",
     "tslint.enable": true,
 
     "vim.useSystemClipboard": true,
