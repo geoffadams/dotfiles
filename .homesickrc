@@ -1,36 +1,39 @@
 require 'readline'
 require 'pathname'
 require 'fileutils'
+require 'os'
 
-# Keyboard preferences
-unless system 'defaults write -g InitialKeyRepeat -int 25 && defaults write -g KeyRepeat -int 2 && defaults write -g ApplePressAndHoldEnabled -bool false'
-  raise 'Error setting keyboard preferences.'
-end
-puts 'Keyboard preferences set successfully'
-
-# homebrew installation
-unless system 'which brew'
-  puts 'Installing homebrew...'
-  unless system 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
-    raise 'Error installing homebrew.'
+if OS.mac?
+  # Keyboard preferences
+  unless system 'defaults write -g InitialKeyRepeat -int 25 && defaults write -g KeyRepeat -int 2 && defaults write -g ApplePressAndHoldEnabled -bool false'
+    raise 'Error setting keyboard preferences.'
   end
-  puts 'homebrew successfully installed!'
-else
-  puts 'homebrew already installed.'
-end
+  puts 'Keyboard preferences set successfully'
 
-puts 'Tapping brew-bundle...'
-unless system 'brew tap Homebrew/bundle'
-  raise 'Error tapping Homebrew/bundle.'
-end
-puts 'brew-bundle successfully installed!'
+  # homebrew installation
+  unless system 'which brew'
+    puts 'Installing homebrew...'
+    unless system 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
+      raise 'Error installing homebrew.'
+    end
+    puts 'homebrew successfully installed!'
+  else
+    puts 'homebrew already installed.'
+  end
 
-# Brewfile installation
-puts 'Installing Brewfile bundle...'
-unless system 'brew bundle'
-  raise 'Error installing Brewfile bundle.'
+  puts 'Tapping brew-bundle...'
+  unless system 'brew tap Homebrew/bundle'
+    raise 'Error tapping Homebrew/bundle.'
+  end
+  puts 'brew-bundle successfully installed!'
+
+  # Brewfile installation
+  puts 'Installing Brewfile bundle...'
+  unless system 'brew bundle'
+    raise 'Error installing Brewfile bundle.'
+  end
+  puts 'Brewfile bundle successfully installed!'
 end
-puts 'Brewfile bundle successfully installed!'
 
 # oh-my-zsh installation
 ohmyzsh_path = Pathname.new "#{Dir.home}/.oh-my-zsh"
@@ -44,8 +47,10 @@ else
   puts 'oh-my-zsh already installed.'
 end
 
-# Install powerline-fonts
-FileUtils.cp Dir.glob("./vendor/powerline-fonts/SourceCodePro/*.otf"), "#{Dir.home}/Library/Fonts/"
+if OS.mac?
+  # Install powerline-fonts
+  FileUtils.cp Dir.glob("./vendor/powerline-fonts/SourceCodePro/*.otf"), "#{Dir.home}/Library/Fonts/"
+end
 
 # Private info prompts
 email = Readline.readline('Email address: ')

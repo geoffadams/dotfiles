@@ -2,7 +2,7 @@
 
 ## Installation
 
-    gem install homesick
+    gem install homesick os
     homesick clone geoffadams/dotfiles
     homesick symlink dotfiles
     homesick rc dotfiles
