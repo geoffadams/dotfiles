@@ -8,7 +8,10 @@ PAGER=less
 EDITOR=vim
 HELPDIR=/usr/local/share/zsh/helpfiles
 
-JAVA_HOME=$(/usr/libexec/java_home)
+if [ -f "/usr/libexec/java_home" ]; then
+  JAVA_HOME=$(/usr/libexec/java_home)
+fi
+
 JAVA_OPTS="-Xss2M -Xms256M -Xmx2G \
   -XX:+UseConcMarkSweepGC \
   -XX:+CMSClassUnloadingEnabled \
