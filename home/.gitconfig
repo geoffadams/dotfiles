@@ -50,10 +50,10 @@
     precommit = diff --cached --diff-algorithm=minimal -w
 
     tidy-branches = remote prune origin
-[include]
-    path = ~/.gitconfig-local
-    path = ~/.gitconfig-private
 [tag]
     sort = version:refname
 [commit]
     gpgsign = true
+[include]
+    path = ~/.gitconfig-local
+    path = ~/.gitconfig-private
