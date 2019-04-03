@@ -2,7 +2,7 @@ tap "homebrew/core"
 tap "shopify/shopify"
 brew "awscli"
 brew "colordiff"
-brew "curl", args: ["with-openssl"]
+brew "curl-openssl"
 brew "git"
 brew "gnu-sed"
 brew "gnu-units"
