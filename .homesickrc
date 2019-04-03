@@ -4,12 +4,6 @@ require 'fileutils'
 require 'os'
 
 if OS.mac?
-  # general system settings
-  unless system 'bash ./mac/system-settings.sh'
-    raise 'Error applying system settings'
-  end
-  puts 'System settings applied successfully'
-
   # homebrew installation
   unless system 'which brew'
     puts 'Installing homebrew...'
@@ -33,6 +27,12 @@ if OS.mac?
     raise 'Error installing Brewfile bundle.'
   end
   puts 'Brewfile bundle successfully installed!'
+
+  # general system settings
+  unless system 'bash ./mac/system-settings.sh'
+    raise 'Error applying system settings'
+  end
+  puts 'System settings applied successfully'
 
   # Flux settings
   unless system 'bash ./mac/flux.sh'
