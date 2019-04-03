@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+function add_dock_icon () {
+  defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>$1</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"
+}
+
 # System: keyboard preferences
 defaults write -g InitialKeyRepeat -int 25
 defaults write -g KeyRepeat -int 2
@@ -20,7 +24,20 @@ defaults write com.apple.dock "mineffect" -string "scale"
 defaults write com.apple.dock "minimize-to-application" -bool true
 
 # Dock: icon size
-defaults write com.apple.dock "tilesize" -float 47
+defaults write com.apple.dock "tilesize" -float 48
+
+# Dock: persistent apps
+defaults write com.apple.dock "persistent-apps" -array
+add_dock_icon "/Applications/iTerm.app"
+add_dock_icon "/Applications/Firefox.app"
+add_dock_icon "/Applications/Mail.app"
+add_dock_icon "/Applications/Calendar.app"
+add_dock_icon "/Applications/Todoist.app"
+add_dock_icon "/Applications/iA Writer.app"
+add_dock_icon "/Applications/Microsoft Excel.app"
+add_dock_icon "/Applications/Visual Studio Code.app"
+add_dock_icon "/Applications/Spotify.app"
+killall Dock
 
 # Mission Control: group windows by application
 defaults write com.apple.dock "expose-group-apps" -bool true
