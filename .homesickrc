@@ -44,6 +44,12 @@ if OS.mac?
   end
   puts 'iTerm2 custom preferences location set.'
 
+  # VSCode extensions
+  unless system 'bash ./mac/vscode-extensions.sh'
+    raise 'Error installing VSCode extensions.'
+  end
+  puts 'VSCode extensions successfully installed.'
+
   # Mac App Store apps
   unless system 'bash ./mac/mac-app-store.sh'
     raise 'Error installing Mac App Store applications.'
