@@ -33,6 +33,16 @@ if OS.mac?
     raise 'Error installing Brewfile bundle.'
   end
   puts 'Brewfile bundle successfully installed!'
+
+  # iTerm 2 preferences location
+  unless system 'defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.homesick/repos/dotfiles/preferences"'
+    raise 'Error setting iTerm2 custom preferences location'
+  end
+
+  unless system 'defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true'
+    raise 'Error setting iTerm2 preferences to load from custom folder'
+  end
+  puts 'iTerm2 custom preferences location set.'
 end
 
 # oh-my-zsh installation
