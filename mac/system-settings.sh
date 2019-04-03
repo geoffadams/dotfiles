@@ -44,3 +44,12 @@ defaults write com.apple.dock "expose-group-apps" -bool true
 
 # Mission Control: don't re-arrange spaces based on use
 defaults write com.apple.dock "mru-spaces" -bool false
+
+# Menu: show all icons
+defaults write com.apple.systemuiserver menuExtras -array \
+  "/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
+  "/System/Library/CoreServices/Menu Extras/Volume.menu" \
+  "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
+  "/System/Library/CoreServices/Menu Extras/AirPort.menu" \
+  "/System/Library/CoreServices/Menu Extras/TextInput.menu" \
+  "/System/Library/CoreServices/Menu Extras/VPN.menu"
