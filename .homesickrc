@@ -4,11 +4,11 @@ require 'fileutils'
 require 'os'
 
 if OS.mac?
-  # Keyboard preferences
-  unless system 'defaults write -g InitialKeyRepeat -int 25 && defaults write -g KeyRepeat -int 2 && defaults write -g ApplePressAndHoldEnabled -bool false'
-    raise 'Error setting keyboard preferences.'
+  # general system settings
+  unless system 'bash ./mac/system-settings.sh'
+    raise 'Error applying system settings'
   end
-  puts 'Keyboard preferences set successfully'
+  puts 'System settings applied successfully'
 
   # homebrew installation
   unless system 'which brew'
