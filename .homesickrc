@@ -43,6 +43,12 @@ if OS.mac?
     raise 'Error setting iTerm2 preferences to load from custom folder'
   end
   puts 'iTerm2 custom preferences location set.'
+
+  # Mac App Store apps
+  unless system 'bash ./mac/mac-app-store.sh'
+    raise 'Error installing Mac App Store applications.'
+  end
+  puts 'Mac App Store applications installed.'
 end
 
 # oh-my-zsh installation
