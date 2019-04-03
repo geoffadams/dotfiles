@@ -29,7 +29,7 @@ if OS.mac?
 
   # Brewfile installation
   puts 'Installing Brewfile bundle...'
-  unless system 'brew bundle'
+  unless system 'brew bundle install -v'
     raise 'Error installing Brewfile bundle.'
   end
   puts 'Brewfile bundle successfully installed!'
