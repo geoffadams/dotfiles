@@ -52,7 +52,7 @@ unless ohmyzsh_path.exist?
   unless system 'git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh'
     raise 'Error installing oh-my-zsh'
   end
-  system 'chmod g-w,o-w .oh-my-zsh'
+  system 'chmod g-w,o-w ~/.oh-my-zsh'
   puts 'oh-my-zsh installed!'
 else
   puts 'oh-my-zsh already installed.'
