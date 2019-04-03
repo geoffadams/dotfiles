@@ -45,6 +45,10 @@ defaults write com.apple.dock "expose-group-apps" -bool true
 # Mission Control: don't re-arrange spaces based on use
 defaults write com.apple.dock "mru-spaces" -bool false
 
+# Menu: hide clock (replaced by Fuzzy Clock)
+defaults -currentHost write com.apple.systemuiserver dontAutoLoad -array \
+ "/System/Library/CoreServices/Menu Extras/Clock.menu"
+
 # Menu: show all icons
 defaults write com.apple.systemuiserver menuExtras -array \
   "/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
