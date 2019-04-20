@@ -52,4 +52,5 @@ cask "visual-studio-code"
 cask "insomnia"
 cask "logitech-options"
 cask "gpg-suite"
+cask "spectacle"
 
