@@ -14,7 +14,7 @@
 
     "editor.tabSize": 2,
     "editor.minimap.enabled": false,
-    "editor.parameterHints": false,
+    "editor.parameterHints.enabled": false,
     "editor.wordWrap": "off",
     "editor.wordWrapColumn": 120,
 
