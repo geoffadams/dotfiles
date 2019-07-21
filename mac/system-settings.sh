@@ -49,6 +49,23 @@ defaults write com.apple.dock "mru-spaces" -bool false
 defaults -currentHost write com.apple.systemuiserver dontAutoLoad -array \
  "/System/Library/CoreServices/Menu Extras/Clock.menu"
 
+# Finder: general settings
+rm -f ~/Library/Preferences/com.apple.finder.plist
+defaults write com.apple.finder "$(cat ./finder.plist)"
+
+# Finder: show file extensions
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# Finder: show user Library folder
+chflags nohidden ~/Library
+
+# Finder: don't write .DS_Store files to network or USB volumes
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+
+# Finder: restart
+killall Finder
+
 # Menu: show all icons
 defaults write com.apple.systemuiserver menuExtras -array \
   "/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
