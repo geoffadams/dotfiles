@@ -53,4 +53,4 @@ cask "insomnia"
 cask "logitech-options"
 cask "gpg-suite"
 cask "spectacle"
-
+cask "mysides"

@@ -66,6 +66,16 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 # Finder: restart
 killall Finder
 
+# Finder: favourite folders
+mysides add Applications file:///Applications/
+mysides add Home file:///Users/geoff/
+mysides add Desktop file:///Users/geoff/Desktop/
+mysides add Downloads file:///Users/geoff/Downloads/
+mysides add Pictures file:///Users/geoff/Pictures/
+mysides add Archive file:///Users/geoff/Archive/
+mysides add Workspace file:///Users/geoff/Workspace/
+mysides add Notes file:///Users/geoff/Notes/
+
 # Menu: show all icons
 defaults write com.apple.systemuiserver menuExtras -array \
   "/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
