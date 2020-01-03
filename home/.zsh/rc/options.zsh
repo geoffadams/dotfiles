@@ -8,3 +8,4 @@ setopt correct
 setopt prompt_subst
 
 _comp_options+=(globdots)
+zstyle ':completion:*' special-dirs false
