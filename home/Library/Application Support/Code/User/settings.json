@@ -50,5 +50,6 @@
 
     },
     "breadcrumbs.enabled": true,
-    "explorer.confirmDragAndDrop": false
+    "explorer.confirmDragAndDrop": false,
+    "liveshare.featureSet": "insiders"
 }
