@@ -34,6 +34,7 @@ brew "syncthing", restart_service: true
 brew "the_silver_searcher"
 brew "trash"
 brew "vim"
+brew "watch"
 brew "wget"
 brew "xz"
 brew "zsh"
