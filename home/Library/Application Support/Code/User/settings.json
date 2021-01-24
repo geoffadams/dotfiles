@@ -48,5 +48,8 @@
     },
     "breadcrumbs.enabled": true,
     "explorer.confirmDragAndDrop": false,
-    "liveshare.featureSet": "insiders"
+    "liveshare.featureSet": "insiders",
+    "files.associations": {
+        "*.pyx": "python"
+    }
 }
