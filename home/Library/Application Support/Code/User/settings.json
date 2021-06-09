@@ -3,8 +3,6 @@
     "workbench.startupEditor": "newUntitledFile",
     "workbench.sideBar.location": "left",
 
-    "window.zoomLevel": 0,
-
     "terminal.external.osxExec": "iTerm.app",
     "terminal.integrated.fontFamily": "Source Code Pro for Powerline",
     "terminal.integrated.fontSize": 13,
@@ -21,6 +19,9 @@
     "extensions.ignoreRecommendations": true,
 
     "files.autoSave": "onFocusChange",
+    "files.associations": {
+        "*.pyx": "python"
+    },
     "files.exclude": {
         "**/.git": true,
         "**/.svn": true,
@@ -49,7 +50,6 @@
     "breadcrumbs.enabled": true,
     "explorer.confirmDragAndDrop": false,
     "liveshare.featureSet": "insiders",
-    "files.associations": {
-        "*.pyx": "python"
-    }
+    "liveshare.authenticationProvider": "GitHub",
+    "window.zoomLevel": 1
 }
