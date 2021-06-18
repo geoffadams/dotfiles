@@ -36,8 +36,6 @@
 
     "standard.enable": true,
 
-    "tslint.enable": true,
-
     "vim.useSystemClipboard": true,
 
     "[markdown]": {
