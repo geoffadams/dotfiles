@@ -34,13 +34,6 @@ if OS.mac?
   end
   puts 'System settings applied successfully'
 
-  # Flux settings
-  unless system 'bash ./mac/flux.sh'
-    raise 'Error applying Flux preferences.'
-  end
-  puts 'Flux preferences successfully applied.'
-  system 'open /Applications/Flux.app'
-
   # Fuzzy Clock
   system 'open /Applications/FuzzyClock.app'
 
