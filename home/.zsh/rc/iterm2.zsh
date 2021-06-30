@@ -19,3 +19,6 @@ color-ssh() {
 compdef _ssh color-ssh=ssh
 
 alias ssh="color-ssh"
+
+# allow path names to be a little longer
+ZSH_THEME_TERM_TAB_TITLE_IDLE="%100<..<%~%<<"

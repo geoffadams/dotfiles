@@ -17,6 +17,7 @@ if [ -f "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]
   source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
+# load additional config
 for f in $PERSONAL_ZSH/rc/*; do
    . $f
 done
