@@ -51,7 +51,7 @@
     "liveshare.authenticationProvider": "GitHub",
     "window.zoomLevel": 1,
     "workbench.editorAssociations": {
-        "*.ipynb": "jupyter.notebook.ipynb"
+        "*.ipynb": "jupyter-notebook"
     },
     "editor.wordBasedSuggestions": false,
     "python.showStartPage": false,
@@ -85,4 +85,8 @@
     ],
     "yaml.format.enable": true,
     "redhat.telemetry.enabled": false,
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
 }
