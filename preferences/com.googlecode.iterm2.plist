@@ -1874,6 +1874,8 @@
 			<true/>
 			<key>Normal Font</key>
 			<string>Inconsolata-Regular 16</string>
+			<key>Only The Default BG Color Uses Transparency</key>
+			<true/>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -2027,7 +2029,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.1064048632979393</real>
+			<real>0.15827674472454897</real>
 			<key>Triggers</key>
 			<array/>
 			<key>Unlimited Scrollback</key>
