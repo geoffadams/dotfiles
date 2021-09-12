@@ -1351,7 +1351,7 @@
 			<key>Close Sessions On End</key>
 			<true/>
 			<key>Columns</key>
-			<integer>120</integer>
+			<integer>140</integer>
 			<key>Command</key>
 			<string>/usr/local/bin/zsh</string>
 			<key>Cursor Color</key>
@@ -1881,7 +1881,7 @@
 			<key>Right Option Key Sends</key>
 			<integer>0</integer>
 			<key>Rows</key>
-			<integer>40</integer>
+			<integer>50</integer>
 			<key>Screen</key>
 			<integer>-1</integer>
 			<key>Scrollback Lines</key>
@@ -2037,6 +2037,8 @@
 			<key>Use Bright Bold</key>
 			<false/>
 			<key>Use Canonical Parser</key>
+			<false/>
+			<key>Use Custom Window Title</key>
 			<false/>
 			<key>Use Italic Font</key>
 			<false/>
