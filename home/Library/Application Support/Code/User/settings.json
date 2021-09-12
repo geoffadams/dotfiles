@@ -60,7 +60,8 @@
             "!Module"
         ],
         "editor.wordBasedSuggestions": false,
-        "editor.tabSize": 4
+        "editor.tabSize": 4,
+        "editor.detectIndentation": false
     },
 
     "yaml.customTags": [
