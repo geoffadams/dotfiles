@@ -64,7 +64,7 @@ noremap <Right> <NOP>
 set clipboard=unnamed
 
 " Automatic word wrapping
-set tw=79
+set tw=119
 set formatoptions+=t
 
 " Helpers
