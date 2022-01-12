@@ -34,9 +34,6 @@ if OS.mac?
   end
   puts 'System settings applied successfully'
 
-  # Fuzzy Clock
-  system 'open /Applications/FuzzyClock.app'
-
   # iTerm 2 preferences location
   unless system 'defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.homesick/repos/dotfiles/preferences"'
     raise 'Error setting iTerm2 custom preferences location'
