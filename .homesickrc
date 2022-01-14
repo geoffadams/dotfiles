@@ -79,9 +79,9 @@ else
 end
 
 if OS.mac?
-  puts "Installing Powerline fonts..."
-  # Install powerline-fonts
-  FileUtils.cp Dir.glob("./vendor/powerline-fonts/SourceCodePro/*.otf"), "#{Dir.home}/Library/Fonts/"
+  puts "Installing fonts..."
+  # Install Inconsolata
+  FileUtils.cp Dir.glob("./vendor/inconsolata/fonts/otf/*.otf"), "#{Dir.home}/Library/Fonts/"
 end
 
 # Private info prompts

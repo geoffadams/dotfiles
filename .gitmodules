@@ -16,6 +16,6 @@
 [submodule "home/.vim/bundle/vim-gitgutter"]
 	path = home/.vim/bundle/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
-[submodule "vendor/powerline-fonts"]
-	path = vendor/powerline-fonts
-	url = https://github.com/powerline/fonts.git
+[submodule "vendor/inconsolata"]
+	path = vendor/inconsolata
+	url = git@github.com:googlefonts/Inconsolata.git
