@@ -11,3 +11,6 @@ mas install 549083868
 
 # Pixelmator
 mas install 407963104
+
+# Notability
+mas install 360593530
