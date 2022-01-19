@@ -26,7 +26,6 @@ brew "pkg-config"
 brew "python"
 brew "qrencode"
 brew "rbenv"
-brew "rpm"
 brew "ruby"
 brew "subversion"
 brew "syncthing", restart_service: true
