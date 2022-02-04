@@ -57,3 +57,5 @@
 [include]
     path = ~/.gitconfig-local
     path = ~/.gitconfig-private
+[init]
+	defaultBranch = main
