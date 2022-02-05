@@ -99,12 +99,20 @@ mysides add Notes file://${HOME}Notes/
 mysides add Pictures file://${HOME}Pictures/
 mysides add Workspace file://${HOME}Workspace/
 
-# Menu: show all icons
+# Menu: show Time Machine and VPN menus
 defaults write com.apple.systemuiserver menuExtras -array \
   "/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
-  "/System/Library/CoreServices/Menu Extras/Volume.menu" \
-  "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
-  "/System/Library/CoreServices/Menu Extras/AirPort.menu" \
-  "/System/Library/CoreServices/Menu Extras/TextInput.menu" \
   "/System/Library/CoreServices/Menu Extras/VPN.menu"
+
+# Menu: hide Spotlight
+defaults write ~/Library/Preferences/ByHost/com.apple.Spotlight MenuItemHidden -bool false
+
+# Menu: display WiFi controls
+defaults write com.apple.controlcenter "NSStatusItem Visible WiFi" -bool true
+defaults write ~/Library/Preferences/ByHost/com.apple.controlcenter.plist WiFi -int 18
+
+# Menu: display sound controls
+defaults write com.apple.controlcenter "NSStatusItem Visible Sound" -bool true
+defaults write ~/Library/Preferences/ByHost/com.apple.controlcenter.plist Sound -int 18
+
 killall SystemUIServer
