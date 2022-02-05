@@ -46,16 +46,36 @@ defaults write com.apple.dock "expose-group-apps" -bool true
 # Mission Control: don't re-arrange spaces based on use
 defaults write com.apple.dock "mru-spaces" -bool false
 
-# Menu: hide clock (replaced by Fuzzy Clock)
-defaults -currentHost write com.apple.systemuiserver dontAutoLoad -array \
- "/System/Library/CoreServices/Menu Extras/Clock.menu"
+# Finder: new windows start in home directory
+defaults write com.apple.finder NewWindowTarget -string "PfHm"
+defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}"
 
-# Finder: general settings
-rm -f ~/Library/Preferences/com.apple.finder.plist
-defaults write com.apple.finder "$(cat ./finder.plist)"
+# Finder: show everything on desktop
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
-# Finder: show file extensions
+# Finder: windows show all optional bars
+defaults write com.apple.finder ShowPathbar -bool true
+defaults write com.apple.finder ShowSidebar -bool true
+defaults write com.apple.finder ShowStatusBar -bool true
+
+# Finder: search in current directory by default
+defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+
+# Finder: show file extensions and allow them to be changed without confirmation
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+# Finder: folders on top
+defaults write com.apple.finder _FXSortFoldersFirst -bool true
+
+# Finder: path in title bar
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+
+# Finder: column view by default
+defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
 
 # Finder: show user Library folder
 chflags nohidden ~/Library
