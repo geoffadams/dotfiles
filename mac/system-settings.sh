@@ -84,6 +84,25 @@ chflags nohidden ~/Library
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
+# Finder: toolbars
+/usr/libexec/PlistBuddy -c "delete :'NSToolbar Configuration Browser':'TB Item Identifiers' array" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "add :'NSToolbar Configuration Browser':'TB Item Identifiers' array" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "add :'NSToolbar Configuration Browser':'TB Item Identifiers':0 string 'com.apple.finder.BACK'" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "add :'NSToolbar Configuration Browser':'TB Item Identifiers':1 string 'com.apple.finder.PATH'" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "add :'NSToolbar Configuration Browser':'TB Item Identifiers':2 string 'com.apple.finder.NFLD'" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "add :'NSToolbar Configuration Browser':'TB Item Identifiers':3 string 'NSToolbarSpaceItem'" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "add :'NSToolbar Configuration Browser':'TB Item Identifiers':4 string 'com.apple.finder.SWCH'" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "add :'NSToolbar Configuration Browser':'TB Item Identifiers':5 string 'com.apple.finder.ARNG'" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "add :'NSToolbar Configuration Browser':'TB Item Identifiers':6 string 'com.apple.finder.PTGL'" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "add :'NSToolbar Configuration Browser':'TB Item Identifiers':7 string 'NSToolbarSpaceItem'" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "add :'NSToolbar Configuration Browser':'TB Item Identifiers':8 string 'com.apple.finder.INFO'" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "add :'NSToolbar Configuration Browser':'TB Item Identifiers':9 string 'com.apple.finder.LABL'" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "add :'NSToolbar Configuration Browser':'TB Item Identifiers':10 string 'com.apple.finder.ACTN'" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "add :'NSToolbar Configuration Browser':'TB Item Identifiers':11 string 'NSToolbarSpaceItem'" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "add :'NSToolbar Configuration Browser':'TB Item Identifiers':12 string 'com.apple.finder.SHAR'" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "add :'NSToolbar Configuration Browser':'TB Item Identifiers':13 string 'com.apple.finder.AirD'" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "add :'NSToolbar Configuration Browser':'TB Item Identifiers':14 string 'com.apple.finder.SRCH'" ~/Library/Preferences/com.apple.finder.plist
+
 # Finder: restart
 killall Finder
 
