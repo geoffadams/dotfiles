@@ -72,7 +72,7 @@ end
 
 puts 'Setting zsh as default shell...'
 if OS.mac?
-  homebrew_zsh_path="/opt/homebrew/bin/zsh"
+  homebrew_zsh_path=`brew --prefix zsh`
   system "sudo sh -c 'echo \"#{homebrew_zsh_path}\" >> /etc/shells'"
   system "chsh -s \"#{homebrew_zsh_path}\""
 else

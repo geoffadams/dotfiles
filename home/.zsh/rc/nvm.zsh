@@ -1,8 +1,6 @@
 export NVM_SCRIPT_DIR="$HOME/.nvm"
 if hash brew 2>/dev/null; then
-  # export NVM_DIR=$(brew --prefix nvm)
-  # Hard-code this instead for terminal load speed.
-  export NVM_SCRIPT_DIR="/opt/homebrew/opt/nvm"
+  export NVM_SCRIPT_DIR=$(brew --prefix nvm)
 fi
 
 if [ -s "$NVM_SCRIPT_DIR/nvm.sh" ] && [ ! "$(whence -w __init_nvm)" = function ]; then
