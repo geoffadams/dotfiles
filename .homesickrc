@@ -83,6 +83,10 @@ if OS.mac?
   puts "Installing fonts..."
   # Install Inconsolata
   FileUtils.cp Dir.glob("./vendor/inconsolata/fonts/otf/*.otf"), "#{Dir.home}/Library/Fonts/"
+
+  puts "Configuring gnupg..."
+  homebrew_pinentry_mac_path=`brew --prefix pinentry-mac`.strip
+  system "echo \"pinentry-program #{homebrew_pinentry_mac_path}/bin/pinentry-mac\" >> ~/.gnupg/gpg-agent.conf"
 end
 
 # Private info prompts
