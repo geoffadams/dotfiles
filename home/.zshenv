@@ -8,7 +8,7 @@ EDITOR=vim
 HELPDIR=/usr/local/share/zsh/helpfiles
 
 if [ -f "/usr/libexec/java_home" ]; then
-  JAVA_HOME=$(/usr/libexec/java_home)
+  JAVA_HOME=$(/usr/libexec/java_home 2&>/dev/null)
 fi
 
 JAVA_OPTS="-Xss2M -Xms256M -Xmx2G \
