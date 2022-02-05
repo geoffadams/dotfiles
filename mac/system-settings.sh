@@ -68,13 +68,15 @@ killall Finder
 
 # Finder: favourite folders
 mysides add Applications file:///Applications/
-mysides add Home file:///Users/geoff/
-mysides add Desktop file:///Users/geoff/Desktop/
-mysides add Downloads file:///Users/geoff/Downloads/
-mysides add Pictures file:///Users/geoff/Pictures/
-mysides add Archive file:///Users/geoff/Archive/
-mysides add Workspace file:///Users/geoff/Workspace/
-mysides add Notes file:///Users/geoff/Notes/
+mysides add Home file://${HOME}
+mysides add Archive file://${HOME}Archive/
+mysides add Desktop file://${HOME}Desktop/
+mysides add Documents file://${HOME}/Documents
+mysides add Downloads file://${HOME}Downloads/
+mysides add KnowledgeBase file://${HOME}/KnowledgeBase/
+mysides add Notes file://${HOME}Notes/
+mysides add Pictures file://${HOME}Pictures/
+mysides add Workspace file://${HOME}Workspace/
 
 # Menu: show all icons
 defaults write com.apple.systemuiserver menuExtras -array \
