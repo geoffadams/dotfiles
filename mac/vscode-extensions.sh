@@ -17,3 +17,5 @@ code --install-extension golang.go
 code --install-extension vsciot-vscode.vscode-arduino
 code --install-extension albert.tabout
 code --install-extension dotjoshjohnson.xml
+code --install-extension fabiospampinato.vscode-diff
+code --install-extension esbenp.prettier-vscode
