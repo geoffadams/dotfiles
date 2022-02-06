@@ -15,7 +15,7 @@
 	url = https://github.com/airblade/vim-gitgutter.git
 [submodule "vendor/inconsolata"]
 	path = vendor/inconsolata
-	url = git@github.com:googlefonts/Inconsolata.git
+	url = https://github.com/googlefonts/Inconsolata.git
 [submodule "home/.vim/bundle/vim-solarized"]
 	path = home/.vim/bundle/vim-solarized
-	url = git@github.com:lifepillar/vim-solarized8.git
+	url = https://github.com/lifepillar/vim-solarized8.git
