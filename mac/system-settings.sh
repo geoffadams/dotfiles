@@ -4,10 +4,16 @@ function add_dock_icon () {
   defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>$1</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"
 }
 
-# System: keyboard preferences
+# Input: faster key repeat
 defaults write -g InitialKeyRepeat -int 25
 defaults write -g KeyRepeat -int 2
 defaults write -g ApplePressAndHoldEnabled -bool false
+
+# Input: tap to click on trackpad
+defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
 # System: ask for password immediately following screensaver activation
 defaults write com.apple.screensaver askForPassword -int 1
