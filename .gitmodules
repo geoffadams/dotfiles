@@ -1,9 +1,6 @@
 [submodule "home/.vim/bundle/vim-pathogen"]
 	path = home/.vim/bundle/vim-pathogen
 	url = https://github.com/tpope/vim-pathogen.git
-[submodule "home/.vim/bundle/vim-colors-solarized"]
-	path = home/.vim/bundle/vim-colors-solarized
-	url = https://github.com/thomwiggers/vim-colors-solarized.git
 [submodule "home/.vim/bundle/vim-nerdtree"]
 	path = home/.vim/bundle/vim-nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
@@ -19,3 +16,6 @@
 [submodule "vendor/inconsolata"]
 	path = vendor/inconsolata
 	url = git@github.com:googlefonts/Inconsolata.git
+[submodule "home/.vim/bundle/vim-solarized"]
+	path = home/.vim/bundle/vim-solarized
+	url = git@github.com:lifepillar/vim-solarized8.git

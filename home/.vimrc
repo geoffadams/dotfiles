@@ -12,8 +12,9 @@ set directory=~/.vim/backup
 
 " Syntax highlighting
 syntax enable
-set background=light
-colorscheme solarized
+set termguicolors
+set background=dark
+colorscheme solarized8
 
 " Tabs
 set autoindent
