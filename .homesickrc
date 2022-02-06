@@ -4,37 +4,58 @@ require 'fileutils'
 require 'os'
 
 if OS.mac?
-  # homebrew installation
+  # Homebrew installation
+  puts 'Checking for Homebrew...'
   unless system 'which brew'
-    puts 'Installing homebrew...'
+    puts 'Installing Homebrew...'
     unless system 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
       raise 'Error installing homebrew.'
     end
-    puts 'homebrew successfully installed!'
+    puts '...success!'
   else
-    puts 'homebrew already installed.'
+    puts 'Homebrew already installed.'
   end
 
   puts 'Tapping brew-bundle...'
   unless system 'brew tap Homebrew/bundle'
     raise 'Error tapping Homebrew/bundle.'
   end
-  puts 'brew-bundle successfully installed!'
+  puts '...success!'
 
   # Brewfile installation
   puts 'Installing Brewfile bundle...'
   unless system 'brew bundle install -v'
     raise 'Error installing Brewfile bundle.'
   end
-  puts 'Brewfile bundle successfully installed!'
+  puts '...success!'
 
-  # general system settings
+  # Mac App Store apps
+  puts 'Installing Mac App Store apps...'
+  unless system 'bash ./mac/mac-app-store.sh'
+    raise 'Error installing Mac App Store applications.'
+  end
+  puts '...success!'
+
+  # VSCode extensions
+  puts 'Installing VSCode extensions...'
+  unless system 'bash ./mac/vscode-extensions.sh'
+    raise 'Error installing VSCode extensions.'
+  end
+  puts '...success!'
+
+  # Install fonts
+  puts 'Installing fonts...'
+  FileUtils.cp Dir.glob('./vendor/inconsolata/fonts/otf/*.otf'), "#{Dir.home}/Library/Fonts/"
+
+  # macOS system settings
+  puts 'Applying Mac system settings...'
   unless system 'bash ./mac/system-settings.sh'
     raise 'Error applying system settings'
   end
-  puts 'System settings applied successfully'
+  puts '...success!'
 
-  # iTerm 2 preferences location
+  # iTerm 2 preferences
+  puts 'Configuring iTerm2 preferences...'
   unless system 'defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.homesick/repos/dotfiles/preferences"'
     raise 'Error setting iTerm2 custom preferences location'
   end
@@ -42,22 +63,28 @@ if OS.mac?
   unless system 'defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true'
     raise 'Error setting iTerm2 preferences to load from custom folder'
   end
-  puts 'iTerm2 custom preferences location set.'
+  puts '...success!'
 
-  # VSCode extensions
-  unless system 'bash ./mac/vscode-extensions.sh'
-    raise 'Error installing VSCode extensions.'
-  end
-  puts 'VSCode extensions successfully installed.'
-
-  # Mac App Store apps
-  unless system 'bash ./mac/mac-app-store.sh'
-    raise 'Error installing Mac App Store applications.'
-  end
-  puts 'Mac App Store applications installed.'
+  # gnupg pinentry-mac
+  puts 'Configuring gnupg...'
+  homebrew_pinentry_mac_path=`brew --prefix pinentry-mac`.strip
+  system "echo \"pinentry-program #{homebrew_pinentry_mac_path}/bin/pinentry-mac\" >> ~/.gnupg/gpg-agent.conf"
+  puts '...success!'
 end
 
+# zsh as default shell
+puts 'Setting zsh as default shell...'
+if OS.mac?
+  homebrew_zsh_path=`brew --prefix zsh`
+  system "sudo sh -c 'echo \"#{homebrew_zsh_path}\" >> /etc/shells'"
+  system "chsh -s \"#{homebrew_zsh_path}\""
+else
+  system 'chsh -s /bin/zsh'
+end
+puts '...success!'
+
 # oh-my-zsh installation
+puts 'Checking for oh-my-zsh...'
 ohmyzsh_path = Pathname.new "#{Dir.home}/.oh-my-zsh"
 unless ohmyzsh_path.exist?
   puts 'Installing oh-my-zsh...'
@@ -65,34 +92,15 @@ unless ohmyzsh_path.exist?
     raise 'Error installing oh-my-zsh'
   end
   system 'chmod g-w,o-w ~/.oh-my-zsh'
-  puts 'oh-my-zsh installed!'
+  puts '...success!'
 else
   puts 'oh-my-zsh already installed.'
 end
 
-puts 'Setting zsh as default shell...'
-if OS.mac?
-  homebrew_zsh_path=`brew --prefix zsh`
-  system "sudo sh -c 'echo \"#{homebrew_zsh_path}\" >> /etc/shells'"
-  system "chsh -s \"#{homebrew_zsh_path}\""
-else
-  system "chsh -s /bin/zsh"
-end
-
-if OS.mac?
-  puts "Installing fonts..."
-  # Install Inconsolata
-  FileUtils.cp Dir.glob("./vendor/inconsolata/fonts/otf/*.otf"), "#{Dir.home}/Library/Fonts/"
-
-  puts "Configuring gnupg..."
-  homebrew_pinentry_mac_path=`brew --prefix pinentry-mac`.strip
-  system "echo \"pinentry-program #{homebrew_pinentry_mac_path}/bin/pinentry-mac\" >> ~/.gnupg/gpg-agent.conf"
-end
-
-# Private info prompts
-puts "Configuring git..."
+# git user info
+puts 'Configuring git user info...'
 email = Readline.readline('Email address: ')
 unless system "git config --file ~/.gitconfig-private user.email #{email}"
   raise 'Error setting email address in git.'
 end
-puts 'Email address set in git global configuration'
+puts '...success!'

@@ -2,20 +2,34 @@
 
 ## Installation
 
-    gem install homesick os
-    homesick clone geoffadams/dotfiles
-    homesick symlink dotfiles
-    homesick rc dotfiles
+```sh
+gem install homesick os
+homesick clone geoffadams/dotfiles
+homesick symlink dotfiles
+homesick rc dotfiles
+```
 
 ## What it does
 
-- Configuration for a whole bunch of tools
-- Installs homebrew
-- Installs a bunch of homebrew packages
-- Installs oh-my-zsh
-- Populates configuration with private information
+- Installs stuff:
+    - Homebrew
+    - Applications via Homebrew
+    - Applications from the Mac App Store
+    - VSCode extensions
+- Configures `zsh`
+    - Sets `zsh` as the default shell (though no longer strictly necessary given `zsh` is default in macOS 10.15 and later)
+    - Installs `oh-my-zsh`
+    - Sets up my personal zsh configuration
+- Configures macOS with my personal preferences
+- Configures iTerm2 with my personal preferences
+    - Installs fonts needed
+- Configures `git` user settings
+- Configures `vim`
+    - Extensions
+    - Preferences
 
-## TODO
+## Stuff that would be nice
 
-- Use cask to install other applications
-- Nicer command line interface
+- Configure more macOS settings as I realise they vary between machines
+- Be less Mac- and Homebrew-specific
+- Applyg settings more gracefully (e.g. don't trounce whole configs on already-configured systems)
