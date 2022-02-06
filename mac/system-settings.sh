@@ -52,7 +52,20 @@ add_dock_icon "/Applications/Notability.app"
 add_dock_icon "/Applications/Microsoft Excel.app"
 add_dock_icon "/Applications/Visual Studio Code.app"
 add_dock_icon "/Applications/Spotify.app"
-killall Dock
+
+# Dock: hot corners
+# Top-left = none
+defaults write com.apple.dock wvous-tl-corner -int 0
+defaults write com.apple.dock wvous-tl-modifier -int 0
+# Top-right = Notification Center
+defaults write com.apple.dock wvous-tr-corner -int 12
+defaults write com.apple.dock wvous-tr-modifier -int 0
+# Bottom-right = Mission Control
+defaults write com.apple.dock wvous-br-corner -int 2
+defaults write com.apple.dock wvous-br-modifier -int 0
+# Bottom-left = none
+defaults write com.apple.dock wvous-bl-corner -int 0
+defaults write com.apple.dock wvous-bl-modifier -int 0
 
 # Mission Control: group windows by application
 defaults write com.apple.dock "expose-group-apps" -bool true
@@ -117,9 +130,6 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 /usr/libexec/PlistBuddy -c "add :'NSToolbar Configuration Browser':'TB Item Identifiers':13 string 'com.apple.finder.AirD'" ~/Library/Preferences/com.apple.finder.plist
 /usr/libexec/PlistBuddy -c "add :'NSToolbar Configuration Browser':'TB Item Identifiers':14 string 'com.apple.finder.SRCH'" ~/Library/Preferences/com.apple.finder.plist
 
-# Finder: restart
-killall Finder
-
 # Finder: favourite folders
 mysides add Applications file:///Applications/
 mysides add Home file://${HOME}
@@ -148,4 +158,7 @@ defaults write ~/Library/Preferences/ByHost/com.apple.controlcenter.plist WiFi -
 defaults write com.apple.controlcenter "NSStatusItem Visible Sound" -bool true
 defaults write ~/Library/Preferences/ByHost/com.apple.controlcenter.plist Sound -int 18
 
+# Restart everything
 killall SystemUIServer
+killall Dock
+killall Finder
