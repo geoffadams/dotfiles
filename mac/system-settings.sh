@@ -18,6 +18,11 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
+# Sound: disable UI sounds
+defaults write -g 'com.apple.sound.beep.sound' -string '/System/Library/Sounds/Tink.aiff'
+defaults write -g 'com.apple.sound.uiaudio.enabled' -int 0
+defaults write -g "com.apple.sound.beep.feedback" -int 0
+
 # System: ask for password immediately following screensaver activation
 defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
