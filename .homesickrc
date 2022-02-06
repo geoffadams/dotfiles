@@ -75,7 +75,7 @@ end
 # zsh as default shell
 puts 'Setting zsh as default shell...'
 if OS.mac?
-  homebrew_zsh_path=`brew --prefix zsh`
+  homebrew_zsh_path=`brew --prefix zsh`.strip + '/bin/zsh'
   system "sudo sh -c 'echo \"#{homebrew_zsh_path}\" >> /etc/shells'"
   system "chsh -s \"#{homebrew_zsh_path}\""
 else
