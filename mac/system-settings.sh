@@ -132,15 +132,15 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
 # Finder: favourite folders
 mysides add Applications file:///Applications/
-mysides add Home file://${HOME}
-mysides add Archive file://${HOME}Archive/
-mysides add Desktop file://${HOME}Desktop/
-mysides add Documents file://${HOME}/Documents
-mysides add Downloads file://${HOME}Downloads/
+mysides add Home file://${HOME}/
+mysides add Archive file://${HOME}/Archive/
+mysides add Desktop file://${HOME}/Desktop/
+mysides add Documents file://${HOME}/Documents/
+mysides add Downloads file://${HOME}/Downloads/
 mysides add KnowledgeBase file://${HOME}/KnowledgeBase/
-mysides add Notes file://${HOME}Notes/
-mysides add Pictures file://${HOME}Pictures/
-mysides add Workspace file://${HOME}Workspace/
+mysides add Notes file://${HOME}/Notes/
+mysides add Pictures file://${HOME}/Pictures/
+mysides add Workspace file://${HOME}/Workspace/
 
 # Menu: show Time Machine and VPN menus
 defaults write com.apple.systemuiserver menuExtras -array \
