@@ -9,6 +9,9 @@ defaults write -g InitialKeyRepeat -int 25
 defaults write -g KeyRepeat -int 2
 defaults write -g ApplePressAndHoldEnabled -bool false
 
+# Input: function keys map to F1-F12
+defaults write -g com.apple.keyboard.fnState -bool true
+
 # Input: tap to click on trackpad
 defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
