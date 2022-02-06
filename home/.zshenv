@@ -25,8 +25,6 @@ JAVA_OPTS="-Xss2M -Xms256M -Xmx2G \
   -XX:+CMSClassUnloadingEnabled \
   -XX:MaxPermSize=2G -Xss2M"
 
-PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin":${HOME}/.rbenv/shims:${HOME}/bin:${BREW_PREFIX}/sbin:${BREW_PREFIX}/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:${PATH}
-
 for f in $PERSONAL_ZSH/env/*; do
    . $f
 done
