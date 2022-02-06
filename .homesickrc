@@ -8,7 +8,7 @@ if OS.mac?
   puts 'Checking for Homebrew...'
   unless system 'which brew'
     puts 'Installing Homebrew...'
-    unless system 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
+    unless system '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
       raise 'Error installing homebrew.'
     end
     puts '...success!'
