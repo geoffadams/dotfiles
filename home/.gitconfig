@@ -14,6 +14,8 @@
     whitespace = fix
 [push]
     default = current
+[pull]
+	rebase = true
 [branch]
     autosetuprebase = always
 [alias]
