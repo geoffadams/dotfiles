@@ -5,7 +5,7 @@ alias ....='cd ../../..'
 alias bk='cd $OLDPWD'
 
 alias ls="ls -GFh"
-alias ll="ls -al"
+alias ll="ls -Al"
 alias l="ll"
 alias lh='ls -dl .*' # show hidden files/directories only
 
