@@ -19,3 +19,7 @@ fi
 for f in $PERSONAL_ZSH/rc/*; do
    . $f
 done
+
+for f in $HOME/.zsh-private/*; do
+  . $f
+done
