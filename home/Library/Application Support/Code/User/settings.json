@@ -8,7 +8,8 @@
     "terminal.integrated.fontSize": 14,
     "terminal.integrated.lineHeight": 1,
 
-    "telemetry.enableTelemetry": false,
+
+    "telemetry.telemetryLevel": "off",
 
     "editor.tabSize": 2,
     "editor.minimap.enabled": false,
@@ -47,14 +48,10 @@
     },
     "breadcrumbs.enabled": true,
     "explorer.confirmDragAndDrop": false,
-    "liveshare.featureSet": "insiders",
-    "liveshare.authenticationProvider": "GitHub",
-    "window.zoomLevel": 1,
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter-notebook"
     },
     "editor.wordBasedSuggestions": false,
-    "python.showStartPage": false,
     "[python]": {
         "gitlens.codeLens.symbolScopes": [
             "!Module"
@@ -89,4 +86,5 @@
         "default": "right",
         "jupyter-notebook": "left"
     },
+    "window.zoomLevel": 1,
 }
