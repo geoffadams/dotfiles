@@ -4,8 +4,8 @@
     "workbench.sideBar.location": "left",
 
     "terminal.external.osxExec": "iTerm.app",
-    "terminal.integrated.fontFamily": "Source Code Pro for Powerline",
-    "terminal.integrated.fontSize": 13,
+    "terminal.integrated.fontFamily": "Inconsolata",
+    "terminal.integrated.fontSize": 14,
     "terminal.integrated.lineHeight": 1,
 
     "telemetry.enableTelemetry": false,
