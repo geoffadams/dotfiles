@@ -24,15 +24,15 @@
     graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 
     changes = diff --name-status
-    unmerged-branches = branch --no-merged master
-    unpushed-branches = branch --no-merged origin/master
+    unmerged-branches = branch --no-merged main
+    unpushed-branches = branch --no-merged origin/main
 
     who-committed = shortlog -s --
     who-is = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
     what-is = show -s --pretty='tformat:%h (%s, %ad)' --date=short
 
-    create-branch-tracking-master = "!sh -c 'git checkout -b $1 && git branch --set-upstream-to=origin/master $1' -"
-    checkout-existing-branch = "!sh -c 'git checkout $1 && git branch --set-upstream-to=origin/master $1' -"
+    create-branch-tracking-main = "!sh -c 'git checkout -b $1 && git branch --set-upstream-to=origin/main $1' -"
+    checkout-existing-branch = "!sh -c 'git checkout $1 && git branch --set-upstream-to=origin/main $1' -"
     delete-branch = "!sh -c 'git branch -d $1 && git remote prune origin' -"
     track-branch = "!sh -c 'git branch --set-upstream-to=origin/$1' -"
 
@@ -60,4 +60,4 @@
     path = ~/.gitconfig-local
     path = ~/.gitconfig-private
 [init]
-	defaultBranch = main
+    defaultBranch = main
