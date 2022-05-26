@@ -13,6 +13,9 @@ alias mkdir='mkdir -pv'
 
 alias t="trash"
 
+alias hs="history | grep"
+alias hsi="history | grep -i"
+
 # --preserve-root
 # alias rm='rm -I --preserve-root'
 # alias chown='chown --preserve-root'
