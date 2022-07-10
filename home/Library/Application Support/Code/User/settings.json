@@ -91,4 +91,5 @@
         "jupyter-notebook": "left"
     },
     "window.zoomLevel": 1,
+    "explorer.confirmDelete": false,
 }
