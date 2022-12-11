@@ -94,6 +94,10 @@
     "window.zoomLevel": 1,
     "explorer.confirmDelete": false,
 
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+
     "gitlens.codeLens.enabled": false,
     "gitlens.statusBar.enabled": false,
 }
