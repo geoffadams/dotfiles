@@ -13,7 +13,6 @@
 
     "editor.tabSize": 2,
     "editor.minimap.enabled": false,
-    "editor.parameterHints.enabled": false,
     "editor.wordWrap": "off",
     "editor.wordWrapColumn": 120,
 
@@ -33,9 +32,11 @@
     },
     "files.trimTrailingWhitespace": true,
 
-    "eslint.enable": false,
+    "eslint.enable": true,
+    "eslint.format.enable": true,
+    "eslint.lintTask.enable": true,
 
-    "standard.enable": true,
+    "standard.enable": false,
 
     "vim.useSystemClipboard": true,
 
