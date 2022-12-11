@@ -83,20 +83,6 @@ else
 end
 puts '...success!'
 
-# oh-my-zsh installation
-puts 'Checking for oh-my-zsh...'
-ohmyzsh_path = Pathname.new "#{Dir.home}/.oh-my-zsh"
-unless ohmyzsh_path.exist?
-  puts 'Installing oh-my-zsh...'
-  unless system 'git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh'
-    raise 'Error installing oh-my-zsh'
-  end
-  system 'chmod g-w,o-w ~/.oh-my-zsh'
-  puts '...success!'
-else
-  puts 'oh-my-zsh already installed.'
-end
-
 # git user info
 puts 'Configuring git user info...'
 email = Readline.readline('Email address: ')
