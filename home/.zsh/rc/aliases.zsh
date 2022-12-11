@@ -4,10 +4,9 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias bk='cd $OLDPWD'
 
-alias ls="ls -GFh"
-alias ll="ls -Al"
+alias ls="gls -Fh --color -N --group-directories-first"
+alias ll="ls -Al --time-style=long-iso"
 alias l="ll"
-alias lh='ls -dl .*' # show hidden files/directories only
 
 alias mkdir='mkdir -pv'
 
