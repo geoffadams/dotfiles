@@ -1,71 +1,70 @@
 {
-    "workbench.colorTheme": "Solarized Dark",
-    "workbench.startupEditor": "newUntitledFile",
-    "workbench.sideBar.location": "left",
-
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[markdown]": {
+        "editor.quickSuggestions": {
+            "comments": "off",
+            "other": "off",
+            "strings": "off"
+        },
+        "editor.wordWrap": "wordWrapColumn"
+    },
+    "[python]": {
+        "editor.detectIndentation": false,
+        "editor.tabSize": 4,
+        "editor.wordBasedSuggestions": false,
+        "gitlens.codeLens.symbolScopes": [
+            "!Module"
+        ]
+    },
+    "[sql]": {},
+    "breadcrumbs.enabled": true,
+    "editor.minimap.enabled": false,
+    "editor.tabSize": 2,
+    "editor.wordBasedSuggestions": false,
+    "editor.wordWrap": "off",
+    "editor.wordWrapColumn": 120,
+    "eslint.enable": true,
+    "eslint.format.enable": true,
+    "eslint.lintTask.enable": true,
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "extensions.ignoreRecommendations": true,
+    "files.associations": {
+        "*.pyx": "python"
+    },
+    "files.autoSave": "onFocusChange",
+    "files.exclude": {
+        "**/.DS_Store": true,
+        "**/.git": true,
+        "**/.hg": true,
+        "**/.idea": true,
+        "**/.svn": true,
+        "**/CVS": true
+    },
+    "files.trimTrailingWhitespace": true,
+    "gitlens.codeLens.enabled": false,
+    "gitlens.statusBar.enabled": false,
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
+    "redhat.telemetry.enabled": false,
+    "standard.enable": false,
+    "telemetry.telemetryLevel": "off",
     "terminal.external.osxExec": "iTerm.app",
     "terminal.integrated.fontFamily": "Inconsolata",
     "terminal.integrated.fontSize": 14,
     "terminal.integrated.lineHeight": 1,
-
-
-    "telemetry.telemetryLevel": "off",
-
-    "editor.tabSize": 2,
-    "editor.minimap.enabled": false,
-    "editor.wordWrap": "off",
-    "editor.wordWrapColumn": 120,
-
-    "extensions.ignoreRecommendations": true,
-
-    "files.autoSave": "onFocusChange",
-    "files.associations": {
-        "*.pyx": "python"
-    },
-    "files.exclude": {
-        "**/.git": true,
-        "**/.svn": true,
-        "**/.hg": true,
-        "**/CVS": true,
-        "**/.DS_Store": true,
-        "**/.idea": true
-    },
-    "files.trimTrailingWhitespace": true,
-
-    "eslint.enable": true,
-    "eslint.format.enable": true,
-    "eslint.lintTask.enable": true,
-
-    "standard.enable": false,
-
     "vim.useSystemClipboard": true,
-
-    "[markdown]": {
-        "editor.wordWrap": "wordWrapColumn",
-        "editor.quickSuggestions": {
-            "comments": "off",
-            "strings": "off",
-            "other": "off"
-        }
-    },
-    "[sql]": {
-
-    },
-    "breadcrumbs.enabled": true,
-    "explorer.confirmDragAndDrop": false,
+    "window.zoomLevel": 1,
+    "workbench.colorTheme": "Solarized Dark",
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter-notebook"
     },
-    "editor.wordBasedSuggestions": false,
-    "[python]": {
-        "gitlens.codeLens.symbolScopes": [
-            "!Module"
-        ],
-        "editor.wordBasedSuggestions": false,
-        "editor.tabSize": 4,
-        "editor.detectIndentation": false
-    },
-
+    "workbench.sideBar.location": "left",
+    "workbench.startupEditor": "newUntitledFile",
     "yaml.customTags": [
         "!And",
         "!If",
@@ -85,19 +84,5 @@
         "!Split",
         "!Join sequence"
     ],
-    "yaml.format.enable": true,
-    "redhat.telemetry.enabled": false,
-    "notebook.cellToolbarLocation": {
-        "default": "right",
-        "jupyter-notebook": "left"
-    },
-    "window.zoomLevel": 1,
-    "explorer.confirmDelete": false,
-
-    "[css]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-
-    "gitlens.codeLens.enabled": false,
-    "gitlens.statusBar.enabled": false,
+    "yaml.format.enable": true
 }
