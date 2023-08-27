@@ -2,16 +2,33 @@ PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin":${HOME}/.
 
 eval "$(starship init zsh)"
 
-# extend completions and highlighting
+# completion menu behaviour
+unsetopt menu_complete
+setopt auto_menu
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+
+# completion matching behaviour
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}' 'r:|=*' 'l:|=* r:|=*'
+setopt complete_in_word
+setopt always_to_end
+
+# init completions
 autoload -Uz compinit
 compinit
 
 if [ -n "${BREW_PREFIX}" ]; then
+  # set function paths
   fpath=(${BREW_PREFIX}/share/zsh-completions ${BREW_PREFIX}/share/zsh/site-functions $fpath)
+
+  # command syntax highlighting
   source ${BREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+  # better autosuggestions
   source ${BREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 
+# better history search
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 
