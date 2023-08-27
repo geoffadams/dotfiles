@@ -23,6 +23,7 @@ set expandtab
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
+set showtabline=2
 
 " Whitespace
 set nowrap
