@@ -58,7 +58,6 @@
     "terminal.integrated.fontSize": 14,
     "terminal.integrated.lineHeight": 1,
     "vim.useSystemClipboard": true,
-    "window.zoomLevel": 1,
     "workbench.colorTheme": "Solarized Dark",
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter-notebook"
@@ -84,5 +83,8 @@
         "!Split",
         "!Join sequence"
     ],
-    "yaml.format.enable": true
+    "yaml.format.enable": true,
+    "editor.fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 14
 }
