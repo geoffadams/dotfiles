@@ -64,3 +64,9 @@ cask "qlmarkdown"
 cask "spotify"
 cask "visual-studio-code"
 brew "rafaelgarrido/caveats/brew-caveats"
+mas "Amphetamine", id: 937984704
+mas "GoodNotes", id: 1444383602
+mas "iA Writer", id: 775737590
+mas "Notability", id: 360593530
+mas "Pixelmator", id: 407963104
+mas "Todoist", id: 585829637
