@@ -13,7 +13,7 @@
     "[python]": {
         "editor.detectIndentation": false,
         "editor.tabSize": 4,
-        "editor.wordBasedSuggestions": false,
+        "editor.wordBasedSuggestions": "off",
         "gitlens.codeLens.symbolScopes": [
             "!Module"
         ]
@@ -22,7 +22,7 @@
     "breadcrumbs.enabled": true,
     "editor.minimap.enabled": false,
     "editor.tabSize": 2,
-    "editor.wordBasedSuggestions": false,
+    "editor.wordBasedSuggestions": "off",
     "editor.wordWrap": "off",
     "editor.wordWrapColumn": 120,
     "eslint.enable": true,
@@ -89,6 +89,7 @@
     "editor.fontSize": 14,
     "workbench.preferredDarkColorTheme": "Dainty – Nord (chroma 1, lightness 3)",
     "workbench.preferredLightColorTheme": "Nord Light",
+    "terminal.explorerKind": "external",
     "window.autoDetectColorScheme": true,
     "window.systemColorTheme": "auto"
 }
