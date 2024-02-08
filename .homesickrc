@@ -29,13 +29,6 @@ if OS.mac?
   end
   puts '...success!'
 
-  # VSCode extensions
-  puts 'Installing VSCode extensions...'
-  unless system 'bash ./mac/vscode-extensions.sh'
-    raise 'Error installing VSCode extensions.'
-  end
-  puts '...success!'
-
   # Install fonts
   puts 'Installing fonts...'
   FileUtils.cp Dir.glob('./vendor/inconsolata/fonts/otf/*.otf'), "#{Dir.home}/Library/Fonts/"
