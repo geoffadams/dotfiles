@@ -58,7 +58,7 @@
     "terminal.integrated.fontSize": 14,
     "terminal.integrated.lineHeight": 1,
     "vim.useSystemClipboard": true,
-    "workbench.colorTheme": "Solarized Dark",
+    "workbench.colorTheme": "Nord Light",
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter-notebook"
     },
@@ -86,5 +86,9 @@
     "yaml.format.enable": true,
     "editor.fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
     "editor.fontLigatures": true,
-    "editor.fontSize": 14
+    "editor.fontSize": 14,
+    "workbench.preferredDarkColorTheme": "Dainty – Nord (chroma 1, lightness 3)",
+    "workbench.preferredLightColorTheme": "Nord Light",
+    "window.autoDetectColorScheme": true,
+    "window.systemColorTheme": "auto"
 }

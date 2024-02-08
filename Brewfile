@@ -51,7 +51,9 @@ cask "1password-cli"
 cask "bettertouchtool"
 cask "drawio"
 cask "firefox"
+cask "font-atkinson-hyperlegible"
 cask "font-fira-code"
+cask "font-fira-code-nerd-font"
 cask "insomnia"
 cask "iterm2-beta"
 cask "logi-options-plus"
@@ -69,3 +71,5 @@ mas "iA Writer", id: 775737590
 mas "Notability", id: 360593530
 mas "Pixelmator", id: 407963104
 mas "Todoist", id: 585829637
+vscode "alexanderte.dainty-nord-vscode"
+vscode "huytd.nord-light"
