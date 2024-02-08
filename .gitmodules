@@ -13,9 +13,6 @@
 [submodule "home/.vim/bundle/vim-gitgutter"]
 	path = home/.vim/bundle/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
-[submodule "vendor/inconsolata"]
-	path = vendor/inconsolata
-	url = https://github.com/googlefonts/Inconsolata.git
 [submodule "home/.vim/bundle/vim-solarized"]
 	path = home/.vim/bundle/vim-solarized
 	url = https://github.com/lifepillar/vim-solarized8.git

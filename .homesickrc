@@ -29,10 +29,6 @@ if OS.mac?
   end
   puts '...success!'
 
-  # Install fonts
-  puts 'Installing fonts...'
-  FileUtils.cp Dir.glob('./vendor/inconsolata/fonts/otf/*.otf'), "#{Dir.home}/Library/Fonts/"
-
   # macOS system settings
   puts 'Applying Mac system settings...'
   unless system 'bash ./mac/system-settings.sh'

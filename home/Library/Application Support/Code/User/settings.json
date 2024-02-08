@@ -54,7 +54,6 @@
     "standard.enable": false,
     "telemetry.telemetryLevel": "off",
     "terminal.external.osxExec": "iTerm.app",
-    "terminal.integrated.fontFamily": "Inconsolata",
     "terminal.integrated.fontSize": 14,
     "terminal.integrated.lineHeight": 1,
     "vim.useSystemClipboard": true,
