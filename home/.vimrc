@@ -66,3 +66,6 @@ set formatoptions+=t
 
 " Helpers
 set wildmenu
+
+" Misc
+set updatetime=250
