@@ -13,6 +13,6 @@
 [submodule "home/.vim/bundle/vim-gitgutter"]
 	path = home/.vim/bundle/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
-[submodule "home/.vim/bundle/vim-solarized"]
-	path = home/.vim/bundle/vim-solarized
-	url = https://github.com/lifepillar/vim-solarized8.git
+[submodule "home/.vim/bundle/nordtheme-vim"]
+	path = home/.vim/bundle/nordtheme-vim
+	url = git@github.com:nordtheme/vim.git

@@ -14,7 +14,7 @@ set directory=~/.vim/backup
 syntax enable
 set termguicolors
 set background=dark
-colorscheme solarized8
+colorscheme nord
 
 " Tabs
 set autoindent
@@ -50,11 +50,6 @@ au BufNewFile,BufRead *.json set filetype=javascript
 
 " GitGutter
 let g:gitgutter_sign_column_always=1
-highlight SignColumn ctermbg=8 guibg=#002b36
-highlight GitGutterAdd ctermbg=8 ctermfg=2 guibg=#002b36 guifg=#859900
-highlight GitGutterChange ctermbg=8 ctermfg=4 guibg=#002b36 guifg=#268bd2
-highlight GitGutterDelete ctermbg=8 ctermfg=1 guibg=#002b36 guifg=#dc322f
-highlight GitGutterChangeDelete ctermbg=8 ctermfg=4 guibg=#002b36 guifg=#268bd2
 
 " Disable arrow keys
 noremap <Up> <NOP>
