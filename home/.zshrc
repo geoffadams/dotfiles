@@ -17,21 +17,6 @@ setopt always_to_end
 autoload -Uz compinit
 compinit
 
-if [ -n "${BREW_PREFIX}" ]; then
-  # set function paths
-  fpath=(${BREW_PREFIX}/share/zsh-completions ${BREW_PREFIX}/share/zsh/site-functions $fpath)
-
-  # command syntax highlighting
-  source ${BREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-  # better autosuggestions
-  source ${BREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-fi
-
-# better history search
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-
 # load additional config
 for f in $PERSONAL_ZSH/rc/*; do
    . $f
@@ -40,3 +25,19 @@ done
 for f in $HOME/.zsh-private/*; do
   . $f
 done
+
+# better history search
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+if [ -n "${BREW_PREFIX}" ]; then
+  # set function paths
+  fpath=(${BREW_PREFIX}/share/zsh-completions ${BREW_PREFIX}/share/zsh/site-functions $fpath)
+
+  # command syntax highlighting
+  source ${BREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  ZSH_HIGHLIGHT_HIGHLIGHTERS+=(brackets cursor root)
+
+  # better autosuggestions
+  source ${BREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
