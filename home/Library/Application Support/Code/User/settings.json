@@ -20,7 +20,6 @@
     },
     "[sql]": {},
     "breadcrumbs.enabled": true,
-    "editor.minimap.enabled": false,
     "editor.tabSize": 2,
     "editor.wordBasedSuggestions": "off",
     "editor.wordWrap": "off",
@@ -86,9 +85,14 @@
     "editor.fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
     "editor.fontLigatures": true,
     "editor.fontSize": 14,
-    "workbench.preferredDarkColorTheme": "Dainty – Nord (chroma 1, lightness 3)",
+    "workbench.preferredDarkColorTheme": "Nord",
     "workbench.preferredLightColorTheme": "Nord Light",
     "terminal.explorerKind": "external",
     "window.autoDetectColorScheme": true,
-    "window.systemColorTheme": "auto"
+    "window.systemColorTheme": "auto",
+    "editor.minimap.enabled": false,
+    "aws.cloudformation.telemetry.enabled": false,
+    "workbench.secondarySideBar.showLabels": false,
+    "chat.mcp.gallery.enabled": true,
+    "chat.agentSessionsViewLocation": "single-view"
 }
