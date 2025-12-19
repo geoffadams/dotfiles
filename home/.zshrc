@@ -1,4 +1,9 @@
-PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin":${HOME}/.rbenv/shims:${HOME}/bin:${BREW_PREFIX}/sbin:${BREW_PREFIX}/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:${PATH}
+typeset -U path
+path+=("/Applications/Visual Studio Code.app/Contents/Resources/app/bin")
+path+=(${HOME}/.rbenv/shims)
+path+=(${HOME}/bin)
+path+=(${BREW_PREFIX}/sbin)
+path+=(${BREW_PREFIX}/bin)
 
 eval "$(starship init zsh)"
 
@@ -13,6 +18,34 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]-_}={[:upper:][:lower:
 setopt complete_in_word
 setopt always_to_end
 
+# better history search
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+if [ -n "${BREW_PREFIX}" ]; then
+  # set function paths
+  fpath+=(${BREW_PREFIX}/share/zsh-completions)
+  fpath+=(${BREW_PREFIX}/share/zsh/site-functions)
+
+  # command syntax highlighting
+  source ${BREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  ZSH_HIGHLIGHT_HIGHLIGHTERS+=(brackets cursor root)
+
+  # better autosuggestions
+  source ${BREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
+# iTerm2 shell integrations
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# pipx
+path+=(${HOME}/.local/bin)
+
+# JetBrains Toolbox App
+path+=(${HOME}/Library/Application Support/JetBrains/Toolbox/scripts)
+
+# Docker CLI
+fpath+=(${HOME}/.docker/completions)
+
 # init completions
 autoload -Uz compinit
 compinit
@@ -25,19 +58,3 @@ done
 for f in $HOME/.zsh-private/*; do
   . $f
 done
-
-# better history search
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-if [ -n "${BREW_PREFIX}" ]; then
-  # set function paths
-  fpath=(${BREW_PREFIX}/share/zsh-completions ${BREW_PREFIX}/share/zsh/site-functions $fpath)
-
-  # command syntax highlighting
-  source ${BREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-  ZSH_HIGHLIGHT_HIGHLIGHTERS+=(brackets cursor root)
-
-  # better autosuggestions
-  source ${BREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-fi
-
