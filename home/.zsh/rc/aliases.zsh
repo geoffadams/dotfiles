@@ -6,14 +6,13 @@ alias bk='cd $OLDPWD'
 
 alias ls="gls -Fh --color -N --group-directories-first"
 alias ll="ls -Al --time-style=long-iso"
-alias l="ll"
 
 alias mkdir='mkdir -pv'
 
 alias t="trash"
 
-alias hs="history | grep"
-alias hsi="history | grep -i"
+alias sync-history="fc -AI && fc -R"
+alias reload-history="fc -R"
 
 # --preserve-root
 # alias rm='rm -I --preserve-root'
@@ -63,6 +62,9 @@ if [[ $IS_MAC -eq 1 ]]; then
 
   # use GNU sed instead of BSD sed
   alias sed="gsed"
+
+  # use neovim instead of built-in vim
+  alias vim="nvim"
 fi
 
 # Docker

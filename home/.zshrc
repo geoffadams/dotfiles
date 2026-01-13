@@ -1,9 +1,9 @@
 typeset -U path
-path+=("/Applications/Visual Studio Code.app/Contents/Resources/app/bin")
-path+=(${HOME}/.rbenv/shims)
-path+=(${HOME}/bin)
-path+=(${BREW_PREFIX}/sbin)
-path+=(${BREW_PREFIX}/bin)
+path=("/Applications/Visual Studio Code.app/Contents/Resources/app/bin" $path)
+path=(${HOME}/.rbenv/shims $path)
+path=(${HOME}/bin $path)
+path=(${BREW_PREFIX}/sbin $path)
+path=(${BREW_PREFIX}/bin $path)
 
 eval "$(starship init zsh)"
 
@@ -38,10 +38,10 @@ fi
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # pipx
-path+=(${HOME}/.local/bin)
+path=(${HOME}/.local/bin $path)
 
 # JetBrains Toolbox App
-path+=(${HOME}/Library/Application Support/JetBrains/Toolbox/scripts)
+path=(${HOME}/Library/Application Support/JetBrains/Toolbox/scripts $path)
 
 # Docker CLI
 fpath+=(${HOME}/.docker/completions)
