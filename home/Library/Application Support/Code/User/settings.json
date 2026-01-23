@@ -56,7 +56,7 @@
     "terminal.integrated.fontSize": 14,
     "terminal.integrated.lineHeight": 1,
     "vim.useSystemClipboard": true,
-    "workbench.colorTheme": "Nord Light",
+    "workbench.colorTheme": "Rosé Pine Dawn (no italics)",
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter-notebook"
     },
@@ -85,10 +85,9 @@
     "editor.fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
     "editor.fontLigatures": true,
     "editor.fontSize": 14,
-    "workbench.preferredDarkColorTheme": "Nord",
-    "workbench.preferredLightColorTheme": "Nord Light",
+    "workbench.preferredDarkColorTheme": "Rosé Pine Moon (no italics)",
+    "workbench.preferredLightColorTheme": "Rosé Pine Dawn (no italics)",
     "terminal.explorerKind": "external",
-    "window.autoDetectColorScheme": true,
     "window.systemColorTheme": "auto",
     "editor.minimap.enabled": false,
     "aws.cloudformation.telemetry.enabled": false,
