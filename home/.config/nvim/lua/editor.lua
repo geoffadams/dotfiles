@@ -7,7 +7,7 @@ vim.opt.incsearch = true
 vim.opt.hlsearch = true
 
 -- Use system clipboard
-vim.opt.clipboard = unnamed
+vim.opt.clipboard:append("unnamedplus")
 
 -- Automatic word wrapping
 vim.opt.tw = 119
