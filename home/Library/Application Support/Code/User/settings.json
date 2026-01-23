@@ -14,9 +14,6 @@
         "editor.detectIndentation": false,
         "editor.tabSize": 4,
         "editor.wordBasedSuggestions": "off",
-        "gitlens.codeLens.symbolScopes": [
-            "!Module"
-        ]
     },
     "[sql]": {},
     "breadcrumbs.enabled": true,
@@ -43,14 +40,11 @@
         "**/CVS": true
     },
     "files.trimTrailingWhitespace": true,
-    "gitlens.codeLens.enabled": false,
-    "gitlens.statusBar.enabled": false,
     "notebook.cellToolbarLocation": {
         "default": "right",
         "jupyter-notebook": "left"
     },
     "redhat.telemetry.enabled": false,
-    "standard.enable": false,
     "telemetry.telemetryLevel": "off",
     "terminal.external.osxExec": "iTerm.app",
     "terminal.integrated.fontSize": 14,
@@ -93,5 +87,8 @@
     "aws.cloudformation.telemetry.enabled": false,
     "workbench.secondarySideBar.showLabels": false,
     "chat.mcp.gallery.enabled": true,
-    "chat.agentSessionsViewLocation": "single-view"
+    "chat.agentSessionsViewLocation": "single-view",
+    "git.blame.editorDecoration.enabled": true,
+    "git.blame.ignoreWhitespace": true,
+    "git.path": "/opt/homebrew/Cellar/git/2.52.0_1/bin/git"
 }
