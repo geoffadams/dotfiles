@@ -90,5 +90,8 @@
         "!Split",
         "!Join sequence"
     ],
-    "yaml.format.enable": true
+    "yaml.format.enable": true,
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    }
 }

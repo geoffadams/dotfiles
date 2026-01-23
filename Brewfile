@@ -22,6 +22,7 @@ brew "iperf3"
 brew "jq"
 brew "make"
 brew "mas"
+brew "neovim"
 brew "nmap"
 brew "node"
 brew "nvm"
@@ -38,7 +39,6 @@ brew "starship"
 brew "syncthing", restart_service: true
 brew "the_silver_searcher"
 brew "trash"
-brew "vim"
 brew "watch"
 brew "wget"
 brew "xz"
@@ -72,6 +72,7 @@ mas "iA Writer", id: 775737590
 mas "Notability", id: 360593530
 mas "Pixelmator", id: 407963104
 mas "Todoist", id: 585829637
+vscode "asvetliakov.vscode-neovim"
 vscode "christian-kohler.npm-intellisense"
 vscode "dbaeumer.vscode-eslint"
 vscode "dotjoshjohnson.xml"
@@ -96,4 +97,3 @@ vscode "oliversturm.fix-json"
 vscode "redhat.vscode-xml"
 vscode "redhat.vscode-yaml"
 vscode "richie5um2.vscode-sort-json"
-vscode "vscodevim.vim"
