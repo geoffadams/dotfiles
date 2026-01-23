@@ -13,10 +13,17 @@
     "[python]": {
         "editor.detectIndentation": false,
         "editor.tabSize": 4,
-        "editor.wordBasedSuggestions": "off",
+        "editor.wordBasedSuggestions": "off"
     },
     "[sql]": {},
+    "aws.cloudformation.telemetry.enabled": false,
     "breadcrumbs.enabled": true,
+    "chat.agentSessionsViewLocation": "single-view",
+    "chat.mcp.gallery.enabled": true,
+    "editor.fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 14,
+    "editor.minimap.enabled": false,
     "editor.tabSize": 2,
     "editor.wordBasedSuggestions": "off",
     "editor.wordWrap": "off",
@@ -40,20 +47,28 @@
         "**/CVS": true
     },
     "files.trimTrailingWhitespace": true,
+    "git.blame.editorDecoration.enabled": true,
+    "git.blame.ignoreWhitespace": true,
+    "git.path": "/opt/homebrew/bin/git",
     "notebook.cellToolbarLocation": {
         "default": "right",
         "jupyter-notebook": "left"
     },
     "redhat.telemetry.enabled": false,
     "telemetry.telemetryLevel": "off",
+    "terminal.explorerKind": "external",
     "terminal.external.osxExec": "iTerm.app",
     "terminal.integrated.fontSize": 14,
     "terminal.integrated.lineHeight": 1,
     "vim.useSystemClipboard": true,
+    "window.systemColorTheme": "auto",
     "workbench.colorTheme": "Rosé Pine Dawn (no italics)",
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter-notebook"
     },
+    "workbench.preferredDarkColorTheme": "Rosé Pine Moon (no italics)",
+    "workbench.preferredLightColorTheme": "Rosé Pine Dawn (no italics)",
+    "workbench.secondarySideBar.showLabels": false,
     "workbench.sideBar.location": "left",
     "workbench.startupEditor": "newUntitledFile",
     "yaml.customTags": [
@@ -75,20 +90,5 @@
         "!Split",
         "!Join sequence"
     ],
-    "yaml.format.enable": true,
-    "editor.fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
-    "editor.fontLigatures": true,
-    "editor.fontSize": 14,
-    "workbench.preferredDarkColorTheme": "Rosé Pine Moon (no italics)",
-    "workbench.preferredLightColorTheme": "Rosé Pine Dawn (no italics)",
-    "terminal.explorerKind": "external",
-    "window.systemColorTheme": "auto",
-    "editor.minimap.enabled": false,
-    "aws.cloudformation.telemetry.enabled": false,
-    "workbench.secondarySideBar.showLabels": false,
-    "chat.mcp.gallery.enabled": true,
-    "chat.agentSessionsViewLocation": "single-view",
-    "git.blame.editorDecoration.enabled": true,
-    "git.blame.ignoreWhitespace": true,
-    "git.path": "/opt/homebrew/Cellar/git/2.52.0_1/bin/git"
+    "yaml.format.enable": true
 }
