@@ -2,6 +2,9 @@
     "[css]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
     "[markdown]": {
         "editor.quickSuggestions": {
             "comments": "off",
@@ -17,9 +20,11 @@
     },
     "[sql]": {},
     "aws.cloudformation.telemetry.enabled": false,
+    "aws.telemetry": false,
     "breadcrumbs.enabled": true,
     "chat.agentSessionsViewLocation": "single-view",
     "chat.mcp.gallery.enabled": true,
+    "editor.accessibilitySupport": "off",
     "editor.fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
     "editor.fontLigatures": true,
     "editor.fontSize": 14,
@@ -33,6 +38,8 @@
     "eslint.lintTask.enable": true,
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
+    "explorer.fileNesting.enabled": true,
+    "explorer.sortOrder": "type",
     "extensions.ignoreRecommendations": true,
     "files.associations": {
         "*.pyx": "python"
@@ -50,10 +57,28 @@
     "git.blame.editorDecoration.enabled": true,
     "git.blame.ignoreWhitespace": true,
     "git.path": "/opt/homebrew/bin/git",
+    "jupyter.askForKernelRestart": false,
+    "jupyter.executionAnalysis.enabled": true,
+    "jupyter.widgetScriptSources": [
+        "jsdelivr.com",
+        "unpkg.com"
+    ],
     "notebook.cellToolbarLocation": {
         "default": "right",
         "jupyter-notebook": "left"
     },
+    "notebook.lineNumbers": "on",
+    "notebook.output.scrolling": true,
+    "python-envs.alwaysUseUv": false,
+    "python.analysis.autoFormatStrings": true,
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.completeFunctionParens": true,
+    "python.analysis.diagnosticMode": "workspace",
+    "python.analysis.enableTroubleshootMissingImports": true,
+    "python.analysis.languageServerMode": "full",
+    "python.analysis.typeCheckingMode": "standard",
+    "python.defaultInterpreterPath": "/opt/homebrew/bin/python3",
+    "python.useEnvironmentsExtension": true,
     "redhat.telemetry.enabled": false,
     "telemetry.telemetryLevel": "off",
     "terminal.explorerKind": "external",
@@ -61,8 +86,10 @@
     "terminal.integrated.fontSize": 14,
     "terminal.integrated.lineHeight": 1,
     "vim.useSystemClipboard": true,
+    "window.autoDetectColorScheme": true,
     "window.systemColorTheme": "auto",
     "workbench.colorTheme": "Rosé Pine Dawn (no italics)",
+    "workbench.editor.empty.hint": "hidden",
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter-notebook"
     },
