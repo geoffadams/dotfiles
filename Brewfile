@@ -1,5 +1,6 @@
 tap "rafaelgarrido/caveats"
 brew "awscli"
+brew "bat"
 brew "colordiff"
 brew "coreutils"
 brew "csvkit"

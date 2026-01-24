@@ -3,8 +3,9 @@ PERSONAL_ZSH=$HOME/.zsh
 HISTSIZE=100000
 SAVEHIST=100000
 
-PAGER=less
-EDITOR=vim
+PAGER=bat
+MANPAGER="nvim +Man!"
+EDITOR=nvim
 
 if [ -f "/usr/local/bin/brew" ]; then
   BREW_PREFIX="/usr/local"

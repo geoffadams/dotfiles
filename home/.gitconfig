@@ -4,7 +4,7 @@
     eol = lf
     autocrlf = input
     editor = nvim
-    pager = less -r
+    pager = bat
     excludesfile = ~/.gitignore-global
 [credential]
     helper = osxkeychain
