@@ -37,9 +37,6 @@ fi
 # iTerm2 shell integrations
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-# pipx
-path=(${HOME}/.local/bin $path)
-
 # JetBrains Toolbox App
 path=(${HOME}/Library/Application Support/JetBrains/Toolbox/scripts $path)
 
@@ -49,6 +46,10 @@ fpath+=(${HOME}/.docker/completions)
 # init completions
 autoload -Uz compinit
 compinit
+
+# uv completions
+eval "$(uv generate-shell-completion zsh)"
+eval "$(uvx --generate-shell-completion zsh)"
 
 # load additional config
 for f in $PERSONAL_ZSH/rc/*; do
