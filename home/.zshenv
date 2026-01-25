@@ -17,6 +17,6 @@ HELPDIR=${BREW_PREFIX}/share/zsh/help
 unalias run-help
 autoload run-help
 
-for f in $PERSONAL_ZSH/env/*.zsh(N); do
+for f in $PERSONAL_ZSH/env.d/*.zsh(N); do
    . $f
 done
