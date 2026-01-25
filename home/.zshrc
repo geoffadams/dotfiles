@@ -52,10 +52,11 @@ eval "$(uv generate-shell-completion zsh)"
 eval "$(uvx --generate-shell-completion zsh)"
 
 # load additional config
-for f in $PERSONAL_ZSH/rc/*; do
+for f in $PERSONAL_ZSH/rc/*.zsh(N); do
    . $f
 done
 
-for f in $HOME/.zsh-private/*; do
+# load system-local config
+for f in $PERSONAL_ZSH/rc.private/*.zsh(N); do
   . $f
 done
