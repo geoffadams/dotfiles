@@ -27,6 +27,3 @@ vim.opt.showmode = true     -- display current mode
 vim.opt.title = true
 vim.opt.titlestring = 'nvim [%{fnamemodify(getcwd(), ":t")}] %{expand("%:~:.")}'
 
--- GitGutter
--- require("vim-gitgutter")
-vim.g.gitgutter_sign_colunm_always = 1
