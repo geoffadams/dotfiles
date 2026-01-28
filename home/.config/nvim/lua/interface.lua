@@ -2,11 +2,17 @@
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
 require("rose-pine").setup({
-    variant = "dawn",
-    dark_variant = "moon",
-    styles = {italic = false}
+  variant = "dawn",
+  dark_variant = "moon",
+  styles = {italic = false}
 })
 vim.cmd("colorscheme rose-pine-moon")
+
+-- mini.nvim
+require('mini.icons').setup()
+require('mini.tabline').setup()
+require('mini.statusline').setup()
+require('mini.cmdline').setup()
 
 -- Interface
 vim.opt.cursorline = true
