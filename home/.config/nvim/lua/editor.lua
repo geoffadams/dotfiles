@@ -1,10 +1,13 @@
 vim.cmd("syntax enable")
 vim.opt.encoding = "utf-8"
 
+-- Appearance
+vim.opt.showmatch = true    -- show matching parens
+
 -- Search
-vim.opt.ignorecase = true
-vim.opt.incsearch = true
-vim.opt.hlsearch = true
+vim.opt.ignorecase = true   -- case-insensitive search
+vim.opt.incsearch = true    -- highlight active search
+vim.opt.hlsearch = true     -- highlight previous search
 
 -- Use system clipboard
 vim.opt.clipboard:append("unnamedplus")
@@ -27,3 +30,7 @@ vim.opt.showtabline = indent
 vim.opt.wrap = false
 vim.opt.list = true
 vim.opt.listchars = {tab = "· ", trail = "·"}
+
+-- Completions
+require('mini.completion').setup()
+vim.opt.wildmenu = true

@@ -15,12 +15,17 @@ require('mini.statusline').setup()
 require('mini.cmdline').setup()
 
 -- Interface
-vim.opt.cursorline = true
-vim.opt.number = true
-vim.opt.ruler = true
-vim.opt.showcmd = true
-vim.opt.showmatch = true
-vim.opt.wildmenu = true
+vim.opt.mouse = "a"         -- enable mouse in all modes
+vim.opt.cursorline = true   -- active line highlight
+vim.opt.number = true       -- display line numbers
+vim.opt.signcolumn = "yes"  -- alwasy display signs
+vim.opt.ruler = false       -- no cursor co-ords in status
+vim.opt.showcmd = true      -- display partial commands
+vim.opt.showmode = true     -- display current mode
+
+-- Filename in title
+vim.opt.title = true
+vim.opt.titlestring = 'nvim [%{fnamemodify(getcwd(), ":t")}] %{expand("%:~:.")}'
 
 -- GitGutter
 -- require("vim-gitgutter")
