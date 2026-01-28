@@ -2,10 +2,10 @@ vim.cmd("scriptencoding utf-8")
 
 require("config.lazy")
 
-require("interface")
 require("keymap")
+require("workspace")
+
+require("interface")
 require("editor")
-require("whitespace")
 require("recovery")
 require("filetypes")
-require("workspace")
