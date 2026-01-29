@@ -11,3 +11,5 @@ require("recovery")
 
 require("lsp")
 require("filetypes")
+
+require("debugger")
