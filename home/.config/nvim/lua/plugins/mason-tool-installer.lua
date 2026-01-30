@@ -1,6 +1,6 @@
 return {
-  "WhoIsSethDaniel/mason-tool-installer.nvim",
-  dependencies = {
-    "mason-org/mason.nvim",
-  },
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    dependencies = {
+        "mason-org/mason.nvim",
+    },
 }

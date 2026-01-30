@@ -1,8 +1,8 @@
-vim.g.mapleader = ' '
+vim.g.mapleader = " "
 
 -- Save
 vim.keymap.set("n", "<C-S>", "<Cmd>silent! update | redraw<CR>")
-vim.keymap.set({"i", "x"}, "<C-S>", "<Esc><Cmd>silent! update | redraw<CR>")
+vim.keymap.set({ "i", "x" }, "<C-S>", "<Esc><Cmd>silent! update | redraw<CR>")
 
 -- Window nav
 vim.keymap.set("n", "<C-H>", "<Cmd>wincmd h<CR>")
@@ -23,4 +23,4 @@ vim.keymap.set("n", "<Left>", "")
 vim.keymap.set("n", "<Right>", "")
 
 -- Backspace
-vim.opt.backspace = { 'indent', 'eol', 'start' }
+vim.opt.backspace = { "indent", "eol", "start" }

@@ -1,7 +1,7 @@
 return {
-  "jbyuki/one-small-step-for-vimkind",
-  dependencies = {
-    "mfussenegger/nvim-dap",
-  },
-  lazy = false,
+    "jbyuki/one-small-step-for-vimkind",
+    dependencies = {
+        "mfussenegger/nvim-dap",
+    },
+    lazy = false,
 }
