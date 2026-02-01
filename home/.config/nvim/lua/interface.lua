@@ -1,20 +1,21 @@
--- Theme
+-- theme
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
 require("rose-pine").setup({
     variant = "dawn",
     dark_variant = "moon",
-    styles = { italic = false },
+    styles = { italic = false, transparency = true },
 })
 vim.cmd("colorscheme rose-pine-moon")
 
 -- mini.nvim
+-- mini.nvim gui elements
 require("mini.icons").setup()
 require("mini.tabline").setup()
 require("mini.statusline").setup()
 require("mini.cmdline").setup()
 
--- Interface
+-- interface
 vim.opt.mouse = "a" -- enable mouse in all modes
 vim.opt.cursorline = true -- active line highlight
 vim.opt.number = true -- display line numbers
