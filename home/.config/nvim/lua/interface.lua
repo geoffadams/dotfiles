@@ -8,7 +8,15 @@ require("rose-pine").setup({
 })
 vim.cmd("colorscheme rose-pine-moon")
 
--- mini.nvim
+-- cursor
+local guicursor = {
+    "n-v-c-sm:block",
+    "i-ci-ve:ver25-blinkwait0-blinkon500-blinkoff500",
+    "r-cr-o:hor20-blinkwait0-blinkon500-blinkoff500",
+    "t:ver25-blinkwait0-blinkon500-blinkoff500-TermCursor",
+}
+vim.opt.guicursor = table.concat(guicursor, ",")
+
 -- mini.nvim gui elements
 require("mini.icons").setup()
 require("mini.tabline").setup()
