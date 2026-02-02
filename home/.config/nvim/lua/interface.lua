@@ -32,7 +32,12 @@ vim.opt.ruler = false -- no cursor co-ords in status
 vim.opt.showcmd = true -- display partial commands
 vim.opt.showmode = true -- display current mode
 
--- Filename in title
+-- pretty paths in titles
+require("pretty-path").setup()
 vim.opt.title = true
-vim.opt.titlestring = 'nvim [%{fnamemodify(getcwd(), ":t")}] %{expand("%:~:.")}'
-
+local titlestring = {
+    "nvim",
+    '[%{fnamemodify(getcwd(), ":t")}]',
+    "%{v:lua.PrettyPath.pretty_path()}",
+}
+vim.opt.titlestring = table.concat(titlestring, " ")
