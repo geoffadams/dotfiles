@@ -22,3 +22,6 @@ vim.keymap.set("n", "<Right>", "")
 
 -- Backspace
 vim.opt.backspace = { "indent", "eol", "start" }
+
+-- Terminal
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
