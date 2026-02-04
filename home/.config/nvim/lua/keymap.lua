@@ -1,5 +1,3 @@
-vim.g.mapleader = " "
-
 -- Save
 vim.keymap.set("n", "<C-S>", "<Cmd>silent! update | redraw<CR>")
 vim.keymap.set({ "i", "x" }, "<C-S>", "<Esc><Cmd>silent! update | redraw<CR>")
