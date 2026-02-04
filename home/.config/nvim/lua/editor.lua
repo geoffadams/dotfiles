@@ -30,7 +30,4 @@ vim.opt.showtabline = indent
 vim.opt.wrap = false
 vim.opt.list = true
 vim.opt.listchars = { tab = "· ", trail = "·" }
-
--- Completions
-require("mini.completion").setup()
 vim.opt.wildmenu = true

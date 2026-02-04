@@ -1,5 +1,3 @@
-require("mini.bufremove").setup()
-
 require("gitsigns").setup({
     on_attach = function(bufnr)
         local gitsigns = require("gitsigns")

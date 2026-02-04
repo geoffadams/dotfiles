@@ -17,12 +17,6 @@ local guicursor = {
 }
 vim.opt.guicursor = table.concat(guicursor, ",")
 
--- mini.nvim gui elements
-require("mini.icons").setup()
-require("mini.tabline").setup()
-require("mini.statusline").setup()
-require("mini.cmdline").setup()
-
 -- interface
 vim.opt.mouse = "a" -- enable mouse in all modes
 vim.opt.cursorline = true -- active line highlight

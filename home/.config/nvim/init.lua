@@ -5,6 +5,15 @@ vim.g.maplocalleader = "\\"
 
 require("config.lazy")
 
+-- mini.nvim
+require("mini.icons").setup()
+require("mini.tabline").setup()
+require("mini.statusline").setup()
+require("mini.cmdline").setup()
+require("mini.completion").setup()
+require("mini.bufremove").setup()
+require("mini.completion").setup()
+
 require("keymap")
 require("workspace")
 
