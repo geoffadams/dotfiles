@@ -51,3 +51,4 @@ nbproject
 # Local context #
 #################
 **/cdk.context.json
+.nvim.lua
