@@ -1,0 +1,9 @@
+theme = Rose Pine Moon
+font-family = Fira Code
+background-opacity = 0.95
+
+keybind = super+h=goto_split:left
+keybind = super+j=goto_split:down
+keybind = super+k=goto_split:up
+keybind = super+l=goto_split:right
+
