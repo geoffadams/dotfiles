@@ -14,13 +14,15 @@ require("mini.completion").setup()
 require("mini.bufremove").setup()
 require("mini.completion").setup()
 
+-- general behaviour
 require("keymap")
-require("workspace")
-
 require("interface")
 require("editor")
 
+-- tooling
+require("workspace")
 require("lsp")
-require("filetypes")
-
 require("debugger")
+
+-- additional contexts
+require("filetypes")
