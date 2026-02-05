@@ -1,8 +1,10 @@
 vim.cmd("scriptencoding utf-8")
 
+-- leader (early)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+-- lazy.nvim
 require("config.lazy")
 
 -- mini.nvim
@@ -20,7 +22,7 @@ require("interface")
 require("editor")
 
 -- tooling
-require("workspace")
+require("git")
 require("lsp")
 require("debugger")
 
