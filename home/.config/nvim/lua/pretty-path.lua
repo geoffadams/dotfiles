@@ -48,23 +48,27 @@ function M.pretty_path()
 
     local term_prefix = ""
 
+    local fnamemodify_opts = ""
     if path:find("term://.+") then
         _, _, term_prefix, path, _ = path:find("(term:)//(.+)//%d+:.+")
-        path = vim.fn.fnamemodify(path .. "/.", ":.")
+        fnamemodify_opts = ":."
     else
-        local fnamemodify_opts = ""
         if M.config.path_home_rel then
             fnamemodify_opts = fnamemodify_opts .. ":~"
         end
         if M.config.path_cwd_rel then
             fnamemodify_opts = fnamemodify_opts .. ":."
         end
-        path = vim.fn.fnamemodify(path, fnamemodify_opts)
     end
 
     local path_prefix = ""
     local path_suffix = ""
-    _, _, path_prefix, path, path_suffix, _ = path:find("(~?/?)(.+)(/?)")
+    _, _, path_prefix, path, path_suffix, _ = path:find("(~?)(/?.+)(/?)")
+    path = vim.fn.fnamemodify(path, fnamemodify_opts)
+
+    if path == "" then
+        path = "."
+    end
 
     local shorten_practical_from = (M.config.shorten_to and M.config.shorten_to or 0) + #M.config.replace_with
     local length_cutoff =
