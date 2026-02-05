@@ -1,3 +1,5 @@
+local util = require("util")
+
 require("mason").setup()
 vim.lsp.enable("emmylua_ls")
 vim.lsp.enable("basedpyright")
@@ -41,19 +43,6 @@ vim.lsp.config("eslint", {
 })
 vim.lsp.enable("eslint")
 
-vim.api.nvim_create_autocmd("LspAttach", {
-    desc = "Enable inlay hints",
-    callback = function(event)
-        local id = vim.tbl_get(event, "data", "client_id")
-        local client = id and vim.lsp.get_client_by_id(id)
-        if client == nil or not client.supports_method("textDocument/inlayHint") then
-            return
-        end
-
-        vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
-    end,
-})
-
 require("mason-tool-installer").setup({
     ensure_installed = {
         "emmylua_ls",
@@ -92,3 +81,35 @@ vim.api.nvim_create_autocmd("BufWritePre", {
         })
     end,
 })
+
+function enable_lsp_functionality(event)
+    local map = function(keys, func, desc, mode)
+        mode = mode or "n"
+        vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+    end
+
+    map("grn", vim.lsp.buf.rename, "[R]e[n]ame")
+    map("gra", vim.lsp.buf.code_action, "[G]oto Code [A]ction", { "n", "x" })
+    map("grD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
+    if client and client:supports_method("textDocument/documentHighlight", event.buf) then
+        util.lsp_highlight_autocmd({ "CursorHold", "CursorHoldI" }, event.buf, vim.lsp.buf.document_highlight)
+        util.lsp_highlight_autocmd({ "CursorMoved", "CursorMovedI" }, event.buf, vim.lsp.buf.clear_references)
+
+        function clear_highlights(buf)
+            vim.lsp.buf.clear_references()
+            vim.api.nvim_clear_autocmds({ group = "lsp-highlight", buffer = buf })
+        end
+        util.lsp_detach_autocmd(nil, function(ev)
+            clear_highlights(ev.buf)
+        end, "Clear highlights")
+    end
+
+    if client and client:supports_method("textDocument/inlayHint", event.buf) then
+        map("<leader>th", function()
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
+        end, "[T]oggle Inlay [H]ints")
+    end
+end
+util.lsp_attach_autocmd(nil, enable_lsp_functionality, "Enable LSP functionality")

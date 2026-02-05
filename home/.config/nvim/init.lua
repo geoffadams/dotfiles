@@ -4,6 +4,8 @@ vim.cmd("scriptencoding utf-8")
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+vim.opt.exrc = true
+
 -- lazy.nvim
 require("config.lazy")
 
@@ -12,9 +14,7 @@ require("mini.icons").setup()
 require("mini.tabline").setup()
 require("mini.statusline").setup()
 require("mini.cmdline").setup()
-require("mini.completion").setup()
 require("mini.bufremove").setup()
-require("mini.completion").setup()
 
 -- general behaviour
 require("keymap")
@@ -24,6 +24,7 @@ require("editor")
 -- tooling
 require("git")
 require("lsp")
+require("completions")
 require("debugger")
 
 -- additional contexts
