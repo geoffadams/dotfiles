@@ -11,11 +11,12 @@ return {
     opts = {},
     ---@diagnostic enable: missing-fields
     keys = {
-        { "<C-o>", [[<Cmd>lua require"fzf-lua".buffers()<CR>]] },
-        { "<C-?>", [[<Cmd>lua require"fzf-lua".builtin()<CR>]] },
-        { "<C-p>", [[<Cmd>lua require"fzf-lua".files()<CR>]] },
-        { "<C-g>", [[<Cmd>lua require"fzf-lua".live_grep()<CR>]] },
-        { "<C-f>", [[<Cmd>lua require"fzf-lua".grep_project()<CR>]] },
+        { "<C-p>", [[<Cmd>lua require"fzf-lua".global()<CR>]] },
+        { "<Leader>ob", [[<Cmd>lua require"fzf-lua".buffers()<CR>]] },
+        { "<Leader>oh", [[<Cmd>lua require"fzf-lua".builtin()<CR>]] },
+        { "<Leader>op", [[<Cmd>lua require"fzf-lua".files()<CR>]] },
+        { "<Leader>sd", [[<Cmd>lua require"fzf-lua".live_grep()<CR>]] },
+        { "<Leader>ss", [[<Cmd>lua require"fzf-lua".grep_project()<CR>]] },
         { "<F1>", [[<Cmd>lua require"fzf-lua".help_tags()<CR>]] },
     },
 }
