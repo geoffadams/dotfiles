@@ -16,15 +16,21 @@ local guicursor = {
     "t:ver25-blinkwait0-blinkon500-blinkoff500-TermCursor",
 }
 vim.opt.guicursor = table.concat(guicursor, ",")
+vim.opt.cursorline = true -- active line highlight
 
 -- interface
 vim.opt.mouse = "a" -- enable mouse in all modes
-vim.opt.cursorline = true -- active line highlight
-vim.opt.number = true -- display line numbers
-vim.opt.signcolumn = "yes" -- alwasy display signs
+
+-- status
 vim.opt.ruler = false -- no cursor co-ords in status
-vim.opt.showcmd = true -- display partial commands
 vim.opt.showmode = true -- display current mode
+
+-- command line
+vim.opt.wildmenu = true
+vim.opt.showcmd = true -- display partial commands
+
+-- clipboard
+vim.opt.clipboard:append("unnamedplus")
 
 -- pretty paths in titles
 require("pretty-path").setup()

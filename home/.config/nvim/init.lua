@@ -19,7 +19,6 @@ require("workspace")
 
 require("interface")
 require("editor")
-require("recovery")
 
 require("lsp")
 require("filetypes")

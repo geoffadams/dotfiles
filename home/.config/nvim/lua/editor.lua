@@ -1,22 +1,21 @@
 vim.cmd("syntax enable")
 vim.opt.encoding = "utf-8"
 
--- Appearance
+-- appearance
 vim.opt.showmatch = true -- show matching parens
+vim.opt.number = true -- display line numbers
+vim.opt.signcolumn = "yes" -- alwasy display signs
 
--- Search
+-- search
 vim.opt.ignorecase = true -- case-insensitive search
 vim.opt.incsearch = true -- highlight active search
 vim.opt.hlsearch = true -- highlight previous search
 
--- Use system clipboard
-vim.opt.clipboard:append("unnamedplus")
-
--- Automatic word wrapping
+-- wrapping
 vim.opt.tw = 119
 vim.opt.formatoptions:append({ t = true })
 
--- Tabs
+-- tabs
 local indent = 4
 vim.opt.autoindent = true
 vim.opt.smartindent = true
@@ -26,8 +25,10 @@ vim.opt.shiftwidth = indent
 vim.opt.softtabstop = indent
 vim.opt.showtabline = indent
 
--- Whitespace
+-- whitespace
 vim.opt.wrap = false
 vim.opt.list = true
 vim.opt.listchars = { tab = "· ", trail = "·" }
-vim.opt.wildmenu = true
+
+-- crash recovery
+vim.opt.updatetime = 250
