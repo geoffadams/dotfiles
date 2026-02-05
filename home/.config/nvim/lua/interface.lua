@@ -20,14 +20,16 @@ vim.opt.cursorline = true -- active line highlight
 
 -- interface
 vim.opt.mouse = "a" -- enable mouse in all modes
+vim.opt.splitright = true -- split to right
+vim.opt.splitbelow = true -- split to bottom
 
 -- status
 vim.opt.ruler = false -- no cursor co-ords in status
-vim.opt.showmode = true -- display current mode
 
 -- command line
 vim.opt.wildmenu = true
 vim.opt.showcmd = true -- display partial commands
+vim.opt.showmode = false -- don't display current mode
 
 -- clipboard
 vim.opt.clipboard:append("unnamedplus")
