@@ -11,9 +11,11 @@ return {
                         buf = 0, -- current buffer
                         {
                             severity = vim.diagnostic.severity.ERROR, -- errors only
-                            -- limit to files in the current project
+                            -- filter out irrelevant diagnostics
                             function(item)
-                                return item.filename:find((vim.loop or vim.uv).cwd(), 1, true)
+                                local inCurrentProject = item.filename:find(vim.uv.cwd(), 1, true)
+                                local isNodeModules = item.filename:find("/node_modules/", 1, true)
+                                return inCurrentProject and not isNodeModules
                             end,
                         },
                     },

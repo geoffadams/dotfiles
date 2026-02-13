@@ -55,6 +55,7 @@ require("mason-tool-installer").setup({
         "beautysh",
         "vtsls",
         "eslint-lsp",
+        "prettierd",
     },
 })
 
@@ -65,7 +66,26 @@ require("conform").setup({
         bash = { "beautysh" },
         sh = { "beautysh" },
         zsh = { "beautysh" },
-        typescript = { lsp_format = "prefer" },
+        typescript = { "prettierd", lsp_format = "fallback" },
+    },
+    formatters = {
+        prettier = {
+            require_cwd = true,
+            cwd = require("conform.util").root_file({
+                ".prettierrc",
+                ".prettierrc.json",
+                ".prettierrc.yml",
+                ".prettierrc.yaml",
+                ".prettierrc.json5",
+                ".prettierrc.js",
+                ".prettierrc.cjs",
+                ".prettierrc.mjs",
+                ".prettierrc.toml",
+                "prettier.config.js",
+                "prettier.config.cjs",
+                "prettier.config.mjs",
+            }),
+        },
     },
 })
 vim.api.nvim_create_autocmd("BufWritePre", {
