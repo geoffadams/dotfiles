@@ -109,7 +109,8 @@ function enable_lsp_functionality(event)
     end
 
     map("grn", vim.lsp.buf.rename, "[R]e[n]ame")
-    map("gra", vim.lsp.buf.code_action, "[G]oto Code [A]ction", { "n", "x" })
+    map("gra", vim.lsp.buf.code_action, "[G]oto Code [a]ction", { "n", "x" })
+    map("grd", vim.lsp.buf.definition, "[G]oto [d]efinition")
     map("grD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
     local client = vim.lsp.get_client_by_id(event.data.client_id)
