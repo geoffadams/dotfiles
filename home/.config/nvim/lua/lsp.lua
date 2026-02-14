@@ -2,6 +2,15 @@ local util = require("util")
 
 require("mason").setup()
 vim.lsp.enable("emmylua_ls")
+vim.lsp.config("basedpyright", {
+    settings = {
+        basedpyright = {
+            analysis = {
+                autoImportCompletions = true,
+            },
+        },
+    },
+})
 vim.lsp.enable("basedpyright")
 vim.lsp.config("bashls", {
     filetypes = { "bash", "sh", "zsh" },
