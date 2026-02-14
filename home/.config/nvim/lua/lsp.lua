@@ -76,9 +76,10 @@ require("conform").setup({
         sh = { "beautysh" },
         zsh = { "beautysh" },
         typescript = { "prettierd", lsp_format = "fallback" },
+        markdown = { "prettierd" },
     },
     formatters = {
-        prettier = {
+        prettierd = {
             require_cwd = true,
             cwd = require("conform.util").root_file({
                 ".prettierrc",
