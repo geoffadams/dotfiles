@@ -32,7 +32,7 @@ vim.lsp.config("vtsls", {
                 completeFunctionCalls = true,
             },
             tsserver = {
-                log = "/Users/geoff.adams/.local/state/nvim/lsp/vtsls.log",
+                log = vim.fn.stdpath("state") .. "vtsls.log",
                 experimental = {
                     enableProjectDiagnostics = true,
                 },
