@@ -9,7 +9,6 @@ vim.opt.signcolumn = "yes" -- always display signs
 vim.opt.scrolloff = 10
 
 -- search
-vim.opt.ignorecase = true -- case-insensitive search
 vim.opt.incsearch = true -- highlight active search
 vim.opt.hlsearch = true -- highlight previous search
 vim.opt.ignorecase = true -- case-insenstive search
