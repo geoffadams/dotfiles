@@ -72,6 +72,7 @@ home/.config/nvim/
   covers the use case. Currently used: mini.icons, mini.tabline, mini.statusline, mini.cmdline,
   mini.bufremove, mini.completion, mini.pairs, mini.keymap, mini.snippets.
 - **fzf-lua** is the fuzzy finder (not Telescope).
+- **oil.nvim** is the file explorer (replaces netrw).
 - **conform.nvim** handles formatting (not LSP format-on-save directly).
 - **Mason** manages LSP servers and tools. Server configs use the native `vim.lsp.config()` /
   `vim.lsp.enable()` API (not mason-lspconfig).
@@ -95,6 +96,7 @@ home/.config/nvim/
   - `<Leader>x` — Trouble diagnostics (xx, xX, xL, xQ)
   - `<Leader>c` — Trouble code (cs, cl)
   - `gr` — LSP actions (grn, gra, grd, grD) — Neovim 0.11+ defaults
+  - `-` — oil.nvim file explorer
   - `<C-hjkl>` — window navigation
   - `<C-S-hjkl>` — window repositioning
   - `<C-p>` — fzf-lua global picker

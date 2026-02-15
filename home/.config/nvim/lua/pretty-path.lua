@@ -46,11 +46,14 @@ function M.pretty_path()
         return ""
     end
 
-    local term_prefix = ""
+    local scheme_prefix = ""
 
     local fnamemodify_opts = ""
-    if path:find("term://.+") then
-        _, _, term_prefix, path, _ = path:find("(term:)//(.+)//%d+:.+")
+    if path:find("^term://.+") then
+        _, _, scheme_prefix, path, _ = path:find("(term:)//(.+)//%d+:.+")
+        fnamemodify_opts = ":."
+    elseif path:find("^oil://") then
+        _, _, scheme_prefix, path = path:find("(oil:)//(.*)")
         fnamemodify_opts = ":."
     else
         if M.config.path_home_rel then
@@ -100,7 +103,7 @@ function M.pretty_path()
         out = table.concat(shortened, "/")
     end
 
-    return term_prefix .. path_prefix .. out .. path_suffix
+    return scheme_prefix .. path_prefix .. out .. path_suffix
 end
 
 _G.PrettyPath = M
