@@ -1,13 +1,18 @@
-typeset -U path
+include() { [[ -f $1 ]] && source $1; }
+eval_if_cmd() { command -v $1 &>/dev/null && eval "$(eval $2)"; }
+
 is_mac() { [[ $IS_MAC -eq 1 ]]; }
 has_brew() { [[ $IS_HOMEBREW -eq 1 ]]; }
+
+typeset -U path
 is_mac && path=("/Applications/Visual Studio Code.app/Contents/Resources/app/bin" $path)
 path=(${HOME}/.rbenv/shims $path)
 path=(${HOME}/bin $path)
+path=(${HOME}/.local/bin $path)
 has_brew && path=(${BREW_PREFIX}/sbin $path)
 has_brew && path=(${BREW_PREFIX}/bin $path)
 
-command -v starship &>/dev/null && eval "$(starship init zsh)"
+eval_if_cmd starship "starship init zsh"
 
 # completion menu behaviour
 unsetopt menu_complete
@@ -20,34 +25,32 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]-_}={[:upper:][:lower:
 setopt complete_in_word
 setopt always_to_end
 
-# better history search
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-if [ -n "${BREW_PREFIX}" ]; then
-  # set function paths
-  fpath+=(${BREW_PREFIX}/share/zsh-completions)
-  fpath+=(${BREW_PREFIX}/share/zsh/site-functions)
-
-  # command syntax highlighting
-  source ${BREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-  ZSH_HIGHLIGHT_HIGHLIGHTERS+=(brackets cursor root)
-
-  # better autosuggestions
-  source ${BREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# zsh prefix
+if [ has_brew ]; then
+    ZSH_SHARE_PREFIX=${BREW_PREFIX}/share
 else
-  # common Linux package-manager paths
-  [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && \
-    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh && \
-    ZSH_HIGHLIGHT_HIGHLIGHTERS+=(brackets cursor root)
-  [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ] && \
-    source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    ZSH_SHARE_PREFIX=/usr/share
 fi
 
+# better history search
+include ~/.fzf.zsh
+
+# set function paths
+fpath+=(${ZSH_SHARE_PREFIX}/zsh-completions)
+fpath+=(${ZSH_SHARE_PREFIX}/zsh/site-functions)
+
+# command syntax highlighting
+include ${ZSH_SHARE_PREFIX}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+ZSH_HIGHLIGHT_HIGHLIGHTERS+=(brackets cursor root)
+
+# better autosuggestions
+include ${ZSH_SHARE_PREFIX}/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 # iTerm2 shell integrations
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+include "${HOME}/.iterm2_shell_integration.zsh"
 
 # JetBrains Toolbox App
-is_mac && path=(${HOME}/Library/Application\ Support/JetBrains/Toolbox/scripts $path)
+is_mac && path=("${HOME}/Library/Application\ Support/JetBrains/Toolbox/scripts" $path)
 
 # Docker CLI
 fpath+=(${HOME}/.docker/completions)
@@ -57,15 +60,15 @@ autoload -Uz compinit
 compinit
 
 # uv completions
-command -v uv &>/dev/null && eval "$(uv generate-shell-completion zsh)"
-command -v uvx &>/dev/null && eval "$(uvx --generate-shell-completion zsh)"
+eval_if_cmd uv "uv generate-shell-completion zsh"
+eval_if_cmd uvx "uvx --generate-shell-completion zsh"
 
 # load additional config
 for f in $PERSONAL_ZSH/rc.d/*.zsh(N); do
-   . $f
+    . $f
 done
 
 # load system-local config
 for f in $PERSONAL_ZSH/rc.private.d/*.zsh(N); do
-  . $f
+    . $f
 done
