@@ -26,7 +26,7 @@ completion.setup({
 })
 
 -- Set 'omnifunc' for LSP completion only when needed.
-function set_omnifunc(ev)
+local function set_omnifunc(ev)
     vim.bo[ev.buf].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
 end
 util.lsp_attach_autocmd(nil, set_omnifunc, "Set 'omnifunc'")
