@@ -1,11 +1,13 @@
 typeset -U path
-path=("/Applications/Visual Studio Code.app/Contents/Resources/app/bin" $path)
+is_mac() { [[ $IS_MAC -eq 1 ]]; }
+has_brew() { [[ $IS_HOMEBREW -eq 1 ]]; }
+is_mac && path=("/Applications/Visual Studio Code.app/Contents/Resources/app/bin" $path)
 path=(${HOME}/.rbenv/shims $path)
 path=(${HOME}/bin $path)
-path=(${BREW_PREFIX}/sbin $path)
-path=(${BREW_PREFIX}/bin $path)
+has_brew && path=(${BREW_PREFIX}/sbin $path)
+has_brew && path=(${BREW_PREFIX}/bin $path)
 
-eval "$(starship init zsh)"
+command -v starship &>/dev/null && eval "$(starship init zsh)"
 
 # completion menu behaviour
 unsetopt menu_complete
@@ -32,13 +34,20 @@ if [ -n "${BREW_PREFIX}" ]; then
 
   # better autosuggestions
   source ${BREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+else
+  # common Linux package-manager paths
+  [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && \
+    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh && \
+    ZSH_HIGHLIGHT_HIGHLIGHTERS+=(brackets cursor root)
+  [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ] && \
+    source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 
 # iTerm2 shell integrations
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # JetBrains Toolbox App
-path=(${HOME}/Library/Application Support/JetBrains/Toolbox/scripts $path)
+is_mac && path=(${HOME}/Library/Application\ Support/JetBrains/Toolbox/scripts $path)
 
 # Docker CLI
 fpath+=(${HOME}/.docker/completions)
@@ -48,8 +57,8 @@ autoload -Uz compinit
 compinit
 
 # uv completions
-eval "$(uv generate-shell-completion zsh)"
-eval "$(uvx --generate-shell-completion zsh)"
+command -v uv &>/dev/null && eval "$(uv generate-shell-completion zsh)"
+command -v uvx &>/dev/null && eval "$(uvx --generate-shell-completion zsh)"
 
 # load additional config
 for f in $PERSONAL_ZSH/rc.d/*.zsh(N); do

@@ -4,12 +4,18 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias bk='cd $OLDPWD'
 
-alias ls="gls -Fh --color -N --group-directories-first"
+if [[ $IS_MAC -eq 1 ]]; then
+  alias ls="gls -Fh --color -N --group-directories-first"
+else
+  alias ls="ls -Fh --color -N --group-directories-first"
+fi
 alias ll="ls -Al --time-style=long-iso"
 
 alias mkdir='mkdir -pv'
 
-alias t="trash"
+if [[ $IS_MAC -eq 1 ]]; then
+  alias t="trash"
+fi
 
 alias sync-history="fc -AI && fc -R"
 alias reload-history="fc -R"
@@ -37,9 +43,11 @@ whatsonport() {
   lsof -i tcp:$*
 }
 
-pbfile() {
-  cat $1 | pbcopy
-}
+if [[ $IS_MAC -eq 1 ]]; then
+  pbfile() {
+    cat $1 | pbcopy
+  }
+fi
 
 alias directory-size='du -h -d 1 | sort -h'
 
@@ -63,9 +71,10 @@ if [[ $IS_MAC -eq 1 ]]; then
   # use GNU sed instead of BSD sed
   alias sed="gsed"
 
-  # use neovim instead of built-in vim
-  alias vim="nvim"
 fi
+
+# use neovim instead of built-in vim
+command -v nvim &>/dev/null && alias vim="nvim"
 
 # Docker
 alias docker-image-prune='docker rmi $(docker images -f "dangling=true" -q)'

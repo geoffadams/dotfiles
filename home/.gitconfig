@@ -6,8 +6,6 @@
     editor = nvim
     pager = bat
     excludesfile = ~/.gitignore-global
-[credential]
-    helper = osxkeychain
 [colors]
     ui = auto
 [apply]
