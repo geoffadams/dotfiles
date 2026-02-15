@@ -73,6 +73,7 @@ home/.config/nvim/
   mini.bufremove, mini.completion, mini.pairs, mini.keymap, mini.snippets.
 - **fzf-lua** is the fuzzy finder (not Telescope).
 - **oil.nvim** is the file explorer (replaces netrw).
+- **which-key.nvim** provides keymap discoverability popups with group labels for leader prefixes.
 - **conform.nvim** handles formatting (not LSP format-on-save directly).
 - **Mason** manages LSP servers and tools. Server configs use the native `vim.lsp.config()` /
   `vim.lsp.enable()` API (not mason-lspconfig).
