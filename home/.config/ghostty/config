@@ -7,3 +7,5 @@ keybind = super+j=goto_split:down
 keybind = super+k=goto_split:up
 keybind = super+l=goto_split:right
 
+shell-integration-features = ssh-terminfo,ssh-env
+
