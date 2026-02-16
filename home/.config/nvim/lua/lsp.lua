@@ -51,6 +51,7 @@ vim.lsp.config("eslint", {
     },
 })
 vim.lsp.enable("eslint")
+vim.lsp.enable("jsonls")
 
 require("mason-tool-installer").setup({
     ensure_installed = {
@@ -65,6 +66,7 @@ require("mason-tool-installer").setup({
         "vtsls",
         "eslint-lsp",
         "prettierd",
+        "json-lsp",
     },
 })
 
@@ -77,6 +79,7 @@ require("conform").setup({
         zsh = { "beautysh" },
         typescript = { "prettierd", lsp_format = "fallback" },
         markdown = { "prettierd" },
+        json = { "prettierd", lsp_format = "fallback" },
     },
     formatters = {
         prettierd = {
