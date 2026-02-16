@@ -15,10 +15,14 @@ return {
         { "<F1>", [[<Cmd>lua require"fzf-lua".help_tags()<CR>]], desc = "Help tags" },
         { "<Leader>fb", [[<Cmd>lua require"fzf-lua".buffers()<CR>]], desc = "Buffers" },
         { "<Leader>fc", [[<Cmd>lua require"fzf-lua".git_status()<CR>]], desc = "Git changes" },
-        { "<Leader>fd", [[<Cmd>lua require"fzf-lua".lsp_finder()<CR>]], desc = "LSP definitions, declarations & references" },
+        {
+            "<Leader>fd",
+            [[<Cmd>lua require"fzf-lua".lsp_finder()<CR>]],
+            desc = "LSP definitions, declarations & references",
+        },
         { "<Leader>ff", [[<Cmd>lua require"fzf-lua".files()<CR>]], desc = "Files" },
         { "<Leader>fg", [[<Cmd>lua require"fzf-lua".live_grep()<CR>]], desc = "Live grep" },
-        { "<Leader>fp", [[<Cmd>lua require"fzf-lua".builtin()<CR>]], desc = "Pickers" },
+        { "<Leader>f?", [[<Cmd>lua require"fzf-lua".builtin()<CR>]], desc = "Pickers" },
         { "<Leader>fs", [[<Cmd>lua require"fzf-lua".grep_project()<CR>]], desc = "Search project" },
         {
             "<Leader>fv",

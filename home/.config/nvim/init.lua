@@ -20,6 +20,7 @@ require("mini.bufremove").setup()
 require("keymap")
 require("interface")
 require("editor")
+require("workspace")
 
 -- tooling
 require("git")
