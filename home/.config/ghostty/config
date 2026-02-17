@@ -1,11 +1,15 @@
 theme = Rose Pine Moon
 font-family = Fira Code
 background-opacity = 0.95
+background-blur = true
+macos-titlebar-style = tabs
 
 keybind = super+h=goto_split:left
 keybind = super+j=goto_split:down
 keybind = super+k=goto_split:up
 keybind = super+l=goto_split:right
+macos-option-as-alt = right
 
-shell-integration-features = ssh-terminfo,ssh-env
+shell-integration-features = cursor,sudo,title,ssh-terminfo,ssh-env
 
+bell-features = no-attention,system
