@@ -70,6 +70,14 @@ require("mason-tool-installer").setup({
     },
 })
 
+local get_venv_command = function(command)
+    if vim.env.VIRTUAL_ENV then
+        return vim.env.VIRTUAL_ENV .. "/bin/" .. command
+    else
+        return command
+    end
+end
+
 require("conform").setup({
     formatters_by_ft = {
         lua = { "stylua" },
@@ -78,7 +86,7 @@ require("conform").setup({
         sh = { "beautysh" },
         zsh = { "beautysh" },
         typescript = { "prettierd", lsp_format = "fallback" },
-        markdown = { "prettierd" },
+        markdown = { "flowmark", "prettierd" },
         json = { "prettierd", lsp_format = "fallback" },
     },
     formatters = {
@@ -97,6 +105,14 @@ require("conform").setup({
                 "prettier.config.js",
                 "prettier.config.cjs",
                 "prettier.config.mjs",
+            }),
+        },
+        flowmark = {
+            command = get_venv_command("flowmark"),
+            args = { "-s" },
+            require_cwd = true,
+            cwd = require("conform.util").root_file({
+                "pyproject.toml",
             }),
         },
     },
