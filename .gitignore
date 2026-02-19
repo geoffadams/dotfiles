@@ -1,3 +1,4 @@
 Brewfile.lock.json
 Brewfile-dump*
 home/.config/karabiner/automatic_backups
+home/.config/git/config-local
