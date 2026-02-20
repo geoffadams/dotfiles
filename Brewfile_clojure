@@ -1,0 +1,4 @@
+tap "clojure/tools"
+brew "borkdude/brew/babashka"
+brew "clojure/tools/clojure"
+vscode "betterthantomorrow.calva"

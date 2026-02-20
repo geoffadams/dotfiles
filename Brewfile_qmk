@@ -1,0 +1,8 @@
+tap "osx-cross/arm"
+tap "osx-cross/avr"
+tap "qmk/qmk"
+brew "avrdude"
+brew "osx-cross/arm/arm-none-eabi-gcc@8"
+brew "osx-cross/avr/avr-gcc@8"
+brew "qmk/qmk/qmk"
+cask "qmk-toolbox"

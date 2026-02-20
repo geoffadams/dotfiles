@@ -1,0 +1,11 @@
+brew "b2-tools"
+brew "czkawka"
+brew "fclones"
+brew "jdupes"
+brew "lsusb-laniksj"
+brew "rclone"
+brew "rmlint"
+brew "ssdeep"
+brew "syncthing", restart_service: changed
+brew "tio"
+brew "wireguard-tools"
