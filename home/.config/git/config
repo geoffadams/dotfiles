@@ -4,17 +4,37 @@
     eol = lf
     autocrlf = input
     editor = nvim
-    pager = bat
+    pager = delta
+[include]
+    path = ~/.config/git/config-local
+[interactive]
+    diffFilter = delta --color-only
 [colors]
     ui = auto
-[apply]
-    whitespace = fix
+[diff]
+    colorMoved = default
+[delta]
+    map-styles = bold purple => syntax magenta, bold cyan => syntax blue
+    dark = true
+    navigate = true
+    line-numbers = true
+    hyperlinks = true
+[init]
+    defaultBranch = main
+[branch]
+    autosetuprebase = always
+[tag]
+    sort = version:refname
 [push]
     default = current
 [pull]
 	rebase = true
-[branch]
-    autosetuprebase = always
+[commit]
+    gpgsign = true
+[merge]
+    conflictStyle = zdiff3
+[apply]
+    whitespace = fix
 [alias]
     st = status -sb
 
@@ -49,11 +69,3 @@
     precommit = diff --cached --diff-algorithm=minimal -w
 
     tidy-branches = remote prune origin
-[tag]
-    sort = version:refname
-[commit]
-    gpgsign = true
-[include]
-    path = ~/.config/git/config-local
-[init]
-    defaultBranch = main
