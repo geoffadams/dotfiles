@@ -134,13 +134,16 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 local function enable_lsp_functionality(event)
     local map = function(keys, func, desc, mode)
         mode = mode or "n"
-        vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+        vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = desc })
     end
 
-    map("grn", vim.lsp.buf.rename, "[R]e[n]ame")
-    map("gra", vim.lsp.buf.code_action, "[G]oto Code [a]ction", { "n", "x" })
-    map("grd", vim.lsp.buf.definition, "[G]oto [d]efinition")
-    map("grD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+    map("<Leader>cn", vim.lsp.buf.rename, "Rename")
+    map("<Leader>ca", vim.lsp.buf.code_action, "Code action", { "n", "x" })
+    map("<Leader>cd", vim.lsp.buf.definition, "Go to definition")
+    map("<Leader>cD", vim.lsp.buf.declaration, "Go to declaration")
+    map("<Leader>ci", vim.lsp.buf.implementation, "Go to implementation")
+    map("<Leader>cr", vim.lsp.buf.references, "Show references")
+    map("<Leader>ct", vim.lsp.buf.type_definition, "Type definition")
 
     local client = vim.lsp.get_client_by_id(event.data.client_id)
     if client and client:supports_method("textDocument/documentHighlight", event.buf) then
@@ -159,7 +162,7 @@ local function enable_lsp_functionality(event)
     if client and client:supports_method("textDocument/inlayHint", event.buf) then
         map("<leader>th", function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
-        end, "[T]oggle Inlay [H]ints")
+        end, "Toggle inlay hints")
     end
 end
 util.lsp_attach_autocmd(nil, enable_lsp_functionality, "Enable LSP functionality")

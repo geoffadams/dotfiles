@@ -12,18 +12,21 @@ return {
     ---@diagnostic enable: missing-fields
     keys = {
         { "<C-p>", [[<Cmd>lua require"fzf-lua".global()<CR>]], desc = "Global picker" },
-        { "<F1>", [[<Cmd>lua require"fzf-lua".help_tags()<CR>]], desc = "Help tags" },
+        { "<Leader>fg", [[<Cmd>lua require"fzf-lua".files()<CR>]], desc = "Files" },
         { "<Leader>fb", [[<Cmd>lua require"fzf-lua".buffers()<CR>]], desc = "Buffers" },
-        { "<Leader>fc", [[<Cmd>lua require"fzf-lua".git_status()<CR>]], desc = "Git changes" },
+        { "<Leader>ff", [[<Cmd>lua require"fzf-lua".live_grep_glob()<CR>]], desc = "Grep" },
+        { "<Leader>fq", [[<Cmd>lua require"fzf-lua".quickfix()<CR>]], desc = "Quickfix" },
+        { "<Leader>fa", [[<Cmd>lua require"fzf-lua".lsp_code_actions()<CR>]], desc = "Code actions" },
         {
             "<Leader>fd",
             [[<Cmd>lua require"fzf-lua".lsp_finder()<CR>]],
             desc = "LSP definitions, declarations & references",
         },
-        { "<Leader>ff", [[<Cmd>lua require"fzf-lua".files()<CR>]], desc = "Files" },
-        { "<Leader>fg", [[<Cmd>lua require"fzf-lua".live_grep()<CR>]], desc = "Live grep" },
-        { "<Leader>f?", [[<Cmd>lua require"fzf-lua".builtin()<CR>]], desc = "Pickers" },
-        { "<Leader>fs", [[<Cmd>lua require"fzf-lua".grep_project()<CR>]], desc = "Search project" },
+        { "<Leader>fs", [[<Cmd>lua require"fzf-lua".lsp_document_symbols()<CR>]], desc = "Document symbols" },
+        { "<Leader>fS", [[<Cmd>lua require"fzf-lua".lsp_workspace_symbols()<CR>]], desc = "Workspace symbols" },
+        { "<Leader>fx", [[<Cmd>lua require"fzf-lua".lsp_document_diagnostics()<CR>]], desc = "Document diagnostics" },
+        { "<Leader>fX", [[<Cmd>lua require"fzf-lua".lsp_workspace_diagnostics()<CR>]], desc = "Workspace diagnostics" },
+        { "<Leader>fc", [[<Cmd>lua require"fzf-lua".git_status()<CR>]], desc = "Git changes" },
         {
             "<Leader>fv",
             function()
@@ -31,6 +34,7 @@ return {
             end,
             desc = "Git refs (branches, tags, stash)",
         },
-        { "<Leader>fw", [[<Cmd>lua require"fzf-lua".lsp_workspace_symbols()<CR>]], desc = "Workspace symbols" },
+        { "<F1>", [[<Cmd>lua require"fzf-lua".help_tags()<CR>]], desc = "Help tags" },
+        { "<Leader>f?", [[<Cmd>lua require"fzf-lua".builtin()<CR>]], desc = "Pickers" },
     },
 }
