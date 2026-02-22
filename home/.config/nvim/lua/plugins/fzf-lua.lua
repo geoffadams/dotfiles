@@ -8,7 +8,16 @@ return {
     ---@module "fzf-lua"
     ---@type fzf-lua.Config|{}
     ---@diagnostic disable: missing-fields
-    opts = {},
+    opts = {
+        defaults = {
+            formatter = "path.filename_first",
+            git_icons = true,
+        },
+        grep = {
+            RIPGREP_CONFIG_PATH = vim.env.RIPGREP_CONFIG_PATH,
+            resume = true,
+        },
+    },
     ---@diagnostic enable: missing-fields
     keys = {
         { "<C-p>", [[<Cmd>lua require"fzf-lua".global()<CR>]], desc = "Global picker" },

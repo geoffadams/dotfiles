@@ -28,6 +28,10 @@ vim.opt.ruler = false -- no cursor co-ords in status
 
 -- command line
 vim.opt.wildmenu = true
+vim.opt.wildmode = "noselect:lastused,full"
+vim.opt.wildoptions = "fuzzy,pum,tagfile"
+vim.opt.wildignorecase = true
+vim.opt.wildignore = { ".git/*" }
 vim.opt.showcmd = true -- display partial commands
 vim.opt.showmode = false -- don't display current mode
 
