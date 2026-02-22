@@ -52,6 +52,7 @@ vim.lsp.config("eslint", {
 })
 vim.lsp.enable("eslint")
 vim.lsp.enable("jsonls")
+vim.lsp.enable("clojure_lsp")
 
 require("mason-tool-installer").setup({
     ensure_installed = {
@@ -67,6 +68,8 @@ require("mason-tool-installer").setup({
         "eslint-lsp",
         "prettierd",
         "json-lsp",
+        "clojure-lsp",
+        "cljfmt",
     },
 })
 
@@ -88,6 +91,7 @@ require("conform").setup({
         typescript = { "prettierd", lsp_format = "fallback" },
         markdown = { "flowmark", "prettierd" },
         json = { "prettierd", lsp_format = "fallback" },
+        clojure = { "cljfmt" },
     },
     formatters = {
         prettierd = {
