@@ -15,6 +15,7 @@ require("mini.tabline").setup()
 require("mini.statusline").setup()
 require("mini.cmdline").setup()
 require("mini.bufremove").setup()
+require("mini.surround").setup()
 
 -- general behaviour
 require("keymap")
