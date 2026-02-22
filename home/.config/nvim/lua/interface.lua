@@ -4,7 +4,13 @@ vim.opt.background = "dark"
 require("rose-pine").setup({
     variant = "dawn",
     dark_variant = "moon",
+    enable = {
+        legacy_highlights = false,
+    },
     styles = { italic = false, transparency = true },
+    highlight_groups = {
+        FidgetNotify = { fg = "subtle", bg = "overlay" },
+    },
 })
 vim.cmd("colorscheme rose-pine-moon")
 
