@@ -53,6 +53,17 @@ vim.lsp.config("eslint", {
 vim.lsp.enable("eslint")
 vim.lsp.enable("jsonls")
 vim.lsp.enable("clojure_lsp")
+vim.lsp.enable("marksman")
+vim.lsp.config("markdown_oxide", {
+    capabilities = {
+        workspace = {
+            didChangeWatchedFiles = {
+                dynamicRegistration = true,
+            },
+        },
+    },
+})
+vim.lsp.enable("markdown_oxide")
 
 require("mason-tool-installer").setup({
     ensure_installed = {
@@ -70,6 +81,8 @@ require("mason-tool-installer").setup({
         "json-lsp",
         "clojure-lsp",
         "cljfmt",
+        "marksman",
+        "markdown-oxide",
     },
 })
 
@@ -89,7 +102,7 @@ require("conform").setup({
         sh = { "beautysh" },
         zsh = { "beautysh" },
         typescript = { "prettierd", lsp_format = "fallback" },
-        markdown = { "flowmark", "prettierd" },
+        markdown = { "flowmark", "prettierd", lsp_format = "fallback" },
         json = { "prettierd", lsp_format = "fallback" },
         clojure = { "cljfmt" },
     },
