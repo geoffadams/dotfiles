@@ -231,12 +231,43 @@ plugins {
     welcome-screen location="zellij:session-manager" {
         welcome_screen true
     }
+    zjstatus location="file:~/.config/zellij/plugins/zjstatus.wasm" {
+        format_left   "{command_pwd}{command_git_branch}"
+        format_center "{tabs}"
+        format_right  "{swap_layout}#[fg=blue,bg=black,bold] {session} "
+        format_space  ""
+
+        border_enabled  "false"
+
+        tab_normal   "#[fg=white,bg=black] {name} "
+        tab_active   "#[fg=green,bg=black,bold] {name} "
+
+        swap_layout_format          "#[fg=white,bg=black] {name} "
+        swap_layout_hide_if_empty   "true"
+
+        command_pwd_command "zsh -c 'grealpath -s --relative-base=\"$HOME\" \"$(pwd)\"'"
+        command_pwd_format      "#[fg=magenta,bg=black,bold] {stdout} "
+        command_pwd_interval    "10"
+        command_pwd_rendermode  "static"
+
+        command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
+        command_git_branch_format      "#[fg=cyan,bg=black] {stdout} "
+        command_git_branch_interval    "10"
+        command_git_branch_rendermode  "static"
+    }
+    zjframes location="file:~/.config/zellij/plugins/zjframes.wasm" {
+        hide_frame_for_single_pane       "true"
+        hide_frame_except_for_search     "true"
+        hide_frame_except_for_scroll     "true"
+        hide_frame_except_for_fullscreen "true"
+    }
 }
 
 // Plugins to load in the background when a new session starts
 // eg. "file:/path/to/my-plugin.wasm"
 // eg. "https://example.com/my-plugin.wasm"
 load_plugins {
+    zjframes
 }
 web_client {
     font "monospace"
@@ -297,7 +328,7 @@ theme "rose-pine-moon"
 //   - true (default, enabled)
 //   - false
 // 
-pane_frames true
+pane_frames false
  
 // When attaching to an existing session with other users,
 // should the session be mirrored (true)
