@@ -1,6 +1,54 @@
 keybinds clear-defaults=true {
     locked {
-        bind "Ctrl Alt Super Shift g" { SwitchToMode "normal"; }
+        bind "Ctrl Alt Super Shift 0" { SwitchToMode "normal"; }
+    }
+    shared_except "locked" {
+        bind "Ctrl Alt Shift h" { MoveFocusOrTab "left"; }
+        bind "Ctrl Alt Shift j" { MoveFocus "down"; }
+        bind "Ctrl Alt Shift k" { MoveFocus "up"; }
+        bind "Ctrl Alt Shift l" { MoveFocusOrTab "right"; }
+
+        bind "Ctrl Alt Shift i" { MoveTab "left"; }
+        bind "Ctrl Alt Shift o" { MoveTab "right"; }
+
+        bind "Ctrl Alt Shift +" { Resize "Increase"; }
+        bind "Ctrl Alt Shift -" { Resize "Decrease"; }
+        bind "Ctrl Alt Shift =" { Resize "Increase"; }
+
+        bind "Ctrl Alt Shift [" { PreviousSwapLayout; }
+        bind "Ctrl Alt Shift ]" { NextSwapLayout; }
+
+        bind "Ctrl Alt Shift t" { NewTab; }
+        bind "Ctrl Alt Shift n" { NewPane; }
+        bind "Ctrl Alt Shift x" { CloseFocus; }
+
+        bind "Ctrl Alt Shift f" { ToggleFloatingPanes; }
+
+        bind "Ctrl Alt Super Shift 0" { SwitchToMode "locked"; }
+        bind "Ctrl Alt Super Shift x" { Quit; }
+        bind "Ctrl Alt Shift /" {
+            LaunchOrFocusPlugin "zellij-forgot" {
+                floating true
+            }
+        }
+    }
+    shared_except "locked" "move" {
+        bind "Ctrl Alt Super Shift m" { SwitchToMode "move"; }
+    }
+    shared_except "locked" "resize" {
+        bind "Ctrl Alt Super Shift r" { SwitchToMode "resize"; }
+    }
+    shared_except "locked" "scroll" "search" {
+        bind "Ctrl Alt Super Shift f" { SwitchToMode "scroll"; }
+    }
+    shared_except "locked" "pane" {
+        bind "Ctrl Alt Super Shift p" { SwitchToMode "pane"; }
+    }
+    shared_except "locked" "tab" {
+        bind "Ctrl Alt Super Shift t" { SwitchToMode "tab"; }
+    }
+    shared_except "locked" "session" {
+        bind "Ctrl Alt Super Shift s" { SwitchToMode "session"; }
     }
     pane {
         bind "h" { MoveFocus "left"; }
@@ -71,7 +119,7 @@ keybinds clear-defaults=true {
         bind "K" { Resize "Decrease up"; }
         bind "L" { Resize "Decrease right"; }
 
-        bind "Ctrl Alt Super Shift n" { SwitchToMode "normal"; }
+        bind "Ctrl Alt Super Shift r" { SwitchToMode "normal"; }
     }
     move {
         bind "h" { MovePane "left"; }
@@ -83,7 +131,7 @@ keybinds clear-defaults=true {
         bind "n" { MovePane; }
         bind "p" { MovePaneBackwards; }
 
-        bind "Ctrl Alt Super Shift h" { SwitchToMode "normal"; }
+        bind "Ctrl Alt Super Shift m" { SwitchToMode "normal"; }
     }
     scroll {
         bind "e" { EditScrollback; SwitchToMode "normal"; }
@@ -133,51 +181,7 @@ keybinds clear-defaults=true {
             SwitchToMode "normal"
         }
 
-        bind "Ctrl Alt Super Shift o" { SwitchToMode "normal"; }
-    }
-    shared_except "locked" {
-        bind "Ctrl Alt Shift h" { MoveFocusOrTab "left"; }
-        bind "Ctrl Alt Shift j" { MoveFocus "down"; }
-        bind "Ctrl Alt Shift k" { MoveFocus "up"; }
-        bind "Ctrl Alt Shift l" { MoveFocusOrTab "right"; }
-
-        bind "Ctrl Alt Shift i" { MoveTab "left"; }
-        bind "Ctrl Alt Shift o" { MoveTab "right"; }
-
-        bind "Ctrl Alt Shift +" { Resize "Increase"; }
-        bind "Ctrl Alt Shift -" { Resize "Decrease"; }
-        bind "Ctrl Alt Shift =" { Resize "Increase"; }
-
-        bind "Ctrl Alt Shift [" { PreviousSwapLayout; }
-        bind "Ctrl Alt Shift ]" { NextSwapLayout; }
-
-        bind "Ctrl Alt Shift n" { NewPane; }
-        bind "Ctrl Alt Shift x" { CloseFocus; }
-
-        bind "Ctrl Alt Shift f" { ToggleFloatingPanes; }
-        bind "Ctrl Alt Shift p" { TogglePaneInGroup; }
-        bind "Alt Shift p" { ToggleGroupMarking; }
-
-        bind "Ctrl Alt Super Shift g" { SwitchToMode "locked"; }
-        bind "Ctrl Alt Super Shift x" { Quit; }
-    }
-    shared_except "locked" "move" {
-        bind "Ctrl Alt Super Shift h" { SwitchToMode "move"; }
-    }
-    shared_except "locked" "session" {
-        bind "Ctrl Alt Super Shift o" { SwitchToMode "session"; }
-    }
-    shared_except "locked" "scroll" "search" {
-        bind "Ctrl Alt Super Shift s" { SwitchToMode "scroll"; }
-    }
-    shared_except "locked" "tab" {
-        bind "Ctrl Alt Super Shift t" { SwitchToMode "tab"; }
-    }
-    shared_except "locked" "pane" {
-        bind "Ctrl Alt Super Shift p" { SwitchToMode "pane"; }
-    }
-    shared_except "locked" "resize" {
-        bind "Ctrl Alt Super Shift n" { SwitchToMode "resize"; }
+        bind "Ctrl Alt Super Shift s" { SwitchToMode "normal"; }
     }
     shared_except "normal" "locked" "entersearch" {
         bind "enter" { SwitchToMode "normal"; }
@@ -197,7 +201,7 @@ keybinds clear-defaults=true {
         bind "Home" { ScrollToTop; }
 
         bind "Ctrl Alt Super Shift g" { ScrollToBottom; SwitchToMode "normal"; }
-        bind "Ctrl Alt Super Shift s" { SwitchToMode "normal"; }
+        bind "Ctrl Alt Super Shift f" { SwitchToMode "normal"; }
     }
     entersearch {
         bind "Ctrl c" { SwitchToMode "scroll"; }
@@ -292,6 +296,8 @@ plugins {
         hide_frame_except_for_search     "true"
         hide_frame_except_for_scroll     "true"
         hide_frame_except_for_fullscreen "true"
+    }
+    zellij-forgot location="file:~/.config/zellij/plugins/zellij_forgot.wasm" {
     }
 }
 
