@@ -152,6 +152,7 @@ keybinds clear-defaults=true {
         bind "Ctrl Alt Shift ]" { NextSwapLayout; }
 
         bind "Ctrl Alt Shift n" { NewPane; }
+        bind "Ctrl Alt Shift x" { CloseFocus; }
 
         bind "Ctrl Alt Shift f" { ToggleFloatingPanes; }
         bind "Ctrl Alt Shift p" { TogglePaneInGroup; }
