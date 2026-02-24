@@ -1,54 +1,51 @@
 swap_tiled_layout name="vertical" {
-    tab max_panes=4 {
-        pane {
-            pane split_direction="vertical" {
+    tab max_panes=6 {
+        pane split_direction="horizontal" {
+            pane size="80%" split_direction="vertical" {
                 pane size="70%"
                 pane size="30%" {
                     children
                 }
             }
+            pane size="20%"
         }
         pane size=1 borderless=true {
             plugin location="zjstatus"
         }
     }
-    tab max_panes=7 {
-        pane {
-            pane split_direction="vertical" {
+    tab max_panes=8 {
+        pane split_direction="horizontal" {
+            pane size="80%" split_direction="vertical" {
                 pane size="70%" {
                     children
                 }
                 pane size="30%" {
                     pane
                     pane
-                    pane
-                    pane
                 }
             }
+            pane size="20%"
         }
         pane size=1 borderless=true {
             plugin location="zjstatus"
         }
     }
     tab max_panes=11 {
-        pane {
-            pane split_direction="vertical" {
+        pane split_direction="horizontal" {
+            pane size="80%" split_direction="vertical" {
                 pane size="40%" {
                     children
                 }
                 pane size="30%" {
                     pane
                     pane
-                    pane
-                    pane
                 }
                 pane size="30%" {
                     pane
                     pane
-                    pane
-                    pane
                 }
             }
+            pane size="20%"
         }
         pane size=1 borderless=true {
             plugin location="zjstatus"
