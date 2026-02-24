@@ -32,9 +32,6 @@ else
     ZSH_SHARE_PREFIX=/usr/share
 fi
 
-# better history search
-include ~/.fzf.zsh
-
 # set function paths
 fpath+=(${ZSH_SHARE_PREFIX}/zsh-completions)
 fpath+=(${ZSH_SHARE_PREFIX}/zsh/site-functions)
@@ -46,8 +43,8 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS+=(brackets cursor root)
 # better autosuggestions
 include ${ZSH_SHARE_PREFIX}/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# iTerm2 shell integrations
-include "${HOME}/.iterm2_shell_integration.zsh"
+# fuzzy finder
+source <(fzf --zsh)
 
 # JetBrains Toolbox App
 is_mac && path=("${HOME}/Library/Application\ Support/JetBrains/Toolbox/scripts" $path)
