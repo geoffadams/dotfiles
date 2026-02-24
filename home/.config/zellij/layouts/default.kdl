@@ -1,16 +1,15 @@
 layout {
-    default_tab_template {
-        pane split_direction="horizontal" {
-            pane size="80%" split_direction="vertical" {
-                pane size="70%"
-                pane size="30%" {
-                    children
-                }
-            }
-            pane size="20%"
-        }
+    tab_template name="ui" {
+        children
         pane size=1 borderless=true {
             plugin location="zjstatus"
+        }
+    }
+
+    ui {
+        pane split_direction="vertical" {
+            pane size="70%"
+            pane size="30%"
         }
     }
 }

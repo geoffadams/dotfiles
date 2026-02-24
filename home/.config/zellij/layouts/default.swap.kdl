@@ -1,19 +1,16 @@
 swap_tiled_layout name="vertical" {
-    tab max_panes=6 {
-        pane split_direction="horizontal" {
-            pane size="80%" split_direction="vertical" {
-                pane size="70%"
-                pane size="30%" {
-                    children
-                }
+    ui max_panes=2 {
+        pane
+    }
+    ui max_panes=4 {
+        pane split_direction="vertical" {
+            pane size="70%"
+            pane size="30%" {
+                children
             }
-            pane size="20%"
-        }
-        pane size=1 borderless=true {
-            plugin location="zjstatus"
         }
     }
-    tab max_panes=8 {
+    ui max_panes=6 {
         pane split_direction="horizontal" {
             pane size="80%" split_direction="vertical" {
                 pane size="70%" {
@@ -26,97 +23,58 @@ swap_tiled_layout name="vertical" {
             }
             pane size="20%"
         }
-        pane size=1 borderless=true {
-            plugin location="zjstatus"
-        }
     }
-    tab max_panes=11 {
+    ui max_panes=8 {
         pane split_direction="horizontal" {
             pane size="80%" split_direction="vertical" {
                 pane size="40%" {
+                    pane
+                    pane
+                }
+                pane size="30%" {
+                    pane
+                    pane
+                }
+                pane size="30%" {
                     children
-                }
-                pane size="30%" {
-                    pane
-                    pane
-                }
-                pane size="30%" {
-                    pane
-                    pane
                 }
             }
             pane size="20%"
         }
-        pane size=1 borderless=true {
-            plugin location="zjstatus"
-        }
     }
 }
 swap_tiled_layout name="horizontal" {
-    tab max_panes=3 {
-        pane {
-            pane
-            pane
-        }
-        pane size=1 borderless=true {
-            plugin location="zjstatus"
-        }
+    ui max_panes=2 {
+        pane
     }
-    tab max_panes=7 {
-        pane {
-            pane {
-                pane split_direction="vertical" {
-                    children
-                }
-                pane split_direction="vertical" {
-                    pane
-                    pane
-                    pane
-                    pane
-                }
+    ui max_panes=5 {
+        pane split_direction="horizontal" {
+            pane size="70%"
+            pane size="30%" split_direction="vertical" {
+                children
             }
         }
-        pane size=1 borderless=true {
-            plugin location="zjstatus"
-        }
     }
-    tab max_panes=11 {
-        pane {
-            pane {
-                pane split_direction="vertical" {
-                    children
-                }
-                pane split_direction="vertical" {
-                    pane
-                    pane
-                    pane
-                    pane
-                }
-                pane split_direction="vertical" {
-                    pane
-                    pane
-                    pane
-                    pane
-                }
+    ui max_panes=7 {
+        pane split_direction="horizontal" {
+            pane size="70%" split_direction="vertical" {
+                children
             }
-        }
-        pane size=1 borderless=true {
-            plugin location="zjstatus"
+            pane size="30%" split_direction="vertical" {
+                pane
+                pane
+                pane
+            }
         }
     }
 }
 swap_tiled_layout name="stacked" {
-    tab min_panes=4 {
-        pane {
-            pane split_direction="vertical" {
-                pane
-                pane stacked=true {
-                    children
-                }
+    ui min_panes=4 {
+        pane split_direction="vertical" {
+            pane size="70%"
+            pane stacked=true size="30%" {
+                children
             }
-        }
-        pane size=1 borderless=true {
-            plugin location="zjstatus"
         }
     }
 }
