@@ -1,8 +1,8 @@
 swap_tiled_layout name="vertical" {
-    ui max_panes=2 {
+    tab max_panes=2 {
         pane
     }
-    ui max_panes=4 {
+    tab max_panes=4 {
         pane split_direction="vertical" {
             pane size="70%"
             pane size="30%" {
@@ -10,7 +10,7 @@ swap_tiled_layout name="vertical" {
             }
         }
     }
-    ui max_panes=6 {
+    tab max_panes=6 {
         pane split_direction="horizontal" {
             pane size="80%" split_direction="vertical" {
                 pane size="70%" {
@@ -24,7 +24,7 @@ swap_tiled_layout name="vertical" {
             pane size="20%"
         }
     }
-    ui max_panes=8 {
+    tab max_panes=8 {
         pane split_direction="horizontal" {
             pane size="80%" split_direction="vertical" {
                 pane size="40%" {
@@ -44,10 +44,10 @@ swap_tiled_layout name="vertical" {
     }
 }
 swap_tiled_layout name="horizontal" {
-    ui max_panes=2 {
+    tab max_panes=2 {
         pane
     }
-    ui max_panes=5 {
+    tab max_panes=5 {
         pane split_direction="horizontal" {
             pane size="70%"
             pane size="30%" split_direction="vertical" {
@@ -55,7 +55,7 @@ swap_tiled_layout name="horizontal" {
             }
         }
     }
-    ui max_panes=7 {
+    tab max_panes=7 {
         pane split_direction="horizontal" {
             pane size="70%" split_direction="vertical" {
                 children
@@ -69,7 +69,7 @@ swap_tiled_layout name="horizontal" {
     }
 }
 swap_tiled_layout name="stacked" {
-    ui min_panes=4 {
+    tab min_panes=4 {
         pane split_direction="vertical" {
             pane size="70%"
             pane stacked=true size="30%" {
