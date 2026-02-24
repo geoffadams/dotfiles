@@ -233,26 +233,57 @@ plugins {
         welcome_screen true
     }
     zjstatus location="file:~/.config/zellij/plugins/zjstatus.wasm" {
-        format_left   "{command_pwd}{command_git_branch}"
+        format_left   "{mode}{command_pwd}{command_git_branch}"
         format_center "{tabs}"
-        format_right  "{swap_layout}#[fg=blue,bg=black,bold] {session} "
-        format_space  ""
+        format_right  "{swap_layout}#[fg=magenta,bg=black,bold]  {session} "
+        format_space  "#[bg=black]"
+
+        format_hide_on_overlength "true"
+        format_precedence         "lrc"
 
         border_enabled  "false"
 
-        tab_normal   "#[fg=white,bg=black] {name} "
-        tab_active   "#[fg=green,bg=black,bold] {name} "
+        mode_normal        "#[fg=bright_black,bg=black,bold]  "
+        mode_locked        "#[fg=red,bg=black,bold]  "
+        mode_pane          "#[fg=black,bg=green,bold]  "
+        mode_tab           "#[fg=black,bg=blue,bold]  "
+        mode_session       "#[fg=black,bg=magenta,bold]  "
+        mode_resize        "#[fg=black,bg=yellow,bold]  "
+        mode_move          "#[fg=black,bg=yellow,bold]  "
+        mode_scroll        "#[fg=black,bg=yellow,bold]  "
+        mode_search        "#[fg=black,bg=blue,bold]  "
+        mode_enter_search  "#[fg=black,bg=blue,bold]  "
+        mode_prompt        "#[fg=black,bg=blue,bold]  "
+        mode_rename_tab    "#[fg=black,bg=blue,bold]  "
+        mode_rename_pane   "#[fg=black,bg=blue,bold]  "
 
-        swap_layout_format          "#[fg=white,bg=black] {name} "
+        tab_normal   "#[fg=white,bg=black] {name} "
+        tab_normal_fullscreen "#[fg=white,bg=black] {name} {fullscreen_indicator}"
+        tab_normal_sync "#[fg=white,bg=black] {name} {sync_indicator}"
+
+        tab_active   "#[fg=magenta,bg=black,bold] {name} "
+        tab_active_fullscreen "#[fg=magenta,bg=black,bold] {name} {fullscreen_indicator}"
+        tab_active_sync "#[fg=magenta,bg=black,bold] {name} {sync_indicator}"
+        tab_rename   "#[fg=black,bg=blue,bold]  {name} "
+
+        tab_sync_indicator       " "
+        tab_fullscreen_indicator " "
+        tab_floating_indicator   " "
+
+        tab_display_count         "3"  // limit to showing 3 tabs
+        tab_truncate_start_format "#[fg=bright_black,bg=black,bold]  +{count}  "
+        tab_truncate_end_format   "#[fg=bright_black,bg=black,bold]  +{count}  "
+
+        swap_layout_format          "#[fg=white,bg=black]  {name} "
         swap_layout_hide_if_empty   "true"
 
         command_pwd_command "zsh -c 'grealpath -s --relative-base=\"$HOME\" \"$(pwd)\"'"
-        command_pwd_format      "#[fg=magenta,bg=black,bold] {stdout} "
+        command_pwd_format      "#[fg=cyan,bg=black,bold] {stdout} "
         command_pwd_interval    "10"
         command_pwd_rendermode  "static"
 
         command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
-        command_git_branch_format      "#[fg=cyan,bg=black] {stdout} "
+        command_git_branch_format      "#[fg=magenta,bg=black] {stdout} "
         command_git_branch_interval    "10"
         command_git_branch_rendermode  "static"
     }
