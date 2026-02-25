@@ -1,17 +1,6 @@
 include() { [[ -f $1 ]] && source $1; }
 eval_if_cmd() { command -v $1 &>/dev/null && eval "$(eval $2)"; }
 
-is_mac() { [[ $IS_MAC -eq 1 ]]; }
-has_brew() { [[ $IS_HOMEBREW -eq 1 ]]; }
-
-typeset -U path
-is_mac && path=("/Applications/Visual Studio Code.app/Contents/Resources/app/bin" $path)
-path=(${HOME}/.rbenv/shims $path)
-path=(${HOME}/bin $path)
-path=(${HOME}/.local/bin $path)
-has_brew && path=(${BREW_PREFIX}/sbin $path)
-has_brew && path=(${BREW_PREFIX}/bin $path)
-
 eval_if_cmd starship "starship init zsh"
 
 # completion menu behaviour
@@ -24,13 +13,6 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}' 'r:|=*' 'l:|=* r:|=*'
 setopt complete_in_word
 setopt always_to_end
-
-# zsh prefix
-if [ has_brew ]; then
-    ZSH_SHARE_PREFIX=${BREW_PREFIX}/share
-else
-    ZSH_SHARE_PREFIX=/usr/share
-fi
 
 # set function paths
 fpath+=(${ZSH_SHARE_PREFIX}/zsh-completions)
@@ -45,6 +27,9 @@ include ${ZSH_SHARE_PREFIX}/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # fuzzy finder
 source <(fzf --zsh)
+
+# VSCode
+is_mac && path=("/Applications/Visual Studio Code.app/Contents/Resources/app/bin" $path)
 
 # JetBrains Toolbox App
 is_mac && path=("${HOME}/Library/Application\ Support/JetBrains/Toolbox/scripts" $path)
