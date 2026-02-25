@@ -30,6 +30,13 @@ keybinds clear-defaults=true {
             }
         }
 
+        bind "Ctrl Alt Shift s" {
+            LaunchOrFocusPlugin "zsm" {
+                floating true
+                move_to_focused_tab true
+            }
+        }
+
         bind "Ctrl Alt Super Shift 0" { SwitchToMode "locked"; }
         bind "Ctrl Alt Super Shift x" { Quit; }
     }
@@ -298,6 +305,11 @@ plugins {
         hide_frame_except_for_fullscreen "true"
     }
     zellij-forgot location="file:~/.config/zellij/plugins/zellij_forgot.wasm" {
+    }
+    zsm location="file:~/.config/zellij/plugins/zsm.wasm" {
+        session_separator "-"
+        show_resurrectable_sessions true
+        base_paths "/home/geoff.adams/Workspace|/Users/geoff.adams"
     }
 }
 
