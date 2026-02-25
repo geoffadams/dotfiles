@@ -26,6 +26,7 @@ require("workspace")
 -- tooling
 require("git")
 require("installers")
+require("treesitter")
 require("language-servers")
 require("formatters")
 require("completions")
