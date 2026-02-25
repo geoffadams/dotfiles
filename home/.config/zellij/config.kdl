@@ -19,18 +19,19 @@ keybinds clear-defaults=true {
         bind "Ctrl Alt Shift ]" { NextSwapLayout; }
 
         bind "Ctrl Alt Shift t" { NewTab; }
-        bind "Ctrl Alt Shift n" { NewPane; }
+        bind "Ctrl Alt Shift p" { NewPane; }
         bind "Ctrl Alt Shift x" { CloseFocus; }
 
         bind "Ctrl Alt Shift f" { ToggleFloatingPanes; }
 
-        bind "Ctrl Alt Super Shift 0" { SwitchToMode "locked"; }
-        bind "Ctrl Alt Super Shift x" { Quit; }
         bind "Ctrl Alt Shift /" {
             LaunchOrFocusPlugin "zellij-forgot" {
                 floating true
             }
         }
+
+        bind "Ctrl Alt Super Shift 0" { SwitchToMode "locked"; }
+        bind "Ctrl Alt Super Shift x" { Quit; }
     }
     shared_except "locked" "move" {
         bind "Ctrl Alt Super Shift m" { SwitchToMode "move"; }
@@ -104,46 +105,6 @@ keybinds clear-defaults=true {
 
         bind "Ctrl Alt Super Shift t" { SwitchToMode "normal"; }
     }
-    resize {
-        bind "-" { Resize "Decrease"; }
-        bind "=" { Resize "Increase"; }
-        bind "+" { Resize "Increase"; }
-
-        bind "h" { Resize "Increase left"; }
-        bind "j" { Resize "Increase down"; }
-        bind "k" { Resize "Increase up"; }
-        bind "l" { Resize "Increase right"; }
-
-        bind "H" { Resize "Decrease left"; }
-        bind "J" { Resize "Decrease down"; }
-        bind "K" { Resize "Decrease up"; }
-        bind "L" { Resize "Decrease right"; }
-
-        bind "Ctrl Alt Super Shift r" { SwitchToMode "normal"; }
-    }
-    move {
-        bind "h" { MovePane "left"; }
-        bind "j" { MovePane "down"; }
-        bind "k" { MovePane "up"; }
-        bind "l" { MovePane "right"; }
-
-        bind "tab" { MovePane; }
-        bind "n" { MovePane; }
-        bind "p" { MovePaneBackwards; }
-
-        bind "Ctrl Alt Super Shift m" { SwitchToMode "normal"; }
-    }
-    scroll {
-        bind "e" { EditScrollback; SwitchToMode "normal"; }
-        bind "s" { SwitchToMode "entersearch"; SearchInput 0; }
-    }
-    search {
-        bind "c" { SearchToggleOption "CaseSensitivity"; }
-        bind "n" { Search "down"; }
-        bind "o" { SearchToggleOption "WholeWord"; }
-        bind "p" { Search "up"; }
-        bind "w" { SearchToggleOption "Wrap"; }
-    }
     session {
         bind "a" {
             LaunchOrFocusPlugin "zellij:about" {
@@ -182,6 +143,45 @@ keybinds clear-defaults=true {
         }
 
         bind "Ctrl Alt Super Shift s" { SwitchToMode "normal"; }
+    }
+    resize {
+        bind "-" { Resize "Decrease"; }
+        bind "=" { Resize "Increase"; }
+        bind "+" { Resize "Increase"; }
+
+        bind "h" { Resize "Increase left"; }
+        bind "j" { Resize "Increase down"; }
+        bind "k" { Resize "Increase up"; }
+        bind "l" { Resize "Increase right"; }
+
+        bind "H" { Resize "Decrease left"; }
+        bind "J" { Resize "Decrease down"; }
+        bind "K" { Resize "Decrease up"; }
+        bind "L" { Resize "Decrease right"; }
+
+        bind "Ctrl Alt Super Shift r" { SwitchToMode "normal"; }
+    }
+    move {
+        bind "h" { MovePane "left"; }
+        bind "j" { MovePane "down"; }
+        bind "k" { MovePane "up"; }
+        bind "l" { MovePane "right"; }
+
+        bind "tab" { MovePane; }
+        bind "Shift tab" { MovePaneBackwards; }
+
+        bind "Ctrl Alt Super Shift m" { SwitchToMode "normal"; }
+    }
+    scroll {
+        bind "e" { EditScrollback; SwitchToMode "normal"; }
+        bind "s" { SwitchToMode "entersearch"; SearchInput 0; }
+    }
+    search {
+        bind "c" { SearchToggleOption "CaseSensitivity"; }
+        bind "n" { Search "down"; }
+        bind "o" { SearchToggleOption "WholeWord"; }
+        bind "p" { Search "up"; }
+        bind "w" { SearchToggleOption "Wrap"; }
     }
     shared_except "normal" "locked" "entersearch" {
         bind "enter" { SwitchToMode "normal"; }
