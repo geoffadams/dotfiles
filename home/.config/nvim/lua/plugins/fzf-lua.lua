@@ -21,9 +21,9 @@ return {
     ---@diagnostic enable: missing-fields
     keys = {
         { "<C-p>", [[<Cmd>lua require"fzf-lua".global()<CR>]], desc = "Global picker" },
-        { "<Leader>fg", [[<Cmd>lua require"fzf-lua".files()<CR>]], desc = "Files" },
+        { "<Leader>ff", [[<Cmd>lua require"fzf-lua".files()<CR>]], desc = "Files" },
         { "<Leader>fb", [[<Cmd>lua require"fzf-lua".buffers()<CR>]], desc = "Buffers" },
-        { "<Leader>ff", [[<Cmd>lua require"fzf-lua".live_grep_glob()<CR>]], desc = "Grep" },
+        { "<Leader>fg", [[<Cmd>lua require"fzf-lua".live_grep_glob()<CR>]], desc = "Grep" },
         { "<Leader>fq", [[<Cmd>lua require"fzf-lua".quickfix()<CR>]], desc = "Quickfix" },
         { "<Leader>fa", [[<Cmd>lua require"fzf-lua".lsp_code_actions()<CR>]], desc = "Code actions" },
         {
