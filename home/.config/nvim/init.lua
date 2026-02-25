@@ -25,9 +25,11 @@ require("workspace")
 
 -- tooling
 require("git")
-require("lsp")
+require("installers")
+require("language-servers")
+require("formatters")
 require("completions")
-require("debugger")
+require("debuggers")
 
 -- additional contexts
 require("filetypes")

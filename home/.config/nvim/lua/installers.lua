@@ -1,0 +1,21 @@
+require("mason").setup()
+require("mason-tool-installer").setup({
+    ensure_installed = {
+        "emmylua_ls",
+        "stylua",
+        "selene",
+        "basedpyright",
+        "ruff",
+        "isort",
+        "bash-language-server",
+        "beautysh",
+        "vtsls",
+        "eslint-lsp",
+        "prettierd",
+        "json-lsp",
+        "clojure-lsp",
+        "cljfmt",
+        "marksman",
+        "markdown-oxide",
+    },
+})
