@@ -41,6 +41,9 @@ fpath+=(${HOME}/.docker/completions)
 autoload -Uz compinit
 compinit
 
+# zoxide
+eval "$(zoxide init zsh)"
+
 # uv completions
 eval_if_cmd uv "uv generate-shell-completion zsh"
 eval_if_cmd uvx "uvx --generate-shell-completion zsh"
