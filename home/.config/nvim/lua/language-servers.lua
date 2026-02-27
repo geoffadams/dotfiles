@@ -70,13 +70,15 @@ local function enable_lsp_functionality(event)
         vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = desc })
     end
 
-    map("<Leader>cn", vim.lsp.buf.rename, "Rename")
-    map("<Leader>ca", vim.lsp.buf.code_action, "Code action", { "n", "x" })
-    map("<Leader>cd", vim.lsp.buf.definition, "Go to definition")
-    map("<Leader>cD", vim.lsp.buf.declaration, "Go to declaration")
-    map("<Leader>ci", vim.lsp.buf.implementation, "Go to implementation")
-    map("<Leader>cr", vim.lsp.buf.references, "Show references")
-    map("<Leader>ct", vim.lsp.buf.type_definition, "Type definition")
+    -- all defaults...
+    map("grn", vim.lsp.buf.rename, "Rename")
+    map("gra", vim.lsp.buf.code_action, "Code action", { "n", "x" })
+    map("grd", vim.lsp.buf.definition, "Go to definition")
+    map("grD", vim.lsp.buf.declaration, "Go to declaration")
+    map("gri", vim.lsp.buf.implementation, "Go to implementation")
+    map("grr", vim.lsp.buf.references, "Show references")
+    map("grt", vim.lsp.buf.type_definition, "Type definition")
+    map("gO", vim.lsp.buf.document_symbol, "Document symbols")
 
     local client = vim.lsp.get_client_by_id(event.data.client_id)
     if client and client:supports_method("textDocument/documentHighlight", event.buf) then
