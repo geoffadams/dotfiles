@@ -10,4 +10,5 @@ treesitter.install({
     "typescript",
     "clojure",
     "markdown",
+    "kdl",
 })
