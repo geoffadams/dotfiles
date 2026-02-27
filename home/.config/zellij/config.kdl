@@ -15,14 +15,15 @@ keybinds clear-defaults=true {
         bind "Ctrl Alt Shift -" { Resize "Decrease"; }
         bind "Ctrl Alt Shift =" { Resize "Increase"; }
 
+        bind "Ctrl Alt Super Shift `" { ToggleFloatingPanes; }
+        bind "Ctrl Alt Super Shift z" { ToggleFocusFullscreen; }
+
         bind "Ctrl Alt Shift [" { PreviousSwapLayout; }
         bind "Ctrl Alt Shift ]" { NextSwapLayout; }
 
         bind "Ctrl Alt Shift t" { NewTab; }
         bind "Ctrl Alt Shift p" { NewPane; }
         bind "Ctrl Alt Shift x" { CloseFocus; }
-
-        bind "Ctrl Alt Shift f" { ToggleFloatingPanes; }
 
         bind "Ctrl Alt Shift /" {
             LaunchOrFocusPlugin "zellij-forgot" {
