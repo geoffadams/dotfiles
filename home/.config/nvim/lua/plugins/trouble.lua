@@ -37,13 +37,13 @@ return {
         },
         {
             "<Leader>ts",
-            "<Cmd>Trouble symbols toggle focus=false<cr>",
-            desc = "Document symbols sidebar",
+            "<Cmd>Trouble lsp_document_symbols toggle focus=false win.position=bottom<cr>",
+            desc = "Document symbols",
         },
         {
             "<Leader>tc",
             "<Cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-            desc = "LSP sidebar",
+            desc = "Refs, defs, decls, impls, types",
         },
         {
             "<Leader>tl",
