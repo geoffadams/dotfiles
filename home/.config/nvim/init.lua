@@ -9,16 +9,7 @@ vim.opt.exrc = true
 -- lazy.nvim
 require("config.lazy")
 
--- mini.nvim
-require("mini.icons").setup()
-require("mini.tabline").setup()
-require("mini.statusline").setup()
-require("mini.cmdline").setup()
-require("mini.bufremove").setup()
-require("mini.surround").setup()
-
 -- general behaviour
-require("keymap")
 require("interface")
 require("editor")
 require("workspace")
@@ -32,5 +23,6 @@ require("formatters")
 require("completions")
 require("debuggers")
 
--- additional contexts
+-- behaviour
+require("keymap")
 require("filetypes")
