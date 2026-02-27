@@ -1,6 +1,7 @@
-typeset -U path
-
 PERSONAL_ZSH=$HOME/.zsh
+
+typeset -U path
+path=(${HOME}/.local/bin $path)
 
 HISTSIZE=100000
 SAVEHIST=100000
