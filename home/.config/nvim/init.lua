@@ -1,10 +1,6 @@
 vim.cmd("scriptencoding utf-8")
 
--- leader (early)
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-
-vim.opt.exrc = true
+require("global")
 
 -- lazy.nvim
 require("config.lazy")
@@ -12,7 +8,6 @@ require("config.lazy")
 -- general behaviour
 require("interface")
 require("editor")
-require("workspace")
 
 -- tooling
 require("git")

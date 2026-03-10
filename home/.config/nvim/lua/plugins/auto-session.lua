@@ -7,6 +7,7 @@ return {
     ---@module "auto-session"
     ---@type AutoSession.Config
     opts = {
+        log_level = "warn",
         legacy_cmds = false,
         session_lens = {
             picker = "fzf",
