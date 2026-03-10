@@ -3,12 +3,12 @@ PERSONAL_ZSH=$HOME/.zsh
 typeset -U path
 path=(${HOME}/.local/bin $path)
 
-HISTSIZE=100000
-SAVEHIST=100000
+export HISTSIZE=100000
+export SAVEHIST=100000
 
-PAGER=bat
-MANPAGER="nvim +Man!"
-EDITOR=nvim
+export PAGER=bat
+export MANPAGER="nvim +Man!"
+export EDITOR=nvim
 
 # OS detection
 os_name=$(uname)
