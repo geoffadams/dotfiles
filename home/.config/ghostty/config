@@ -7,7 +7,15 @@ window-colorspace = display-p3
 macos-titlebar-style = tabs
 
 shell-integration-features = cursor,sudo,title,ssh-terminfo,ssh-env
-bell-features = no-attention,system
+
+window-inherit-working-directory = false
+tab-inherit-working-directory = true
+split-inherit-working-directory = true
+
+bell-features = no-attention,no-system,title,border
+notify-on-command-finish = unfocused
+notify-on-command-finish-action = bell,notify
+notify-on-command-finish-after = 30s
 
 macos-option-as-alt = right
 keybind = super+h=goto_split:left
