@@ -6,27 +6,16 @@ path=(${HOME}/.local/bin $path)
 export HISTSIZE=100000
 export SAVEHIST=100000
 
-export PAGER=bat
-export MANPAGER="nvim +Man!"
-export EDITOR=nvim
-
 # OS detection
-os_name=$(uname)
-export IS_LINUX=0
-[[ "$os_name" == 'Linux' ]] && export IS_LINUX=1
-export IS_MAC=0
-[[ "$os_name" == 'Darwin' ]] && export IS_MAC=1
-unset os_name
-is_mac() { [[ $IS_MAC -eq 1 ]]; }
+is_linux() { [[ $(uname) == "Linux" ]] }
+is_mac() { [[ $(uname) == "Darwin" ]] }
 
 # Homebrew setup
-export IS_HOMEBREW=0
-has_brew() { [[ $IS_HOMEBREW -eq 1 ]]; }
+has_brew() { [[ $(command -v "/opt/homebrew/bin/brew") ]] }
 
 export ZSH_SHARE_PREFIX=/usr/share
-if [ -f "/opt/homebrew/bin/brew" ]; then
-    export IS_HOMEBREW=1
-    export BREW_PREFIX="/opt/homebrew"
+if [[ has_brew ]]; then
+    export BREW_PREFIX=$(/opt/homebrew/bin/brew --prefix)
 
     path=(${BREW_PREFIX}/bin $path)
     path=(${BREW_PREFIX}/sbin $path)

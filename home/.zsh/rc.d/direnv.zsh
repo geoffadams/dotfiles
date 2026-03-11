@@ -1,1 +1,1 @@
-command -v direnv &>/dev/null && eval "$(direnv hook zsh)"
+[[ $(command -v direnv) ]] && eval "$(direnv hook zsh)"

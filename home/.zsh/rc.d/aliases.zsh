@@ -1,42 +1,34 @@
 # basics
-alias ls="ls -Fh --color -N --group-directories-first"
+alias ls="ls -1 -Fh --color"
+[[ $(command -v gls) ]] && alias ls="gls -1 -Fh --color -N --group-directories-first"
 alias ll="ls -Al --time-style=long-iso"
-alias mkdir='mkdir -pv'
+alias mkdir="mkdir -pv"
 
 # shell history
-alias sync-history="fc -AI && fc -R"
-alias reload-history="fc -R"
+alias zhist-sync="fc -AI && fc -R"
+alias zhist-reload="fc -R"
 
-# colorise the world
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
+# text tools
+[[ $(command -v gsed) ]] && alias sed="gsed"
+alias grep="grep --color=auto"
+[[ $(command -v ggrep) ]] && alias grep="ggrep --color=auto"
 
 # utilities
 alias now='date +"%T"'
-alias nowtime=now
-alias nowdate='date +"%d-%m-%Y"'
-alias sha1='openssl sha1'
-alias diru='du -h -d 1 | sort -h'
+alias today='date +"%d-%m-%Y"'
+alias sha1="openssl sha1"
+alias du-dir="du -h -d 1 | sort -h"
 
-whatsonport() {
-    lsof -i tcp:$*
-}
+whatsonport() { lsof -i tcp:$* }
 
 # mac utilities
-if [ is_mac ]; then
+if [[ is_mac ]]; then
     alias t="trash"
-    pbfile() {
-        cat $1 | pbcopy
-    }
-
-    # GNU versions, not BSD versions
-    alias sed="gsed"
-    unalias ls && alias ls="gls -Fh --color -N --group-directories-first"
+    pbfile() { cat $1 | pbcopy; }
 fi
 
 # use neovim instead of built-in vim
-command -v nvim &>/dev/null && alias vim="nvim"
+[[ $(command -v nvim) ]] && alias vim="nvim"
 
 # Docker
 alias docker-image-prune='docker rmi $(docker images -f "dangling=true" -q)'
