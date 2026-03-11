@@ -12,8 +12,8 @@ layout {
 
     tab {
         pane split_direction="vertical" {
-            pane size="70%"
-            pane size="30%"
+            pane size="60%"
+            pane size="40%"
         }
     }
 }

@@ -4,8 +4,8 @@ swap_tiled_layout name="vertical" {
     }
     tab max_panes=4 {
         pane split_direction="vertical" {
-            pane size="70%"
-            pane size="30%" {
+            pane size="60%"
+            pane size="40%" {
                 children
             }
         }
@@ -13,10 +13,10 @@ swap_tiled_layout name="vertical" {
     tab max_panes=6 {
         pane split_direction="horizontal" {
             pane size="80%" split_direction="vertical" {
-                pane size="70%" {
+                pane size="60%" {
                     children
                 }
-                pane size="30%" {
+                pane size="40%" {
                     pane
                     pane
                 }
@@ -49,18 +49,18 @@ swap_tiled_layout name="horizontal" {
     }
     tab max_panes=5 {
         pane split_direction="horizontal" {
-            pane size="70%"
-            pane size="30%" split_direction="vertical" {
+            pane size="60%"
+            pane size="40%" split_direction="vertical" {
                 children
             }
         }
     }
     tab max_panes=7 {
         pane split_direction="horizontal" {
-            pane size="70%" split_direction="vertical" {
+            pane size="60%" split_direction="vertical" {
                 children
             }
-            pane size="30%" split_direction="vertical" {
+            pane size="40%" split_direction="vertical" {
                 pane
                 pane
                 pane
@@ -71,8 +71,8 @@ swap_tiled_layout name="horizontal" {
 swap_tiled_layout name="stacked" {
     tab min_panes=4 {
         pane split_direction="vertical" {
-            pane size="70%"
-            pane stacked=true size="30%" {
+            pane size="60%"
+            pane stacked=true size="40%" {
                 children
             }
         }
