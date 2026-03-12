@@ -3,9 +3,6 @@ PERSONAL_ZSH=$HOME/.zsh
 typeset -U path
 path=(${HOME}/.local/bin $path)
 
-export HISTSIZE=100000
-export SAVEHIST=100000
-
 # OS detection
 is_linux() { [[ $(uname) == "Linux" ]] }
 is_mac() { [[ $(uname) == "Darwin" ]] }
