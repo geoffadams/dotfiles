@@ -5,6 +5,7 @@
     autocrlf = input
     editor = nvim
     pager = delta
+    fsmonitor = true
 [include]
     path = ~/.config/git/config-local
 [interactive]
