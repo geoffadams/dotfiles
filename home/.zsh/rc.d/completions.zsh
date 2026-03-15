@@ -1,6 +1,8 @@
 # set function paths
-fpath+=(${ZSH_SHARE_PREFIX}/zsh-completions)
-fpath+=(${ZSH_SHARE_PREFIX}/zsh/site-functions)
+if [[ has_brew ]]; then
+    fpath+=(${BREW_ZSH_SHARE_PREFIX}/zsh-completions)
+    fpath+=(${BREW_ZSH_SHARE_PREFIX}/zsh/site-functions)
+fi
 
 # completion menu behaviour
 unsetopt menu_complete
