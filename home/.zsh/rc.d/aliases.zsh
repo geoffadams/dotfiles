@@ -22,7 +22,7 @@ alias du-dir="du -h -d 1 | sort -h"
 whatsonport() { lsof -i tcp:$* }
 
 # mac utilities
-if [[ is_mac ]]; then
+if is_mac; then
     alias t="trash"
     pbfile() { cat $1 | pbcopy; }
 fi

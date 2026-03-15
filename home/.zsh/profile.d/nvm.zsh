@@ -1,5 +1,5 @@
 export NVM_SCRIPT_DIR="$HOME/.nvm"
-if [ has_brew ]; then
+if has_brew; then
     export NVM_SCRIPT_DIR=$(brew --prefix nvm)
 fi
 

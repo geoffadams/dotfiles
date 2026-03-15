@@ -1,5 +1,5 @@
 # set function paths
-if [[ has_brew ]]; then
+if has_brew; then
     fpath+=(${BREW_ZSH_SHARE_PREFIX}/zsh-completions)
     fpath+=(${BREW_ZSH_SHARE_PREFIX}/zsh/site-functions)
 fi

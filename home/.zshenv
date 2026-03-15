@@ -10,7 +10,7 @@ is_mac() { [[ $(uname) == "Darwin" ]] }
 # Homebrew setup
 has_brew() { [[ $(command -v "/opt/homebrew/bin/brew") ]] }
 
-if [[ has_brew ]]; then
+if has_brew; then
     export BREW_PREFIX=$(/opt/homebrew/bin/brew --prefix)
 
     path=(${BREW_PREFIX}/bin $path)
