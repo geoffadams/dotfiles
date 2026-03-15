@@ -1,2 +1,4 @@
 # zoxide
-eval "$(zoxide init zsh)"
+if has_brew; then
+    eval "$(zoxide init zsh)"
+fi
