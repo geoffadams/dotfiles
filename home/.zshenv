@@ -8,7 +8,7 @@ is_linux() { [[ $(uname) == "Linux" ]] }
 is_mac() { [[ $(uname) == "Darwin" ]] }
 
 # Homebrew setup
-has_brew() { [[ $(command -v "/opt/homebrew/bin/brew") ]] }
+has_brew() { [[ $(command -v "/opt/homebrew/bin/brew" 2>&1 /dev/null) ]] }
 
 if has_brew; then
     export BREW_PREFIX=$(/opt/homebrew/bin/brew --prefix)
