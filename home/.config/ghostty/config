@@ -22,6 +22,4 @@ keybind = super+h=goto_split:left
 keybind = super+j=goto_split:down
 keybind = super+k=goto_split:up
 keybind = super+l=goto_split:right
-keybind = alt+left=unbind
-keybind = alt+right=unbind
 
