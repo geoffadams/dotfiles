@@ -16,8 +16,16 @@ vim.opt.smartcase = true -- uppercase triggers case sensitivity
 
 -- wrapping
 vim.opt.wrap = false
-vim.opt.tw = 119
+vim.opt.textwidth = 0
+vim.opt.wrapmargin = 10
+vim.opt.breakindent = true
 vim.opt.formatoptions:append({ t = true })
+require("wrapping").setup({
+    create_keymaps = false,
+})
+vim.keymap.set("n", "<Leader>tws", "<Plug>(wrapping-soft-wrap-mode)")
+vim.keymap.set("n", "<Leader>twh", "<Plug>(wrapping-hard-wrap-mode)")
+vim.keymap.set("n", "<Leader>tww", "<Plug>(wrapping-toggle-wrap-mode)")
 
 -- tabs
 local indent = 4
@@ -32,7 +40,6 @@ vim.opt.showtabline = 2
 -- whitespace
 vim.opt.list = true
 vim.opt.listchars = { tab = "· ", trail = "·" }
-vim.opt.breakindent = true
 
 -- crash recovery
 vim.opt.updatetime = 250
