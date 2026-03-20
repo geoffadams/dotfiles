@@ -20,7 +20,7 @@ fi
 
 function source_nvm() {
     export NVM_DIR="${HOME}/.nvm"
-    if [[ -o login ]]; then
+    if [[ -o interactive ]]; then
         source "${NVM_SCRIPT_DIR}/nvm.sh"
     else
         source "${NVM_SCRIPT_DIR}/nvm.sh" --no-use
