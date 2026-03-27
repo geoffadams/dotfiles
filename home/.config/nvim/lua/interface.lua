@@ -59,3 +59,88 @@ local titlestring = {
     "%{v:lua.PrettyPath.pretty_path()}",
 }
 vim.opt.titlestring = table.concat(titlestring, " ")
+
+-- pickers
+require("fzf-lua").register_ui_select(function(ui_opts, items)
+    function clamp(val, min, max)
+        if val < min then
+            return min
+        elseif val > max then
+            return max
+        else
+            return val
+        end
+    end
+    function to_percentage(val, total)
+        return (val / total) * 100
+    end
+    function to_ratio_h(lines, total)
+        if total == nil then
+            total = vim.o.lines
+        end
+        return lines / total
+    end
+    function to_ratio_w(columns, total)
+        if total == nil then
+            total = vim.o.columns
+        end
+        return columns / total
+    end
+    function to_lines(ratio, total)
+        if total == nil then
+            total = vim.o.lines
+        end
+        return math.ceil(ratio * total)
+    end
+    function to_columns(ratio, total)
+        if total == nil then
+            total = vim.o.columns
+        end
+        return math.ceil(ratio * total)
+    end
+
+    local min_h, max_h = 0.15, 0.70
+    local listui_h_pad = 2
+    local preview_h_pad = 0
+
+    local min_w, max_w = 0.20, 0.70
+    local listui_w_pad = 9
+    local preview_w_pad = 0
+
+    if ui_opts.kind == "codeaction" then
+        preview_h_pad = 20
+        preview_w_pad = 10
+        min_w = 0.5
+    end
+
+    local min_h_lines = to_lines(min_h)
+    local max_h_lines = to_lines(max_h)
+    local h_lines = clamp(#items + listui_h_pad + preview_h_pad, min_h_lines, max_h_lines)
+
+    local longest_w = 0
+    for _, e in ipairs(items) do
+        local format_entry = ui_opts.format_item and ui_opts.format_item(e) or tostring(e)
+        longest_w = math.max(tostring(format_entry):len(), longest_w)
+    end
+
+    local min_w_cols = to_columns(min_w)
+    local max_w_cols = to_columns(max_w)
+    local w_cols = clamp(longest_w + listui_w_pad + preview_w_pad, min_w_cols, max_w_cols)
+
+    return {
+        winopts = {
+            height = to_ratio_h(h_lines),
+            width = to_ratio_w(w_cols),
+            row = 0.5,
+            col = 0.5,
+            preview = {
+                vertical = "down:" .. to_percentage(preview_h_pad, h_lines) .. "%",
+                layout = "vertical",
+            },
+        },
+        fzf_opts = {
+            ["--layout"] = "reverse-list",
+            ["--info"] = "hidden",
+        },
+    }
+end)

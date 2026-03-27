@@ -17,6 +17,24 @@ return {
             RIPGREP_CONFIG_PATH = vim.env.RIPGREP_CONFIG_PATH,
             resume = true,
         },
+        lsp = {
+            finder = {
+                winopts = {
+                    height = 0.5,
+                    width = 0.5,
+                    row = 0.5,
+                    col = 0.5,
+                    preview = {
+                        vertical = "down:60%",
+                        layout = "vertical",
+                    },
+                },
+            },
+            code_actions = {
+                previewer = "codeaction_native",
+                preview_pager = [[delta --width=$COLUMNS --hunk-header-style="omit" --file-style="omit"]],
+            },
+        },
     },
     ---@diagnostic enable: missing-fields
     keys = {
