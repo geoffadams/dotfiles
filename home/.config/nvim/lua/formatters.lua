@@ -56,7 +56,7 @@ conform.setup({
             lsp_format = "fallback",
             bufnr = bufnr,
             filter = function(client)
-                return client.name ~= "vtsls" or client.name ~= "jsonls"
+                return client.name ~= "vtsls" and client.name ~= "jsonls"
             end,
         }
     end,

@@ -46,7 +46,7 @@ vim.lsp.config("vtsls", {
 vim.lsp.enable("vtsls")
 vim.lsp.config("eslint", {
     settings = {
-        workingDirectory = { mode = "location" },
+        -- workingDirectory = { mode = "location" },
     },
 })
 vim.lsp.enable("eslint")
