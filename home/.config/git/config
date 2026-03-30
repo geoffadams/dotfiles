@@ -6,48 +6,84 @@
     editor = nvim
     pager = delta
     fsmonitor = true
+    untrackedCache = true
+    preloadIndex = true
+    commitGraph = true
 [include]
     path = ~/.config/git/config-local
 [interactive]
     diffFilter = delta --color-only
 [colors]
     ui = auto
-[diff]
-    colorMoved = default
 [delta]
-    map-styles = bold purple => syntax magenta, bold cyan => syntax blue
+    map-styles = bold purple => syntax purple, bold cyan => syntax green
     dark = true
     navigate = true
     line-numbers = true
     hyperlinks = true
+    file-decoration-style = bold yellow
+    hunk-header-decoration-style = bold yellow
+    relative-paths = true
 [init]
     defaultBranch = main
-[branch]
-    autosetuprebase = always
-[tag]
-    sort = version:refname
-[push]
-    default = current
-[pull]
-	rebase = true
+[status]
+    showStash = true
+[diff]
+    algorithm = histogram
+    colorMoved = default
+    renames = copies
 [commit]
-    gpgsign = true
-[merge]
-    conflictStyle = zdiff3
+    gpgSign = true
 [apply]
     whitespace = fix
+[branch]
+    autoSetupRebase = always
+[tag]
+    sort = version:refname
+[fetch]
+    prune = true
+    pruneTags = true
+    writeCommitGraph = true
+[pull]
+    rebase = true
+[rebase]
+    autoStash = true
+    missingCommitsCheck = warn
+    stat = true
+[merge]
+    autoStash = true
+    ff = only
+    conflictStyle = zdiff3
+    stat = true
+[push]
+    default = current
+    autoSetupRemote = true
+    followTags = true
+[gc]
+    writeCommitGraph = true
 [alias]
     st = status -sb
 
-    graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    precommit = diff --cached
+    pending = diff --
 
-    changes = diff --name-status
+    unstage = reset -q HEAD --
+
+    amend = commit --amend
+    undo-commit = reset --mixed HEAD~
+    drop-commit = !git reset --hard HEAD && git clean -d -f
+
+    tags = tag
+    stashes = stash list
+
+    branches = branch -a
     unmerged-branches = branch --no-merged main
     unpushed-branches = branch --no-merged origin/main
 
-    who-committed = shortlog -s --
-    who-is = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
-    what-is = show -s --pretty='tformat:%h (%s, %ad)' --date=short
+    create-branch-tracking-main = "!sh -c 'git checkout -b $1 && git branch --set-upstream-to=origin/main $1' -"
+    checkout-existing-branch = "!sh -c 'git checkout $1 && git branch --set-upstream-to=origin/main $1' -"
+    delete-branch = "!sh -c 'git branch -d $1 && git remote prune origin' -"
+    track-branch = "!sh -c 'git branch --set-upstream-to=origin/$1' -"
 
     create-branch-tracking-main = "!sh -c 'git checkout -b $1 && git branch --set-upstream-to=origin/main $1' -"
     checkout-existing-branch = "!sh -c 'git checkout $1 && git branch --set-upstream-to=origin/main $1' -"
@@ -55,18 +91,10 @@
     track-branch = "!sh -c 'git branch --set-upstream-to=origin/$1' -"
 
     search-log = log -S
+    graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 
-    branches = branch -a
-    tags = tag
-    stashes = stash list
-
-    unstage = reset -q HEAD --
-    discard = checkout --
-    uncommit = reset --mixed HEAD~
-    amend = commit --amend
-
-    scrap-it = !git reset --hard HEAD && git clean -d -f
-
-    precommit = diff --cached --diff-algorithm=minimal -w
+    who-committed = shortlog -s --
+    who-is = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
+    what-is = show -s --pretty='tformat:%h (%s, %ad)' --date=short
 
     tidy-branches = remote prune origin
