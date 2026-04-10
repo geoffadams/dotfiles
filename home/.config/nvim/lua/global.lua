@@ -3,7 +3,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 -- allow workspace-specific overrides
-vim.opt.exrc = true
+vim.o.exrc = true
 
 -- session data to save
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
