@@ -56,8 +56,4 @@ require("mini.pairs").setup()
 vim.o.foldcolumn = "auto:9"
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
-require("origami").setup({
-    autoFold = {
-        enabled = false,
-    },
-})
+require("origami").setup()
