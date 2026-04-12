@@ -12,13 +12,6 @@ vim.filetype.add({
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "kdl" },
-    callback = function()
-        vim.treesitter.start()
-    end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
     pattern = { "help" },
     callback = function(opts)
         vim.keymap.set("n", "gd", "<C-]>", { silent = true, buffer = opts.buf })
