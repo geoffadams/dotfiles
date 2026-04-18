@@ -13,8 +13,8 @@ vim.keymap.set("n", "<C-S-k>", "<Cmd>wincmd K<CR>", { desc = "Move window up" })
 vim.keymap.set("n", "<C-S-l>", "<Cmd>wincmd L<CR>", { desc = "Move window right" })
 
 -- buffers
-vim.keymap.set("n", "<Leader>j", "<Cmd>bprev<CR>", { desc = "Previous buffer" })
-vim.keymap.set("n", "<Leader>k", "<Cmd>bnext<CR>", { desc = "Next buffer" })
+vim.keymap.set("n", "<Leader>[", "<Cmd>bprev<CR>", { desc = "Previous buffer" })
+vim.keymap.set("n", "<Leader>]", "<Cmd>bnext<CR>", { desc = "Next buffer" })
 vim.keymap.set("n", "<Leader>bd", "<Cmd>lua MiniBufremove.delete()<CR>", { desc = "Drop buffer" })
 vim.keymap.set(
     "n",
