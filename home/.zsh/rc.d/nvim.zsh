@@ -1,6 +1,10 @@
-[[ $(command -v bat) ]] && PAGER=bat
 if [[ $(command -v nvim) ]]; then
+    alias vim="nvim"
+
     MANPAGER="nvim +Man!"
     EDITOR=nvim
+
+    # revert to emacs bindings in zle
+    bindkey -e
 fi
-bindkey -e
+

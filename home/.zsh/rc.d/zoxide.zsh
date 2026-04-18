@@ -1,4 +1,3 @@
-# zoxide
-if has_brew; then
+if [[ $(command -v zoxide) ]]; then
     eval "$(zoxide init zsh)"
 fi
