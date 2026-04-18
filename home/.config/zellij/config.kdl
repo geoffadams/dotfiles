@@ -1,68 +1,71 @@
 keybinds clear-defaults=true {
-    locked {
-        bind "Ctrl Alt Super Shift 0" { SwitchToMode "normal"; }
-    }
     shared_except "locked" {
-        bind "Ctrl Alt Shift h" { MoveFocus "left"; }
-        bind "Ctrl Alt Shift j" { MoveFocus "down"; }
-        bind "Ctrl Alt Shift k" { MoveFocus "up"; }
-        bind "Ctrl Alt Shift l" { MoveFocus "right"; }
+        bind "Super Ctrl Alt Shift 0" { ToggleFocusFullscreen; }
+        bind "Super Ctrl Alt Shift -" { Resize "Decrease"; }
+        bind "Super Ctrl Alt Shift =" { Resize "Increase"; }
 
-        bind "Ctrl Alt Shift i" { GoToPreviousTab; }
-        bind "Ctrl Alt Shift o" { GoToNextTab; }
+        bind "Super Ctrl Alt Shift i" { ToggleFloatingPanes; }
+        bind "Super Ctrl Alt Shift o" { TogglePaneEmbedOrFloating; }
+        bind "Super Ctrl Alt Shift p" { TogglePanePinned; }
 
-        bind "Ctrl Alt Shift +" { Resize "Increase"; }
-        bind "Ctrl Alt Shift -" { Resize "Decrease"; }
-        bind "Ctrl Alt Shift =" { Resize "Increase"; }
+        bind "Super Ctrl Alt Shift [" { GoToPreviousTab; }
+        bind "Super Ctrl Alt Shift ]" { GoToNextTab; }
+        bind "Super Ctrl Alt Shift \\" { NextSwapLayout; }
 
-        bind "Ctrl Alt Super Shift `" { ToggleFloatingPanes; }
-        bind "Ctrl Alt Super Shift z" { ToggleFocusFullscreen; }
+        bind "Super Ctrl Alt Shift h" { MoveFocus "left"; }
+        bind "Super Ctrl Alt Shift j" { MoveFocus "down"; }
+        bind "Super Ctrl Alt Shift k" { MoveFocus "up"; }
+        bind "Super Ctrl Alt Shift l" { MoveFocus "right"; }
 
-        bind "Ctrl Alt Shift [" { PreviousSwapLayout; }
-        bind "Ctrl Alt Shift ]" { NextSwapLayout; }
+        bind "Super Ctrl Alt Shift ;" { MoveTab "left"; }
+        bind "Super Ctrl Alt Shift '" { MoveTab "right"; }
 
-        bind "Ctrl Alt Shift t" { NewTab; }
-        bind "Ctrl Alt Shift p" { NewPane; }
-        bind "Ctrl Alt Shift x" { CloseFocus; }
+        bind "Super Ctrl Alt Shift x" { CloseFocus; }
+        bind "Super Ctrl Alt Shift c" { NewPane; }
+        bind "Super Ctrl Alt Shift v" { NewTab; }
 
-        bind "Ctrl Alt Shift /" {
+        bind "Super Ctrl Alt Shift ," { MovePane; }
+        bind "Super Ctrl Alt Shift ." { MovePaneBackwards; }
+        bind "Super Ctrl Alt Shift /" {
             LaunchOrFocusPlugin "zellij-forgot" {
                 floating true
             }
         }
 
-        bind "Ctrl Alt Shift s" {
-            LaunchOrFocusPlugin "zsm" {
-                floating true
-                move_to_focused_tab true
-            }
-        }
+        bind "Super Ctrl Alt Shift d" { Detach; }
+        bind "Super Ctrl Alt Shift §" { Quit; }
 
-        bind "Ctrl Alt Super Shift 0" { SwitchToMode "locked"; }
-        bind "Ctrl Alt Super Shift d" { Detach; }
-        bind "Ctrl Alt Super Shift x" { Quit; }
+        bind "Super Ctrl Alt Shift z" { SwitchToMode "locked"; }
     }
-    shared_except "locked" "move" {
-        bind "Ctrl Alt Super Shift m" { SwitchToMode "move"; }
+    locked {
+        bind "Super Ctrl Alt Shift z" { SwitchToMode "normal"; }
     }
-    shared_except "locked" "resize" {
-        bind "Ctrl Alt Super Shift r" { SwitchToMode "resize"; }
-    }
+
     shared_except "locked" "search" {
-        bind "Ctrl Alt Super Shift f" { SwitchToMode "entersearch"; SearchInput 0; }
+        bind "Super Ctrl Alt Shift f" { SwitchToMode "entersearch"; SearchInput 0; }
     }
     shared_except "locked" "scroll" {
-        bind "Ctrl Alt Super Shift g" { SwitchToMode "scroll"; }
+        bind "Super Ctrl Alt Shift g" { SwitchToMode "scroll"; }
     }
+
+    shared_except "locked" "move" {
+        bind "Ctrl Alt Shift m" { SwitchToMode "move"; }
+    }
+    shared_except "locked" "resize" {
+        bind "Ctrl Alt Shift r" { SwitchToMode "resize"; }
+    }
+
     shared_except "locked" "pane" {
-        bind "Ctrl Alt Super Shift p" { SwitchToMode "pane"; }
+        bind "Ctrl Alt Shift p" { SwitchToMode "pane"; }
     }
     shared_except "locked" "tab" {
-        bind "Ctrl Alt Super Shift t" { SwitchToMode "tab"; }
+        bind "Ctrl Alt Shift t" { SwitchToMode "tab"; }
     }
+
     shared_except "locked" "session" {
-        bind "Ctrl Alt Super Shift s" { SwitchToMode "session"; }
+        bind "Ctrl Alt Shift s" { SwitchToMode "session"; }
     }
+
     pane {
         bind "h" { MoveFocus "left"; }
         bind "j" { MoveFocus "down"; }
@@ -70,8 +73,9 @@ keybinds clear-defaults=true {
         bind "l" { MoveFocus "right"; }
 
         bind "r" { SwitchToMode "renamepane"; PaneNameInput 0; }
-        bind "=" { ToggleFocusFullscreen; SwitchToMode "normal"; }
-        bind "-" { TogglePaneEmbedOrFloating; SwitchToMode "normal"; }
+
+        bind "o" { ToggleFocusFullscreen; SwitchToMode "normal"; }
+        bind "i" { TogglePaneEmbedOrFloating; SwitchToMode "normal"; }
         bind "p" { TogglePanePinned; SwitchToMode "normal"; }
 
         bind "w" { ToggleFloatingPanes; SwitchToMode "normal"; }
@@ -85,7 +89,7 @@ keybinds clear-defaults=true {
 
         bind "x" { CloseFocus; SwitchToMode "normal"; }
 
-        bind "Ctrl Alt Super Shift p" { SwitchToMode "normal"; }
+        bind "Ctrl Alt Shift p" { SwitchToMode "normal"; }
     }
     tab {
         bind "tab" { ToggleTab; }
@@ -115,7 +119,7 @@ keybinds clear-defaults=true {
 
         bind "x" { CloseTab; SwitchToMode "normal"; }
 
-        bind "Ctrl Alt Super Shift t" { SwitchToMode "normal"; }
+        bind "Ctrl Alt Shift t" { SwitchToMode "normal"; }
     }
     session {
         bind "a" {
@@ -153,6 +157,14 @@ keybinds clear-defaults=true {
             }
             SwitchToMode "normal"
         }
+        bind "e" {
+            LaunchOrFocusPlugin "zsm" {
+                floating true
+                move_to_focused_tab true
+            }
+            SwitchToMode "normal"
+        }
+
         bind "l" {
             LaunchOrFocusPlugin "zellij:layout-manager" {
                 floating true
@@ -161,7 +173,7 @@ keybinds clear-defaults=true {
             SwitchToMode "Normal"
         }
 
-        bind "Ctrl Alt Super Shift s" { SwitchToMode "normal"; }
+        bind "Ctrl Alt Shift s" { SwitchToMode "normal"; }
     }
     resize {
         bind "-" { Resize "Decrease"; }
@@ -178,7 +190,7 @@ keybinds clear-defaults=true {
         bind "K" { Resize "Decrease up"; }
         bind "L" { Resize "Decrease right"; }
 
-        bind "Ctrl Alt Super Shift r" { SwitchToMode "normal"; }
+        bind "Ctrl Alt Shift r" { SwitchToMode "normal"; }
     }
     move {
         bind "h" { MovePane "left"; }
@@ -189,7 +201,7 @@ keybinds clear-defaults=true {
         bind "tab" { MovePane; }
         bind "Shift tab" { MovePaneBackwards; }
 
-        bind "Ctrl Alt Super Shift m" { SwitchToMode "normal"; }
+        bind "Ctrl Alt Shift m" { SwitchToMode "normal"; }
     }
     scroll {
         bind "e" { EditScrollback; SwitchToMode "normal"; }
@@ -219,14 +231,11 @@ keybinds clear-defaults=true {
         bind "PageUp" { PageScrollUp; }
         bind "Home" { ScrollToTop; }
 
-        bind "Ctrl Alt Super Shift g" { ScrollToBottom; SwitchToMode "normal"; }
-        bind "Ctrl Alt Super Shift f" { SwitchToMode "normal"; }
+        bind "Super Ctrl Alt Shift g" { ScrollToBottom; SwitchToMode "normal"; }
+        bind "Super Ctrl Alt Shift f" { SwitchToMode "normal"; }
     }
     entersearch {
         bind "Enter" { SwitchToMode "search"; }
-    }
-    shared_among "renametab" "renamepane" {
-        bind "Esc" { SwitchToMode "normal"; }
     }
     renametab {
         bind "Esc" { UndoRenameTab; SwitchToMode "tab"; }
@@ -282,18 +291,19 @@ plugins {
         tab_normal_fullscreen "#[fg=white,bg=black] {name} {fullscreen_indicator}"
         tab_normal_sync "#[fg=white,bg=black] {name} {sync_indicator}"
 
-        tab_active   "#[fg=magenta,bg=black,bold] {name} "
+        tab_active   "#[fg=bright_magenta,bg=black,bold] {name} "
         tab_active_fullscreen "#[fg=magenta,bg=black,bold] {name} {fullscreen_indicator}"
         tab_active_sync "#[fg=magenta,bg=black,bold] {name} {sync_indicator}"
-        tab_rename   "#[fg=black,bg=blue,bold]  {name} "
+        tab_rename   "#[fg=bright_black,bg=blue,bold]  #[fg=black,bg=blue]{name}#[fg=black,bg=blue,bold] "
 
         tab_sync_indicator       " "
         tab_fullscreen_indicator " "
         tab_floating_indicator   " "
 
-        tab_display_count         "5"  // limit to showing 5 tabs
-        tab_truncate_start_format "#[fg=bright_black,bg=black,bold]  +{count}  "
-        tab_truncate_end_format   "#[fg=bright_black,bg=black,bold]  +{count}  "
+        tab_display_count         "5"
+        tab_truncate_start_format "#[fg=bright_black,bg=black,bold] {count} "
+        tab_truncate_end_format   "#[fg=bright_black,bg=black,bold] {count} "
+        tab_separator             "#[fg=bright_black,bg=black,bold]·"
 
         swap_layout_format          "#[fg=white,bg=black]  {name} "
         swap_layout_hide_if_empty   "true"
@@ -360,7 +370,7 @@ theme "rose-pine-moon"
 // The name of the default layout to load on startup
 // Default: "default"
 // 
-// default_layout "compact"
+default_layout "standard"
  
 // The folder in which Zellij will look for layouts
 // (Requires restart)
@@ -476,13 +486,13 @@ pane_frames false
 //   - true
 //   - false (default)
 // 
-// serialize_pane_viewport false
+serialize_pane_viewport true
  
 // Scrollback lines to serialize along with the pane viewport when serializing sessions, 0
 // defaults to the scrollback size. If this number is higher than the scrollback size, it will
 // also default to the scrollback size. This does nothing if `serialize_pane_viewport` is not true.
 // 
-// scrollback_lines_to_serialize 10000
+scrollback_lines_to_serialize 10000
  
 // Enable or disable the rendering of styled and colored underlines (undercurl).
 // May need to be disabled for certain unsupported terminals
@@ -507,6 +517,7 @@ pane_frames false
 // Default: true (if the host terminal supports it)
 // 
 // support_kitty_keyboard_protocol false
+
 // Whether to make sure a local web server is running when a new Zellij session starts.
 // This web server will allow creating new sessions and attaching to existing ones that have
 // opted in to being shared in the browser.
@@ -523,6 +534,7 @@ pane_frames false
 // Default: false
 // 
 // web_server false
+
 // Whether to allow sessions started in the terminal to be shared through a local web server, assuming one is
 // running (see the `web_server` option for more details).
 // (Requires restart)
@@ -537,14 +549,17 @@ pane_frames false
 // Default: "off"
 // 
 // web_sharing "off"
+
 // A path to a certificate file to be used when setting up the web client to serve the
 // connection over HTTPs
 // 
 // web_server_cert "/path/to/cert.pem"
+
 // A path to a key file to be used when setting up the web client to serve the
 // connection over HTTPs
 // 
 // web_server_key "/path/to/key.pem"
+
 /// Whether to enforce https connections to the web server when it is bound to localhost
 /// (127.0.0.0/8)
 ///
@@ -576,12 +591,12 @@ show_startup_tips false
 // Whether to enable mouse hover visual effects (frame highlight and help text)
 // Default: true
 //
-// mouse_hover_effects false
+mouse_hover_effects false
 
 // Whether to output OSC8 hyperlink sequences
 // Default: true
 //
-// osc8_hyperlinks false
+osc8_hyperlinks true
 
 // The ip address the web server should listen on when it starts
 // Default: "127.0.0.1"

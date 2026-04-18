@@ -2,44 +2,29 @@ swap_tiled_layout name="vertical" {
     tab max_panes=2 {
         pane
     }
-    tab max_panes=4 {
+    tab max_panes=5 {
         pane split_direction="vertical" {
             pane size="60%"
-            pane size="40%" {
-                children
+            pane size="40%" split_direction="horizontal" {
+                pane
+                pane
+                pane
             }
-        }
-    }
-    tab max_panes=6 {
-        pane split_direction="horizontal" {
-            pane size="80%" split_direction="vertical" {
-                pane size="60%" {
-                    children
-                }
-                pane size="40%" {
-                    pane
-                    pane
-                }
-            }
-            pane size="20%"
         }
     }
     tab max_panes=8 {
-        pane split_direction="horizontal" {
-            pane size="80%" split_direction="vertical" {
-                pane size="40%" {
-                    pane
-                    pane
-                }
-                pane size="30%" {
-                    pane
-                    pane
-                }
-                pane size="30%" {
-                    children
-                }
+        pane split_direction="vertical" {
+            pane size="40%"
+            pane size="30%" split_direction="horizontal" {
+                pane
+                pane
+                pane
             }
-            pane size="20%"
+            pane size="30%" split_direction="horizontal" {
+                pane
+                pane
+                pane
+            }
         }
     }
 }
@@ -49,16 +34,22 @@ swap_tiled_layout name="horizontal" {
     }
     tab max_panes=5 {
         pane split_direction="horizontal" {
-            pane size="60%"
+            pane size="60%" split_direction="vertical" {
+                pane
+                pane
+            }
             pane size="40%" split_direction="vertical" {
-                children
+                pane
+                pane
             }
         }
     }
     tab max_panes=7 {
         pane split_direction="horizontal" {
             pane size="60%" split_direction="vertical" {
-                children
+                pane
+                pane
+                pane
             }
             pane size="40%" split_direction="vertical" {
                 pane
