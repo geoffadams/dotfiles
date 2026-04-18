@@ -70,7 +70,6 @@ local function enable_lsp_functionality(event)
         vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = desc })
     end
 
-    -- all defaults...
     map("grn", vim.lsp.buf.rename, "Rename")
     map("gra", vim.lsp.buf.code_action, "Code action", { "n", "x" })
     map("grd", vim.lsp.buf.definition, "Go to definition")
@@ -78,6 +77,7 @@ local function enable_lsp_functionality(event)
     map("gri", vim.lsp.buf.implementation, "Go to implementation")
     map("grr", vim.lsp.buf.references, "Show references")
     map("grt", vim.lsp.buf.type_definition, "Type definition")
+    map("grx", vim.lsp.codelens.run, "Codelens")
     map("gO", vim.lsp.buf.document_symbol, "Document symbols")
 
     local client = vim.lsp.get_client_by_id(event.data.client_id)

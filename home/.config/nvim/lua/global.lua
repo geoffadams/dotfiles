@@ -1,3 +1,5 @@
+require("vim._core.ui2").enable({})
+
 -- leader (early)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
