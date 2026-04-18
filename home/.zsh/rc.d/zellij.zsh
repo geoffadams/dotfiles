@@ -10,7 +10,17 @@ if [[ $(command -v zellij) ]]; then
     alias zzl="zellij ls"
     alias zzd="zellij d"
 
-    alias zza="zellij a -c"
+    if [[ $(command -v fzf) ]]; then
+        zza() {
+            if [[ -z "$1" ]]; then
+                zellij a -c $(zellij ls -s | fzf)
+            else
+                zellij a -c "$1"
+            fi
+        }
+    else
+        alias zza="zellij a -c"
+    fi
 
     zzr() {
         zellij d $1
