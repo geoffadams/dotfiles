@@ -4,9 +4,9 @@ keybinds clear-defaults=true {
         bind "Super Ctrl Alt Shift -" { Resize "Decrease"; }
         bind "Super Ctrl Alt Shift =" { Resize "Increase"; }
 
+        bind "Super Ctrl Alt Shift u" { TogglePanePinned; }
         bind "Super Ctrl Alt Shift i" { ToggleFloatingPanes; }
         bind "Super Ctrl Alt Shift o" { TogglePaneEmbedOrFloating; }
-        bind "Super Ctrl Alt Shift p" { TogglePanePinned; }
 
         bind "Super Ctrl Alt Shift [" { GoToPreviousTab; }
         bind "Super Ctrl Alt Shift ]" { GoToNextTab; }
@@ -49,21 +49,21 @@ keybinds clear-defaults=true {
     }
 
     shared_except "locked" "move" {
-        bind "Ctrl Alt Shift m" { SwitchToMode "move"; }
+        bind "Super Ctrl Alt Shift m" { SwitchToMode "move"; }
     }
     shared_except "locked" "resize" {
-        bind "Ctrl Alt Shift r" { SwitchToMode "resize"; }
+        bind "Super Ctrl Alt Shift r" { SwitchToMode "resize"; }
     }
 
     shared_except "locked" "pane" {
-        bind "Ctrl Alt Shift p" { SwitchToMode "pane"; }
+        bind "Super Ctrl Alt Shift p" { SwitchToMode "pane"; }
     }
     shared_except "locked" "tab" {
-        bind "Ctrl Alt Shift t" { SwitchToMode "tab"; }
+        bind "Super Ctrl Alt Shift t" { SwitchToMode "tab"; }
     }
 
     shared_except "locked" "session" {
-        bind "Ctrl Alt Shift s" { SwitchToMode "session"; }
+        bind "Super Ctrl Alt Shift s" { SwitchToMode "session"; }
     }
 
     pane {
@@ -89,7 +89,7 @@ keybinds clear-defaults=true {
 
         bind "x" { CloseFocus; SwitchToMode "normal"; }
 
-        bind "Ctrl Alt Shift p" { SwitchToMode "normal"; }
+        bind "Super Ctrl Alt Shift p" { SwitchToMode "normal"; }
     }
     tab {
         bind "tab" { ToggleTab; }
@@ -119,7 +119,7 @@ keybinds clear-defaults=true {
 
         bind "x" { CloseTab; SwitchToMode "normal"; }
 
-        bind "Ctrl Alt Shift t" { SwitchToMode "normal"; }
+        bind "Super Ctrl Alt Shift t" { SwitchToMode "normal"; }
     }
     session {
         bind "a" {
@@ -173,7 +173,7 @@ keybinds clear-defaults=true {
             SwitchToMode "Normal"
         }
 
-        bind "Ctrl Alt Shift s" { SwitchToMode "normal"; }
+        bind "Super Ctrl Alt Shift s" { SwitchToMode "normal"; }
     }
     resize {
         bind "-" { Resize "Decrease"; }
@@ -190,7 +190,7 @@ keybinds clear-defaults=true {
         bind "K" { Resize "Decrease up"; }
         bind "L" { Resize "Decrease right"; }
 
-        bind "Ctrl Alt Shift r" { SwitchToMode "normal"; }
+        bind "Super Ctrl Alt Shift r" { SwitchToMode "normal"; }
     }
     move {
         bind "h" { MovePane "left"; }
@@ -201,7 +201,7 @@ keybinds clear-defaults=true {
         bind "tab" { MovePane; }
         bind "Shift tab" { MovePaneBackwards; }
 
-        bind "Ctrl Alt Shift m" { SwitchToMode "normal"; }
+        bind "Super Ctrl Alt Shift m" { SwitchToMode "normal"; }
     }
     scroll {
         bind "e" { EditScrollback; SwitchToMode "normal"; }
