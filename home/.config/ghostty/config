@@ -28,3 +28,4 @@ keybind = super+shift+e=clear_screen
 
 link-url = true
 link-previews = true
+clipboard-read = ask
