@@ -11,20 +11,18 @@ if [[ $(command -v zellij) ]]; then
 
     if [[ $(command -v fzf) ]]; then
         zza() {
-            local session
-            if [[ -z "$1" ]]; then
+            local session="$1"
+            if [[ -z "$session" ]]; then
                 session=$(zellij ls -s | fzf --height=~40% --layout=reverse --info=inline --border --margin=1)
             fi
-            zellij a -c "$session"
+            zellij a -c $session
         }
         zzs() {
-            local host
-            local session
-            host=$1
+            local host="$1"
+            local session="$2"
             if [[ -z "$host" ]]; then
                 host=$(grep -E '^Host [^\*]' ~/.ssh/config | awk '{print $2}' | fzf --height=~40% --layout=reverse --info=inline --border --margin=1)
             fi
-            session=$2
             if [[ -z "$session" ]]; then
                 session=$(ssh $host -t "zellij ls -rs" 2>/dev/null | fzf --height=~40% --layout=reverse --info=inline --border --margin=1)
             fi
