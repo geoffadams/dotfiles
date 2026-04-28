@@ -2,6 +2,7 @@ return {
     "folke/which-key.nvim",
     event = "VeryLazy",
     opts = {
+        preset = "modern",
         spec = {
             { "<Leader>b", group = "buffer" },
             { "<Leader>c", group = "code" },
