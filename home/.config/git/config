@@ -24,6 +24,8 @@
     file-decoration-style = bold yellow
     hunk-header-decoration-style = bold yellow
     relative-paths = true
+    wrap-max-lines = unlimited
+    width = variable
 [init]
     defaultBranch = main
 [status]
