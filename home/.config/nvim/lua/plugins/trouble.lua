@@ -1,5 +1,6 @@
 return {
     "folke/trouble.nvim",
+    dependencies = { "nvim-mini/mini.nvim" },
     opts = {
         warn_no_results = false,
         open_no_results = true,

@@ -1,4 +1,3 @@
-require("mini.icons").setup()
 require("mini.tabline").setup()
 require("mini.statusline").setup()
 require("mini.cmdline").setup()

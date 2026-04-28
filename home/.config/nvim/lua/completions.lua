@@ -3,9 +3,7 @@ local completion = require("mini.completion")
 local pairs = require("mini.pairs")
 local mkeymap = require("mini.keymap")
 local snippets = require("mini.snippets")
-local icons = require("mini.icons")
 
-icons.tweak_lsp_kind()
 pairs.setup()
 mkeymap.setup()
 
@@ -48,7 +46,7 @@ snippets.setup({
 -- By default snippets available at cursor are not shown as candidates in
 -- 'mini.completion' menu. This requires a dedicated in-process LSP server
 -- that will provide them. To have that, uncomment next line (use `gcc`).
--- MiniSnippets.start_lsp_server()
+snippets.start_lsp_server()
 
 -- Advertise to servers that Neovim now supports certain set of completion and
 -- signature features through 'mini.completion'.

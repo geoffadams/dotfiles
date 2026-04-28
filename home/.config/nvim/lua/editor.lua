@@ -58,3 +58,30 @@ vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 require("origami").setup()
 require("statuscol").setup()
+
+-- diagnostics
+local severity = vim.diagnostic.severity
+vim.diagnostic.config({
+    float = {
+        severity_sort = true,
+        source = "if_many",
+    },
+    virtual_lines = {
+        current_line = true,
+    },
+    virtual_text = false,
+    underline = true,
+    severity_sort = true,
+    signs = {
+        text = {
+            [severity.ERROR] = "",
+            [severity.WARN] = "",
+            [severity.INFO] = "",
+            [severity.HINT] = "󰌶",
+        },
+        numhl = {
+            [severity.ERROR] = "DiagnosticVirtualTextError",
+            [severity.WARN] = "DiagnosticVirtualTextWarn",
+        },
+    },
+})
