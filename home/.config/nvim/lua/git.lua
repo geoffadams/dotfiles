@@ -60,8 +60,8 @@ require("gitsigns").setup({
         map("n", "<leader>hq", gitsigns.setqflist, "Quickfix buffer hunks")
 
         -- Toggles
-        map("n", "<leader>tb", gitsigns.toggle_current_line_blame, "Toggle blame")
-        map("n", "<leader>tw", gitsigns.toggle_word_diff, "Toggle word diffs")
+        map("n", "<leader>tvb", gitsigns.toggle_current_line_blame, "Toggle blame")
+        map("n", "<leader>tvw", gitsigns.toggle_word_diff, "Toggle word diffs")
 
         -- Text object
         map({ "o", "x" }, "ih", gitsigns.select_hunk, "Select hunk")
