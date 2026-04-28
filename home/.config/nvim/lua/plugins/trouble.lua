@@ -4,8 +4,16 @@ return {
         warn_no_results = false,
         open_no_results = true,
         modes = {
+            diagnostics = {
+                preview = {
+                    type = "split",
+                    relative = "win",
+                    position = "right",
+                    size = 0.5,
+                },
+            },
             major_diagnostics = {
-                mode = "diagnostics", -- inherit from diagnostics mode
+                mode = "diagnostics",
                 filter = {
                     any = {
                         buf = 0, -- current buffer
@@ -27,7 +35,7 @@ return {
     keys = {
         {
             "<Leader>td",
-            "<Cmd>Trouble major_diagnostics toggle filter.buf=0<cr>",
+            "<Cmd>Trouble diagnostics toggle filter.buf=0<cr>",
             desc = "Document diagnostics",
         },
         {
