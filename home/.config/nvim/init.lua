@@ -8,9 +8,14 @@ require("config.lazy")
 -- general behaviour
 require("interface")
 require("editor")
+require("clipboard")
 
--- tooling
+-- general tools
+require("pickers")
+require("file-tools")
 require("git")
+
+-- development
 require("installers")
 require("treesitter")
 require("lsp")
