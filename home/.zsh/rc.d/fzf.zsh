@@ -37,35 +37,41 @@ _fzf_smart_tab() {
     local words
     words=("${(@Q)${(z)LBUFFER}}")
     local cmd=${words[1]}
-    local subcmd=${words[2]}
+    local subcmd=""
+    local query=""
 
     # let normal completion handle options
     [[ ${words[-1]} == -* ]] && { zle expand-or-complete; return; }
 
     if (( $+commands[git] )) && [[ $cmd == "git" ]]; then
+        subcmd=${words[2]}
         case $subcmd in
             add|update-index|rm|checkout|restore|diff)
-                zle _fzf_complete_git_files_widget
+                [[ ${words[-1]} != ($cmd|$subcmd|'**') ]] && query="${words[-1]}"
+                zle _fzf_complete_git_files_widget "$query"
                 return
                 ;;
             stash)
                 local stash_sub=${words[3]}
+                [[ ${words[-1]} != ($cmd|$subcmd|$stash_sub|'**') ]] && query="${words[-1]}"
                 case $stash_sub in
                     show|drop|pop|apply|branch)
-                        zle _fzf_complete_git_stash_widget
+                        zle _fzf_complete_git_stash_widget "$query"
                         return
                         ;;
                 esac
                 ;;
             show|cherry-pick|rebase|reset|revert)
-                zle _fzf_complete_git_commit_widget
+                [[ ${words[-1]} != ($cmd|$subcmd|'**') ]] && query="${words[-1]}"
+                zle _fzf_complete_git_commit_widget "$query"
                 return
                 ;;
         esac
     fi
 
     if (( $+commands[zoxide] )) && [[ $cmd == "z" || $cmd == "zi" ]]; then
-        zle _fzf_complete_zoxide_widget
+        [[ ${words[-1]} != ($cmd|'**') ]] && query="${words[-1]}"
+        zle _fzf_complete_zoxide_widget "$query"
         return
     fi
 

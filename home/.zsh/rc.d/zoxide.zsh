@@ -23,7 +23,7 @@ if (( $+commands[fzf] )); then
         fi
         [[ -z "$filtered" ]] && return
         awk -v home="$HOME" \
-            'NR==FNR { vis[$0]=1; next }
+        'NR==FNR { vis[$0]=1; next }
              { score=$1; path=$0; sub(/^ *[0-9.]+ +/,"",path)
                if (path in vis) {
                    scores[++k]=score; paths[k]=path
@@ -46,6 +46,7 @@ if (( $+commands[fzf] )); then
     }
 
     _fzf_zoxide_dirs() {
+        local query="$1"
         # Serialize _zoxide_colorize for use in fzf's reload subshell
         local inline="function _zoxide_colorize() { $functions[_zoxide_colorize] }; _zoxide_colorize \"\$@\""
         fzf \
@@ -56,15 +57,17 @@ if (( $+commands[fzf] )); then
             --preview-window 'right:50%:wrap' \
             --bind 'ctrl-/:toggle-preview' \
             --bind "change:reload(zsh -c ${(q)inline} -- {q})" \
-            < <(_zoxide_colorize "") \
+            --query "$query" \
+            < <(_zoxide_colorize "${query}") \
             | cut -f1
     }
 
     # ── zle widgets ────────────────────────────────────────────────────────────
 
     _fzf_complete_zoxide_widget() {
+        local query="$1"
         local result
-        result=$(_fzf_zoxide_dirs) || { zle redisplay; return 0; }
+        result=$(_fzf_zoxide_dirs "$query") || { zle redisplay; return 0; }
         [[ -z $result ]] && { zle redisplay; return 0; }
         LBUFFER="${LBUFFER% *} ${(q)result}"
         LBUFFER="${LBUFFER# }"
