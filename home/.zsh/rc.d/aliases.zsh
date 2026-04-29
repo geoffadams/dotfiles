@@ -1,7 +1,7 @@
 # basics
 export LS_COLORS=$(vivid generate rose-pine-moon)
 alias ls="ls -1 -Fh --color"
-[[ $(command -v gls) ]] && alias ls="gls -1 -Fh --color -N --group-directories-first"
+(( $+commands[gls] )) && alias ls="gls -1 -Fh --color -N --group-directories-first"
 alias ll="ls -Al --time-style=long-iso"
 alias mkdir="mkdir -pv"
 
@@ -10,9 +10,9 @@ alias zhist-sync="fc -AI && fc -R"
 alias zhist-reload="fc -R"
 
 # text tools
-[[ $(command -v gsed) ]] && alias sed="gsed"
+(( $+commands[gsed] )) && alias sed="gsed"
 alias grep="grep --color=auto"
-[[ $(command -v ggrep) ]] && alias grep="ggrep --color=auto"
+(( $+commands[ggrep] )) && alias grep="ggrep --color=auto"
 
 # utilities
 alias now='date +"%T"'

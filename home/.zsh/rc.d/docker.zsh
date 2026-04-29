@@ -1,4 +1,4 @@
-if [[ $(command -v docker) ]]; then
+if (( $+commands[docker] )); then
     if is_mac; then
         fpath+=(${HOME}/.docker/completions)
     fi

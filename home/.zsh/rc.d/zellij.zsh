@@ -5,11 +5,11 @@ if [[ -n $ZELLIJ ]]; then
     fi
 fi
 
-if [[ $(command -v zellij) ]]; then
+if (( $+commands[zellij] )); then
     alias zz="zellij"
     alias zzl="zellij ls -r"
 
-    if [[ $(command -v fzf) ]]; then
+    if (( $+commands[fzf] )); then
         zza() {
             local session="$1"
             if [[ -z "$session" ]]; then

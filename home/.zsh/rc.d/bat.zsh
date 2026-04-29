@@ -1,1 +1,1 @@
-[[ $(command -v bat) ]] && PAGER=bat
+(( $+commands[bat] )) && PAGER=bat

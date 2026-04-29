@@ -8,7 +8,7 @@ is_linux() { [[ $(uname) == "Linux" ]] }
 is_mac() { [[ $(uname) == "Darwin" ]] }
 
 # Homebrew setup
-has_brew() { [[ $(command -v "/opt/homebrew/bin/brew" 2>&1 /dev/null) ]] }
+has_brew() { [[ -x /opt/homebrew/bin/brew ]] }
 
 
 # load additional config

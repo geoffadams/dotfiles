@@ -1,4 +1,4 @@
-if [[ $(command -v rbenv) ]]; then
+if (( $+commands[rbenv] )); then
     path=(${HOME}/.rbenv/shims $path)
 
     function rbenv() {

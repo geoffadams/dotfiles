@@ -1,4 +1,4 @@
-if [[ $(command -v nvim) ]]; then
+if (( $+commands[nvim] )); then
     alias vim="nvim"
 
     MANPAGER="nvim +Man!"
