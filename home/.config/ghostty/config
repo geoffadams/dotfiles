@@ -26,7 +26,8 @@ keybind = super+j=goto_split:down
 keybind = super+k=goto_split:up
 keybind = super+l=goto_split:right
 keybind = super+shift+r=reset
-keybind = super+shift+e=clear_screen
+keybind = chain=clear_screen
+keybind = chain=text:\x03
 
 link-url = true
 link-previews = true
