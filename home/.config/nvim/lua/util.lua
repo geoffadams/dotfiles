@@ -18,4 +18,19 @@ M.lsp_highlight_autocmd = function(event, buffer, callback, desc)
     vim.api.nvim_create_autocmd(event, opts)
 end
 
+M.map_keys = function(from, mapping)
+    local to = {}
+    for k, v in pairs(from) do
+        to[mapping[k]] = v
+    end
+    return to
+end
+M.map_vals = function(from, mapping)
+    local to = {}
+    for k, v in pairs(from) do
+        to[k] = mapping(v)
+    end
+    return to
+end
+
 return M

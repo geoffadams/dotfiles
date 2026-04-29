@@ -11,6 +11,7 @@ return {
                     sign = {
                         name = { ".*" },
                         text = { ".*" },
+                        foldclosed = true,
                     },
                     click = "v:lua.ScSa",
                 },
@@ -20,7 +21,7 @@ return {
                     click = "v:lua.ScLa",
                 },
                 {
-                    sign = { namespace = { "gitsigns" }, colwidth = 1, wrap = true },
+                    sign = { namespace = { "gitsigns" }, colwidth = 1, wrap = true, foldclosed = true },
                     click = "v:lua.ScSa",
                 },
                 {
@@ -31,6 +32,7 @@ return {
                             args.fold.sep = "│"
                             return builtin.foldfunc(args)
                         end,
+                        " ",
                     },
                     click = "v:lua.ScFa",
                 },

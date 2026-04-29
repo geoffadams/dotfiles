@@ -9,6 +9,7 @@ require("config.lazy")
 require("interface")
 require("editor")
 require("clipboard")
+require("diagnostics")
 
 -- general tools
 require("pickers")
