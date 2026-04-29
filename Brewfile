@@ -43,6 +43,7 @@ brew "rust"
 brew "sad"
 brew "starship"
 brew "trash", link: true
+brew "tree"
 brew "tree-sitter-cli"
 brew "uv"
 brew "watch"
