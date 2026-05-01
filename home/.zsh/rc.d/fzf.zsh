@@ -21,8 +21,9 @@ fi
 # Appends fzf selection(s) to the current line buffer, replacing the last word.
 _fzf_replace_last_args() {
     local src_fn=$1
+    local src_query=$2
     local result
-    result=$($src_fn) || { zle redisplay; return 0; }
+    result=$($src_fn $src_query) || { zle redisplay; return 0; }
     [[ -z $result ]] && { zle redisplay; return 0; }
     local quoted
     quoted=$(printf '%q ' ${(f)result})
@@ -34,11 +35,10 @@ _fzf_replace_last_args() {
 # ── smart Tab binding ──────────────────────────────────────────────────────────
 
 _fzf_smart_tab() {
-    local words
-    words=("${(@Q)${(z)LBUFFER}}")
+    local words=("${(@Q)${(z)LBUFFER}}")
     local cmd=${words[1]}
     local subcmd=""
-    local query=""
+    local query
 
     # let normal completion handle options
     [[ ${words[-1]} == -* ]] && { zle expand-or-complete; return; }
@@ -47,22 +47,28 @@ _fzf_smart_tab() {
         subcmd=${words[2]}
         case $subcmd in
             add|update-index|rm|checkout|restore|diff)
-                [[ ${words[-1]} != ($cmd|$subcmd|'**') ]] && query="${words[-1]}"
-                zle _fzf_complete_git_files_widget "$query"
+                if [[ ${#words[@]} > 2 && ${words[-1]} != '**' ]]; then
+                    query=${words[-1]}
+                fi
+                zle _fzf_complete_git_files_widget "${query}"
                 return
                 ;;
             stash)
-                local stash_sub=${words[3]}
-                [[ ${words[-1]} != ($cmd|$subcmd|$stash_sub|'**') ]] && query="${words[-1]}"
-                case $stash_sub in
+                local stash_subcmd=${words[3]}
+                case $stash_subcmd in
                     show|drop|pop|apply|branch)
+                        if [[ ${#words[@]} > 3 && ${words[-1]} != '**' ]]; then
+                            query=${words[-1]}
+                        fi
                         zle _fzf_complete_git_stash_widget "$query"
                         return
                         ;;
                 esac
                 ;;
             show|cherry-pick|rebase|reset|revert)
-                [[ ${words[-1]} != ($cmd|$subcmd|'**') ]] && query="${words[-1]}"
+                if [[ ${#words[@]} > 2 && ${words[-1]} != '**' ]]; then
+                    query=${words[-1]}
+                fi
                 zle _fzf_complete_git_commit_widget "$query"
                 return
                 ;;
