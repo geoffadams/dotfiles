@@ -53,3 +53,7 @@ nbproject
 **/cdk.context.json
 .nvim.lua
 **/.claude/settings.local.json
+
+# Agents #
+##########
+.claude
