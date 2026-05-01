@@ -10,7 +10,7 @@ require("fzf-lua").register_ui_select(function(ui_opts, items)
         end
     end
     function to_percentage(val, total)
-        return (val / total) * 100
+        return math.floor(0.5 + ((val / total) * 100))
     end
     function to_ratio_h(lines, total)
         if total == nil then
