@@ -13,6 +13,7 @@ local ts_ensure_installed = {
     "clojure",
     "markdown",
     "kdl",
+    "zsh",
 }
 
 -- baseline auto-install
