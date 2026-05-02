@@ -37,16 +37,25 @@ _fzf_replace_last_args() {
 _fzf_smart_tab() {
     local words=("${(@Q)${(z)LBUFFER}}")
     local cmd=${words[1]}
-    local subcmd=""
+    local subcmd
     local query
 
-    # let normal completion handle options
-    [[ ${words[-1]} == -* ]] && { zle expand-or-complete; return; }
+    # let normal completion handle options; '--' is only a file delimiter when followed by a space
+    [[ ${words[-1]} == -* ]] && [[ ${words[-1]} != '--' || $LBUFFER[-1] != ' ' ]] && { zle expand-or-complete; return; }
 
     if (( $+commands[git] )) && [[ $cmd == "git" ]]; then
         subcmd=${words[2]}
+
+        # '--' after the subcommand means everything following is a file path
+        # (I) returns the index of the last match, or 0 if not found
+        if (( ${words[(I)--]} >= 3 )); then
+            [[ ${words[-1]} != '--' ]] && query=${words[-1]}
+            zle _fzf_complete_git_files_widget "$query"
+            return
+        fi
+
         case $subcmd in
-            add|update-index|rm|checkout|restore|diff)
+            add|update-index|rm|restore|diff)
                 if [[ ${#words[@]} > 2 && ${words[-1]} != '**' ]]; then
                     query=${words[-1]}
                 fi
@@ -65,11 +74,11 @@ _fzf_smart_tab() {
                         ;;
                 esac
                 ;;
-            show|cherry-pick|rebase|reset|revert)
+            checkout|show|cherry-pick|rebase|reset|revert|merge)
                 if [[ ${#words[@]} > 2 && ${words[-1]} != '**' ]]; then
                     query=${words[-1]}
                 fi
-                zle _fzf_complete_git_commit_widget "$query"
+                zle _fzf_complete_git_refs_widget "$query"
                 return
                 ;;
         esac
