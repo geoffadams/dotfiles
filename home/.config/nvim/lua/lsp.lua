@@ -64,6 +64,8 @@ vim.lsp.config("markdown_oxide", {
 })
 vim.lsp.enable("markdown_oxide")
 
+vim.lsp.enable("ansiblels")
+
 local function enable_lsp_functionality(event)
     local map = function(keys, func, desc, mode)
         mode = mode or "n"
