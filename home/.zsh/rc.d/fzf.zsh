@@ -34,59 +34,52 @@ _fzf_replace_last_args() {
 
 # ── smart Tab binding ──────────────────────────────────────────────────────────
 
+_fzf_smart_tab_query() {
+    [[ ${#@} > 0 && $@[-1] != ('**'|'--') ]] && echo $@[-1]
+}
+
 _fzf_smart_tab() {
     local words=("${(@Q)${(z)LBUFFER}}")
-    local cmd=${words[1]}
-    local subcmd
-    local query
 
     # let normal completion handle options; '--' is only a file delimiter when followed by a space
     [[ ${words[-1]} == -* ]] && [[ ${words[-1]} != '--' || $LBUFFER[-1] != ' ' ]] && { zle expand-or-complete; return; }
 
+    local cmd=$words[1]
+    shift words
     if (( $+commands[git] )) && [[ $cmd == "git" ]]; then
-        subcmd=${words[2]}
-
         # '--' after the subcommand means everything following is a file path
         # (I) returns the index of the last match, or 0 if not found
-        if (( ${words[(I)--]} >= 3 )); then
-            [[ ${words[-1]} != '--' ]] && query=${words[-1]}
-            zle _fzf_complete_git_files_widget "$query"
+        if (( ${words[(I)--]} > 0 )); then
+            zle _fzf_complete_git_files_widget "$(_fzf_smart_tab_query $words)"
             return
         fi
 
+        local subcmd=$words[1]
+        shift words
         case $subcmd in
             add|update-index|rm|restore|diff)
-                if [[ ${#words[@]} > 2 && ${words[-1]} != '**' ]]; then
-                    query=${words[-1]}
-                fi
-                zle _fzf_complete_git_files_widget "${query}"
+                zle _fzf_complete_git_files_widget "$(_fzf_smart_tab_query $words)"
+                return
+                ;;
+            checkout|show|cherry-pick|rebase|reset|revert|merge)
+                zle _fzf_complete_git_refs_widget "$(_fzf_smart_tab_query $words)"
                 return
                 ;;
             stash)
-                local stash_subcmd=${words[3]}
+                local stash_subcmd=$words[1]
+                shift words
                 case $stash_subcmd in
                     show|drop|pop|apply|branch)
-                        if [[ ${#words[@]} > 3 && ${words[-1]} != '**' ]]; then
-                            query=${words[-1]}
-                        fi
-                        zle _fzf_complete_git_stash_widget "$query"
+                        zle _fzf_complete_git_stash_widget "$(_fzf_smart_tab_query $words)"
                         return
                         ;;
                 esac
-                ;;
-            checkout|show|cherry-pick|rebase|reset|revert|merge)
-                if [[ ${#words[@]} > 2 && ${words[-1]} != '**' ]]; then
-                    query=${words[-1]}
-                fi
-                zle _fzf_complete_git_refs_widget "$query"
-                return
                 ;;
         esac
     fi
 
     if (( $+commands[zoxide] )) && [[ $cmd == "z" || $cmd == "zi" ]]; then
-        [[ ${words[-1]} != ($cmd|'**') ]] && query="${words[-1]}"
-        zle _fzf_complete_zoxide_widget "$query"
+        zle _fzf_complete_zoxide_widget "$(_fzf_smart_tab_query $words)"
         return
     fi
 
