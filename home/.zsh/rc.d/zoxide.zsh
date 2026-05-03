@@ -50,6 +50,8 @@ if (( $+commands[fzf] )); then
         # Serialize _zoxide_colorize for use in fzf's reload subshell
         local inline="function _zoxide_colorize() { $functions[_zoxide_colorize] }; _zoxide_colorize \"\$@\""
         fzf \
+            --height=60% \
+            --layout=reverse \
             --ansi \
             --disabled \
             --with-nth=2 \
@@ -88,7 +90,10 @@ if (( $+commands[fzf] )); then
     # ── fzf **<Tab> hook ───────────────────────────────────────────────────────
 
     _fzf_complete_z() {
-        _fzf_complete --ansi \
+        _fzf_complete \
+            --height=60% \
+            --layout=reverse \
+            --ansi \
             --preview 'tree -C -L 2 {} 2>/dev/null || ls -1F --color=always {}' \
             --preview-window 'right:50%:wrap' \
             --bind 'ctrl-/:toggle-preview' \

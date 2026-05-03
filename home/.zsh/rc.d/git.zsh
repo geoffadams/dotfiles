@@ -25,6 +25,8 @@ _fzf_git_modified_files() {
     )
     [[ -z "$files" ]] && return 1
     echo "$files" | xargs ls -t1d 2>/dev/null | fzf \
+        --height=60% \
+        --layout=reverse \
         --multi \
         --ansi \
         --delimiter ' ' \
@@ -44,6 +46,8 @@ _fzf_git_stashes() {
     local preview='git stash show -p {1} --color=always | delta'
     git -C . rev-parse --git-dir &>/dev/null || return 1
     git stash list --format='%gd %s' 2>/dev/null | fzf \
+        --height=60% \
+        --layout=reverse \
         --ansi \
         --delimiter ' ' \
         --preview "$preview" \
@@ -63,6 +67,8 @@ _fzf_git_refs() {
         git for-each-ref --sort=-creatordate --format='%(refname:short)' refs/heads refs/remotes refs/tags 2>/dev/null
         git log --oneline --color=always 2>/dev/null
     } | fzf \
+        --height=60% \
+        --layout=reverse \
         --ansi \
         --delimiter ' ' \
         --prompt 'ref> ' \
