@@ -3,6 +3,7 @@ export LS_COLORS=$(vivid generate rose-pine-moon)
 alias ls="ls -1 -Fh --color"
 (( $+commands[gls] )) && alias ls="gls -1 -Fh --color -N --group-directories-first"
 alias ll="ls -Al --time-style=long-iso"
+alias lla="ll -a"
 alias mkdir="mkdir -pv"
 
 # shell history
