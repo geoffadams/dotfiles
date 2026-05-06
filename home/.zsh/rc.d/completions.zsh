@@ -5,7 +5,7 @@ if has_brew; then
 fi
 
 # completion menu behaviour
-setopt menu_complete
+unsetopt menu_complete
 setopt auto_menu
 setopt list_rows_first
 zstyle ':completion:*' rehash true
