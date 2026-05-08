@@ -23,9 +23,15 @@ vim.opt.formatoptions:append({ t = true })
 require("wrapping").setup({
     create_keymaps = false,
 })
-vim.keymap.set("n", "<Leader>tws", "<Plug>(wrapping-soft-wrap-mode)")
-vim.keymap.set("n", "<Leader>twh", "<Plug>(wrapping-hard-wrap-mode)")
-vim.keymap.set("n", "<Leader>tww", "<Plug>(wrapping-toggle-wrap-mode)")
+vim.keymap.set(
+    "n",
+    "<Leader>ww",
+    "<Plug>(wrapping-soft-wrap-mode) <bar> <Cmd>Wrapwidth!<cr>",
+    { desc = "Enable soft-wrapping" }
+)
+vim.keymap.set("n", "<Leader>wW", "<Plug>(wrapping-hard-wrap-mode)", { desc = "Enable hard-wrapping" })
+vim.keymap.set("n", "<Leader>wc", "<Cmd>Wrapwidth 120<cr>", { desc = "Wide column width" })
+vim.keymap.set("n", "<Leader>wC", "<Cmd>Wrapwidth 80<cr>", { desc = "Narrow column width" })
 
 -- tabs
 local indent = 4

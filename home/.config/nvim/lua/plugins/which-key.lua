@@ -11,7 +11,7 @@ return {
             { "<Leader>f", group = "find/grep" },
             { "<Leader>t", group = "toggles" },
             { "<Leader>tv", group = "view toggles" },
-            { "<Leader>tw", group = "wrapping toggles" },
+            { "<Leader>w", group = "wrapping" },
         },
     },
 }

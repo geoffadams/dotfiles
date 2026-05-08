@@ -37,6 +37,7 @@ statusline.setup({
             })
             local lsp = statusline.section_lsp({ trunc_width = 75 })
             local filename = statusline.section_filename({ trunc_width = 140 })
+            local wrap_mode = require("wrapping").get_current_mode()
             local fileinfo = statusline.section_fileinfo({ trunc_width = 120 })
             local location = statusline.section_location({ trunc_width = 75 })
             local search = statusline.section_searchcount({ trunc_width = 75 })
@@ -47,7 +48,7 @@ statusline.setup({
                 "%<", -- Mark general truncate point
                 { hl = "MiniStatuslineFilename", strings = { filename } },
                 "%=", -- End left alignment
-                { hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
+                { hl = "MiniStatuslineFileinfo", strings = { wrap_mode, fileinfo } },
                 { hl = mode_hl, strings = { search, location } },
             })
         end,
