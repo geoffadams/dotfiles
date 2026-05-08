@@ -17,6 +17,6 @@ require("mason-tool-installer").setup({
         "cljfmt",
         "marksman",
         "markdown-oxide",
-        "ansiblels",
+        "ansible-language-server",
     },
 })
