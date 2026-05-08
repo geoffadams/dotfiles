@@ -10,7 +10,7 @@ return {
             { "<Leader>h", group = "git hunks" },
             { "<Leader>f", group = "find/grep" },
             { "<Leader>t", group = "toggles" },
-            { "<Leader>tv", group = "view toggles" },
+            { "<Leader>v", group = "view toggles" },
             { "<Leader>w", group = "wrapping" },
         },
     },
