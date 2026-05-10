@@ -3,7 +3,7 @@ if ! (( $+commands[git] )) || ! (( $+commands[fzf] )); then
 fi
 
 # picker inputs
-_fzf_git_list_refs() {
+_git_list_refs() {
     {
         git for-each-ref \
             --color=always \
@@ -18,23 +18,23 @@ _fzf_git_list_refs() {
             2>/dev/null
     }
 }
-export _FZF_GIT_LIST_REFS=$(functions _fzf_git_list_refs)
+export _FZF_GIT_LIST_REFS=$(functions _git_list_refs)
 
-_fzf_git_list_modified_files() {
+_git_list_modified_files() {
     git status --porcelain=2 --no-renames | \
         ggrep -v -e "^#" | \
         gsed "s/^\? /? ?? /" | \
         gsed -r 's/^(.) (.)(.)(( [^ ]+ [[:digit:]]+ [[:digit:]]+ [[:digit:]]+ [[:xdigit:]]+ [[:xdigit:]]+)?) (.+)$/\1\t\6\t\o033\[32m\2\o033\[31m\3\o033\[0m/'
 }
-export _FZF_GIT_LIST_MODIFIED_FILES=$(functions _fzf_git_list_modified_files)
+export _FZF_GIT_LIST_MODIFIED_FILES=$(functions _git_list_modified_files)
 
-_fzf_git_list_unstaged_files() {
+_git_list_unstaged_files() {
     git status --porcelain=2 --no-renames | \
         ggrep -v -e '^#' -e '^. .\.' | \
         gsed 's/^\? /? ?? /' | \
         gsed -r 's/^(.) (.)(.)(( [^ ]+ [[:digit:]]+ [[:digit:]]+ [[:digit:]]+ [[:xdigit:]]+ [[:xdigit:]]+)?) (.+?)$/\1\t\6\t\o033\[32m\2\o033\[31m\3\o033\[0m/'
 }
-export _FZF_GIT_LIST_UNSTAGED_FILES=$(functions _fzf_git_list_unstaged_files)
+export _FZF_GIT_LIST_UNSTAGED_FILES=$(functions _git_list_unstaged_files)
 
 # picker previews
 _fzf_git_preview_ref() {
@@ -64,6 +64,19 @@ _fzf_git_preview_file() {
 export _FZF_GIT_PREVIEW_FILE=$(functions _fzf_git_preview_file)
 
 # picker builders
+_fzf_bind_preview() {
+    "$@" --bind "ctrl-/:toggle-preview"
+}
+_fzf_bind_git_refs() {
+    "$@" --bind "ctrl-r:reload(eval $_FZF_GIT_LIST_REFS && _git_list_refs)+change-prompt(ref> )+change-preview(eval $_FZF_GIT_PREVIEW_REF && _fzf_git_preview_ref {})+change-header(ctrl-f: files)+change-nth(1,2)+change-with-nth({2} {3})"
+}
+_fzf_bind_git_modified_files() {
+    "$@" --bind "ctrl-f:reload(eval $_FZF_GIT_LIST_MODIFIED_FILES && _git_list_modified_files)+change-prompt(modified> )+change-preview(eval $_FZF_GIT_PREVIEW_FILE && _fzf_git_preview_file {})+change-header(ctrl-r: refs)+change-nth(1)+change-with-nth({3} {2})"
+}
+_fzf_bind_git_unstaged_files() {
+    "$@" --bind "ctrl-f:reload-sync(eval $_FZF_GIT_LIST_UNSTAGED_FILES && _git_list_unstaged_files)+change-prompt(unstaged> )+change-preview(eval $_FZF_GIT_PREVIEW_FILE && _fzf_git_preview_file {})+change-header(ctrl-r: refs)+change-nth(1)+change-with-nth({3} {2})"
+}
+
 _fzf_git_with_preview_ref() {
     _fzf_bind_preview "$@" \
         --preview "eval $_FZF_GIT_PREVIEW_REF && _fzf_git_preview_ref {}" \
@@ -73,20 +86,6 @@ _fzf_git_with_preview_file() {
     _fzf_bind_preview "$@" \
         --preview "eval $_FZF_GIT_PREVIEW_FILE && _fzf_git_preview_file {}" \
         --preview-window 'right:60%:wrap'
-}
-
-_fzf_bind_preview() {
-    "$@" --bind "ctrl-/:toggle-preview"
-}
-
-_fzf_bind_refs() {
-    "$@" --bind "ctrl-r:reload(eval $_FZF_GIT_LIST_REFS && _fzf_git_list_refs)+change-prompt(ref> )+change-preview(eval $_FZF_GIT_PREVIEW_REF && _fzf_git_preview_ref {})+change-header(ctrl-f: files)+change-nth(1,2)+change-with-nth({2} {3})"
-}
-_fzf_bind_modified() {
-    "$@" --bind "ctrl-f:reload(eval $_FZF_GIT_LIST_MODIFIED_FILES && _fzf_git_list_modified_files)+change-prompt(modified> )+change-preview(eval $_FZF_GIT_PREVIEW_FILE && _fzf_git_preview_file {})+change-header(ctrl-r: refs)+change-nth(1)+change-with-nth({3} {2})"
-}
-_fzf_bind_unstaged() {
-    "$@" --bind "ctrl-f:reload-sync(eval $_FZF_GIT_LIST_UNSTAGED_FILES && _fzf_git_list_unstaged_files)+change-prompt(unstaged> )+change-preview(eval $_FZF_GIT_PREVIEW_FILE && _fzf_git_preview_file {})+change-header(ctrl-r: refs)+change-nth(1)+change-with-nth({3} {2})"
 }
 
 _fzf_git() {
@@ -101,10 +100,10 @@ _fzf_git() {
 
 # pickers
 _fzf_git_modified_files() {
-    _fzf_git_list_modified_files | \
+    _git_list_modified_files | \
         _fzf_git_with_preview_file \
-        _fzf_bind_refs \
-        _fzf_bind_modified \
+        _fzf_bind_git_refs \
+        _fzf_bind_git_modified_files \
         _fzf_git \
         --multi \
         --delimiter "\t" \
@@ -117,10 +116,10 @@ _fzf_git_modified_files() {
 }
 
 _fzf_git_unstaged_files() {
-    _fzf_git_list_unstaged_files | \
+    _git_list_unstaged_files | \
         _fzf_git_with_preview_file \
-        _fzf_bind_refs \
-        _fzf_bind_unstaged \
+        _fzf_bind_git_refs \
+        _fzf_bind_git_unstaged_files \
         _fzf_git \
         --multi \
         --delimiter "\t" \
@@ -153,10 +152,10 @@ _fzf_git_stashes() {
 }
 
 _fzf_git_refs() {
-    _fzf_git_list_refs | \
+    _git_list_refs | \
         _fzf_git_with_preview_ref \
-        _fzf_bind_refs \
-        _fzf_bind_modified \
+        _fzf_bind_git_refs \
+        _fzf_bind_git_modified_files \
         _fzf_git \
         --delimiter "\t" \
         --prompt 'ref> ' \
