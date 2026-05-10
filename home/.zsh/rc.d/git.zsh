@@ -2,92 +2,186 @@ if ! (( $+commands[git] )) || ! (( $+commands[fzf] )); then
     return
 fi
 
-# ── pickers ────────────────────────────────────────────────────────────────────
+# picker inputs
+_fzf_git_list_refs() {
+    {
+        git for-each-ref \
+            --color=always \
+            --sort=-creatordate \
+            --format='%(refname:rstrip=-2)%09%(color:blue)%(refname:short)%(color:reset)%09%(contents:subject)' \
+            refs/heads refs/remotes refs/tags \
+            2>/dev/null
+        git log \
+            --color=always \
+            --abbrev-commit \
+            --pretty='format:commit%x09%C(auto)%h%d%x09%s%Creset' \
+            2>/dev/null
+    }
+}
+export _FZF_GIT_LIST_REFS=$(functions _fzf_git_list_refs)
 
-_fzf_git_modified_files() {
-    local query="$1"
-    local preview='
-        f={1}
-        file_status=$(git status --short "$f" 2>/dev/null | cut -c1-2)
-        if [[ $file_status == "??" ]]; then
-            echo "--- untracked ---"
-            bat --style=numbers --color=always "$f" 2>/dev/null || cat "$f"
-        else
-            git diff --color=always HEAD -- "$f" 2>/dev/null | delta
-        fi
-    '
-    local refs_reload='git for-each-ref --sort=-creatordate --format="%(refname:short)" refs/heads refs/remotes refs/tags 2>/dev/null; git log --oneline --color=always 2>/dev/null'
-    local files_reload='{ git diff --name-only HEAD 2>/dev/null; git ls-files --others --exclude-standard 2>/dev/null; } | sort -u | (f=$(cat); [ -n "$f" ] && echo "$f" | xargs ls -t1d 2>/dev/null || true)'
+_fzf_git_list_modified_files() {
+    git status --porcelain=2 --no-renames | \
+        ggrep -v -e "^#" | \
+        gsed "s/^\? /? ?? /" | \
+        gsed -r 's/^(.) (.)(.)(( [^ ]+ [[:digit:]]+ [[:digit:]]+ [[:digit:]]+ [[:xdigit:]]+ [[:xdigit:]]+)?) (.+)$/\1\t\6\t\o033\[32m\2\o033\[31m\3\o033\[0m/'
+}
+export _FZF_GIT_LIST_MODIFIED_FILES=$(functions _fzf_git_list_modified_files)
+
+_fzf_git_list_unstaged_files() {
+    git status --porcelain=2 --no-renames | \
+        ggrep -v -e '^#' -e '^. .\.' | \
+        gsed 's/^\? /? ?? /' | \
+        gsed -r 's/^(.) (.)(.)(( [^ ]+ [[:digit:]]+ [[:digit:]]+ [[:digit:]]+ [[:xdigit:]]+ [[:xdigit:]]+)?) (.+?)$/\1\t\6\t\o033\[32m\2\o033\[31m\3\o033\[0m/'
+}
+export _FZF_GIT_LIST_UNSTAGED_FILES=$(functions _fzf_git_list_unstaged_files)
+
+# picker previews
+_fzf_git_preview_ref() {
+    local line=("${(@Q)${(z)@}}")
+    git show --stat --color=always ${line[2]} 2>/dev/null | head -50
+}
+export _FZF_GIT_PREVIEW_REF=$(functions _fzf_git_preview_ref)
+
+_fzf_git_preview_file() {
+    local line=("${(@Q)${(z)@}}")
+    echo $line
+    local f
+    if [[ ${#line} == 1 ]]; then
+        f=$line[1]
+        echo "one line: $f"
+        bat --style=numbers --color=always "$f" 2>/dev/null || cat "$f" 2>/dev/null || ls -1 "$f"
+    elif [[ $line[1] == "?" ]]; then
+        f=${line[2,-2]}
+        echo "? line: $f"
+        bat --style=numbers --color=always "$f" 2>/dev/null || cat "$f" 2>/dev/null || ls -1 "$f"
+    else
+        f=${line[2,-2]}
+        echo "other line: $f"
+        git diff --color=always HEAD -- "$f" 2>/dev/null | delta
+    fi
+}
+export _FZF_GIT_PREVIEW_FILE=$(functions _fzf_git_preview_file)
+
+# picker builders
+_fzf_git_with_preview_ref() {
+    _fzf_bind_preview "$@" \
+        --preview "eval $_FZF_GIT_PREVIEW_REF && _fzf_git_preview_ref {}" \
+        --preview-window 'right:60%:wrap' \
+    }
+_fzf_git_with_preview_file() {
+    _fzf_bind_preview "$@" \
+        --preview "eval $_FZF_GIT_PREVIEW_FILE && _fzf_git_preview_file {}" \
+        --preview-window 'right:60%:wrap'
+}
+
+_fzf_bind_preview() {
+    "$@" --bind "ctrl-/:toggle-preview"
+}
+
+_fzf_bind_refs() {
+    "$@" --bind "ctrl-r:reload(eval $_FZF_GIT_LIST_REFS && _fzf_git_list_refs)+change-prompt(ref> )+change-preview(eval $_FZF_GIT_PREVIEW_REF && _fzf_git_preview_ref {})+change-header(ctrl-f: files)+change-nth(1,2)+change-with-nth({2} {3})"
+}
+_fzf_bind_modified() {
+    "$@" --bind "ctrl-f:reload(eval $_FZF_GIT_LIST_MODIFIED_FILES && _fzf_git_list_modified_files)+change-prompt(modified> )+change-preview(eval $_FZF_GIT_PREVIEW_FILE && _fzf_git_preview_file {})+change-header(ctrl-r: refs)+change-nth(1)+change-with-nth({3} {2})"
+}
+_fzf_bind_unstaged() {
+    "$@" --bind "ctrl-f:reload-sync(eval $_FZF_GIT_LIST_UNSTAGED_FILES && _fzf_git_list_unstaged_files)+change-prompt(unstaged> )+change-preview(eval $_FZF_GIT_PREVIEW_FILE && _fzf_git_preview_file {})+change-header(ctrl-r: refs)+change-nth(1)+change-with-nth({3} {2})"
+}
+
+_fzf_git() {
     git -C . rev-parse --git-dir &>/dev/null || return 1
-    local files
-    files=$(
-        { git diff --name-only HEAD 2>/dev/null; git ls-files --others --exclude-standard 2>/dev/null; } | sort -u
-    )
-    [[ -z "$files" ]] && return 1
-    echo "$files" | xargs ls -t1d 2>/dev/null | fzf \
+    fzf \
         --height=60% \
         --layout=reverse \
-        --multi \
+        --with-shell='zsh -c' \
         --ansi \
-        --delimiter ' ' \
-        --prompt 'file> ' \
-        --header 'ctrl-r: refs/commits' \
-        --preview "$preview" \
-        --preview-window 'right:60%:wrap' \
-        --bind 'ctrl-/:toggle-preview' \
-        --bind "ctrl-r:reload($refs_reload)+change-prompt(ref> )+change-preview(git show --stat --color=always {1} 2>/dev/null | head -50)+change-header(ctrl-f: files)" \
-        --bind "ctrl-f:reload($files_reload)+change-prompt(file> )+change-preview($preview)+change-header(ctrl-r: refs/commits)" \
-        --query "$query" \
-        | awk '{print $1}'
+        "$@"
+}
+
+# pickers
+_fzf_git_modified_files() {
+    _fzf_git_list_modified_files | \
+        _fzf_git_with_preview_file \
+        _fzf_bind_refs \
+        _fzf_bind_modified \
+        _fzf_git \
+        --multi \
+        --delimiter "\t" \
+        --prompt 'modified> ' \
+        --header 'ctrl-r: refs' \
+        --nth=1 \
+        --with-nth="{3} {2}" \
+        --accept-nth=2 \
+        --query "$1"
+}
+
+_fzf_git_unstaged_files() {
+    _fzf_git_list_unstaged_files | \
+        _fzf_git_with_preview_file \
+        _fzf_bind_refs \
+        _fzf_bind_unstaged \
+        _fzf_git \
+        --multi \
+        --delimiter "\t" \
+        --prompt 'unstaged> ' \
+        --header 'ctrl-r: refs' \
+        --nth=1 \
+        --with-nth="{3} {2}" \
+        --accept-nth=2 \
+        --query "$1"
+}
+
+_fzf_git_tracked_files() {
+    git ls-files 2>/dev/null | \
+        _fzf_git_with_preview_file \
+        _fzf_git \
+        --multi \
+        --prompt 'tracked> ' \
+        --query "$1"
 }
 
 _fzf_git_stashes() {
-    local query="$1"
-    local preview='git stash show -p {1} --color=always | delta'
-    git -C . rev-parse --git-dir &>/dev/null || return 1
-    git stash list --format='%gd %s' 2>/dev/null | fzf \
-        --height=60% \
-        --layout=reverse \
-        --ansi \
+    git stash list --format='%gd %s' 2>/dev/null | \
+        _fzf_bind_preview \
+        _fzf_git \
         --delimiter ' ' \
-        --preview "$preview" \
+        --prompt 'stash> ' \
+        --preview "git stash show -p {1} --color=always | delta" \
         --preview-window 'right:60%:wrap' \
-        --bind 'ctrl-/:toggle-preview' \
-        --query "$query" \
-        | awk '{print $1}'
+        --query "$1"
 }
 
 _fzf_git_refs() {
-    local query="$1"
-    local files_reload='{ git diff --name-only HEAD 2>/dev/null; git ls-files --others --exclude-standard 2>/dev/null; } | sort -u | (f=$(cat); [ -n "$f" ] && echo "$f" | xargs ls -t1d 2>/dev/null || true)'
-    local refs_reload='git for-each-ref --sort=-creatordate --format="%(refname:short)" refs/heads refs/remotes refs/tags 2>/dev/null; git log --oneline --color=always 2>/dev/null'
-    local file_preview='git diff --color=always HEAD -- {1} 2>/dev/null | delta'
-    git -C . rev-parse --git-dir &>/dev/null || return 1
-    {
-        git for-each-ref --sort=-creatordate --format='%(refname:short)' refs/heads refs/remotes refs/tags 2>/dev/null
-        git log --oneline --color=always 2>/dev/null
-    } | fzf \
-        --height=60% \
-        --layout=reverse \
-        --ansi \
-        --delimiter ' ' \
+    _fzf_git_list_refs | \
+        _fzf_git_with_preview_ref \
+        _fzf_bind_refs \
+        _fzf_bind_modified \
+        _fzf_git \
+        --delimiter "\t" \
         --prompt 'ref> ' \
-        --header 'ctrl-f: files' \
-        --preview 'git show --stat --color=always {1} 2>/dev/null | head -50' \
-        --preview-window 'right:60%:wrap' \
-        --bind 'ctrl-/:toggle-preview' \
-        --bind "ctrl-f:reload($files_reload)+change-prompt(file> )+change-preview($file_preview)+change-header(ctrl-r: refs/commits)" \
-        --bind "ctrl-r:reload($refs_reload)+change-prompt(ref> )+change-preview(git show --stat --color=always {1} 2>/dev/null | head -50)+change-header(ctrl-f: files)" \
-        --query "$query" \
-        | awk '{print $1}'
+        --header 'ctrl-f: modified' \
+        --nth=1,2 \
+        --with-nth="{2} {3}" \
+        --accept-nth=2 \
+        --query "$1"
 }
 
-# ── zle widgets ────────────────────────────────────────────────────────────────
-
+# picker zle widgets
 _fzf_complete_git_files_widget() {
     _fzf_replace_last_args _fzf_git_modified_files "$1"
 }
 zle -N _fzf_complete_git_files_widget
+
+_fzf_complete_git_tracked_files_widget() {
+    _fzf_replace_last_args _fzf_git_tracked_files "$1"
+}
+zle -N _fzf_complete_git_tracked_files_widget
+
+_fzf_complete_git_unstaged_files_widget() {
+    _fzf_replace_last_args _fzf_git_unstaged_files "$1"
+}
+zle -N _fzf_complete_git_unstaged_files_widget
 
 _fzf_complete_git_stash_widget() {
     _fzf_replace_last_args _fzf_git_stashes "$1"
@@ -99,8 +193,7 @@ _fzf_complete_git_refs_widget() {
 }
 zle -N _fzf_complete_git_refs_widget
 
-# ── fzf **<Tab> hooks ──────────────────────────────────────────────────────────
-
+# fzf hooks
 _fzf_complete_git() {
     local args=("$@")
     local subcmd=$(
@@ -115,8 +208,14 @@ _fzf_complete_git() {
     fi
 
     case $subcmd in
-        add|update-index|rm|restore|diff)
+        restore|diff)
             _fzf_git_modified_files
+            ;;
+        add)
+            _fzf_git_unstaged_files
+            ;;
+        rm)
+            _fzf_git_tracked_files
             ;;
         stash)
             local stash_subcmd=$(
@@ -135,6 +234,3 @@ _fzf_complete_git() {
     esac
 }
 
-_fzf_complete_git_post() {
-    awk '{print $1}'
-}

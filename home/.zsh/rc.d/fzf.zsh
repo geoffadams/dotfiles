@@ -57,8 +57,16 @@ _fzf_smart_tab() {
         local subcmd=$words[1]
         shift words
         case $subcmd in
-            add|update-index|rm|restore|diff)
+            restore|diff)
                 zle _fzf_complete_git_files_widget "$(_fzf_smart_tab_query $words)"
+                return
+                ;;
+            add)
+                zle _fzf_complete_git_unstaged_files_widget "$(_fzf_smart_tab_query $words)"
+                return
+                ;;
+            rm)
+                zle _fzf_complete_git_tracked_files_widget "$(_fzf_smart_tab_query $words)"
                 return
                 ;;
             checkout|show|cherry-pick|rebase|reset|revert|merge)
