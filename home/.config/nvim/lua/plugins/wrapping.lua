@@ -1,3 +1,7 @@
 return {
-    "andrewferrier/wrapping.nvim"
+    "andrewferrier/wrapping.nvim",
+    opts = {
+        create_keymaps = false,
+        softener = { markdown = true },
+    },
 }

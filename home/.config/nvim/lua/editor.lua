@@ -16,13 +16,10 @@ vim.o.smartcase = true -- uppercase triggers case sensitivity
 
 -- wrapping
 vim.o.wrap = false
-vim.o.textwidth = 0
+vim.o.textwidth = 120
 vim.o.wrapmargin = 10
 vim.o.breakindent = true
 vim.opt.formatoptions:append({ t = true })
-require("wrapping").setup({
-    create_keymaps = false,
-})
 vim.keymap.set(
     "n",
     "<Leader>ww",
