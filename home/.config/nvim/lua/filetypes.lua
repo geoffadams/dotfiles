@@ -1,3 +1,5 @@
+local u = require("util")
+
 vim.filetype.add({
     extension = {
         urls = function()
@@ -24,6 +26,6 @@ vim.filetype.add({
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "help" },
     callback = function(opts)
-        vim.keymap.set("n", "gd", "<C-]>", { silent = true, buffer = opts.buf })
+        u.keymap_buf("n", "gd", "<C-]>", "Go to definition", opts.buf)
     end,
 })

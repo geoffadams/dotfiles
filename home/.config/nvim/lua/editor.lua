@@ -1,3 +1,5 @@
+local u = require("util")
+
 vim.cmd("syntax enable")
 vim.o.encoding = "utf-8"
 
@@ -20,15 +22,10 @@ vim.o.textwidth = 120
 vim.o.wrapmargin = 10
 vim.o.breakindent = true
 vim.opt.formatoptions:append({ t = true })
-vim.keymap.set(
-    "n",
-    "<Leader>ww",
-    "<Plug>(wrapping-soft-wrap-mode) <bar> <Cmd>Wrapwidth!<cr>",
-    { desc = "Enable soft-wrapping" }
-)
-vim.keymap.set("n", "<Leader>wW", "<Plug>(wrapping-hard-wrap-mode)", { desc = "Enable hard-wrapping" })
-vim.keymap.set("n", "<Leader>wc", "<Cmd>Wrapwidth 120<cr>", { desc = "Wide column width" })
-vim.keymap.set("n", "<Leader>wC", "<Cmd>Wrapwidth 80<cr>", { desc = "Narrow column width" })
+u.keymap("n", "<Leader>ww", "<Plug>(wrapping-soft-wrap-mode) <bar> <Cmd>Wrapwidth!<cr>", "Enable soft-wrapping")
+u.keymap("n", "<Leader>wW", "<Plug>(wrapping-hard-wrap-mode)", "Enable hard-wrapping")
+u.keymap("n", "<Leader>wc", "<Cmd>Wrapwidth 120<cr>", "Wide column width")
+u.keymap("n", "<Leader>wC", "<Cmd>Wrapwidth 80<cr>", "Narrow column width")
 
 -- tabs
 local indent = 4

@@ -33,4 +33,21 @@ M.map_vals = function(from, mapping)
     return to
 end
 
+M.keymap = function(mode, l, r, desc)
+    local opts = {
+        desc = desc,
+        noremap = true,
+    }
+    vim.keymap.set(mode, l, r, opts)
+end
+
+M.keymap_buf = function(mode, l, r, desc, bufnr)
+    local opts = {
+        desc = desc,
+        buffer = bufnr,
+        noremap = true,
+    }
+    vim.keymap.set(mode, l, r, opts)
+end
+
 return M
