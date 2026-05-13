@@ -26,9 +26,10 @@ keybinds clear-defaults=true {
 
         bind "Super Ctrl Alt Shift ," { MovePane; }
         bind "Super Ctrl Alt Shift ." { MovePaneBackwards; }
-        bind "Super Ctrl Alt Shift /" {
-            LaunchOrFocusPlugin "zellij-forgot" {
+        bind "Super Ctrl Alt Shift F1" {
+            LaunchOrFocusPlugin "zellij_forgot" {
                 floating true
+                move_to_focused_tab true
             }
         }
 
@@ -324,7 +325,7 @@ plugins {
     //     hide_frame_except_for_scroll     "true"
     //     hide_frame_except_for_fullscreen "true"
     // }
-    zellij-forgot location="file:~/.config/zellij/plugins/zellij_forgot.wasm" {
+    zellij_forgot location="file:~/.config/zellij/plugins/zellij_forgot.wasm" {
     }
     zsm location="file:~/.config/zellij/plugins/zsm.wasm" {
         session_separator "-"
@@ -339,6 +340,7 @@ plugins {
 load_plugins {
     // "zjframes"
     "zellij:link"
+    "zellij_forgot"
 }
  
 // Use a simplified UI without special fonts (arrow glyphs)
