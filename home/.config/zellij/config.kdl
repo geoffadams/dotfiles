@@ -318,12 +318,12 @@ plugins {
         command_git_branch_interval    "10"
         command_git_branch_rendermode  "static"
     }
-    zjframes location="file:~/.config/zellij/plugins/zjframes.wasm" {
-        hide_frame_for_single_pane       "true"
-        hide_frame_except_for_search     "true"
-        hide_frame_except_for_scroll     "true"
-        hide_frame_except_for_fullscreen "true"
-    }
+    // zjframes location="file:~/.config/zellij/plugins/zjframes.wasm" {
+    //     hide_frame_for_single_pane       "true"
+    //     hide_frame_except_for_search     "true"
+    //     hide_frame_except_for_scroll     "true"
+    //     hide_frame_except_for_fullscreen "true"
+    // }
     zellij-forgot location="file:~/.config/zellij/plugins/zellij_forgot.wasm" {
     }
     zsm location="file:~/.config/zellij/plugins/zsm.wasm" {
@@ -337,7 +337,7 @@ plugins {
 // eg. "file:/path/to/my-plugin.wasm"
 // eg. "https://example.com/my-plugin.wasm"
 load_plugins {
-    "zjframes"
+    // "zjframes"
     "zellij:link"
 }
  
@@ -396,7 +396,7 @@ default_layout "standard"
 //   - true (default, enabled)
 //   - false
 // 
-pane_frames false
+pane_frames true
  
 // When attaching to an existing session with other users,
 // should the session be mirrored (true)
