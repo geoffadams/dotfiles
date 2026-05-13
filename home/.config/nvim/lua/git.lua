@@ -60,3 +60,6 @@ gitsigns.setup({
         u.keymap_buf("n", "<leader>vw", gitsigns.toggle_word_diff, "Toggle word diffs", bufnr)
     end,
 })
+
+u.keymap("n", "<leader>hl", "<cmd>Browsher commit<CR>")
+u.keymap("v", "<leader>hl", ":'<,'>Browsher commit<CR>gv")
