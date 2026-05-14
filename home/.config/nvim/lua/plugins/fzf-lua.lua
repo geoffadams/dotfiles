@@ -12,7 +12,6 @@ return {
         },
         grep = {
             RIPGREP_CONFIG_PATH = vim.env.RIPGREP_CONFIG_PATH,
-            resume = true,
         },
         lsp = {
             finder = {
@@ -35,30 +34,33 @@ return {
     },
     ---@diagnostic enable: missing-fields
     keys = {
-        { "<C-p>", [[<Cmd>lua require"fzf-lua".global()<CR>]], desc = "Global picker" },
-        { "<Leader>ff", [[<Cmd>lua require"fzf-lua".files()<CR>]], desc = "Files" },
-        { "<Leader>fb", [[<Cmd>lua require"fzf-lua".buffers()<CR>]], desc = "Buffers" },
-        { "<Leader>fg", [[<Cmd>lua require"fzf-lua".live_grep_glob()<CR>]], desc = "Grep" },
-        { "<Leader>fq", [[<Cmd>lua require"fzf-lua".quickfix()<CR>]], desc = "Quickfix" },
-        { "<Leader>fa", [[<Cmd>lua require"fzf-lua".lsp_code_actions()<CR>]], desc = "Code actions" },
+        { "<C-k>", [[<Cmd>lua require"fzf-lua".global()<CR>]], desc = "Global picker" },
+        { "<C-p>", [[<Cmd>lua require"fzf-lua".files()<CR>]], desc = "Files" },
+        { "<C-b>", [[<Cmd>lua require"fzf-lua".buffers()<CR>]], desc = "Buffers" },
+        { "<C-f>", [[<Cmd>lua require"fzf-lua".live_grep_glob({resume = true})<CR>]], desc = "Live Grep" },
+
+        { "<F1>", [[<Cmd>lua require"fzf-lua".help_tags()<CR>]], desc = "Help tags" },
+        { "<F2>", [[<Cmd>lua require"fzf-lua".builtin()<CR>]], desc = "Pickers" },
+
+        { "<C-q>", [[<Cmd>lua require"fzf-lua".quickfix()<CR>]], desc = "Quickfix" },
+        { "<C-a>", [[<Cmd>lua require"fzf-lua".lsp_code_actions()<CR>]], desc = "Code actions" },
         {
-            "<Leader>fd",
+            "<C-i>",
             [[<Cmd>lua require"fzf-lua".lsp_finder()<CR>]],
             desc = "LSP definitions, declarations & references",
         },
-        { "<Leader>fs", [[<Cmd>lua require"fzf-lua".lsp_document_symbols()<CR>]], desc = "Document symbols" },
-        { "<Leader>fS", [[<Cmd>lua require"fzf-lua".lsp_workspace_symbols()<CR>]], desc = "Workspace symbols" },
-        { "<Leader>fx", [[<Cmd>lua require"fzf-lua".lsp_document_diagnostics()<CR>]], desc = "Document diagnostics" },
-        { "<Leader>fX", [[<Cmd>lua require"fzf-lua".lsp_workspace_diagnostics()<CR>]], desc = "Workspace diagnostics" },
-        { "<Leader>fc", [[<Cmd>lua require"fzf-lua".git_status()<CR>]], desc = "Git changes" },
+        { "<C-o>", [[<Cmd>lua require"fzf-lua".lsp_document_symbols()<CR>]], desc = "Document symbols" },
+        { "<C-S-o>", [[<Cmd>lua require"fzf-lua".lsp_workspace_symbols()<CR>]], desc = "Workspace symbols" },
+        { "<C-d>", [[<Cmd>lua require"fzf-lua".lsp_document_diagnostics()<CR>]], desc = "Document diagnostics" },
+        { "<C-S-d>", [[<Cmd>lua require"fzf-lua".lsp_workspace_diagnostics()<CR>]], desc = "Workspace diagnostics" },
+
+        { "<C-g>", [[<Cmd>lua require"fzf-lua".git_status()<CR>]], desc = "Git changes" },
         {
-            "<Leader>fv",
+            "<C-S-g>",
             function()
-                require("fzf-lua").combine({ pickers = "git_branches;git_tags;git_stash" })
+                require("fzf-lua").combine({ pickers = { "git_branches", "git_tags", "git_stash" } })
             end,
             desc = "Git refs (branches, tags, stash)",
         },
-        { "<F1>", [[<Cmd>lua require"fzf-lua".help_tags()<CR>]], desc = "Help tags" },
-        { "<Leader>f?", [[<Cmd>lua require"fzf-lua".builtin()<CR>]], desc = "Pickers" },
     },
 }
