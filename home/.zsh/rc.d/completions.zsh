@@ -25,7 +25,7 @@ setopt always_to_end
 setopt glob_complete
 
 # filesystem completions
-_comp_options+=(globdots)
+setopt globdots
 zstyle ':completion:*' special-dirs false
 
 # init completions
