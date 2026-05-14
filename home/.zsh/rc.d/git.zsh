@@ -79,10 +79,10 @@ _fzf_bind_git_tracked_files() {
     "$@" --bind "ctrl-t:reload(eval $_FZF_GIT_LIST_TRACKED_FILES && _git_list_tracked_files)+change-prompt(tracked> )+change-preview(eval $_FZF_GIT_PREVIEW_FILE && _fzf_git_preview_file {})+change-nth(1)+change-with-nth({2})"
 }
 _fzf_bind_git_modified_files() {
-    "$@" --bind "ctrl-m:reload(eval $_FZF_GIT_LIST_MODIFIED_FILES && _git_list_modified_files)+change-prompt(modified> )+change-preview(eval $_FZF_GIT_PREVIEW_FILE && _fzf_git_preview_file {})+change-nth(1)+change-with-nth({3} {2})"
+    "$@" --bind "ctrl-f:reload(eval $_FZF_GIT_LIST_MODIFIED_FILES && _git_list_modified_files)+change-prompt(bmodified> )+change-preview(eval $_FZF_GIT_PREVIEW_FILE && _fzf_git_preview_file {})+change-nth(1)+change-with-nth({3} {2})"
 }
 _fzf_bind_git_unstaged_files() {
-    "$@" --bind "ctrl-u:reload-sync(eval $_FZF_GIT_LIST_UNSTAGED_FILES && _git_list_unstaged_files)+change-prompt(unstaged> )+change-preview(eval $_FZF_GIT_PREVIEW_FILE && _fzf_git_preview_file {})+change-nth(1)+change-with-nth({3} {2})"
+    "$@" --bind "ctrl-u:reload(eval $_FZF_GIT_LIST_UNSTAGED_FILES && _git_list_unstaged_files)+change-prompt(unstaged> )+change-preview(eval $_FZF_GIT_PREVIEW_FILE && _fzf_git_preview_file {})+change-nth(1)+change-with-nth({3} {2})"
 }
 
 _fzf_git_with_preview_ref() {
@@ -118,7 +118,7 @@ _fzf_git_files() {
         --multi \
         --delimiter "\t" \
         --prompt 'tracked> ' \
-        --header 'ctrl+ [t]racked [m]odified [u]nstaged [r]efs' \
+        --header 'ctrl+ [t]racked modi[f]ied [u]nstaged [r]efs' \
         --nth=1 \
         --with-nth="{2}" \
         --accept-nth=2 \
@@ -136,7 +136,7 @@ _fzf_git_modified_files() {
         --multi \
         --delimiter "\t" \
         --prompt 'modified> ' \
-        --header 'ctrl+ [t]racked [m]odified [u]nstaged [r]efs' \
+        --header 'ctrl+ [t]racked modi[f]ied [u]nstaged [r]efs' \
         --nth=1 \
         --with-nth="{3} {2}" \
         --accept-nth=2 \
@@ -154,7 +154,7 @@ _fzf_git_unstaged_files() {
         --multi \
         --delimiter "\t" \
         --prompt 'unstaged> ' \
-        --header 'ctrl+ [t]racked [m]odified [u]nstaged [r]efs' \
+        --header 'ctrl+ [t]racked modi[f]ied [u]nstaged [r]efs' \
         --nth=1 \
         --with-nth="{3} {2}" \
         --accept-nth=2 \
@@ -164,14 +164,14 @@ _fzf_git_unstaged_files() {
 _fzf_git_tracked_files() {
     _git_list_tracked_files | \
         _fzf_git_with_preview_file \
-        _fzf_git \
         _fzf_bind_git_modified_files \
         _fzf_bind_git_unstaged_files \
         _fzf_bind_git_tracked_files \
+        _fzf_git \
         --multi \
         --delimiter "\t" \
         --prompt 'tracked> ' \
-        --header 'ctrl+ [t]racked [m]odified [u]nstaged [r]efs' \
+        --header 'ctrl+ [t]racked modi[f]ied [u]nstaged [r]efs' \
         --nth=1 \
         --with-nth="{2}" \
         --accept-nth=2 \
@@ -199,7 +199,7 @@ _fzf_git_refs() {
         _fzf_git \
         --delimiter "\t" \
         --prompt 'ref> ' \
-        --header 'ctrl+ [t]racked [m]odified [u]nstaged [r]efs' \
+        --header 'ctrl+ [t]racked modi[f]ied [u]nstaged [r]efs' \
         --nth=1,2 \
         --with-nth="{2} {3}" \
         --accept-nth=2 \
