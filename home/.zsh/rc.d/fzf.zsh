@@ -4,6 +4,7 @@ fi
 
 source <(fzf --zsh)
 
+# base fzf config
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
 
 if (( $+commands[fd] )); then
@@ -16,7 +17,7 @@ if (( $+commands[fd] )); then
     }
 fi
 
-# ── shared fzf helpers ─────────────────────────────────────────────────────────
+# fzf helpers
 
 # Appends fzf selection(s) to the current line buffer, replacing the last word.
 _fzf_replace_last_args() {
@@ -32,7 +33,7 @@ _fzf_replace_last_args() {
     zle redisplay
 }
 
-# ── smart Tab binding ──────────────────────────────────────────────────────────
+# fzf-driven tab completions
 
 _fzf_smart_tab_query() {
     [[ ${#@} > 0 && $@[-1] != ('**'|'--') ]] && echo $@[-1]
@@ -58,7 +59,7 @@ _fzf_smart_tab() {
         shift words
         case $subcmd in
             restore|diff)
-                zle _fzf_complete_git_files_widget "$(_fzf_smart_tab_query $words)"
+                zle _fzf_complete_git_modified_files_widget "$(_fzf_smart_tab_query $words)"
                 return
                 ;;
             add)
@@ -93,6 +94,5 @@ _fzf_smart_tab() {
 
     zle expand-or-complete
 }
-
 zle -N _fzf_smart_tab
 bindkey '^I' _fzf_smart_tab

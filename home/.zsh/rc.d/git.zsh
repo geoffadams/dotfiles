@@ -20,6 +20,12 @@ _git_list_refs() {
 }
 export _FZF_GIT_LIST_REFS=$(functions _git_list_refs)
 
+_git_list_tracked_files() {
+    git ls-files -t | \
+        gsed -r 's/^(.) (.+)$/\1\t\2/'
+}
+export _FZF_GIT_LIST_TRACKED_FILES=$(functions _git_list_tracked_files)
+
 _git_list_modified_files() {
     git status --porcelain=2 --no-renames | \
         ggrep -v -e "^#" | \
@@ -45,19 +51,18 @@ export _FZF_GIT_PREVIEW_REF=$(functions _fzf_git_preview_ref)
 
 _fzf_git_preview_file() {
     local line=("${(@Q)${(z)@}}")
-    echo $line
     local f
     if [[ ${#line} == 1 ]]; then
         f=$line[1]
-        echo "one line: $f"
         bat --style=numbers --color=always "$f" 2>/dev/null || cat "$f" 2>/dev/null || ls -1 "$f"
     elif [[ $line[1] == "?" ]]; then
         f=${line[2,-2]}
-        echo "? line: $f"
+        bat --style=numbers --color=always "$f" 2>/dev/null || cat "$f" 2>/dev/null || ls -1 "$f"
+    elif [[ $line[1] == "H" ]]; then
+        f=${line[2,-1]}
         bat --style=numbers --color=always "$f" 2>/dev/null || cat "$f" 2>/dev/null || ls -1 "$f"
     else
         f=${line[2,-2]}
-        echo "other line: $f"
         git diff --color=always HEAD -- "$f" 2>/dev/null | delta
     fi
 }
@@ -68,13 +73,16 @@ _fzf_bind_preview() {
     "$@" --bind "ctrl-/:toggle-preview"
 }
 _fzf_bind_git_refs() {
-    "$@" --bind "ctrl-r:reload(eval $_FZF_GIT_LIST_REFS && _git_list_refs)+change-prompt(ref> )+change-preview(eval $_FZF_GIT_PREVIEW_REF && _fzf_git_preview_ref {})+change-header(ctrl-f: files)+change-nth(1,2)+change-with-nth({2} {3})"
+    "$@" --bind "ctrl-r:reload(eval $_FZF_GIT_LIST_REFS && _git_list_refs)+change-prompt(ref> )+change-preview(eval $_FZF_GIT_PREVIEW_REF && _fzf_git_preview_ref {})+change-nth(1,2)+change-with-nth({2} {3})"
+}
+_fzf_bind_git_tracked_files() {
+    "$@" --bind "ctrl-t:reload(eval $_FZF_GIT_LIST_TRACKED_FILES && _git_list_tracked_files)+change-prompt(tracked> )+change-preview(eval $_FZF_GIT_PREVIEW_FILE && _fzf_git_preview_file {})+change-nth(1)+change-with-nth({2})"
 }
 _fzf_bind_git_modified_files() {
-    "$@" --bind "ctrl-f:reload(eval $_FZF_GIT_LIST_MODIFIED_FILES && _git_list_modified_files)+change-prompt(modified> )+change-preview(eval $_FZF_GIT_PREVIEW_FILE && _fzf_git_preview_file {})+change-header(ctrl-r: refs)+change-nth(1)+change-with-nth({3} {2})"
+    "$@" --bind "ctrl-m:reload(eval $_FZF_GIT_LIST_MODIFIED_FILES && _git_list_modified_files)+change-prompt(modified> )+change-preview(eval $_FZF_GIT_PREVIEW_FILE && _fzf_git_preview_file {})+change-nth(1)+change-with-nth({3} {2})"
 }
 _fzf_bind_git_unstaged_files() {
-    "$@" --bind "ctrl-f:reload-sync(eval $_FZF_GIT_LIST_UNSTAGED_FILES && _git_list_unstaged_files)+change-prompt(unstaged> )+change-preview(eval $_FZF_GIT_PREVIEW_FILE && _fzf_git_preview_file {})+change-header(ctrl-r: refs)+change-nth(1)+change-with-nth({3} {2})"
+    "$@" --bind "ctrl-u:reload-sync(eval $_FZF_GIT_LIST_UNSTAGED_FILES && _git_list_unstaged_files)+change-prompt(unstaged> )+change-preview(eval $_FZF_GIT_PREVIEW_FILE && _fzf_git_preview_file {})+change-nth(1)+change-with-nth({3} {2})"
 }
 
 _fzf_git_with_preview_ref() {
@@ -99,16 +107,36 @@ _fzf_git() {
 }
 
 # pickers
+_fzf_git_files() {
+    _git_list_tracked_files | \
+        _fzf_git_with_preview_file \
+        _fzf_bind_git_refs \
+        _fzf_bind_git_modified_files \
+        _fzf_bind_git_unstaged_files \
+        _fzf_bind_git_tracked_files \
+        _fzf_git \
+        --multi \
+        --delimiter "\t" \
+        --prompt 'tracked> ' \
+        --header 'ctrl+ [t]racked [m]odified [u]nstaged [r]efs' \
+        --nth=1 \
+        --with-nth="{2}" \
+        --accept-nth=2 \
+        --query "$1"
+}
+
 _fzf_git_modified_files() {
     _git_list_modified_files | \
         _fzf_git_with_preview_file \
         _fzf_bind_git_refs \
         _fzf_bind_git_modified_files \
+        _fzf_bind_git_unstaged_files \
+        _fzf_bind_git_tracked_files \
         _fzf_git \
         --multi \
         --delimiter "\t" \
         --prompt 'modified> ' \
-        --header 'ctrl-r: refs' \
+        --header 'ctrl+ [t]racked [m]odified [u]nstaged [r]efs' \
         --nth=1 \
         --with-nth="{3} {2}" \
         --accept-nth=2 \
@@ -119,12 +147,14 @@ _fzf_git_unstaged_files() {
     _git_list_unstaged_files | \
         _fzf_git_with_preview_file \
         _fzf_bind_git_refs \
+        _fzf_bind_git_modified_files \
         _fzf_bind_git_unstaged_files \
+        _fzf_bind_git_tracked_files \
         _fzf_git \
         --multi \
         --delimiter "\t" \
         --prompt 'unstaged> ' \
-        --header 'ctrl-r: refs' \
+        --header 'ctrl+ [t]racked [m]odified [u]nstaged [r]efs' \
         --nth=1 \
         --with-nth="{3} {2}" \
         --accept-nth=2 \
@@ -132,11 +162,19 @@ _fzf_git_unstaged_files() {
 }
 
 _fzf_git_tracked_files() {
-    git ls-files 2>/dev/null | \
+    _git_list_tracked_files | \
         _fzf_git_with_preview_file \
         _fzf_git \
+        _fzf_bind_git_modified_files \
+        _fzf_bind_git_unstaged_files \
+        _fzf_bind_git_tracked_files \
         --multi \
+        --delimiter "\t" \
         --prompt 'tracked> ' \
+        --header 'ctrl+ [t]racked [m]odified [u]nstaged [r]efs' \
+        --nth=1 \
+        --with-nth="{2}" \
+        --accept-nth=2 \
         --query "$1"
 }
 
@@ -156,10 +194,12 @@ _fzf_git_refs() {
         _fzf_git_with_preview_ref \
         _fzf_bind_git_refs \
         _fzf_bind_git_modified_files \
+        _fzf_bind_git_unstaged_files \
+        _fzf_bind_git_tracked_files \
         _fzf_git \
         --delimiter "\t" \
         --prompt 'ref> ' \
-        --header 'ctrl-f: modified' \
+        --header 'ctrl+ [t]racked [m]odified [u]nstaged [r]efs' \
         --nth=1,2 \
         --with-nth="{2} {3}" \
         --accept-nth=2 \
@@ -168,9 +208,14 @@ _fzf_git_refs() {
 
 # picker zle widgets
 _fzf_complete_git_files_widget() {
-    _fzf_replace_last_args _fzf_git_modified_files "$1"
+    _fzf_replace_last_args _fzf_git_files "$1"
 }
 zle -N _fzf_complete_git_files_widget
+
+_fzf_complete_git_modified_files_widget() {
+    _fzf_replace_last_args _fzf_git_modified_files "$1"
+}
+zle -N _fzf_complete_git_modified_files_widget
 
 _fzf_complete_git_tracked_files_widget() {
     _fzf_replace_last_args _fzf_git_tracked_files "$1"
@@ -216,6 +261,9 @@ _fzf_complete_git() {
         rm)
             _fzf_git_tracked_files
             ;;
+        checkout|show|cherry-pick|rebase|reset|revert|merge)
+            _fzf_git_refs
+            ;;
         stash)
             local stash_subcmd=$(
                 echo "${args[@]}" \
@@ -226,9 +274,6 @@ _fzf_complete_git() {
                     _fzf_git_stashes
                     ;;
             esac
-            ;;
-        checkout|show|cherry-pick|rebase|reset|revert|merge)
-            _fzf_git_refs
             ;;
     esac
 }
