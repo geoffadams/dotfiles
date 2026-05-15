@@ -16,6 +16,6 @@ return {
         },
     },
     keys = {
-        { "<leader>fp", "<cmd>AutoSession search<CR>", desc = "Session search" },
+        { "<Leader>sw", "<cmd>AutoSession search<CR>", desc = "Session search" },
     },
 }

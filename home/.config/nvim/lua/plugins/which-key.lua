@@ -14,4 +14,13 @@ return {
             { "<Leader>w", group = "wrapping" },
         },
     },
+    keys = {
+        {
+            "<F1>",
+            function()
+                require("which-key").show()
+            end,
+            desc = "Keymaps",
+        },
+    },
 }
