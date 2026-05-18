@@ -44,7 +44,7 @@ return {
 
         { "<C-a>", [[<Cmd>lua require"fzf-lua".lsp_code_actions()<CR>]], desc = "Code actions" },
         {
-            "<C-i>",
+            "<C-l>",
             [[<Cmd>lua require"fzf-lua".lsp_finder()<CR>]],
             desc = "LSP definitions, declarations & references",
         },
