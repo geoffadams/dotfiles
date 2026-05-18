@@ -1,9 +1,7 @@
 return {
     "rmagatti/auto-session",
     lazy = false,
-    dependencies = {
-        "ibhagwan/fzf-lua",
-    },
+    dependencies = {},
     ---@module "auto-session"
     ---@type AutoSession.Config
     opts = {
