@@ -53,17 +53,6 @@ vim.lsp.enable("eslint")
 vim.lsp.enable("jsonls")
 vim.lsp.enable("clojure_lsp")
 vim.lsp.enable("marksman")
-vim.lsp.config("markdown_oxide", {
-    capabilities = {
-        workspace = {
-            didChangeWatchedFiles = {
-                dynamicRegistration = true,
-            },
-        },
-    },
-})
-vim.lsp.enable("markdown_oxide")
-
 vim.lsp.enable("ansiblels")
 
 local function enable_lsp_functionality(event)
