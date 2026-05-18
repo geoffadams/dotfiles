@@ -1,13 +1,15 @@
 local util = require("util")
-local completion = require("mini.completion")
-local pairs = require("mini.pairs")
-local mkeymap = require("mini.keymap")
-local snippets = require("mini.snippets")
 
+vim.opt.completeopt = "fuzzy,menu,noselect,popup"
+
+local pairs = require("mini.pairs")
 pairs.setup()
+
+local mkeymap = require("mini.keymap")
 mkeymap.setup()
 
 local process_items_opts = { kind_priority = { Text = -1, Snippet = 99 } }
+local completion = require("mini.completion")
 completion.setup({
     lsp_completion = {
         auto_setup = false,
@@ -36,6 +38,7 @@ mkeymap.map_multistep("i", "<CR>", { "pmenu_accept", "minipairs_cr" })
 mkeymap.map_multistep("i", "<BS>", { "minipairs_bs" })
 
 local config_path = vim.fn.stdpath("config")
+local snippets = require("mini.snippets")
 snippets.setup({
     snippets = {
         -- Always load 'snippets/global.json' from config directory
