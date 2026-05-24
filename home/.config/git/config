@@ -5,10 +5,11 @@
     autocrlf = input
     editor = nvim
     pager = delta
-    fsmonitor = true
     untrackedCache = true
     preloadIndex = true
     commitGraph = true
+[feature]
+    manyFiles = true
 [include]
     path = ~/.config/git/config-local
 [interactive]
@@ -28,6 +29,8 @@
     width = variable
 [init]
     defaultBranch = main
+[worktree]
+    useRelativePaths = true
 [status]
     showStash = true
 [diff]
