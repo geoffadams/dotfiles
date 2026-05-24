@@ -16,6 +16,9 @@ vim.lsp.config("bashls", {
 })
 vim.lsp.enable("bashls")
 vim.lsp.config("vtsls", {
+    -- devcontainers support
+    cmd = require("devcontainers").lsp_cmd({ "vtsls", "--stdio" }),
+    -- general config
     settings = {
         typescript = {
             inlayHints = {
