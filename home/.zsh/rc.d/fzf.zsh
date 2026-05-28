@@ -44,6 +44,7 @@ _fzf_smart_tab() {
 
     # let normal completion handle options; '--' is only a file delimiter when followed by a space
     [[ ${words[-1]} == -* ]] && [[ ${words[-1]} != '--' || $LBUFFER[-1] != ' ' ]] && { zle expand-or-complete; return; }
+    [[ ${#words} < 2 || $LBUFFER[-1] != ' ' ]] && { zle expand-or-complete; return; }
 
     local cmd=$words[1]
     shift words
