@@ -5,7 +5,14 @@ fi
 source <(fzf --zsh)
 
 # base fzf config
-export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
+export FZF_CTRL_R_OPTS="--scheme history
+    --layout=default
+    --info=inline-right
+    --border=line
+    --ansi
+    --preview 'echo -ne {} | cut -f2 | bat -f --wrap never -l sh --style=plain'
+    --preview-window down:3:border-line:wrap:noinfo
+    --bind '?:toggle-preview'"
 
 if (( $+commands[fd] )); then
     _fzf_compgen_path() {
