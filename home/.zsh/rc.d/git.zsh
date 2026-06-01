@@ -88,12 +88,12 @@ _fzf_bind_git_unstaged_files() {
 _fzf_git_with_preview_ref() {
     _fzf_bind_preview "$@" \
         --preview "eval $_FZF_GIT_PREVIEW_REF && _fzf_git_preview_ref {}" \
-        --preview-window 'right:60%:wrap' \
+        --preview-window 'right:60%:border-line:wrap' \
     }
 _fzf_git_with_preview_file() {
     _fzf_bind_preview "$@" \
         --preview "eval $_FZF_GIT_PREVIEW_FILE && _fzf_git_preview_file {}" \
-        --preview-window 'right:60%:wrap'
+        --preview-window 'right:60%:border-line:wrap'
 }
 
 _fzf_git() {
@@ -101,6 +101,8 @@ _fzf_git() {
     fzf \
         --height=60% \
         --layout=reverse \
+        --info=inline-right \
+        --border=line \
         --with-shell='zsh -c' \
         --ansi \
         "$@"
@@ -185,7 +187,7 @@ _fzf_git_stashes() {
         --delimiter ' ' \
         --prompt 'stash> ' \
         --preview "git stash show -p {1} --color=always | delta" \
-        --preview-window 'right:60%:wrap' \
+        --preview-window 'right:60%:border-line:wrap' \
         --query "$1"
 }
 
