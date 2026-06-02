@@ -10,21 +10,49 @@ if (( $+commands[zellij] )); then
     alias zzl="zellij ls -r"
 
     if (( $+commands[fzf] )); then
+        _fzf_zellij() {
+            fzf \
+                --height=~40% \
+                --layout=default \
+                --info=inline-right \
+                --border=line \
+                --with-shell='zsh -c' \
+                --ansi \
+                --delimiter ' ' \
+                --nth 1 \
+                --with-nth "{1} {2..-1}" \
+                --accept-nth 1 \
+                "$@"
+        }
         zza() {
             local session="$1"
             if [[ -z "$session" ]]; then
-                session=$(zellij ls -s | fzf --height=~40% --layout=reverse --info=inline --border --margin=1)
+                session=$(
+                    zellij ls -r 2>/dev/null | \
+                        gsed -r 's/(.*) (\[Created (.*)\]) ?(\(.*EXITED.*\))?(\(current\))?$/\1\t\3/' | \
+                        column -s$'\t' -t | \
+                        _fzf_zellij
+                )
             fi
-            zellij a -c $session
+            zellij a -c "$session"
         }
         zzs() {
             local host="$1"
             local session="$2"
             if [[ -z "$host" ]]; then
-                host=$(grep -E '^Host [^\*]' ~/.ssh/config | awk '{print $2}' | fzf --height=~40% --layout=reverse --info=inline --border --margin=1)
+                host=$(
+                    grep -E '^Host [^\*]' ~/.ssh/config | \
+                        awk '{print $2}' | \
+                        _fzf_zellij
+                )
             fi
             if [[ -z "$session" ]]; then
-                session=$(ssh $host -t "zellij ls -rs" 2>/dev/null | fzf --height=~40% --layout=reverse --info=inline --border --margin=1)
+                session=$(
+                    ssh $host -t "zellij ls -r" 2>/dev/null | \
+                        gsed -r 's/(.*) (\[Created (.*)\]) ?(\(.*EXITED.*\))?(\(current\))?$/\1\t\3/' | \
+                        column -s$'\t' -t | \
+                        _fzf_zellij
+                )
             fi
             ssh $host -t "zellij a -c $session"
         }
@@ -61,7 +89,7 @@ if (( $+commands[zellij] )); then
         local state
         _arguments \
             '1:SSH host:->host' \
-            '2:remote session:->session'
+            '2:remote zellij session:->session'
         case $state in
             host)
                 _ssh_hosts
@@ -70,7 +98,7 @@ if (( $+commands[zellij] )); then
                 local host=${words[2]}
                 local sessions
                 sessions=(${(f)"$(ssh "$host" -t "zellij ls -rs" 2>/dev/null | tr -d '\r')"})
-                _describe 'remote session' sessions
+                _describe 'remote zellij session' sessions
                 ;;
         esac
     }
