@@ -55,7 +55,6 @@ return {
         { "<C-S-.>", [[<Cmd>lua require"fzf-lua".lsp_workspace_diagnostics()<CR>]], desc = "Workspace diagnostics" },
         { "<C-\\>", [[<Cmd>lua require"fzf-lua".quickfix()<CR>]], desc = "Quickfix" },
 
-        { "<C-g>", [[<Cmd>lua require"fzf-lua".git_status()<CR>]], desc = "Git changes" },
         {
             "<C-S-g>",
             function()
