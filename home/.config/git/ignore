@@ -43,6 +43,7 @@ nbproject
 .idea
 *.iml
 .vscode
+.nvim.lua
 
 # LibreOffice #
 ###############
@@ -51,9 +52,8 @@ nbproject
 # Local context #
 #################
 **/cdk.context.json
-.nvim.lua
-**/.claude/settings.local.json
 
 # Agents #
 ##########
-.claude
+**/.claude/settings.local.json
+
