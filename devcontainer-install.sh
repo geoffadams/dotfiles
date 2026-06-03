@@ -179,7 +179,7 @@ install_direnv() {
     command -v direnv &>/dev/null && return
     echo "Installing direnv..."
     local url
-    url="$(gh_asset_url direnv/direnv 'linux-amd64$')"
+    url="$(gh_asset_url direnv/direnv 'direnv\.linux-amd64')"
     curl -fsSL "$url" | $SUDO install -m 0755 /dev/stdin /usr/local/bin/direnv
     echo "direnv installed: $(direnv --version)"
 }
@@ -220,13 +220,13 @@ EOF
     fi
 }
 
+install_zsh_plugins
 install_starship
 install_vivid
-install_neovim
+install_fzf
+install_delta
 install_bat
 install_fd
-install_fzf
 install_zoxide
-install_delta
+install_neovim
 install_direnv
-install_zsh_plugins
