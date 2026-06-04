@@ -199,10 +199,6 @@ install_zsh_plugins() {
         echo "Installing zsh-autosuggestions..."
         $SUDO apt-get install -y -q zsh-autosuggestions
     fi
-    if ! dpkg -l zsh-completions &>/dev/null; then
-        echo "Installing zsh-completions..."
-        $SUDO apt-get install -y -q zsh-completions
-    fi
 
     if [[ ! -f "$rc_file" ]]; then
         mkdir -p "$(dirname "$rc_file")"
