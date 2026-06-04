@@ -189,6 +189,8 @@ install_direnv() {
 install_zsh_plugins() {
     local rc_file="$HOME/.zsh/rc.private.d/linux-plugins.zsh"
 
+    $SUDO apt update
+
     if [[ ! -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
         echo "Installing zsh-syntax-highlighting..."
         $SUDO apt-get install -y -q zsh-syntax-highlighting
