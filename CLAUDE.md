@@ -43,3 +43,10 @@
 ## Appearance
 
 - Maintain the Rose Pine Moon theme consistently when adding tools with theme support.
+
+## Research & findings
+
+- Whenever you do substantive research, investigation, or analysis (auditing config, comparing options, diagnosing a problem), write the findings out to a file **before** presenting conclusions in chat — even if not explicitly asked.
+- Naming scheme: `.claude/research/yyyy-mm-dd-title.md` (ISO date prefix, kebab-case title).
+- The file is the source of truth: structure findings clearly — what, where (as `file:line`), why it matters, and the recommended action. The chat reply should summarise and point at the file, not replace it.
+- For the full analyse → report → approve → fix workflow, use the `audit-and-fix` skill.
