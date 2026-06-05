@@ -42,7 +42,7 @@ RESET='\033[0m'
 
 input=$(cat)
 
-# echo "$input" > ~/Temp/claude-statusline-stdin.json
+echo "$input" > ~/Temp/claude-statusline-stdin.json
 
 typeset -T status_str status_el " "
 
@@ -133,7 +133,7 @@ fi
 # rate limit: 5 hours
 format_rl_5h() {
     local pct=$1
-    [[ -n $pct ]] && echo "-" && return
+    [[ -z $pct ]] && echo "-" && return
     pct=$(printf "%.0f" "$pct")
     if [[ $pct -ge 90 ]]; then color="$RED"
     elif [[ $pct -ge 70 ]]; then color="$YELLOW"
@@ -150,13 +150,13 @@ format_rl_5h() {
 rl_5h_pct=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty')
 rl_5h_reset=$(echo "$input" | jq -r '.rate_limits.five_hour.resets_at // empty')
 if [[ -n $rl_5h_pct ]]; then
-    usage+=( $( icon " 5h" $BLUE ) "$(format_rl_5h "$rl_5h_pct" "$rl_5h_reset" $BLUE)" )
+    usage_el+=( $( icon " 5h" $BLUE ) "$(format_rl_5h "$rl_5h_pct" "$rl_5h_reset" $BLUE)" )
 fi
 
 # rate limit: 7 days
 format_rl_7d() {
     local pct=$1
-    [[ -n $pct ]] && echo "-" && return
+    [[ -z $pct ]] && echo "-" && return
     pct=$(printf "%.0f" "$pct")
     if [[ $pct -ge 90 ]]; then color="$RED"
     elif [[ $pct -ge 70 ]]; then color="$YELLOW"
@@ -170,12 +170,11 @@ format_rl_7d() {
     local hl=$3
     printf "${color}${bar}${RESET} ${hl}${pct}%%${RESET} $reset_time"
 }
-rl_7d_pct=$(echo "$input" | jq -r '.rate_limits.seven_day.used_percentage // empty')
+rl_7d_pct=$(echo "$input" | jq -r '.rate_limits.seven_day.used_percentage // empty ')
 rl_7d_reset=$(echo "$input" | jq -r '.rate_limits.seven_day.resets_at // empty')
 if [[ -n $rl_7d_pct ]]; then
     usage_el+=( $( icon " 7d" $BLUE ) "$(format_rl_7d "$rl_7d_pct" "$rl_7d_reset" $BLUE)" )
 fi
-
 [[ ${#usage_el} -gt 0 ]] && status_el+=( $usage_str )
 
 # session duration
@@ -187,9 +186,9 @@ format_duration() {
 wall_duration=$(echo "$input" | jq -r '.cost.total_duration_ms // 0')
 api_duration=$(echo "$input" | jq -r '.cost.total_api_duration_ms // 0')
 
-typeset -T duration_str duration_el " "
-[[ $wall_duration -gt 0 ]] && duration_el+="$(printf "$(format_duration $wall_duration) total")"
-[[ $api_duration -gt 0 ]] && duration_el+="$(printf "$(format_duration $api_duration) active")"
+typeset -T duration_str duration_el "/"
+[[ $api_duration -gt 0 ]] && duration_el+="$(printf "api $(format_duration $api_duration)")"
+[[ $wall_duration -gt 0 ]] && duration_el+="$(printf "total $(format_duration $wall_duration)")"
 [[ ${#duration_el} -gt 0 ]] && status_el+=( $( icon  $WHITE ) $duration_str )
 
 echo $status_str
