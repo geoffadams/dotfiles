@@ -1,6 +1,6 @@
 -- pickers
 require("fzf-lua").register_ui_select(function(ui_opts, items)
-    function clamp(val, min, max)
+    local function clamp(val, min, max)
         if val < min then
             return min
         elseif val > max then
@@ -9,28 +9,28 @@ require("fzf-lua").register_ui_select(function(ui_opts, items)
             return val
         end
     end
-    function to_percentage(val, total)
+    local function to_percentage(val, total)
         return math.floor(0.5 + ((val / total) * 100))
     end
-    function to_ratio_h(lines, total)
+    local function to_ratio_h(lines, total)
         if total == nil then
             total = vim.o.lines
         end
         return lines / total
     end
-    function to_ratio_w(columns, total)
+    local function to_ratio_w(columns, total)
         if total == nil then
             total = vim.o.columns
         end
         return columns / total
     end
-    function to_lines(ratio, total)
+    local function to_lines(ratio, total)
         if total == nil then
             total = vim.o.lines
         end
         return math.ceil(ratio * total)
     end
-    function to_columns(ratio, total)
+    local function to_columns(ratio, total)
         if total == nil then
             total = vim.o.columns
         end

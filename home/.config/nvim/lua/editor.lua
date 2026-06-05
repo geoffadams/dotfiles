@@ -50,7 +50,6 @@ vim.o.confirm = true
 
 -- ergonomics
 require("mini.surround").setup()
-require("mini.pairs").setup()
 
 -- folds
 vim.o.foldcolumn = "auto:1"

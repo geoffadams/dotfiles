@@ -34,7 +34,7 @@ require("mini.bufremove").setup()
 vim.o.termguicolors = true
 vim.o.background = "dark"
 require("rose-pine").setup({
-    variant = "dawn",
+    variant = "moon",
     dark_variant = "moon",
     enable = {
         legacy_highlights = false,

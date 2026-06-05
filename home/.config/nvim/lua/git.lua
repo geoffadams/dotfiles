@@ -2,6 +2,9 @@ local u = require("util")
 local gitsigns = require("gitsigns")
 
 gitsigns.setup({
+    current_line_blame_opts = {
+        virt_text_pos = "right_align",
+    },
     on_attach = function(bufnr)
         -- motions
         u.keymap_buf("n", "]c", function()
