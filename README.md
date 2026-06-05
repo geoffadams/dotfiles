@@ -3,33 +3,25 @@
 ## Installation
 
 ```sh
-gem install homesick os
+gem install homesick
 homesick clone geoffadams/dotfiles
 homesick symlink dotfiles
-homesick rc dotfiles
 ```
 
-## What it does
+## What's included
 
-- Installs stuff:
-    - Homebrew
-    - Applications via Homebrew
-    - Applications from the Mac App Store
-    - VSCode extensions
-- Configures `zsh`
-    - Sets `zsh` as the default shell (though no longer strictly necessary given `zsh` is default in macOS 10.15 and later)
-    - Installs `oh-my-zsh`
-    - Sets up my personal zsh configuration
-- Configures macOS with my personal preferences
-- Configures iTerm2 with my personal preferences
-    - Installs fonts needed
-- Configures `git` user settings
-- Configures `vim`
-    - Extensions
-    - Preferences
+- **Zsh** config, `starship` prompt, theming, autosuggestions, syntax highlighting, `fzf` pickers, `zoxide` helpers with `fzf` pickers
+- **Git** config, aliases, shell helpers with `fzf` pickers
+- **Neovim** config, plugins, LSP integrations, Treesitter config
+- **Zellij** config, layouts, shell helpers with `fzf` pickers
+- Config for a bunch of other CLI tools such as **ripgrep**, **bat**, **delta**, **rclone** etc
 
-## Stuff that would be nice
+### macOS
 
-- Configure more macOS settings as I realise they vary between machines
-- Be less Mac- and Homebrew-specific
-- Applyg settings more gracefully (e.g. don't trounce whole configs on already-configured systems)
+- **Homebrew** Brewfile for general system and development tools
+- **Ghostty** config
+- **Karabiner Elements** config
+
+### Linux
+
+- **Dev Containers** dotfiles install script for Debian-based platforms for a minimal set of dependencies normally installed via Homebrew
