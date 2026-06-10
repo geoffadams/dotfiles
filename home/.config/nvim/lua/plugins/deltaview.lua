@@ -1,7 +1,7 @@
 return {
     "kokusenz/deltaview.nvim",
     dependencies = {
-        "geoffadams/delta.lua",
+        "kokusenz/delta.lua",
     },
     opts = {
         line_numbers = true,

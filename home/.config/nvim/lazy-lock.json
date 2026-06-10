@@ -2,7 +2,7 @@
   "auto-session": { "branch": "main", "commit": "6cde3874a9283c2db55627acca5f28e4fa402320" },
   "browsher.nvim": { "branch": "main", "commit": "6d87d5b8b0d178f75ee047a04f11c5b172fa705a" },
   "conform.nvim": { "branch": "master", "commit": "619363c30309d29ffa631e67c8183f2a72caa373" },
-  "delta.lua": { "branch": "main", "commit": "3712167f43ca9da92b0461b9a9951f93ab188005" },
+  "delta.lua": { "branch": "main", "commit": "e315aa13ff699f1c7d6880d8933c8776b3c62943" },
   "deltaview.nvim": { "branch": "main", "commit": "5c07045ce0e9e030d957c13eb9bab70a0e1da540" },
   "devcontainers.nvim": { "branch": "master", "commit": "d8910dbf668b9db7dc21c9ef5c1aea800de804df" },
   "fidget.nvim": { "branch": "main", "commit": "82404b196e73a00b1727a91903beef5ddc319d22" },
