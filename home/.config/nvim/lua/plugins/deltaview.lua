@@ -1,8 +1,5 @@
 return {
     "kokusenz/deltaview.nvim",
-    dependencies = {
-        "kokusenz/delta.lua",
-    },
     opts = {
         line_numbers = true,
         keyconfig = {
