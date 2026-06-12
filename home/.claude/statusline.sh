@@ -42,7 +42,7 @@ RESET='\033[0m'
 
 input=$(cat)
 
-echo "$input" > ~/Temp/claude-statusline-stdin.json
+# echo "$input" > ~/Temp/claude-statusline-stdin.json
 
 typeset -T status_str status_el " "
 
