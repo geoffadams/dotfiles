@@ -28,6 +28,35 @@ swap_tiled_layout name="vertical" {
         }
     }
 }
+swap_tiled_layout name="split" {
+    tab max_panes=2 {
+        pane
+    }
+    tab max_panes=5 {
+        pane split_direction="vertical" {
+            pane size="50%"
+            pane size="50%" split_direction="horizontal" {
+                pane
+                pane
+                pane
+            }
+        }
+    }
+    tab max_panes=7 {
+        pane split_direction="vertical" {
+            pane size="50%" split_direction="horizontal" {
+                pane
+                pane
+                pane
+            }
+            pane size="50%" split_direction="horizontal" {
+                pane
+                pane
+                pane
+            }
+        }
+    }
+}
 swap_tiled_layout name="horizontal" {
     tab max_panes=2 {
         pane
