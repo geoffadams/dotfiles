@@ -3,6 +3,11 @@ PERSONAL_ZSH=$HOME/.zsh
 typeset -U path
 path=(${HOME}/.local/bin $path)
 
+export LANG=en_GB.UTF-8
+export LANGUAGE=en_GB:en
+export LC_ALL=en_GB.UTF-8
+export TERM=xterm-256color
+
 # OS detection
 is_linux() { [[ $(uname) == "Linux" ]] }
 is_mac() { [[ $(uname) == "Darwin" ]] }
