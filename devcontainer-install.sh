@@ -184,12 +184,18 @@ install_direnv() {
     echo "direnv installed: $(direnv --version)"
 }
 
+install_locales() {
+    echo "Installing locales..."
+    $SUDO apt-get install -y -q locales
+    $SUDO sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
+    $SUDO sed -i -e 's/# en_GB.UTF-8 UTF-8/en_GB.UTF-8 UTF-8/' /etc/locale.gen
+    $SUDO dpkg-reconfigure --frontend=noninteractive locales
+}
+
 # Install zsh plugins via apt and wire them up via rc.private.d (Linux fallback
 # for the has_brew-gated sourcing in rc.d/zsh-highlighting.zsh etc.)
 install_zsh_plugins() {
     local rc_file="$HOME/.zsh/rc.private.d/linux-plugins.zsh"
-
-    $SUDO apt update
 
     if [[ ! -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
         echo "Installing zsh-syntax-highlighting..."
@@ -218,6 +224,8 @@ EOF
     fi
 }
 
+$SUDO apt update
+install_locales
 install_zsh_plugins
 install_starship
 install_vivid
