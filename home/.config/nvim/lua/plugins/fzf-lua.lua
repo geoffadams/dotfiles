@@ -37,7 +37,7 @@ return {
         { "<C-p>", [[<Cmd>lua require"fzf-lua".global()<CR>]], desc = "Global picker" },
         { "<C-o>", [[<Cmd>lua require"fzf-lua".files()<CR>]], desc = "Files" },
         { "<C-i>", [[<Cmd>lua require"fzf-lua".buffers()<CR>]], desc = "Buffers" },
-        { "<C-f>", [[<Cmd>lua require"fzf-lua".live_grep_glob({resume = true})<CR>]], desc = "Live Grep" },
+        { "<C-f>", [[<Cmd>lua require"fzf-lua".live_grep({resume = true})<CR>]], desc = "Live Grep" },
 
         { "<C-F1>", [[<Cmd>lua require"fzf-lua".help_tags()<CR>]], desc = "Help tags" },
         { "<C-F2>", [[<Cmd>lua require"fzf-lua".builtin()<CR>]], desc = "Pickers" },
