@@ -27,6 +27,7 @@
     relative-paths = true
     wrap-max-lines = unlimited
     width = variable
+    side-by-side = true
 [init]
     defaultBranch = main
 [worktree]
