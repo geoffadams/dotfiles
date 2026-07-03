@@ -16,6 +16,9 @@ vim.opt.wildignore = { ".git/*" }
 vim.o.showcmd = true -- display partial commands
 vim.o.showmode = false -- don't display current mode
 
+-- input
+require("mini.input").setup()
+
 -- cursor
 local guicursor = {
     "n-v-c-sm:block",
