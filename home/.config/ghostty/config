@@ -11,9 +11,6 @@ macos-titlebar-style = tabs
 
 # system integration
 shell-integration-features = cursor,sudo,title,ssh-terminfo,ssh-env
-link-url = true
-link-previews = true
-clipboard-read = ask
 bell-features = no-attention,no-system,title,border
 notify-on-command-finish = unfocused
 notify-on-command-finish-action = bell,notify
@@ -24,14 +21,46 @@ window-inherit-working-directory = false
 tab-inherit-working-directory = true
 split-inherit-working-directory = true
 
+# terminal interaction
+link-url = true
+link-previews = true
+clipboard-read = ask
+copy-on-select = true
+
 # input
 mouse-scroll-multiplier = precision:1,discrete:0.5
 macos-option-as-alt = right
+
+# keybinds
+## term control
+keybind = super+shift+k=clear_screen
+keybind = super+shift+r=reset
+keybind = chain=clear_screen
+keybind = chain=text:\x03
+## tabs
+keybind = super+;=move_tab:-1
+keybind = super+'=move_tab:1
+keybind = super+[=previous_tab
+keybind = super+]=next_tab
+keybind = ctrl+tab=unbind
+keybind = ctrl+shift+tab=unbind
+## splits
+keybind = super+shift+[=goto_split:previous
+keybind = super+shift+]=goto_split:next
 keybind = super+h=goto_split:left
 keybind = super+j=goto_split:down
 keybind = super+k=goto_split:up
 keybind = super+l=goto_split:right
-keybind = super+shift+r=reset
-keybind = chain=clear_screen
-keybind = chain=text:\x03
-
+keybind = super+alt+arrow_down=unbind
+keybind = super+alt+arrow_left=unbind
+keybind = super+alt+arrow_right=unbind
+keybind = super+alt+arrow_up=unbind
+keybind = super+ctrl+arrow_down=unbind
+keybind = super+ctrl+arrow_left=unbind
+keybind = super+ctrl+arrow_right=unbind
+keybind = super+ctrl+arrow_up=unbind
+## prompts
+keybind = super+shift+j=jump_to_prompt:-1
+keybind = super+shift+k=jump_to_prompt:1
+keybind = super+shift+arrow_down=unbind
+keybind = super+shift+arrow_up=unbind
