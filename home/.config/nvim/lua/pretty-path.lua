@@ -52,8 +52,8 @@ function M.pretty_path()
     if path:find("^term://.+") then
         _, _, scheme_prefix, path, _ = path:find("(term:)//(.+)//%d+:.+")
         fnamemodify_opts = ":."
-    elseif path:find("^oil://") then
-        _, _, scheme_prefix, path = path:find("(oil:)//(.*)")
+    elseif path:find("^canola://") then
+        _, _, scheme_prefix, path = path:find("(canola:)//(.*)")
         fnamemodify_opts = ":."
     else
         if M.config.path_home_rel then

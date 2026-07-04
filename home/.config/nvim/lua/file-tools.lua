@@ -10,3 +10,10 @@ end, "Undotree toggle")
 
 -- difftool
 vim.cmd("packadd nvim.difftool")
+
+-- canola
+vim.g.canola = {
+    columns = { "git_status", "icon", "permissions" },
+    watch = true,
+}
+vim.g.canola_git = {}
