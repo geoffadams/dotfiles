@@ -22,10 +22,3 @@ vim.filetype.add({
         end,
     },
 })
-
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "help" },
-    callback = function(opts)
-        u.keymap_buf("n", "gd", "<C-]>", "Go to definition", opts.buf)
-    end,
-})
