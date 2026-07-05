@@ -4,6 +4,7 @@
   "browsher.nvim": { "branch": "main", "commit": "6d87d5b8b0d178f75ee047a04f11c5b172fa705a" },
   "canola-collection": { "branch": "main", "commit": "8566c09080c3084db1ffba21dec53e2b4235daed" },
   "canola.nvim": { "branch": "canola", "commit": "88f1344be2b852cd8cad6b866d6eaf7c747abb83" },
+  "colorful-winsep.nvim": { "branch": "main", "commit": "6134b5cd4a38990c7b720adc90973ed32f726179" },
   "conform.nvim": { "branch": "master", "commit": "619363c30309d29ffa631e67c8183f2a72caa373" },
   "deltaview.nvim": { "branch": "main", "commit": "3893d56a26e60b9907445f67d099c78fe9e90044" },
   "devcontainers.nvim": { "branch": "master", "commit": "d8910dbf668b9db7dc21c9ef5c1aea800de804df" },

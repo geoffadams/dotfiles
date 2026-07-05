@@ -50,6 +50,7 @@ require("rose-pine").setup({
 vim.cmd("colorscheme rose-pine-moon")
 
 -- status
+vim.o.laststatus = 3
 vim.o.ruler = false -- no cursor co-ords in status
 local statusline = require("mini.statusline")
 local visual = require("config/visual")

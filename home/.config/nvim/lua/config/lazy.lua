@@ -22,4 +22,8 @@ require("lazy").setup({
     install = { colorscheme = { "rose-pine-moon" } },
     checker = { enabled = true },
     version = "*",
+    ui = {
+        border = "rounded",
+        title = "lazy.nvim",
+    },
 })
