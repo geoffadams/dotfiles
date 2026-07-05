@@ -64,5 +64,9 @@ return {
             "<Cmd>Trouble qflist toggle<cr>",
             desc = "Quickfix list",
         },
+        {
+            "<Leader>tf",
+            "<Cmd>Trouble fzf toggle<cr>",
+        },
     },
 }

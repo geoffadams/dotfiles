@@ -82,3 +82,7 @@ require("fzf-lua").register_ui_select(function(ui_opts, items)
         },
     }
 end)
+
+local config = require("fzf-lua.config")
+local actions = require("trouble.sources.fzf").actions
+config.defaults.actions.files["ctrl-t"] = actions.open
