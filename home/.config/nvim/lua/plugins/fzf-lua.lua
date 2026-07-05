@@ -6,9 +6,19 @@ return {
     ---@type fzf-lua.Config|{}
     ---@diagnostic disable: missing-fields
     opts = {
+        winopts = {
+            preview = { default = "bat_native" },
+        },
         defaults = {
             formatter = "path.filename_first",
             git_icons = true,
+        },
+        buffers = {
+            winopts = {
+                preview = {
+                    hidden = true,
+                },
+            },
         },
         grep = {
             RIPGREP_CONFIG_PATH = vim.env.RIPGREP_CONFIG_PATH,
@@ -35,8 +45,8 @@ return {
     ---@diagnostic enable: missing-fields
     keys = {
         { "<C-p>", [[<Cmd>lua require"fzf-lua".global()<CR>]], desc = "Global picker" },
-        { "<C-o>", [[<Cmd>lua require"fzf-lua".files()<CR>]], desc = "Files" },
-        { "<C-i>", [[<Cmd>lua require"fzf-lua".buffers()<CR>]], desc = "Buffers" },
+        { "<C-S-p>", [[<Cmd>lua require"fzf-lua".files()<CR>]], desc = "Files" },
+        { "<C-M-p>", [[<Cmd>lua require"fzf-lua".buffers()<CR>]], desc = "Buffers" },
         { "<C-f>", [[<Cmd>lua require"fzf-lua".live_grep({resume = true})<CR>]], desc = "Live Grep" },
 
         { "<C-F1>", [[<Cmd>lua require"fzf-lua".help_tags()<CR>]], desc = "Help tags" },

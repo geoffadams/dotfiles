@@ -34,3 +34,7 @@ u.keymap("t", "<Esc><Esc>", "<C-\\><C-n>", "Exit terminal mode")
 
 -- search
 u.keymap("n", "<Esc>", "<Cmd>nohlsearch<CR>", "Clear highlight")
+
+-- buffers + in/out
+u.keymap("n", "<Tab>", '<Cmd>lua require "bafa".toggle()<CR>', "Switch buffers")
+u.keymap("n", "<C-i>", "<C-i>")
