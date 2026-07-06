@@ -6,7 +6,9 @@ return {
             override_vim_notify = true,
             window = {
                 normal_hl = "FidgetNotify",
-                winblend = 25,
+                winblend = 40,
+                border = "rounded",
+                tabstop = 2,
             },
         },
     },

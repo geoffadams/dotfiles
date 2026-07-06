@@ -44,7 +44,9 @@ require("rose-pine").setup({
     },
     styles = { italic = false, transparency = true },
     highlight_groups = {
+        ColorfulWinSep = { link = "WinSeparator" },
         FidgetNotify = { fg = "subtle", bg = "overlay" },
+        Visual = { bg = "foam" },
     },
 })
 vim.cmd("colorscheme rose-pine-moon")
