@@ -2,7 +2,8 @@
 # Symlink the contents of home/ into $HOME, mirroring `homesick symlink`
 # but skipping the macOS-only Library tree. Lets the dotfiles work in
 # Linux devcontainers where homesick (Ruby) isn't available.
-# Also installs missing shell tools from GitHub releases.
+# Also installs missing shell tools from GitHub releases into
+# $HOME/.local so they persist container rebuilds (already on $PATH via .zshenv).
 # All binaries target x86_64 — containers run in an x86_64 VM via Rosetta.
 
 set -euo pipefail
@@ -12,6 +13,8 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 HOME_DIR="$SCRIPT_DIR/home"
 SUBDIR_FILE="$SCRIPT_DIR/.homesick_subdir"
 SUDO="$( [[ "$(id -u)" -eq 0 ]] && echo '' || echo 'sudo' )"
+LOCAL_DIR="$HOME/.local"
+mkdir -p "$LOCAL_DIR/bin" "$LOCAL_DIR/lib" "$LOCAL_DIR/share" "$LOCAL_DIR/man"
 
 # ── Dotfile symlinking ────────────────────────────────────────────────────────
 
@@ -84,7 +87,7 @@ install_starship() {
     url="$(gh_asset_url starship/starship 'x86_64-unknown-linux-musl\.tar\.gz')"
     tmp="$(mktemp -d)"
     curl -fsSL "$url" | tar -xz -C "$tmp"
-    $SUDO install -m 0755 "$tmp/starship" /usr/local/bin/starship
+    install -m 0755 "$tmp/starship" "$LOCAL_DIR/bin/starship"
     rm -rf "$tmp"
     echo "starship installed: $(starship --version)"
 }
@@ -93,11 +96,11 @@ install_vivid() {
     command -v vivid &>/dev/null && return
     echo "Installing vivid..."
     local url tmp
-    url="$(gh_asset_url sharkdp/vivid '_amd64\.deb')"
-    tmp="$(mktemp --suffix=.deb)"
-    curl -fsSL "$url" -o "$tmp"
-    $SUDO dpkg -i "$tmp"
-    rm -f "$tmp"
+    url="$(gh_asset_url sharkdp/vivid 'x86_64-unknown-linux-musl\.tar\.gz')"
+    tmp="$(mktemp -d)"
+    curl -fsSL "$url" | tar -xz -C "$tmp" --strip-components=1
+    install -m 0755 "$tmp/vivid" "$LOCAL_DIR/bin/vivid"
+    rm -rf "$tmp"
     echo "vivid installed: $(vivid --version)"
 }
 
@@ -109,7 +112,7 @@ install_neovim() {
     tmp="$(mktemp -d)"
     curl -fsSL "$url" | tar -xz -C "$tmp" --strip-components=1
     for dir in bin lib share man; do
-        [[ -d "$tmp/$dir" ]] && $SUDO cp -r "$tmp/$dir/." "/usr/local/$dir/"
+        [[ -d "$tmp/$dir" ]] && cp -r "$tmp/$dir/." "$LOCAL_DIR/$dir/"
     done
     rm -rf "$tmp"
     echo "neovim installed: $(nvim --version | head -1)"
@@ -122,7 +125,7 @@ install_bat() {
     url="$(gh_asset_url sharkdp/bat 'x86_64-unknown-linux-musl\.tar\.gz')"
     tmp="$(mktemp -d)"
     curl -fsSL "$url" | tar -xz -C "$tmp" --strip-components=1
-    $SUDO install -m 0755 "$tmp/bat" /usr/local/bin/bat
+    install -m 0755 "$tmp/bat" "$LOCAL_DIR/bin/bat"
     rm -rf "$tmp"
     echo "bat installed: $(bat --version)"
 }
@@ -134,7 +137,7 @@ install_fd() {
     url="$(gh_asset_url sharkdp/fd 'x86_64-unknown-linux-musl\.tar\.gz')"
     tmp="$(mktemp -d)"
     curl -fsSL "$url" | tar -xz -C "$tmp" --strip-components=1
-    $SUDO install -m 0755 "$tmp/fd" /usr/local/bin/fd
+    install -m 0755 "$tmp/fd" "$LOCAL_DIR/bin/fd"
     rm -rf "$tmp"
     echo "fd installed: $(fd --version)"
 }
@@ -146,7 +149,7 @@ install_fzf() {
     url="$(gh_asset_url junegunn/fzf 'linux_amd64\.tar\.gz')"
     tmp="$(mktemp -d)"
     curl -fsSL "$url" | tar -xz -C "$tmp"
-    $SUDO install -m 0755 "$tmp/fzf" /usr/local/bin/fzf
+    install -m 0755 "$tmp/fzf" "$LOCAL_DIR/bin/fzf"
     rm -rf "$tmp"
     echo "fzf installed: $(fzf --version)"
 }
@@ -158,7 +161,7 @@ install_zoxide() {
     url="$(gh_asset_url ajeetdsouza/zoxide 'x86_64-unknown-linux-musl\.tar\.gz')"
     tmp="$(mktemp -d)"
     curl -fsSL "$url" | tar -xz -C "$tmp"
-    $SUDO install -m 0755 "$tmp/zoxide" /usr/local/bin/zoxide
+    install -m 0755 "$tmp/zoxide" "$LOCAL_DIR/bin/zoxide"
     rm -rf "$tmp"
     echo "zoxide installed: $(zoxide --version)"
 }
@@ -170,7 +173,7 @@ install_delta() {
     url="$(gh_asset_url dandavison/delta 'x86_64-unknown-linux-gnu\.tar\.gz')"
     tmp="$(mktemp -d)"
     curl -fsSL "$url" | tar -xz -C "$tmp" --strip-components=1
-    $SUDO install -m 0755 "$tmp/delta" /usr/local/bin/delta
+    install -m 0755 "$tmp/delta" "$LOCAL_DIR/bin/delta"
     rm -rf "$tmp"
     echo "delta installed: $(delta --version)"
 }
@@ -180,8 +183,33 @@ install_direnv() {
     echo "Installing direnv..."
     local url
     url="$(gh_asset_url direnv/direnv 'direnv\.linux-amd64')"
-    curl -fsSL "$url" | $SUDO install -m 0755 /dev/stdin /usr/local/bin/direnv
+    curl -fsSL "$url" | install -m 0755 /dev/stdin "$LOCAL_DIR/bin/direnv"
     echo "direnv installed: $(direnv --version)"
+}
+
+install_jq() {
+    command -v jq &>/dev/null && return
+    echo "Installing jq..."
+    local url
+    url="$(gh_asset_url jqlang/jq 'jq-linux-amd64')"
+    curl -fsSL "$url" | install -m 0755 /dev/stdin "$LOCAL_DIR/bin/jq"
+    echo "jq installed: $(jq --version)"
+}
+
+# Merge cleanupPeriodDays/statusLine into ~/.claude/settings.json without
+# clobbering unrelated settings or overwriting values already set there.
+install_claude_settings() {
+    local settings_file="$HOME/.claude/settings.json" tmp
+    mkdir -p "$(dirname "$settings_file")"
+    [[ -f "$settings_file" ]] || echo '{}' > "$settings_file"
+
+    tmp="$(mktemp)"
+    jq '
+        .cleanupPeriodDays //= 365 |
+        .statusLine //= {"type": "command", "command": "~/.claude/statusline.sh", "padding": 0}
+    ' "$settings_file" > "$tmp"
+    mv "$tmp" "$settings_file"
+    echo "Updated $settings_file"
 }
 
 install_locales() {
@@ -227,6 +255,7 @@ EOF
 $SUDO apt update
 install_locales
 install_zsh_plugins
+install_jq
 install_starship
 install_vivid
 install_fzf
@@ -236,3 +265,4 @@ install_fd
 install_zoxide
 install_neovim
 install_direnv
+install_claude_settings
