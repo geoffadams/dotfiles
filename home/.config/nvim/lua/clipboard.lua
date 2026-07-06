@@ -1,6 +1,6 @@
 -- clipboard
 if vim.env.SSH_TTY ~= nil then
-    vim.notify("osc52 enabled")
+    vim.notify("osc52 enabled", vim.log.levels.INFO)
     local osc52 = require("vim.ui.clipboard.osc52")
 
     local function copy_reg(reg)
@@ -10,7 +10,6 @@ if vim.env.SSH_TTY ~= nil then
             vim.fn.setreg(reg, table.concat(lines, "\n"), regtype)
 
             -- Send OSC52 to local clipboard
-            orig(lines, regtype)
             orig(lines, regtype)
         end
     end
@@ -32,6 +31,6 @@ if vim.env.SSH_TTY ~= nil then
         },
     }
 else
-    vim.notify("osc52 not enabled")
+    vim.notify("osc52 not enabled", vim.log.levels.INFO)
 end
 vim.opt.clipboard:append("unnamedplus")
