@@ -52,12 +52,6 @@ gitsigns.setup({
             gitsigns.setqflist("all")
         end, "Quickfix workspace hunks", bufnr)
 
-        -- diff
-        u.keymap_buf("n", "<leader>vd", gitsigns.diffthis, "Diff against index", bufnr)
-        u.keymap_buf("n", "<leader>vD", function()
-            gitsigns.diffthis("~")
-        end, "Diff against last commit", bufnr)
-
         -- buffer views
         u.keymap_buf("n", "<leader>vb", gitsigns.toggle_current_line_blame, "Toggle blame", bufnr)
         u.keymap_buf("n", "<leader>vw", gitsigns.toggle_word_diff, "Toggle word diffs", bufnr)

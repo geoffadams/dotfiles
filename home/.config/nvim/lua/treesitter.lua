@@ -16,8 +16,15 @@ local ts_ensure_installed = {
     "zsh",
 }
 
+local has_treesitter_cli = vim.fn.executable("tree-sitter") == 1
+
 -- baseline auto-install
-treesitter.install(ts_ensure_installed)
+if has_treesitter_cli then
+    treesitter.install(ts_ensure_installed)
+else
+    vim.notify("treesitter: tree-sitter CLI not found, skipping baseline parser install", vim.log.levels.WARN)
+end
+
 for _, parser in ipairs(ts_ensure_installed) do
     vim.treesitter.language.register(parser, parser)
     vim.api.nvim_create_autocmd("FileType", {
@@ -55,6 +62,13 @@ vim.api.nvim_create_autocmd("BufRead", {
 
         local parser_installed = vim.treesitter.get_parser(bufnr, parser_name) ~= nil
         if not parser_installed then
+            if not has_treesitter_cli then
+                vim.notify(
+                    "treesitter: tree-sitter CLI not found, skipping install of parser '" .. parser_name .. "'",
+                    vim.log.levels.WARN
+                )
+                return
+            end
             treesitter.install({ parser_name }):wait(30000)
         end
 
