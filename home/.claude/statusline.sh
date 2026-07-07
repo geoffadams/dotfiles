@@ -1,8 +1,8 @@
 #!/usr/bin/env zsh
 #
 # Claude Code statusline. Reads the statusline JSON payload on stdin and
-# prints a 2-3 line summary: repo/dir + model/effort, lines changed +
-# cost/tokens/context, and (if present) rate limits.
+# prints a 2-3 line summary: repo/dir + model/effort/thinking/context,
+# lines & files changed + cost/tokens, and (if present) rate limits.
 
 setopt extendedglob
 
@@ -43,6 +43,28 @@ usage_color() {
     fi
 }
 
+# Same ladder applied to model size and effort level, so all three share one
+# "how much is this costing/thinking" visual language on the statusline.
+model_color() {
+    case "${1:l}" in
+        *haiku*) echo "$USAGE_GREEN" ;;
+        *sonnet*) echo "$USAGE_YELLOW" ;;
+        *opus*) echo "$USAGE_ORANGE" ;;
+        *fable*) echo "$USAGE_RED" ;;
+        *) echo "$USAGE_DEFAULT" ;;
+    esac
+}
+
+effort_color() {
+    case "$1" in
+        low|medium) echo "$USAGE_GREEN" ;;
+        high) echo "$USAGE_YELLOW" ;;
+        xhigh) echo "$USAGE_ORANGE" ;;
+        max) echo "$USAGE_RED" ;;
+        *) echo "$USAGE_DEFAULT" ;;
+    esac
+}
+
 # ---------------------------------------------------------------------------
 # Icons (Nerd Font glyphs, one constant per meaning so they're never retyped)
 # ---------------------------------------------------------------------------
@@ -52,8 +74,8 @@ ICON_BRANCH=""
 ICON_WORKING_DIR="󰣞"
 ICON_MODEL="󰧑"
 ICON_LINES_DIFF=""
-ICON_FILES_CHANGED="󰈢"
-ICON_THINKING="󰟶"
+ICON_FILES_CHANGED="󱀲"
+ICON_THINKING="󰟷"
 ICON_COST="󰄖"
 ICON_TOKENS_IN="󰁝"
 ICON_TOKENS_OUT="󰁅"
@@ -90,6 +112,14 @@ make_bar() {
     while (( i < filled )); do bar+="█"; (( i++ )); done
     while (( i < width )); do bar+="░"; (( i++ )); done
     echo "$bar"
+}
+
+format_context() {
+    local pct=$1
+    [[ -z $pct ]] && echo "-" && return
+    local color=$(usage_color "$pct")
+    local bar=$(make_bar "$pct")
+    printf "${color}${bar}${RESET} ${color}${pct}%%${RESET}"
 }
 
 # strip any ANSI SGR escape sequence to compute a string's true on-screen width
@@ -141,11 +171,11 @@ if [[ -n "$repo" ]]; then
     if [[ -n "$worktree" ]]; then
         git_icon="$ICON_WORKTREE"
         project=$(basename "$(dirname "$(git -C "$repo" rev-parse --git-common-dir)")")
-        git_str="$project:$worktree"
-        [[ "$worktree" != "$branch" ]] && git_str+=" $(icon "$ICON_BRANCH" "$CYAN") $branch"
+        git_str="$(printf "${CYAN}${project}:${worktree}${RESET}")"
+        [[ "$worktree" != "$branch" ]] && git_str+=" $(icon "$ICON_BRANCH" "$CYAN") $(printf "${CYAN}${branch}${RESET}")"
     else
         git_icon="$ICON_BRANCH"
-        git_str="$project:$branch"
+        git_str="$(printf "${CYAN}${project}:${branch}${RESET}")"
     fi
 
     staged=$(git -C "$repo" diff --cached --numstat 2>/dev/null | wc -l | tr -d ' ')
@@ -157,18 +187,27 @@ fi
 working_dir=$(jq_input '.workspace.current_dir // empty')
 if [[ -n "$working_dir" ]]; then
     working_dir=$(basename "$working_dir")
-    [[ "$working_dir" != "$working_project" ]] && line1_left_el+=( $(icon "$ICON_WORKING_DIR" "$CYAN") "$working_dir" )
+    [[ "$working_dir" != "$working_project" ]] && line1_left_el+=( $(icon "$ICON_WORKING_DIR" "$CYAN") "$(printf "${CYAN}${working_dir}${RESET}")" )
 fi
 
 model=$(jq_input '.model.display_name // "Unknown Model"')
 effort=$(jq_input '.effort.level // empty')
 thinking_enabled=$(jq_input '.thinking.enabled // false')
 
-line1_right_el+=( $(icon "$ICON_MODEL" "$MAGENTA") $model )
-if [[ -n "$effort" ]]; then
-    line1_right_el+=( $(icon "$(effort_icon "$effort")" "$MAGENTA") $effort )
+model_col=$(model_color "$model")
+line1_right_el+=( $(icon "$ICON_MODEL" "$model_col") "$(printf "${model_col}${model}${RESET}")" )
+
+effort_col=$(effort_color "$effort")
+typeset -T effort_label effort_label_el " "
+[[ -n "$effort" ]] && effort_label_el+=( "$effort" )
+[[ "$thinking_enabled" == "true" ]] && effort_label_el+=( "$ICON_THINKING" )
+if [[ ${#effort_label_el} -gt 0 ]]; then
+    line1_right_el+=( $(icon "$(effort_icon "$effort")" "$effort_col") "$(printf "${effort_col}${effort_label}${RESET}")" )
 fi
-[[ "$thinking_enabled" == "true" ]] && line1_right_el+=( $(icon "$ICON_THINKING" "$MAGENTA") )
+
+context_used=$(jq_input '.context_window.used_percentage // 0' | awk '{printf "%.0f", $1}')
+context_color=$(usage_color "$context_used")
+line1_right_el+=( $(icon "$ICON_CONTEXT" "$context_color") "$(format_context "$context_used")" )
 
 lines+=( "$(render_line "$line1_left_str" "$line1_right_str")" )
 
@@ -184,36 +223,25 @@ lines_removed=$(jq_input '.cost.total_lines_removed // 0')
 typeset -T stats_str stats_el " "
 [[ $lines_added -gt 0 ]] && stats_el+="$(printf "${GREEN}+$(numfmt --grouping "$lines_added")${RESET}")"
 [[ $lines_removed -gt 0 ]] && stats_el+="$(printf "${RED}-$(numfmt --grouping "$lines_removed")${RESET}")"
-[[ ${#stats_el} -gt 0 ]] && line2_left_el+=( $(icon "$ICON_LINES_DIFF" "$YELLOW") $stats_str )
+[[ ${#stats_el} -gt 0 ]] && line2_left_el+=( $(icon "$ICON_LINES_DIFF" "$BLUE") $stats_str )
 
 typeset -T files_str files_el " "
 [[ ${staged:-0} -gt 0 ]] && files_el+="$(printf "${GREEN}+${staged}${RESET}")"
 [[ ${modified:-0} -gt 0 ]] && files_el+="$(printf "${YELLOW}~${modified}${RESET}")"
-[[ ${#files_el} -gt 0 ]] && line2_left_el+=( $(icon "$ICON_FILES_CHANGED" "$CYAN") $files_str )
+[[ ${#files_el} -gt 0 ]] && line2_left_el+=( $(icon "$ICON_FILES_CHANGED" "$BLUE") $files_str )
 
 total_cost=$(jq_input '.cost.total_cost_usd // empty')
 if [[ -n "$total_cost" ]]; then
     cost_display=$(awk "BEGIN { printf \"%.2f\", $total_cost }")
-    line2_right_el+=( $(icon "$ICON_COST" "$YELLOW") "\$${cost_display}" )
+    line2_right_el+=( $(icon "$ICON_COST" "$YELLOW") "$(printf "${YELLOW}\$${cost_display}${RESET}")" )
 fi
 
 total_input=$(jq_input '.context_window.total_input_tokens // empty')
 total_output=$(jq_input '.context_window.total_output_tokens // empty')
 typeset -T tokens_str tokens_el " "
-[[ $total_input -gt 0 ]] && tokens_el+="${MAGENTA}${ICON_TOKENS_IN} ${RESET}$(numfmt --grouping "$total_input")"
-[[ $total_output -gt 0 ]] && tokens_el+="${GREEN}${ICON_TOKENS_OUT} ${RESET}$(numfmt --grouping "$total_output")"
+[[ $total_input -gt 0 ]] && tokens_el+="${MAGENTA}$(numfmt --grouping "$total_input") ${ICON_TOKENS_IN}${RESET}"
+[[ $total_output -gt 0 ]] && tokens_el+="${GREEN}$(numfmt --grouping "$total_output") ${ICON_TOKENS_OUT}${RESET}"
 [[ ${#tokens_el} -gt 0 ]] && line2_right_el+=( $(icon "$ICON_TOKENS_GROUP" "$MAGENTA") $tokens_str )
-
-format_context() {
-    local pct=$1
-    [[ -z $pct ]] && echo "-" && return
-    local color=$(usage_color "$pct")
-    local bar=$(make_bar "$pct")
-    printf "${color}${bar}${RESET} ${color}${pct}%%${RESET}"
-}
-context_used=$(jq_input '.context_window.used_percentage // 0' | awk '{printf "%.0f", $1}')
-context_color=$(usage_color "$context_used")
-line2_right_el+=( $(icon "$ICON_CONTEXT" "$context_color") "$(format_context "$context_used")" )
 
 lines+=( "$(render_line "$line2_left_str" "$line2_right_str")" )
 
