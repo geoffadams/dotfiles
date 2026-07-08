@@ -37,16 +37,19 @@ keybind = super+shift+k=clear_screen
 keybind = super+shift+r=reset
 keybind = chain=clear_screen
 keybind = chain=text:\x03
+## windows
+keybind = super+alt+[=goto_window:previous
+keybind = super+alt+]=goto_window:next
 ## tabs
 keybind = super+;=move_tab:-1
 keybind = super+'=move_tab:1
-keybind = super+[=previous_tab
-keybind = super+]=next_tab
+keybind = super+shift+[=previous_tab
+keybind = super+shift+]=next_tab
 keybind = ctrl+tab=unbind
 keybind = ctrl+shift+tab=unbind
 ## splits
-keybind = super+shift+[=goto_split:previous
-keybind = super+shift+]=goto_split:next
+keybind = super+[=goto_split:previous
+keybind = super+]=goto_split:next
 keybind = super+h=goto_split:left
 keybind = super+j=goto_split:down
 keybind = super+k=goto_split:up
