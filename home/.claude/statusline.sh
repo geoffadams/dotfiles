@@ -140,7 +140,8 @@ render_line() {
     local right_plain=$(plain "$right")
     local pad=$(( cols - ${#left_plain} - ${#right_plain} ))
     (( pad < 1 )) && pad=1
-    printf '%s%*s%s' "$left" "$pad" "" "$right"
+    # Anchor LHS with a reset, Claude Code strips leading spaces when LHS empty
+    printf '%s%s%*s%s' "$RESET" "$left" "$pad" "" "$right"
 }
 
 # ---------------------------------------------------------------------------
