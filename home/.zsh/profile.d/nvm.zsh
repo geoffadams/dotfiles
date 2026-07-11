@@ -5,7 +5,7 @@ fi
 
 if [[ -o interactive ]]; then
     if [ -s "$NVM_SCRIPT_DIR/nvm.sh" ] && [ ! "$(whence -w __nvmlazy_init)" = function ]; then
-        declare -a __nvmlazy_commands=('nvm' 'node' 'npm' 'yarn' 'gulp' 'grunt' 'webpack')
+        declare -a __nvmlazy_commands=('nvm' 'node' 'npm' 'npx' 'yarn')
         function __nvmlazy_init() {
             for i in "${__nvmlazy_commands[@]}"; do unalias $i; done
             source_nvm
