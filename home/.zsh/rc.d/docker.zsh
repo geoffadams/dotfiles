@@ -1,7 +1,5 @@
 if (( $+commands[docker] )); then
-    if is_mac; then
-        fpath+=(${HOME}/.docker/completions)
-    fi
+    source <(docker completion zsh)
 
     alias docker-image-prune='docker rmi $(docker images -f "dangling=true" -q)'
     alias docker-clean='docker rm $(docker ps -a -q) && docker volume rm $(docker volume ls -q)'
