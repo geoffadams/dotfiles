@@ -196,6 +196,18 @@ install_jq() {
     echo "jq installed: $(jq --version)"
 }
 
+install_rg() {
+    command -v rg &>/dev/null && return
+    echo "Installing rg..."
+    local url
+    url="$(gh_asset_url BurntSushi/ripgrep 'x86_64-unknown-linux-musl\.tar\.gz')"
+    tmp="$(mktemp -d)"
+    curl -fsSL "$url" | tar -xz -C "$tmp" --strip-components=1
+    install -m 0755 "$tmp/rg" "$LOCAL_DIR/bin/rg"
+    rm -rf "$tmp"
+    echo "rg installed: $(rg --version)"
+}
+
 # Merge cleanupPeriodDays/statusLine into ~/.claude/settings.json without
 # clobbering unrelated settings or overwriting values already set there.
 install_claude_settings() {
@@ -265,4 +277,5 @@ install_fd
 install_zoxide
 install_neovim
 install_direnv
+install_rg
 install_claude_settings
