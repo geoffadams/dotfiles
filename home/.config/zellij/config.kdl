@@ -31,7 +31,7 @@ keybinds clear-defaults=true {
         bind "Super Ctrl Alt Shift ," { MovePaneBackwards; }
         bind "Super Ctrl Alt Shift ." { MovePane; }
 
-        bind "Super Ctrl Alt Shift w" { CloseFocus; }
+        bind "Super Ctrl Alt Shift e" { CloseFocus; }
 
         bind "Super Ctrl Alt Shift x" { Detach; }
         bind "Super Ctrl Alt Shift §" { Quit; }

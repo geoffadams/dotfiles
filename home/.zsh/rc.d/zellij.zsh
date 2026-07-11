@@ -109,3 +109,7 @@ if (( $+commands[zellij] )); then
     compdef _zzrf zzrf
     compdef _zzs zzs
 fi
+
+if [[ $ZELLIJ_SESSION_NAME == "test" ]]; then
+    echo "test: pane_id = $ZELLIJ_PANE_ID"
+fi
