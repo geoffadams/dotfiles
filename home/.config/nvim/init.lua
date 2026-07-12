@@ -13,7 +13,6 @@ require("diagnostics")
 
 -- general tools
 require("file-tools")
-require("git")
 
 -- development
 require("treesitter")
