@@ -19,7 +19,6 @@ u.keymap("n", "<C-[>", "<Cmd>bprev<CR>", "Previous buffer")
 u.keymap("n", "<C-]>", "<Cmd>bnext<CR>", "Next buffer")
 u.keymap("n", "<Leader>bd", "<Cmd>lua MiniBufremove.delete()<CR>", "Drop buffer")
 u.keymap("n", "<Leader>bD", "<Cmd>lua MiniBufremove.delete(0, true)<CR>", "Drop buffer, discard changes")
-u.keymap("n", "<Tab>", '<Cmd>lua require "bafa".toggle()<CR>', "Switch buffers")
 u.keymap("n", "<C-i>", "<C-i>", "Go to [count] newer cursor position in jump list")
 u.keymap("n", "ga", function()
     if vim.fn.expand("#") == "" then
