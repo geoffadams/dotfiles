@@ -4,7 +4,7 @@ return {
         local builtin = require("statuscol.builtin")
 
         return {
-            bt_ignore = { "nofile", "terminal" },
+            bt_ignore = { "terminal" },
             relculright = true,
             segments = {
                 {

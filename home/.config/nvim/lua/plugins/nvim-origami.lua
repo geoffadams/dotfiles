@@ -3,7 +3,10 @@ return {
     event = "VeryLazy",
     opts = {
         autoFold = {
-            kinds = { "imports" },
+            enabled = false,
+        },
+        foldKeymaps = {
+            closeOnlyOnFirstColumn = true,
         },
     },
 }
