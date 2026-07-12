@@ -22,7 +22,6 @@ require("treesitter")
 require("lsp")
 require("formatters")
 require("completions")
-require("debuggers")
 
 -- behaviour
 require("keymap")

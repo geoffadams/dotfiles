@@ -1,7 +1,12 @@
 return {
     "jbyuki/one-small-step-for-vimkind",
-    dependencies = {
-        "mfussenegger/nvim-dap",
+    keys = {
+        {
+            "<Leader>dv",
+            function()
+                require("osv").launch({ port = 8086 })
+            end,
+            desc = "Start internal neovim debugger",
+        },
     },
-    lazy = false,
 }
