@@ -50,4 +50,12 @@ M.keymap_buf = function(mode, l, r, desc, bufnr)
     vim.keymap.set(mode, l, r, opts)
 end
 
+M.get_venv_command = function(command)
+    if vim.env.VIRTUAL_ENV then
+        return vim.env.VIRTUAL_ENV .. "/bin/" .. command
+    else
+        return command
+    end
+end
+
 return M
