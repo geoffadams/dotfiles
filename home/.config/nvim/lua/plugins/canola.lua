@@ -5,6 +5,7 @@ return {
         "nvim-mini/mini.nvim",
         "barrettruth/canola-collection",
     },
+    cmd = "Canola",
     keys = {
         { "-", "<Cmd>Canola<CR>", desc = "Open parent directory" },
     },
