@@ -5,21 +5,19 @@ require("global")
 -- lazy.nvim
 require("config.lazy")
 
--- general behaviour
+-- editing
 require("interface")
 require("editor")
 require("clipboard")
-require("diagnostics")
-
--- general tools
-require("file-tools")
-
--- development
-require("treesitter")
-require("lsp")
-require("formatters")
-require("completions")
-
--- behaviour
 require("keymap")
 require("filetypes")
+
+-- syntax
+require("treesitter")
+require("lsp")
+require("completions")
+
+-- tooling
+require("diagnostics")
+require("file-tools")
+require("formatters")

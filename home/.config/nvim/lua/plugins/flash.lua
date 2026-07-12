@@ -1,8 +1,6 @@
 return {
     "folke/flash.nvim",
     event = "VeryLazy",
-    ---@type Flash.Config
-    opts = {},
     keys = {
         {
             "<Leader>g",
@@ -45,4 +43,9 @@ return {
             desc = "Toggle Flash Search",
         },
     },
+    ---@module "flash"
+    ---@type Flash.Config
+    ---@diagnostic disable: missing-fields
+    opts = {},
+    ---@diagnostic enable: missing-fields
 }

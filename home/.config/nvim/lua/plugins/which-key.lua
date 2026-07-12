@@ -1,6 +1,15 @@
 return {
     "folke/which-key.nvim",
     event = "VeryLazy",
+    keys = {
+        {
+            "<F1>",
+            function()
+                require("which-key").show()
+            end,
+            desc = "Keymaps",
+        },
+    },
     opts = {
         preset = "modern",
         spec = {
@@ -12,15 +21,6 @@ return {
             { "<Leader>t", group = "toggles" },
             { "<Leader>v", group = "view toggles" },
             { "<Leader>w", group = "wrapping" },
-        },
-    },
-    keys = {
-        {
-            "<F1>",
-            function()
-                require("which-key").show()
-            end,
-            desc = "Keymaps",
         },
     },
 }

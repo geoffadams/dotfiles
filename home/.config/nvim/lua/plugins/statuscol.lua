@@ -1,10 +1,12 @@
 return {
     "luukvbaal/statuscol.nvim",
+    lazy = false,
     opts = function()
         local builtin = require("statuscol.builtin")
 
         return {
             bt_ignore = { "terminal" },
+            ft_ignore = { "query" },
             relculright = true,
             segments = {
                 {

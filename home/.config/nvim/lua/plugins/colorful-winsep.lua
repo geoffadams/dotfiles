@@ -1,6 +1,6 @@
 return {
     "nvim-zh/colorful-winsep.nvim",
-    event = { "WinLeave" },
+    event = "WinLeave",
     opts = {
         animate = {
             enabled = "progressive",
