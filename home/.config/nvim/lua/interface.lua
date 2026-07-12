@@ -36,20 +36,6 @@ require("mini.bufremove").setup()
 -- theme
 vim.o.termguicolors = true
 vim.o.background = "dark"
-require("rose-pine").setup({
-    variant = "moon",
-    dark_variant = "moon",
-    enable = {
-        legacy_highlights = false,
-    },
-    styles = { italic = false, transparency = true },
-    highlight_groups = {
-        ColorfulWinSep = { link = "WinSeparator" },
-        FidgetNotify = { fg = "subtle", bg = "overlay" },
-        Visual = { bg = "foam" },
-    },
-})
-vim.cmd("colorscheme rose-pine-moon")
 
 -- status
 vim.o.laststatus = 3
