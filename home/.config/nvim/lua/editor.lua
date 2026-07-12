@@ -22,10 +22,6 @@ vim.o.textwidth = 120
 vim.o.wrapmargin = 10
 vim.o.breakindent = true
 vim.opt.formatoptions:append({ t = true })
-u.keymap("n", "<Leader>ww", "<Plug>(wrapping-soft-wrap-mode) <bar> <Cmd>Wrapwidth!<cr>", "Enable soft-wrapping")
-u.keymap("n", "<Leader>wW", "<Plug>(wrapping-hard-wrap-mode)", "Enable hard-wrapping")
-u.keymap("n", "<Leader>wc", "<Cmd>Wrapwidth 120<cr>", "Wide column width")
-u.keymap("n", "<Leader>wC", "<Cmd>Wrapwidth 80<cr>", "Narrow column width")
 
 -- tabs
 local indent = 4
