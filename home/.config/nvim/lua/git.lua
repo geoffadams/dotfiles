@@ -60,3 +60,6 @@ gitsigns.setup({
 
 u.keymap("n", "<leader>hl", "<cmd>Browsher commit<CR>")
 u.keymap("v", "<leader>hl", ":'<,'>Browsher commit<CR>gv")
+
+require("deltaview").setup()
+require("delta").setup()
