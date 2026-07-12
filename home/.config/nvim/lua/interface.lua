@@ -82,3 +82,8 @@ local titlestring = {
     "%{v:lua.PrettyPath.pretty_path()}",
 }
 vim.opt.titlestring = table.concat(titlestring, " ")
+
+-- icons
+local icons = require("mini.icons")
+icons.setup()
+icons.tweak_lsp_kind()
