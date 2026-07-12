@@ -17,7 +17,6 @@ require("file-tools")
 require("git")
 
 -- development
-require("installers")
 require("treesitter")
 require("lsp")
 require("formatters")
