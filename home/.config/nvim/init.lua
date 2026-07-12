@@ -12,7 +12,6 @@ require("clipboard")
 require("diagnostics")
 
 -- general tools
-require("pickers")
 require("file-tools")
 require("git")
 
