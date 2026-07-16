@@ -23,6 +23,7 @@ return {
                 "cljfmt",
                 "marksman",
                 "ansible-language-server",
+                "tombi",
             },
         })
     end,

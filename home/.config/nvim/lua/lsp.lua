@@ -57,6 +57,7 @@ vim.lsp.enable("jsonls")
 vim.lsp.enable("clojure_lsp")
 vim.lsp.enable("marksman")
 vim.lsp.enable("ansiblels")
+vim.lsp.enable("tombi")
 
 local function enable_lsp_functionality(event)
     u.keymap_buf("n", "grn", vim.lsp.buf.rename, "Rename", event.buf)
