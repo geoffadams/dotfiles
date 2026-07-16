@@ -39,8 +39,8 @@ function M.setup(opts)
 end
 
 ---@return string
-function M.pretty_path()
-    local path = vim.fn.expand("%:p")
+function M.pretty_path(target)
+    local path = vim.fn.expand((target or "%") .. ":p")
 
     if not path or path == "" then
         return ""
