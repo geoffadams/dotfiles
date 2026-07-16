@@ -21,10 +21,10 @@ format = "on [$symbol($profile )]($style)[($duration)](bold fg:pine) "
 
 [git_status]
 style = "bold fg:pine"
-ahead = "󰁝${count}"
-diverged = "[${ahead_count}󰹹${behind_count}](bold fg:love)"
-behind = "󰁅${count}"
-format = '[\[($ahead_behind )($conflicted )($staged$untracked )$modified$deleted$renamed$typechanged\]]($style) '
+ahead = "[󰁝${count}](bold fg:gold)"
+diverged = "[󰁝${ahead_count} 󰁅${behind_count}](bold fg:love)"
+behind = "[󰁅${count}](bold fg:gold)"
+format = '($ahead_behind )[\[$conflicted$staged$untracked$modified$deleted$renamed$typechanged\]]($style) '
 
 [container]
 style = "bold fg:pine"
