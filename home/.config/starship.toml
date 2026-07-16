@@ -1,2 +1,36 @@
+"$schema" = "https://starship.rs/config-schema.json"
+
 command_timeout = 2000
 
+palette = "rose-pine-moon"
+
+[palettes.rose-pine-moon]
+overlay = "#393552"
+love = "#eb6f92"
+gold = "#f6c177"
+rose = "#ea9a97"
+pine = "#3e8fb0"
+foam = "#9ccfd8"
+iris = "#c4a7e7"
+
+[aws]
+style = "bold fg:iris"
+symbol = "  "
+expiration_symbol = '[]'
+format = "on [$symbol($profile )]($style)[($duration)](bold fg:pine) "
+
+[git_status]
+style = "bold fg:pine"
+ahead = "󰁝${count}"
+diverged = "[${ahead_count}󰹹${behind_count}](bold fg:love)"
+behind = "󰁅${count}"
+format = '[\[($ahead_behind )($conflicted )($staged$untracked )$modified$deleted$renamed$typechanged\]]($style) '
+
+[container]
+style = "bold fg:pine"
+symbol = "⬡"
+format = "[$symbol $name]($style) "
+
+[nodejs]
+style = "bold fg:iris"
+version_format = "v${major}.${minor}"
