@@ -15,5 +15,17 @@ vim.cmd("packadd nvim.difftool")
 vim.g.canola = {
     columns = { "git_status", "icon", "permissions" },
     watch = true,
+    keymaps = {
+        ["<C-s>"] = false,
+        ["<C-h>"] = false,
+        ["<C-t>"] = false,
+        ["<C-CR>"] = { callback = "actions.select", opts = { vertical = true } },
+        ["<C-p>"] = "actions.preview",
+    },
+    float = {
+        default = true,
+        max_width = 0.8,
+        max_height = 0.5,
+    },
 }
 vim.g.canola_git = {}
