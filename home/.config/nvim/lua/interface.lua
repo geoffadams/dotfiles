@@ -145,8 +145,13 @@ map.setup({
         map.gen_integration.gitsigns(),
     },
 })
-vim.api.nvim_create_autocmd("VimEnter", {
-    callback = function()
-        map.open()
+local map_buftypes = { "", "terminal" }
+vim.api.nvim_create_autocmd("BufEnter", {
+    callback = function(opts)
+        if vim.tbl_contains(map_buftypes, vim.bo[opts.buf].buftype) then
+            map.open()
+        else
+            map.close()
+        end
     end,
 })
