@@ -1,4 +1,8 @@
 local u = require("util")
+local mkeymap = require("mini.keymap")
+mkeymap.setup()
+local pairs = require("mini.pairs")
+pairs.setup()
 
 -- save
 u.keymap("n", "<C-s>", "<Cmd>silent! update | redraw<CR>", "Save buffer")
@@ -78,3 +82,31 @@ vim.api.nvim_create_autocmd("FileType", {
         end
     end,
 })
+
+-- tab navigations + indents
+function fallback_to_key(rhs)
+    return {
+        condition = function()
+            return true
+        end,
+        action = function()
+            return rhs
+        end,
+    }
+end
+local tab_steps = {
+    "minisnippets_next",
+    "minisnippets_expand",
+    "vimsnippet_next",
+    "pmenu_next",
+    "increase_indent",
+    fallback_to_key("<C-t>"),
+}
+local s_tab_steps =
+    { "minisnippets_prev", "vimsnippet_prev", "pmenu_prev", "decrease_indent", fallback_to_key("<C-d>") }
+mkeymap.map_multistep("i", "<Tab>", tab_steps)
+mkeymap.map_multistep("i", "<S-Tab>", s_tab_steps)
+
+-- pairways ops
+mkeymap.map_multistep("i", "<CR>", { "pmenu_accept", "minipairs_cr" })
+mkeymap.map_multistep("i", "<BS>", { "minipairs_bs" })

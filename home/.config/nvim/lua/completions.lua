@@ -2,9 +2,6 @@ local util = require("util")
 
 vim.opt.completeopt = "fuzzy,menu,noselect,popup"
 
-local pairs = require("mini.pairs")
-pairs.setup()
-
 util.on_very_lazy(function()
     local process_items_opts = { kind_priority = { Text = -1, Snippet = 99 } }
     local completion = require("mini.completion")
@@ -28,15 +25,6 @@ util.on_very_lazy(function()
         vim.bo[ev.buf].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
     end
     util.lsp_attach_autocmd(nil, set_omnifunc, "Set 'omnifunc'")
-
-    local mkeymap = require("mini.keymap")
-    mkeymap.setup()
-
-    -- Navigate 'mini.completion' menu with `<Tab>` /  `<S-Tab>`
-    mkeymap.map_multistep("i", "<Tab>", { "pmenu_next" })
-    mkeymap.map_multistep("i", "<S-Tab>", { "pmenu_prev" })
-    mkeymap.map_multistep("i", "<CR>", { "pmenu_accept", "minipairs_cr" })
-    mkeymap.map_multistep("i", "<BS>", { "minipairs_bs" })
 
     local config_path = vim.fn.stdpath("config")
     local snippets = require("mini.snippets")

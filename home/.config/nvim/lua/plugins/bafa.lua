@@ -2,7 +2,7 @@ return {
     "mistweaverco/bafa.nvim",
     dependencies = { "nvim-mini/mini.nvim" },
     keys = {
-        { "<Tab>", '<Cmd>lua require "bafa".toggle()<CR>', desc = "Switch buffers" },
+        { mode = "n", "<Tab>", '<Cmd>lua require "bafa".toggle()<CR>', desc = "Switch buffers" },
     },
     config = function()
         local icons = require("mini.icons")

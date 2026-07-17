@@ -9,7 +9,6 @@ require("config.lazy")
 require("interface")
 require("editor")
 require("clipboard")
-require("keymap")
 require("filetypes")
 
 -- syntax
@@ -21,3 +20,6 @@ require("completions")
 require("diagnostics")
 require("file-tools")
 require("formatters")
+
+-- keymaps
+require("keymap")
