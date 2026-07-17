@@ -15,6 +15,7 @@ vim.o.wildignorecase = true
 vim.opt.wildignore = { ".git/*" }
 vim.o.showcmd = true -- display partial commands
 vim.o.showmode = false -- don't display current mode
+vim.opt.shortmess:append("cCIsS")
 
 -- input
 require("mini.input").setup()
@@ -48,26 +49,39 @@ statusline.setup({
             local mode, mode_hl = statusline.section_mode({ trunc_width = 120 })
             local git = statusline.section_git({ trunc_width = 40 })
             local diff = statusline.section_diff({ trunc_width = 75 })
+            local filename = statusline.section_filename({ trunc_width = 120 })
+
+            local diagnostics_hl = "MiniStatuslineDevinfo"
+            for severity_index, count in pairs(vim.diagnostic.count()) do
+                if count > 0 then
+                    diagnostics_hl = visual.highlight.diagnostic_block[severity_index]
+                    break
+                end
+            end
             local diagnostics = statusline.section_diagnostics({
                 trunc_width = 75,
                 signs = visual.icons.diagnostic_by_name,
             })
             local lsp = statusline.section_lsp({ trunc_width = 75 })
-            local filename = statusline.section_filename({ trunc_width = 140 })
+            local fileinfo = statusline.section_fileinfo({ trunc_width = 120 })
+
+            local search = statusline.section_searchcount({ trunc_width = 75 })
+
             local wrap_mode = require("wrapping").get_current_mode() or "-"
             local wrap = wrap_mode:sub(1, 1) .. "/" .. vim.bo.textwidth
-            local fileinfo = statusline.section_fileinfo({ trunc_width = 120 })
-            local location = statusline.section_location({ trunc_width = 75 })
-            local search = statusline.section_searchcount({ trunc_width = 75 })
+            local location = "%l:%L"
 
             return statusline.combine_groups({
                 { hl = mode_hl, strings = { mode } },
-                { hl = "MiniStatuslineDevinfo", strings = { git, diff, diagnostics, lsp } },
+                { hl = "MiniStatuslineDevinfo", strings = { git, diff } },
                 "%<", -- Mark general truncate point
                 { hl = "MiniStatuslineFilename", strings = { filename } },
                 "%=", -- End left alignment
-                { hl = "MiniStatuslineFileinfo", strings = { wrap, fileinfo } },
-                { hl = mode_hl, strings = { search, location } },
+                { hl = diagnostics_hl, strings = { diagnostics } },
+                { hl = "MiniStatuslineDevinfo", strings = { lsp, fileinfo } },
+                { hl = "MiniStatuslineFileinfo", strings = { wrap } },
+                { hl = "CurSearch", strings = { search } },
+                { hl = "MiniStatuslineFileinfo", strings = { location } },
             })
         end,
     },

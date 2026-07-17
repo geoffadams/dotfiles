@@ -1,6 +1,6 @@
 local M = {}
 
-local u = require('../util')
+local u = require("../util")
 local severity_to_index = vim.diagnostic.severity
 local diagnostic_icons = {
     ERROR = "",
@@ -18,6 +18,10 @@ M.highlight = {
     diagnostic = {
         [severity_to_index.ERROR] = "DiagnosticVirtualTextError",
         [severity_to_index.WARN] = "DiagnosticVirtualTextWarn",
+    },
+    diagnostic_block = {
+        [severity_to_index.ERROR] = "MiniStatuslineDiagnosticError",
+        [severity_to_index.WARN] = "MiniStatuslineDiagnosticWarn",
     },
 }
 

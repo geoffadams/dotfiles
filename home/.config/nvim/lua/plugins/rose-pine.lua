@@ -18,6 +18,8 @@ return {
                 MiniMapNormal = { bg = "overlay" },
                 MiniMapSymbolView = { fg = "subtle" },
                 MiniMapSymbolLine = { fg = "text" },
+                MiniStatuslineDiagnosticError = { fg = "love", bg = "overlay" },
+                MiniStatuslineDiagnosticWarn = { fg = "gold", bg = "overlay" },
             },
         })
         vim.cmd("colorscheme rose-pine-moon")
