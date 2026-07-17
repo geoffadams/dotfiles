@@ -15,6 +15,9 @@ return {
                 ColorfulWinSep = { link = "WinSeparator" },
                 FidgetNotify = { fg = "subtle", bg = "overlay" },
                 Visual = { bg = "foam" },
+                MiniMapNormal = { bg = "overlay" },
+                MiniMapSymbolView = { fg = "subtle" },
+                MiniMapSymbolLine = { fg = "text" },
             },
         })
         vim.cmd("colorscheme rose-pine-moon")

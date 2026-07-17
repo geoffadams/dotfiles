@@ -32,6 +32,10 @@ u.keymap("n", "ga", function()
     end
 end, "Go to alternate file")
 
+-- map view
+u.keymap("n", "<Leader>vm", "<Cmd>lua MiniMap.toggle()<CR>", "Toggle map")
+u.keymap("n", "<Leader>vM", "<Cmd>lua MiniMap.refresh()<CR>", "Refresh map")
+
 -- habit-breaking
 u.keymap("n", "<Up>", "", "Disable arrow nav")
 u.keymap("n", "<Down>", "", "Disable arrow nav")

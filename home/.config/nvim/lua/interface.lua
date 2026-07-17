@@ -87,3 +87,52 @@ vim.opt.titlestring = table.concat(titlestring, " ")
 local icons = require("mini.icons")
 icons.setup()
 icons.tweak_lsp_kind()
+
+-- scrollbar
+local map = require("mini.map")
+local dot_symbols = {
+    "⠀",
+    "⠁",
+    "⠂",
+    "⠃",
+    "⠄",
+    "⠅",
+    "⠆",
+    "⠇",
+    "⡀",
+    "⡁",
+    "⡂",
+    "⡃",
+    "⡄",
+    "⡅",
+    "⡆",
+    "⡇",
+    resolution = { row = 4, col = 1 },
+}
+map.setup({
+    symbols = {
+        encode = dot_symbols,
+        scroll_view = "▎",
+        scroll_line = "▊",
+    },
+    window = {
+        width = 2,
+        winblend = 25,
+        show_integration_count = false,
+    },
+    integrations = {
+        map.gen_integration.builtin_search({
+            search = "IncSearch",
+        }),
+        map.gen_integration.diagnostic({
+            error = "DiagnosticFloatingError",
+            warn = "DiagnosticFloatingWarn",
+        }),
+        map.gen_integration.gitsigns(),
+    },
+})
+vim.api.nvim_create_autocmd("VimEnter", {
+    callback = function()
+        map.open()
+    end,
+})
