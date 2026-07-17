@@ -9,10 +9,16 @@
       "?/lua/?/init.lua"
     ]
   },
+  "diagnostics": {
+    "globals": ["vim"]
+  },
   "workspace": {
     "library": [
       "$VIMRUNTIME",
+      "$LLS_Addons/luvit",
       "$HOME/.local/share/nvim/lazy"
-    ]
+    ],
+    "ignoreDir": ["build", ".git", "test"],
+    "ignoreGlobs": ["**/*_spec.lua"]
   }
 }

@@ -3,6 +3,7 @@ return {
     event = "VeryLazy",
     config = function()
         local u = require("util")
+        ---@type gitsigns.main
         local gitsigns = require("gitsigns")
         gitsigns.setup({
             current_line_blame_opts = {
