@@ -55,22 +55,27 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
--- quick exit
+-- quick close
+local quick_close_filetypes = {
+    "checkhealth",
+    "help",
+    "lspinfo",
+    "man",
+    "nofile",
+    "qf",
+    "startuptime",
+}
+local quick_close_buftypes = {
+    "help",
+    "nofile",
+    "quickfix",
+}
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = {
-        "help",
-        "startuptime",
-        "qf",
-        "lspinfo",
-        "man",
-        "checkhealth",
-        "nofile",
-    },
     callback = function(opts)
         if
             not vim.bo[opts.buf].modifiable
-            --or <filetypes>
-            or vim.bo[opts.buf].buftype == "nofile"
+            or vim.tbl_contains(quick_close_filetypes, vim.bo[opts.buf].filetype)
+            or vim.tbl_contains(quick_close_buftypes, vim.bo[opts.buf].buftype)
         then
             u.keymap_buf("n", "q", function()
                 if #vim.api.nvim_list_wins() > 1 then
