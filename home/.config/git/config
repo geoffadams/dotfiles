@@ -22,8 +22,17 @@
     navigate = true
     line-numbers = true
     hyperlinks = true
-    file-decoration-style = bold yellow
-    hunk-header-decoration-style = bold yellow
+    file-decoration-style = bold brightblack box
+    file-style = bold magenta
+    hunk-header-decoration-style = bold brightblack ul
+    hunk-header-file-style = green 
+    hunk-header-line-number-style = bold yellow
+    hunk-header-style = file line-number syntax
+    line-numbers-left-style = brightblack
+    line-numbers-right-style = brightblack
+    line-numbers-zero-style = brightblack
+    line-numbers-minus-style = bold red 
+    line-numbers-plus-style = bold green 
     relative-paths = true
     wrap-max-lines = unlimited
     width = variable
@@ -37,6 +46,10 @@
     algorithm = histogram
     colorMoved = default
     renames = copies
+    tool = nvim_difftool
+[difftool "nvim_difftool"]
+    cmd = "nvim -c \"packadd nvim.difftool\" -d \"$LOCAL\" \"$REMOTE\""
+    prompt = false
 [commit]
     gpgSign = true
 [apply]
