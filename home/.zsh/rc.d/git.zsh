@@ -79,7 +79,7 @@ _fzf_bind_git_tracked_files() {
     "$@" --bind "ctrl-t:reload(eval $_FZF_GIT_LIST_TRACKED_FILES && _git_list_tracked_files)+change-prompt(tracked> )+change-preview(eval $_FZF_GIT_PREVIEW_FILE && _fzf_git_preview_file {})+change-nth(1)+change-with-nth({2})"
 }
 _fzf_bind_git_modified_files() {
-    "$@" --bind "ctrl-f:reload(eval $_FZF_GIT_LIST_MODIFIED_FILES && _git_list_modified_files)+change-prompt(bmodified> )+change-preview(eval $_FZF_GIT_PREVIEW_FILE && _fzf_git_preview_file {})+change-nth(1)+change-with-nth({3} {2})"
+    "$@" --bind "ctrl-f:reload(eval $_FZF_GIT_LIST_MODIFIED_FILES && _git_list_modified_files)+change-prompt(modified> )+change-preview(eval $_FZF_GIT_PREVIEW_FILE && _fzf_git_preview_file {})+change-nth(1)+change-with-nth({3} {2})"
 }
 _fzf_bind_git_unstaged_files() {
     "$@" --bind "ctrl-u:reload(eval $_FZF_GIT_LIST_UNSTAGED_FILES && _git_list_unstaged_files)+change-prompt(unstaged> )+change-preview(eval $_FZF_GIT_PREVIEW_FILE && _fzf_git_preview_file {})+change-nth(1)+change-with-nth({3} {2})"
