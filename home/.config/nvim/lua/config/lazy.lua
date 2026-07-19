@@ -27,3 +27,6 @@ require("lazy").setup({
         title = "lazy.nvim",
     },
 })
+
+local u = require("util")
+u.keymap("n", "<Leader>sp", "<Cmd>Lazy<CR>", "Lazy.nvim")
