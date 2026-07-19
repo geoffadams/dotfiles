@@ -20,25 +20,41 @@ _git_list_refs() {
 }
 export _FZF_GIT_LIST_REFS=$(functions _git_list_refs)
 
+_git_list_all_files() {
+    {
+        _git_list_modified_files --untracked-files=all $@
+        _git_list_unstaged_files --untracked-files=all $@
+        _git_list_untracked_files $@
+        _git_list_tracked_files $@
+    } | sort -s -k 3 -u
+}
+export _FZF_GIT_LIST_ALL_FILES=$(functions _git_list_refs)
+
 _git_list_tracked_files() {
     git ls-files -t | \
-        gsed -r 's/^(.) (.+)$/\1\t\2/'
+        gsed -r 's/^(.) (.+)$/\1\t\o033\[90m--\o033\[0m\t\2/'
+}
+export _FZF_GIT_LIST_TRACKED_FILES=$(functions _git_list_tracked_files)
+
+_git_list_untracked_files() {
+    git ls-files -t --others --exclude-standard | \
+        gsed -r 's/^(.) (.+)$/\1\t??\t\2/'
 }
 export _FZF_GIT_LIST_TRACKED_FILES=$(functions _git_list_tracked_files)
 
 _git_list_modified_files() {
-    git status --porcelain=2 --no-renames | \
+    git status --porcelain=2 --no-renames $@ | \
         ggrep -v -e "^#" | \
         gsed "s/^\? /? ?? /" | \
-        gsed -r 's/^(.) (.)(.)(( [^ ]+ [[:digit:]]+ [[:digit:]]+ [[:digit:]]+ [[:xdigit:]]+ [[:xdigit:]]+)?) (.+)$/\1\t\6\t\o033\[32m\2\o033\[31m\3\o033\[0m/'
+        gsed -r 's/^(.) (.)(.)(( [^ ]+ [[:digit:]]+ [[:digit:]]+ [[:digit:]]+ [[:xdigit:]]+ [[:xdigit:]]+)?) (.+)$/\1\t\o033\[32m\2\o033\[31m\3\o033\[0m\t\6/'
 }
 export _FZF_GIT_LIST_MODIFIED_FILES=$(functions _git_list_modified_files)
 
 _git_list_unstaged_files() {
-    git status --porcelain=2 --no-renames | \
+    git status --porcelain=2 --no-renames $@ | \
         ggrep -v -e '^#' -e '^. .\.' | \
         gsed 's/^\? /? ?? /' | \
-        gsed -r 's/^(.) (.)(.)(( [^ ]+ [[:digit:]]+ [[:digit:]]+ [[:digit:]]+ [[:xdigit:]]+ [[:xdigit:]]+)?) (.+?)$/\1\t\6\t\o033\[32m\2\o033\[31m\3\o033\[0m/'
+        gsed -r 's/^(.) (.)(.)(( [^ ]+ [[:digit:]]+ [[:digit:]]+ [[:digit:]]+ [[:xdigit:]]+ [[:xdigit:]]+)?) (.+?)$/\1\t\o033\[32m\2\o033\[31m\3\o033\[0m\t\6/'
 }
 export _FZF_GIT_LIST_UNSTAGED_FILES=$(functions _git_list_unstaged_files)
 
@@ -51,19 +67,16 @@ export _FZF_GIT_PREVIEW_REF=$(functions _fzf_git_preview_ref)
 
 _fzf_git_preview_file() {
     local line=("${(@Q)${(z)@}}")
-    local f
-    if [[ ${#line} == 1 ]]; then
-        f=$line[1]
-        bat --style=numbers --color=always "$f" 2>/dev/null || cat "$f" 2>/dev/null || ls -1 "$f"
-    elif [[ $line[1] == "?" ]]; then
-        f=${line[2,-2]}
-        bat --style=numbers --color=always "$f" 2>/dev/null || cat "$f" 2>/dev/null || ls -1 "$f"
-    elif [[ $line[1] == "H" ]]; then
-        f=${line[2,-1]}
-        bat --style=numbers --color=always "$f" 2>/dev/null || cat "$f" 2>/dev/null || ls -1 "$f"
+    local f=${line[3,-1]}
+
+    if [[ $line[1] == "?" ]]; then
+        if [[ $f[-1] == "/" ]]; then
+            git ls-files --others --exclude-standard -z "$f" | xargs -0 -n 1 delta --paging never /dev/null
+        else
+            git diff --color=always --no-index -- /dev/null "$f" | delta --file-style "omit" --paging never
+        fi
     else
-        f=${line[2,-2]}
-        git diff --color=always HEAD -- "$f" 2>/dev/null | delta
+        git diff --color=always HEAD -- "$f" 2>/dev/null | delta --file-style "omit" --paging never
     fi
 }
 export _FZF_GIT_PREVIEW_FILE=$(functions _fzf_git_preview_file)
@@ -110,7 +123,7 @@ _fzf_git() {
 
 # pickers
 _fzf_git_files() {
-    _git_list_tracked_files | \
+    _git_list_all_files | \
         _fzf_git_with_preview_file \
         _fzf_bind_git_refs \
         _fzf_bind_git_modified_files \
@@ -119,11 +132,11 @@ _fzf_git_files() {
         _fzf_git \
         --multi \
         --delimiter "\t" \
-        --prompt 'tracked> ' \
+        --prompt 'files> ' \
         --header 'ctrl+ [t]racked modi[f]ied [u]nstaged [r]efs' \
         --nth=1 \
-        --with-nth="{2}" \
-        --accept-nth=2 \
+        --with-nth="{2} {3}" \
+        --accept-nth=3 \
         --query "$1"
 }
 
@@ -139,9 +152,9 @@ _fzf_git_modified_files() {
         --delimiter "\t" \
         --prompt 'modified> ' \
         --header 'ctrl+ [t]racked modi[f]ied [u]nstaged [r]efs' \
-        --nth=1 \
-        --with-nth="{3} {2}" \
-        --accept-nth=2 \
+        --nth=2 \
+        --with-nth="{2} {3}" \
+        --accept-nth=3 \
         --query "$1"
 }
 
@@ -158,8 +171,8 @@ _fzf_git_unstaged_files() {
         --prompt 'unstaged> ' \
         --header 'ctrl+ [t]racked modi[f]ied [u]nstaged [r]efs' \
         --nth=1 \
-        --with-nth="{3} {2}" \
-        --accept-nth=2 \
+        --with-nth="{2} {3}" \
+        --accept-nth=3 \
         --query "$1"
 }
 
@@ -175,8 +188,8 @@ _fzf_git_tracked_files() {
         --prompt 'tracked> ' \
         --header 'ctrl+ [t]racked modi[f]ied [u]nstaged [r]efs' \
         --nth=1 \
-        --with-nth="{2}" \
-        --accept-nth=2 \
+        --with-nth="{2} {3}" \
+        --accept-nth=3 \
         --query "$1"
 }
 
@@ -249,22 +262,26 @@ _fzf_complete_git() {
 
     # '--' after the subcommand means everything following is a file path
     if (( ${args[(I)--]} >= 3 )); then
-        _fzf_git_modified_files
+        _fzf_git_files
         return
     fi
 
     case $subcmd in
         restore|diff)
             _fzf_git_modified_files
+            return
             ;;
         add)
             _fzf_git_unstaged_files
+            return
             ;;
         rm)
             _fzf_git_tracked_files
+            return
             ;;
         checkout|show|cherry-pick|rebase|reset|revert|merge)
             _fzf_git_refs
+            return
             ;;
         stash)
             local stash_subcmd=$(
@@ -274,9 +291,12 @@ _fzf_complete_git() {
             case $stash_subcmd in
                 show|drop|pop|apply|branch)
                     _fzf_git_stashes
+                    return
                     ;;
             esac
             ;;
     esac
+
+    _fzf_git_files
 }
 
