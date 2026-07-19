@@ -7,6 +7,6 @@ return {
     },
     cmd = "Canola",
     keys = {
-        { "-", "<Cmd>Canola<CR>", desc = "Open parent directory" },
+        { mode = "n", "-", "<Cmd>Canola<CR>", desc = "Open parent directory" },
     },
 }
