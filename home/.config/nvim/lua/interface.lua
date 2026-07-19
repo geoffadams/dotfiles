@@ -97,11 +97,6 @@ local titlestring = {
 }
 vim.opt.titlestring = table.concat(titlestring, " ")
 
--- icons
-local icons = require("mini.icons")
-icons.setup()
-icons.tweak_lsp_kind()
-
 -- scrollbar
 local map = require("mini.map")
 local dot_symbols = {

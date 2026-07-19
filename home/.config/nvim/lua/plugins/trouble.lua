@@ -40,9 +40,6 @@ return {
         },
     },
     config = function()
-        local icons = require("mini.icons")
-        icons.mock_nvim_web_devicons()
-
         require("trouble").setup({
             warn_no_results = false,
             open_no_results = true,
