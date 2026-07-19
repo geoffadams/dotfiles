@@ -6,8 +6,8 @@ return {
         "DeltaMenu",
     },
     keys = {
-        { "<Leader>vd", "<Cmd>DeltaView<CR>", desc = "View file diff" },
-        { "<Leader>vD", "<Cmd>DeltaMenu<CR>", desc = "View repo diff" },
+        { "<Leader>hd", "<Cmd>DeltaView<CR>", desc = "View file diff" },
+        { "<Leader>hD", "<Cmd>DeltaMenu<CR>", desc = "View repo diff" },
     },
     opts = {
         keyconfig = {

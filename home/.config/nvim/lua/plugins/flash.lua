@@ -2,30 +2,9 @@ return {
     "folke/flash.nvim",
     event = "VeryLazy",
     keys = {
-        {
-            "<Leader>g",
-            mode = { "n", "x", "o" },
-            function()
-                require("flash").treesitter()
-            end,
-            desc = "Jump 🌳",
-        },
-        {
-            "<Leader>G",
-            mode = { "n", "x", "o" },
-            function()
-                require("flash").jump()
-            end,
-            desc = "Jump",
-        },
-        {
-            "<C-s>",
-            mode = { "c" },
-            function()
-                require("flash").toggle()
-            end,
-            desc = "Toggle Flash Search",
-        },
+        { mode = { "n", "x", "o" }, "<Leader>g", [[<Cmd>lua require "flash".treesitter()<CR>]], desc = "Jump 🌳" },
+        { mode = { "n", "x", "o" }, "<Leader>G", [[<Cmd>lua require "flash".treesitter()<CR>]], desc = "Jump" },
+        { mode = { "c" }, "<C-s>", [[<Cmd>lua require("flash").toggle()<CR>]], desc = "Toggle Flash Search" },
     },
     ---@module "flash"
     ---@type Flash.Config

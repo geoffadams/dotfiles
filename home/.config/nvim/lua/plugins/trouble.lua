@@ -6,7 +6,7 @@ return {
         {
             "<Leader>td",
             "<Cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-            desc = "Document diagnostics",
+            desc = "Diagnostics",
         },
         {
             "<Leader>tD",
@@ -34,7 +34,7 @@ return {
             desc = "Quickfix list",
         },
         {
-            "<Leader>tf",
+            "<Leader>fp",
             "<Cmd>Trouble fzf toggle<cr>",
             desc = "fzf file list",
         },
