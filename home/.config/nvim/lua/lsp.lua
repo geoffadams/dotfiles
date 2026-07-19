@@ -69,7 +69,9 @@ local function enable_lsp_functionality(event)
     u.keymap_buf("n", "grt", vim.lsp.buf.type_definition, "Type definition", event.buf)
     u.keymap_buf("n", "grx", vim.lsp.codelens.run, "Codelens", event.buf)
     u.keymap_buf("n", "gO", vim.lsp.buf.document_symbol, "Document symbols", event.buf)
-    u.keymap_buf("i", "<C-S-/>", vim.lsp.buf.signature_help, "Signature help", event.buf)
+    u.keymap_buf({ "n", "i" }, "<C-S-/>", vim.lsp.buf.signature_help, "Signature info", event.buf)
+    u.keymap_buf({ "n", "i" }, "<C-S-.>", vim.lsp.buf.hover, "Symbol info", event.buf)
+    u.keymap_buf("n", "K", vim.lsp.buf.hover, "Symbol info", event.buf)
 
     local client = vim.lsp.get_client_by_id(event.data.client_id)
     if client and client:supports_method("textDocument/documentHighlight", event.buf) then
