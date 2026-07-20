@@ -12,8 +12,8 @@ set -euo pipefail
 shopt -s dotglob nullglob
 
 case "$(uname -m)" in
-    x86_64) RUST_ARCH=x86_64 GO_ARCH=amd64 NVIM_ARCH=x86_64 VIVID_LIBC=musl ;;
-    aarch64 | arm64) RUST_ARCH=aarch64 GO_ARCH=arm64 NVIM_ARCH=arm64 VIVID_LIBC=gnu ;;
+    x86_64) RUST_ARCH=x86_64 GO_ARCH=amd64 NVIM_ARCH=x86_64 VIVID_LIBC=musl TS_ARCH=x64 ;;
+    aarch64 | arm64) RUST_ARCH=aarch64 GO_ARCH=arm64 NVIM_ARCH=arm64 VIVID_LIBC=gnu TS_ARCH=arm64 ;;
     *)
         echo "ERROR: unsupported architecture: $(uname -m)" >&2
         exit 1
@@ -219,6 +219,15 @@ install_rg() {
     echo "rg installed: $(rg --version)"
 }
 
+install_tree_sitter() {
+    command -v tree-sitter &>/dev/null && return
+    echo "Installing tree-sitter..."
+    local url
+    url="$(gh_asset_url tree-sitter/tree-sitter "tree-sitter-linux-${TS_ARCH}\.gz")"
+    curl -fsSL "$url" | gunzip | install -m 0755 /dev/stdin "$LOCAL_DIR/bin/tree-sitter"
+    echo "tree-sitter installed: $(tree-sitter --version)"
+}
+
 # Merge cleanupPeriodDays/statusLine into ~/.claude/settings.json without
 # clobbering unrelated settings or overwriting values already set there.
 install_claude_settings() {
@@ -287,6 +296,7 @@ install_bat
 install_fd
 install_zoxide
 install_neovim
+install_tree_sitter
 install_direnv
 install_rg
 install_claude_settings
