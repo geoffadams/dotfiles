@@ -7,9 +7,9 @@ return {
             formatters_by_ft = {
                 lua = { "stylua" },
                 python = { "ruff", "isort" },
-                bash = { "beautysh" },
-                sh = { "beautysh" },
-                zsh = { "beautysh" },
+                bash = { "shfmt" },
+                sh = { "shfmt" },
+                zsh = { "shfmt" },
                 typescript = { "prettierd", lsp_format = "fallback" },
                 markdown = { "flowmark", "prettierd", lsp_format = "fallback" },
                 json = { "prettierd", lsp_format = "fallback" },

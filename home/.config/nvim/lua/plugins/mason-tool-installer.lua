@@ -14,7 +14,7 @@ return {
                 "ruff",
                 "isort",
                 "bash-language-server",
-                "beautysh",
+                "shfmt",
                 "vtsls",
                 "eslint-lsp",
                 "prettierd",

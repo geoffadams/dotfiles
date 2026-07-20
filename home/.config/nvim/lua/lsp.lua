@@ -11,9 +11,6 @@ vim.lsp.config("basedpyright", {
     },
 })
 vim.lsp.enable("basedpyright")
-vim.lsp.config("bashls", {
-    filetypes = { "bash", "sh", "zsh" },
-})
 vim.lsp.enable("bashls")
 vim.lsp.config("vtsls", {
     -- devcontainers support
