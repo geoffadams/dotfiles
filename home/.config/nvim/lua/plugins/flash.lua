@@ -18,9 +18,6 @@ return {
             },
         },
         modes = {
-            search = {
-                enabled = true,
-            },
             treesitter = {
                 label = {
                     before = true,
