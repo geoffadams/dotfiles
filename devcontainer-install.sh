@@ -91,28 +91,30 @@ gh_asset_url() {
     echo "$url"
 }
 
-install_starship() {
-    command -v starship &>/dev/null && return
-    echo "Installing starship..."
-    local url tmp
-    url="$(gh_asset_url starship/starship "${RUST_ARCH}-unknown-linux-musl\.tar\.gz")"
+# layout: pass "nested" when the asset is a .tar.gz with $bin inside a
+# subdirectory (e.g. bat-v1.2.3-x86_64.../bat) rather than at its root.
+install_tool() {
+    local bin="$1" repo="$2" pattern="$3" layout="${4:-}"
+    local strip=0
+    [[ "$layout" == nested ]] && strip=1
+    command -v "$bin" &>/dev/null && return
+    echo "Installing $bin..."
+    local url tmp dl
+    url="$(gh_asset_url "$repo" "$pattern")"
     tmp="$(mktemp -d)"
-    curl -fsSL "$url" | tar -xz -C "$tmp"
-    install -m 0755 "$tmp/starship" "$LOCAL_DIR/bin/starship"
+    dl="$tmp/download"
+    curl -fsSL "$url" -o "$dl"
+    case "$url" in
+        *.tar.gz)
+            tar -xzf "$dl" -C "$tmp" --strip-components="$strip"
+            mv "$tmp/$bin" "$tmp/out"
+            ;;
+        *.gz) gunzip -c "$dl" >"$tmp/out" ;;
+        *) mv "$dl" "$tmp/out" ;;
+    esac
+    install -m 0755 "$tmp/out" "$LOCAL_DIR/bin/$bin"
     rm -rf "$tmp"
-    echo "starship installed: $(starship --version)"
-}
-
-install_vivid() {
-    command -v vivid &>/dev/null && return
-    echo "Installing vivid..."
-    local url tmp
-    url="$(gh_asset_url sharkdp/vivid "${RUST_ARCH}-unknown-linux-${VIVID_LIBC}\.tar\.gz")"
-    tmp="$(mktemp -d)"
-    curl -fsSL "$url" | tar -xz -C "$tmp" --strip-components=1
-    install -m 0755 "$tmp/vivid" "$LOCAL_DIR/bin/vivid"
-    rm -rf "$tmp"
-    echo "vivid installed: $(vivid --version)"
+    echo "$bin installed: $("$bin" --version)"
 }
 
 install_neovim() {
@@ -127,105 +129,6 @@ install_neovim() {
     done
     rm -rf "$tmp"
     echo "neovim installed: $(nvim --version | head -1)"
-}
-
-install_bat() {
-    command -v bat &>/dev/null && return
-    echo "Installing bat..."
-    local url tmp
-    url="$(gh_asset_url sharkdp/bat "${RUST_ARCH}-unknown-linux-musl\.tar\.gz")"
-    tmp="$(mktemp -d)"
-    curl -fsSL "$url" | tar -xz -C "$tmp" --strip-components=1
-    install -m 0755 "$tmp/bat" "$LOCAL_DIR/bin/bat"
-    rm -rf "$tmp"
-    echo "bat installed: $(bat --version)"
-}
-
-install_fd() {
-    command -v fd &>/dev/null && return
-    echo "Installing fd..."
-    local url tmp
-    url="$(gh_asset_url sharkdp/fd "${RUST_ARCH}-unknown-linux-musl\.tar\.gz")"
-    tmp="$(mktemp -d)"
-    curl -fsSL "$url" | tar -xz -C "$tmp" --strip-components=1
-    install -m 0755 "$tmp/fd" "$LOCAL_DIR/bin/fd"
-    rm -rf "$tmp"
-    echo "fd installed: $(fd --version)"
-}
-
-install_fzf() {
-    command -v fzf &>/dev/null && return
-    echo "Installing fzf..."
-    local url tmp
-    url="$(gh_asset_url junegunn/fzf "linux_${GO_ARCH}\.tar\.gz")"
-    tmp="$(mktemp -d)"
-    curl -fsSL "$url" | tar -xz -C "$tmp"
-    install -m 0755 "$tmp/fzf" "$LOCAL_DIR/bin/fzf"
-    rm -rf "$tmp"
-    echo "fzf installed: $(fzf --version)"
-}
-
-install_zoxide() {
-    command -v zoxide &>/dev/null && return
-    echo "Installing zoxide..."
-    local url tmp
-    url="$(gh_asset_url ajeetdsouza/zoxide "${RUST_ARCH}-unknown-linux-musl\.tar\.gz")"
-    tmp="$(mktemp -d)"
-    curl -fsSL "$url" | tar -xz -C "$tmp"
-    install -m 0755 "$tmp/zoxide" "$LOCAL_DIR/bin/zoxide"
-    rm -rf "$tmp"
-    echo "zoxide installed: $(zoxide --version)"
-}
-
-install_delta() {
-    command -v delta &>/dev/null && return
-    echo "Installing delta..."
-    local url tmp
-    url="$(gh_asset_url dandavison/delta "${RUST_ARCH}-unknown-linux-gnu\.tar\.gz")"
-    tmp="$(mktemp -d)"
-    curl -fsSL "$url" | tar -xz -C "$tmp" --strip-components=1
-    install -m 0755 "$tmp/delta" "$LOCAL_DIR/bin/delta"
-    rm -rf "$tmp"
-    echo "delta installed: $(delta --version)"
-}
-
-install_direnv() {
-    command -v direnv &>/dev/null && return
-    echo "Installing direnv..."
-    local url
-    url="$(gh_asset_url direnv/direnv "direnv\.linux-${GO_ARCH}")"
-    curl -fsSL "$url" | install -m 0755 /dev/stdin "$LOCAL_DIR/bin/direnv"
-    echo "direnv installed: $(direnv --version)"
-}
-
-install_jq() {
-    command -v jq &>/dev/null && return
-    echo "Installing jq..."
-    local url
-    url="$(gh_asset_url jqlang/jq "jq-linux-${GO_ARCH}")"
-    curl -fsSL "$url" | install -m 0755 /dev/stdin "$LOCAL_DIR/bin/jq"
-    echo "jq installed: $(jq --version)"
-}
-
-install_rg() {
-    command -v rg &>/dev/null && return
-    echo "Installing rg..."
-    local url
-    url="$(gh_asset_url BurntSushi/ripgrep "${RUST_ARCH}-unknown-linux-musl\.tar\.gz")"
-    tmp="$(mktemp -d)"
-    curl -fsSL "$url" | tar -xz -C "$tmp" --strip-components=1
-    install -m 0755 "$tmp/rg" "$LOCAL_DIR/bin/rg"
-    rm -rf "$tmp"
-    echo "rg installed: $(rg --version)"
-}
-
-install_tree_sitter() {
-    command -v tree-sitter &>/dev/null && return
-    echo "Installing tree-sitter..."
-    local url
-    url="$(gh_asset_url tree-sitter/tree-sitter "tree-sitter-linux-${TS_ARCH}\.gz")"
-    curl -fsSL "$url" | gunzip | install -m 0755 /dev/stdin "$LOCAL_DIR/bin/tree-sitter"
-    echo "tree-sitter installed: $(tree-sitter --version)"
 }
 
 # Merge cleanupPeriodDays/statusLine into ~/.claude/settings.json without
@@ -247,24 +150,24 @@ install_claude_settings() {
 install_locales() {
     echo "Installing locales..."
     $SUDO apt-get install -y -q locales
-    $SUDO sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
-    $SUDO sed -i -e 's/# en_GB.UTF-8 UTF-8/en_GB.UTF-8 UTF-8/' /etc/locale.gen
+    local locale
+    for locale in en_US en_GB; do
+        $SUDO sed -i -e "s/# ${locale}.UTF-8 UTF-8/${locale}.UTF-8 UTF-8/" /etc/locale.gen
+    done
     $SUDO dpkg-reconfigure --frontend=noninteractive locales
 }
 
 # Install zsh plugins via apt and wire them up via rc.private.d (Linux fallback
 # for the has_brew-gated sourcing in rc.d/zsh-highlighting.zsh etc.)
 install_zsh_plugins() {
-    local rc_file="$HOME/.zsh/rc.private.d/linux-plugins.zsh"
+    local rc_file="$HOME/.zsh/rc.private.d/linux-plugins.zsh" pkg
 
-    if [[ ! -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
-        echo "Installing zsh-syntax-highlighting..."
-        $SUDO apt-get install -y -q zsh-syntax-highlighting
-    fi
-    if [[ ! -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
-        echo "Installing zsh-autosuggestions..."
-        $SUDO apt-get install -y -q zsh-autosuggestions
-    fi
+    for pkg in zsh-syntax-highlighting zsh-autosuggestions; do
+        if [[ ! -f "/usr/share/$pkg/$pkg.zsh" ]]; then
+            echo "Installing $pkg..."
+            $SUDO apt-get install -y -q "$pkg"
+        fi
+    done
 
     if [[ ! -f "$rc_file" ]]; then
         mkdir -p "$(dirname "$rc_file")"
@@ -285,18 +188,23 @@ EOF
 }
 
 $SUDO apt update
+
 install_locales
+
 install_zsh_plugins
-install_jq
-install_starship
-install_vivid
-install_fzf
-install_delta
-install_bat
-install_fd
-install_zoxide
+
 install_neovim
-install_tree_sitter
-install_direnv
-install_rg
+
+install_tool jq jqlang/jq "jq-linux-${GO_ARCH}"
+install_tool starship starship/starship "${RUST_ARCH}-unknown-linux-musl\.tar\.gz"
+install_tool vivid sharkdp/vivid "${RUST_ARCH}-unknown-linux-${VIVID_LIBC}\.tar\.gz" nested
+install_tool fzf junegunn/fzf "linux_${GO_ARCH}\.tar\.gz"
+install_tool delta dandavison/delta "${RUST_ARCH}-unknown-linux-gnu\.tar\.gz" nested
+install_tool bat sharkdp/bat "${RUST_ARCH}-unknown-linux-musl\.tar\.gz" nested
+install_tool fd sharkdp/fd "${RUST_ARCH}-unknown-linux-musl\.tar\.gz" nested
+install_tool zoxide ajeetdsouza/zoxide "${RUST_ARCH}-unknown-linux-musl\.tar\.gz"
+install_tool tree-sitter tree-sitter/tree-sitter "tree-sitter-linux-${TS_ARCH}\.gz"
+install_tool direnv direnv/direnv "direnv\.linux-${GO_ARCH}"
+install_tool rg BurntSushi/ripgrep "${RUST_ARCH}-unknown-linux-musl\.tar\.gz" nested
+
 install_claude_settings
