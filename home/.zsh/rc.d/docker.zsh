@@ -1,9 +1,11 @@
 #!/usr/bin/env zsh
-if (($+commands[docker])); then
-    source <(docker completion zsh)
-
-    alias docker-image-prune='docker rmi $(docker images -f "dangling=true" -q)'
-    alias docker-clean='docker rm $(docker ps -a -q) && docker volume rm $(docker volume ls -q)'
-    alias docker-pull-all="docker images | grep -v REPOSITORY | awk '{print \$1\":\"\$2}' | xargs -L1 docker pull"
-    alias docker-shell-into-image="docker run --rm -it --entrypoint sh $1"
+if ! (($+commands[docker])); then
+    return
 fi
+
+! (($+_comps[docker])) && source <(docker completion zsh)
+
+alias docker-image-prune='docker rmi $(docker images -f "dangling=true" -q)'
+alias docker-clean='docker rm $(docker ps -a -q) && docker volume rm $(docker volume ls -q)'
+alias docker-pull-all="docker images | grep -v REPOSITORY | awk '{print \$1\":\"\$2}' | xargs -L1 docker pull"
+alias docker-shell-into-image="docker run --rm -it --entrypoint sh $1"
