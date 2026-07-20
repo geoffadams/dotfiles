@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 # Symlink the contents of home/ into $HOME, mirroring `homesick symlink`
 # but skipping the macOS-only Library tree. Lets the dotfiles work in
 # Linux devcontainers where homesick (Ruby) isn't available.
@@ -8,8 +8,8 @@
 # release asset naming conventions vary by project (rust triples, go arch names,
 # neovim's own scheme, and vivid's mixed musl/gnu libc per arch).
 
-set -euo pipefail
-shopt -s dotglob nullglob
+setopt err_exit no_unset pipe_fail
+setopt dotglob nullglob
 
 case "$(uname -m)" in
     x86_64) RUST_ARCH=x86_64 GO_ARCH=amd64 NVIM_ARCH=x86_64 VIVID_LIBC=musl TS_ARCH=x64 ;;
@@ -20,16 +20,17 @@ case "$(uname -m)" in
         ;;
 esac
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_DIR="${0:A:h}"
 HOME_DIR="$SCRIPT_DIR/home"
 SUBDIR_FILE="$SCRIPT_DIR/.homesick_subdir"
-SUDO="$([[ "$(id -u)" -eq 0 ]] && echo '' || echo 'sudo')"
+SUDO="$([[ "$EUID" -eq 0 ]] && echo '' || echo 'sudo')"
 LOCAL_DIR="$HOME/.local"
 mkdir -p "$LOCAL_DIR/bin" "$LOCAL_DIR/lib" "$LOCAL_DIR/share" "$LOCAL_DIR/man"
 
 # ── Dotfile symlinking ────────────────────────────────────────────────────────
 
-declare -a DEEP_PATHS=()
+typeset -a DEEP_PATHS
+DEEP_PATHS=()
 if [[ -f "$SUBDIR_FILE" ]]; then
     while IFS= read -r line; do
         [[ -z "$line" || "$line" == Library* ]] && continue
@@ -39,7 +40,7 @@ fi
 
 is_deep() {
     local target="$1" p
-    for p in ${DEEP_PATHS[@]+"${DEEP_PATHS[@]}"}; do
+    for p in $DEEP_PATHS; do
         [[ "$target" == "$p" ]] && return 0
     done
     return 1
@@ -47,7 +48,7 @@ is_deep() {
 
 make_link() {
     local src="$1" dest="$2"
-    mkdir -p "$(dirname "$dest")"
+    mkdir -p "${dest:h}"
     if [[ -e "$dest" && ! -L "$dest" ]]; then
         echo "replacing $dest (was a plain file)"
         rm -f "$dest"
@@ -58,7 +59,7 @@ make_link() {
 walk() {
     local src_dir="$1" rel="$2" entry name child_rel
     for entry in "$src_dir"/*; do
-        name="${entry##*/}"
+        name="${entry:t}"
         child_rel="${rel:+$rel/}$name"
         [[ "$child_rel" == Library* ]] && continue
 
@@ -135,7 +136,7 @@ install_neovim() {
 # clobbering unrelated settings or overwriting values already set there.
 install_claude_settings() {
     local settings_file="$HOME/.claude/settings.json" tmp
-    mkdir -p "$(dirname "$settings_file")"
+    mkdir -p "${settings_file:h}"
     [[ -f "$settings_file" ]] || echo '{}' >"$settings_file"
 
     tmp="$(mktemp)"
@@ -170,7 +171,7 @@ install_zsh_plugins() {
     done
 
     if [[ ! -f "$rc_file" ]]; then
-        mkdir -p "$(dirname "$rc_file")"
+        mkdir -p "${rc_file:h}"
         cat >"$rc_file" <<'EOF'
 # Linux devcontainer fallback: source zsh plugins installed via apt.
 # The rc.d configs gate these on has_brew, which is false on Linux.
