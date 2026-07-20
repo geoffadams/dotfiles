@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # must run **after** everything else!
 
 # command syntax highlighting

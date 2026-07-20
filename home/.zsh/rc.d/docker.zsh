@@ -1,4 +1,5 @@
-if (( $+commands[docker] )); then
+#!/usr/bin/env zsh
+if (($+commands[docker])); then
     source <(docker completion zsh)
 
     alias docker-image-prune='docker rmi $(docker images -f "dangling=true" -q)'

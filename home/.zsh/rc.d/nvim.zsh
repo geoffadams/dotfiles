@@ -1,4 +1,5 @@
-if (( $+commands[nvim] )); then
+#!/usr/bin/env zsh
+if (($+commands[nvim])); then
     alias vim="nvim"
 
     MANPAGER="nvim +Man!"
@@ -7,4 +8,3 @@ if (( $+commands[nvim] )); then
     # revert to emacs bindings in zle
     bindkey -e
 fi
-

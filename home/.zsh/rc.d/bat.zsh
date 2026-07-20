@@ -1,1 +1,2 @@
-(( $+commands[bat] )) && PAGER=bat
+#!/usr/bin/env zsh
+(($+commands[bat])) && PAGER=bat

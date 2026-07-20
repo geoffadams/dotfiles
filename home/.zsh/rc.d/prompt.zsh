@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # general options
 setopt correct
 setopt prompt_subst

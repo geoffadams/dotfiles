@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # set function paths
 if has_brew; then
     fpath+=(${BREW_ZSH_SHARE_PREFIX}/zsh-completions)
@@ -31,4 +32,3 @@ zstyle ':completion:*' special-dirs false
 # init completions
 autoload -Uz compinit
 compinit
-

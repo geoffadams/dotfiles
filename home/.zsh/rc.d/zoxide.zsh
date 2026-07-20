@@ -1,10 +1,11 @@
-if ! (( $+commands[zoxide] )); then
+#!/usr/bin/env zsh
+if ! (($+commands[zoxide])); then
     return
 fi
 
 eval "$(zoxide init zsh)"
 
-if (( $+commands[fzf] )); then
+if (($+commands[fzf])); then
     # ── picker ─────────────────────────────────────────────────────────────────
 
     # Generates a two-column fzf-ready list: full-path TAB colored-display-path.
@@ -13,7 +14,7 @@ if (( $+commands[fzf] )); then
     _zoxide_colorize() {
         local query="$1"
         awk -v home="$HOME" \
-        '{ score=$1; path=$0; sub(/^ *[0-9.]+ +/,"",path)
+            '{ score=$1; path=$0; sub(/^ *[0-9.]+ +/,"",path)
                scores[++k]=score; paths[k]=path
                if (k==1||score>max_s) max_s=score
                if (k==1||score<min_s) min_s=score
@@ -52,8 +53,8 @@ if (( $+commands[fzf] )); then
             --bind 'ctrl-/:toggle-preview' \
             --bind "change:reload(zsh -c ${(q)inline} -- {q})" \
             --query "$query" \
-            < <(_zoxide_colorize "${query}") \
-            | cut -f1
+            < <(_zoxide_colorize "${query}") |
+            cut -f1
     }
 
     # ── zle widgets ────────────────────────────────────────────────────────────
@@ -61,8 +62,14 @@ if (( $+commands[fzf] )); then
     _fzf_complete_zoxide_widget() {
         local query="$1"
         local result
-        result=$(_fzf_zoxide_dirs "$query") || { zle redisplay; return 0; }
-        [[ -z $result ]] && { zle redisplay; return 0; }
+        result=$(_fzf_zoxide_dirs "$query") || {
+            zle redisplay
+            return 0
+        }
+        [[ -z $result ]] && {
+            zle redisplay
+            return 0
+        }
         LBUFFER="${LBUFFER% *} ${(q)result}"
         LBUFFER="${LBUFFER# }"
         zle redisplay
@@ -71,8 +78,14 @@ if (( $+commands[fzf] )); then
 
     _fzf_zoxide_widget() {
         local selection
-        selection=$(_fzf_zoxide_dirs) || { zle redisplay; return 0; }
-        [[ -z $selection ]] && { zle redisplay; return 0; }
+        selection=$(_fzf_zoxide_dirs) || {
+            zle redisplay
+            return 0
+        }
+        [[ -z $selection ]] && {
+            zle redisplay
+            return 0
+        }
         LBUFFER="z ${(q)selection}"
         zle accept-line
     }

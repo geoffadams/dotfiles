@@ -1,4 +1,5 @@
-if (( $+commands[rbenv] )); then
+#!/usr/bin/env zsh
+if (($+commands[rbenv])); then
     path=(${HOME}/.rbenv/shims $path)
 
     function rbenv() {

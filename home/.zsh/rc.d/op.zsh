@@ -1,3 +1,4 @@
-if (( $+commands[op] )); then
+#!/usr/bin/env zsh
+if (($+commands[op])); then
     eval "$(op completion zsh)"
 fi

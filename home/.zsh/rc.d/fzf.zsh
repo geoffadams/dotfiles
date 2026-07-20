@@ -1,4 +1,5 @@
-if ! (( $+commands[fzf] )); then
+#!/usr/bin/env zsh
+if ! (($+commands[fzf])); then
     return
 fi
 
@@ -14,7 +15,7 @@ export FZF_CTRL_R_OPTS="--scheme history
     --preview-window down:3:border-line:wrap:noinfo
     --bind '?:toggle-preview'"
 
-if (( $+commands[fd] )); then
+if (($+commands[fd])); then
     _fzf_compgen_path() {
         fd --hidden --follow --exclude ".git" . "$1"
     }
@@ -31,8 +32,14 @@ _fzf_replace_last_args() {
     local src_fn=$1
     local src_query=$2
     local result
-    result=$($src_fn $src_query) || { zle redisplay; return 0; }
-    [[ -z $result ]] && { zle redisplay; return 0; }
+    result=$($src_fn $src_query) || {
+        zle redisplay
+        return 0
+    }
+    [[ -z $result ]] && {
+        zle redisplay
+        return 0
+    }
     local quoted
     quoted=$(printf '%q ' ${(f)result})
     LBUFFER="${LBUFFER% *} $quoted"
@@ -50,17 +57,23 @@ _fzf_smart_tab() {
     local words=("${(@Q)${(z)LBUFFER}}")
 
     # let normal completion handle options; '--' is only a file delimiter when followed by a space
-    [[ ${words[-1]} == -* ]] && [[ ${words[-1]} != '--' || $LBUFFER[-1] != ' ' ]] && { zle expand-or-complete; return; }
+    [[ ${words[-1]} == -* ]] && [[ ${words[-1]} != '--' || $LBUFFER[-1] != ' ' ]] && {
+        zle expand-or-complete
+        return
+    }
 
     local cmd=$words[1]
     shift words
-    if (( $+commands[git] )) && [[ $cmd == "git" ]]; then
+    if (($+commands[git])) && [[ $cmd == "git" ]]; then
         # fall back to default completion for partial git subcommands
-        [[ ${#words} < 1 || $LBUFFER[-1] != ' ' ]] && { zle expand-or-complete; return; }
+        [[ ${#words} < 1 || $LBUFFER[-1] != ' ' ]] && {
+            zle expand-or-complete
+            return
+        }
 
         # '--' after the subcommand means everything following is a file path
         # (I) returns the index of the last match, or 0 if not found
-        if (( ${words[(I)--]} > 0 )); then
+        if ((${words[(I)\-\-]} > 0)); then
             zle _fzf_complete_git_files_widget "$(_fzf_smart_tab_query $words)"
             return
         fi
@@ -68,39 +81,39 @@ _fzf_smart_tab() {
         local subcmd=$words[1]
         shift words
         case $subcmd in
-            restore|diff)
-                zle _fzf_complete_git_modified_files_widget "$(_fzf_smart_tab_query $words)"
+        restore | diff)
+            zle _fzf_complete_git_modified_files_widget "$(_fzf_smart_tab_query $words)"
+            return
+            ;;
+        add)
+            zle _fzf_complete_git_unstaged_files_widget "$(_fzf_smart_tab_query $words)"
+            return
+            ;;
+        rm)
+            zle _fzf_complete_git_tracked_files_widget "$(_fzf_smart_tab_query $words)"
+            return
+            ;;
+        checkout | show | cherry-pick | rebase | reset | revert | merge)
+            zle _fzf_complete_git_refs_widget "$(_fzf_smart_tab_query $words)"
+            return
+            ;;
+        stash)
+            local stash_subcmd=$words[1]
+            shift words
+            case $stash_subcmd in
+            show | drop | pop | apply | branch)
+                zle _fzf_complete_git_stash_widget "$(_fzf_smart_tab_query $words)"
                 return
                 ;;
-            add)
-                zle _fzf_complete_git_unstaged_files_widget "$(_fzf_smart_tab_query $words)"
-                return
-                ;;
-            rm)
-                zle _fzf_complete_git_tracked_files_widget "$(_fzf_smart_tab_query $words)"
-                return
-                ;;
-            checkout|show|cherry-pick|rebase|reset|revert|merge)
-                zle _fzf_complete_git_refs_widget "$(_fzf_smart_tab_query $words)"
-                return
-                ;;
-            stash)
-                local stash_subcmd=$words[1]
-                shift words
-                case $stash_subcmd in
-                    show|drop|pop|apply|branch)
-                        zle _fzf_complete_git_stash_widget "$(_fzf_smart_tab_query $words)"
-                        return
-                        ;;
-                esac
-                ;;
+            esac
+            ;;
         esac
 
         zle _fzf_complete_git_files_widget "$(_fzf_smart_tab_query $words)"
         return
     fi
 
-    if (( $+commands[zoxide] )) && [[ $cmd == "z" || $cmd == "zi" ]]; then
+    if (($+commands[zoxide])) && [[ $cmd == "z" || $cmd == "zi" ]]; then
         zle _fzf_complete_zoxide_widget "$(_fzf_smart_tab_query $words)"
         return
     fi

@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 export NVM_SCRIPT_DIR="$HOME/.nvm"
 if has_brew; then
     export NVM_SCRIPT_DIR=$(brew --prefix nvm)
