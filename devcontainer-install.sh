@@ -4,10 +4,21 @@
 # Linux devcontainers where homesick (Ruby) isn't available.
 # Also installs missing shell tools from GitHub releases into
 # $HOME/.local so they persist container rebuilds (already on $PATH via .zshenv).
-# All binaries target x86_64 — containers run in an x86_64 VM via Rosetta.
+# Binaries are matched to the container's actual architecture (uname -m) since
+# release asset naming conventions vary by project (rust triples, go arch names,
+# neovim's own scheme, and vivid's mixed musl/gnu libc per arch).
 
 set -euo pipefail
 shopt -s dotglob nullglob
+
+case "$(uname -m)" in
+    x86_64) RUST_ARCH=x86_64 GO_ARCH=amd64 NVIM_ARCH=x86_64 VIVID_LIBC=musl ;;
+    aarch64 | arm64) RUST_ARCH=aarch64 GO_ARCH=arm64 NVIM_ARCH=arm64 VIVID_LIBC=gnu ;;
+    *)
+        echo "ERROR: unsupported architecture: $(uname -m)" >&2
+        exit 1
+        ;;
+esac
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 HOME_DIR="$SCRIPT_DIR/home"
@@ -84,7 +95,7 @@ install_starship() {
     command -v starship &>/dev/null && return
     echo "Installing starship..."
     local url tmp
-    url="$(gh_asset_url starship/starship 'x86_64-unknown-linux-musl\.tar\.gz')"
+    url="$(gh_asset_url starship/starship "${RUST_ARCH}-unknown-linux-musl\.tar\.gz")"
     tmp="$(mktemp -d)"
     curl -fsSL "$url" | tar -xz -C "$tmp"
     install -m 0755 "$tmp/starship" "$LOCAL_DIR/bin/starship"
@@ -96,7 +107,7 @@ install_vivid() {
     command -v vivid &>/dev/null && return
     echo "Installing vivid..."
     local url tmp
-    url="$(gh_asset_url sharkdp/vivid 'x86_64-unknown-linux-musl\.tar\.gz')"
+    url="$(gh_asset_url sharkdp/vivid "${RUST_ARCH}-unknown-linux-${VIVID_LIBC}\.tar\.gz")"
     tmp="$(mktemp -d)"
     curl -fsSL "$url" | tar -xz -C "$tmp" --strip-components=1
     install -m 0755 "$tmp/vivid" "$LOCAL_DIR/bin/vivid"
@@ -108,7 +119,7 @@ install_neovim() {
     command -v nvim &>/dev/null && return
     echo "Installing neovim..."
     local url tmp
-    url="$(gh_asset_url neovim/neovim 'nvim-linux-x86_64\.tar\.gz')"
+    url="$(gh_asset_url neovim/neovim "nvim-linux-${NVIM_ARCH}\.tar\.gz")"
     tmp="$(mktemp -d)"
     curl -fsSL "$url" | tar -xz -C "$tmp" --strip-components=1
     for dir in bin lib share man; do
@@ -122,7 +133,7 @@ install_bat() {
     command -v bat &>/dev/null && return
     echo "Installing bat..."
     local url tmp
-    url="$(gh_asset_url sharkdp/bat 'x86_64-unknown-linux-musl\.tar\.gz')"
+    url="$(gh_asset_url sharkdp/bat "${RUST_ARCH}-unknown-linux-musl\.tar\.gz")"
     tmp="$(mktemp -d)"
     curl -fsSL "$url" | tar -xz -C "$tmp" --strip-components=1
     install -m 0755 "$tmp/bat" "$LOCAL_DIR/bin/bat"
@@ -134,7 +145,7 @@ install_fd() {
     command -v fd &>/dev/null && return
     echo "Installing fd..."
     local url tmp
-    url="$(gh_asset_url sharkdp/fd 'x86_64-unknown-linux-musl\.tar\.gz')"
+    url="$(gh_asset_url sharkdp/fd "${RUST_ARCH}-unknown-linux-musl\.tar\.gz")"
     tmp="$(mktemp -d)"
     curl -fsSL "$url" | tar -xz -C "$tmp" --strip-components=1
     install -m 0755 "$tmp/fd" "$LOCAL_DIR/bin/fd"
@@ -146,7 +157,7 @@ install_fzf() {
     command -v fzf &>/dev/null && return
     echo "Installing fzf..."
     local url tmp
-    url="$(gh_asset_url junegunn/fzf 'linux_amd64\.tar\.gz')"
+    url="$(gh_asset_url junegunn/fzf "linux_${GO_ARCH}\.tar\.gz")"
     tmp="$(mktemp -d)"
     curl -fsSL "$url" | tar -xz -C "$tmp"
     install -m 0755 "$tmp/fzf" "$LOCAL_DIR/bin/fzf"
@@ -158,7 +169,7 @@ install_zoxide() {
     command -v zoxide &>/dev/null && return
     echo "Installing zoxide..."
     local url tmp
-    url="$(gh_asset_url ajeetdsouza/zoxide 'x86_64-unknown-linux-musl\.tar\.gz')"
+    url="$(gh_asset_url ajeetdsouza/zoxide "${RUST_ARCH}-unknown-linux-musl\.tar\.gz")"
     tmp="$(mktemp -d)"
     curl -fsSL "$url" | tar -xz -C "$tmp"
     install -m 0755 "$tmp/zoxide" "$LOCAL_DIR/bin/zoxide"
@@ -170,7 +181,7 @@ install_delta() {
     command -v delta &>/dev/null && return
     echo "Installing delta..."
     local url tmp
-    url="$(gh_asset_url dandavison/delta 'x86_64-unknown-linux-gnu\.tar\.gz')"
+    url="$(gh_asset_url dandavison/delta "${RUST_ARCH}-unknown-linux-gnu\.tar\.gz")"
     tmp="$(mktemp -d)"
     curl -fsSL "$url" | tar -xz -C "$tmp" --strip-components=1
     install -m 0755 "$tmp/delta" "$LOCAL_DIR/bin/delta"
@@ -182,7 +193,7 @@ install_direnv() {
     command -v direnv &>/dev/null && return
     echo "Installing direnv..."
     local url
-    url="$(gh_asset_url direnv/direnv 'direnv\.linux-amd64')"
+    url="$(gh_asset_url direnv/direnv "direnv\.linux-${GO_ARCH}")"
     curl -fsSL "$url" | install -m 0755 /dev/stdin "$LOCAL_DIR/bin/direnv"
     echo "direnv installed: $(direnv --version)"
 }
@@ -191,7 +202,7 @@ install_jq() {
     command -v jq &>/dev/null && return
     echo "Installing jq..."
     local url
-    url="$(gh_asset_url jqlang/jq 'jq-linux-amd64')"
+    url="$(gh_asset_url jqlang/jq "jq-linux-${GO_ARCH}")"
     curl -fsSL "$url" | install -m 0755 /dev/stdin "$LOCAL_DIR/bin/jq"
     echo "jq installed: $(jq --version)"
 }
@@ -200,7 +211,7 @@ install_rg() {
     command -v rg &>/dev/null && return
     echo "Installing rg..."
     local url
-    url="$(gh_asset_url BurntSushi/ripgrep 'x86_64-unknown-linux-musl\.tar\.gz')"
+    url="$(gh_asset_url BurntSushi/ripgrep "${RUST_ARCH}-unknown-linux-musl\.tar\.gz")"
     tmp="$(mktemp -d)"
     curl -fsSL "$url" | tar -xz -C "$tmp" --strip-components=1
     install -m 0755 "$tmp/rg" "$LOCAL_DIR/bin/rg"
