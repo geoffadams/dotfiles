@@ -12,7 +12,7 @@ shopt -s dotglob nullglob
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 HOME_DIR="$SCRIPT_DIR/home"
 SUBDIR_FILE="$SCRIPT_DIR/.homesick_subdir"
-SUDO="$( [[ "$(id -u)" -eq 0 ]] && echo '' || echo 'sudo' )"
+SUDO="$([[ "$(id -u)" -eq 0 ]] && echo '' || echo 'sudo')"
 LOCAL_DIR="$HOME/.local"
 mkdir -p "$LOCAL_DIR/bin" "$LOCAL_DIR/lib" "$LOCAL_DIR/share" "$LOCAL_DIR/man"
 
@@ -23,7 +23,7 @@ if [[ -f "$SUBDIR_FILE" ]]; then
     while IFS= read -r line; do
         [[ -z "$line" || "$line" == Library* ]] && continue
         DEEP_PATHS+=("$line")
-    done < "$SUBDIR_FILE"
+    done <"$SUBDIR_FILE"
 fi
 
 is_deep() {
@@ -68,11 +68,11 @@ echo "Done."
 gh_asset_url() {
     local repo="$1" pattern="$2"
     local url
-    url="$(curl -fsSL "https://api.github.com/repos/$repo/releases/latest" \
-        | grep '"browser_download_url"' \
-        | grep -E "$pattern" \
-        | head -1 \
-        | sed 's/.*"browser_download_url": *"\([^"]*\)".*/\1/')"
+    url="$(curl -fsSL "https://api.github.com/repos/$repo/releases/latest" |
+        grep '"browser_download_url"' |
+        grep -E "$pattern" |
+        head -1 |
+        sed 's/.*"browser_download_url": *"\([^"]*\)".*/\1/')"
     if [[ -z "$url" ]]; then
         echo "ERROR: no release asset matched '$pattern' for $repo" >&2
         return 1
@@ -213,13 +213,13 @@ install_rg() {
 install_claude_settings() {
     local settings_file="$HOME/.claude/settings.json" tmp
     mkdir -p "$(dirname "$settings_file")"
-    [[ -f "$settings_file" ]] || echo '{}' > "$settings_file"
+    [[ -f "$settings_file" ]] || echo '{}' >"$settings_file"
 
     tmp="$(mktemp)"
     jq '
         .cleanupPeriodDays //= 365 |
         .statusLine //= {"type": "command", "command": "~/.claude/statusline.sh", "padding": 0}
-    ' "$settings_file" > "$tmp"
+    ' "$settings_file" >"$tmp"
     mv "$tmp" "$settings_file"
     echo "Updated $settings_file"
 }
@@ -248,7 +248,7 @@ install_zsh_plugins() {
 
     if [[ ! -f "$rc_file" ]]; then
         mkdir -p "$(dirname "$rc_file")"
-        cat > "$rc_file" <<'EOF'
+        cat >"$rc_file" <<'EOF'
 # Linux devcontainer fallback: source zsh plugins installed via apt.
 # The rc.d configs gate these on has_brew, which is false on Linux.
 [[ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] &&
