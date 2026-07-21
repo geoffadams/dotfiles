@@ -71,6 +71,13 @@ _fzf_smart_tab() {
             return
         fi
 
+        # use standard completions up until the point of ambiguity
+        if [[ ${#words} == 2 && $LBUFFER[-1] != ' ' ]]; then
+            zle complete-word
+            words=("${(@Q)${(z)LBUFFER}}")
+            shift words
+        fi
+
         # '--' after the subcommand means everything following is a file path
         # (I) returns the index of the last match, or 0 if not found
         if ((${words[(I)\-\-]} > 0)); then
