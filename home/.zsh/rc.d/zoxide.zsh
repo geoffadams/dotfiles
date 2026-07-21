@@ -60,9 +60,14 @@ if (($+commands[fzf])); then
     # ── zle widgets ────────────────────────────────────────────────────────────
 
     _fzf_complete_zoxide_widget() {
-        local query="$1"
-        local result
-        result=$(_fzf_zoxide_dirs "$query") || {
+        local query
+        local words=("${(@Q)${(z)LBUFFER}}")
+        if [[ -n $1 ]]; then
+            query="$1"
+        else
+            query="${words[-1]}"
+        fi
+        local result=$(_fzf_zoxide_dirs "$query") || {
             zle redisplay
             return 0
         }
@@ -70,23 +75,34 @@ if (($+commands[fzf])); then
             zle redisplay
             return 0
         }
-        LBUFFER="${LBUFFER% *} ${(q)result}"
+        if ((${#words} == 1)); then
+            LBUFFER="${(q)result}"
+        else
+            LBUFFER="${LBUFFER% *} ${(q)result}"
+        fi
         LBUFFER="${LBUFFER# }"
         zle redisplay
     }
     zle -N _fzf_complete_zoxide_widget
+    bindkey '^P' _fzf_complete_zoxide_widget
 
     _fzf_zoxide_widget() {
-        local selection
-        selection=$(_fzf_zoxide_dirs) || {
+        local query
+        local words=("${(@Q)${(z)LBUFFER}}")
+        if [[ -n $1 ]]; then
+            query="$1"
+        else
+            query="${words[-1]}"
+        fi
+        local result=$(_fzf_zoxide_dirs "$query") || {
             zle redisplay
             return 0
         }
-        [[ -z $selection ]] && {
+        [[ -z $result ]] && {
             zle redisplay
             return 0
         }
-        LBUFFER="z ${(q)selection}"
+        LBUFFER="z ${(q)result}"
         zle accept-line
     }
     zle -N _fzf_zoxide_widget
