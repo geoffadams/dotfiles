@@ -66,10 +66,10 @@ _fzf_smart_tab() {
     shift words
     if (($+commands[git])) && [[ $cmd == "git" ]]; then
         # fall back to default completion for partial git subcommands
-        [[ ${#words} < 1 || $LBUFFER[-1] != ' ' ]] && {
+        if [[ ${#words} < 1 ]] || [[ ${#words} == 1 && $LBUFFER[-1] != ' ' ]]; then
             zle expand-or-complete
             return
-        }
+        fi
 
         # '--' after the subcommand means everything following is a file path
         # (I) returns the index of the last match, or 0 if not found
