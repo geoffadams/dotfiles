@@ -6,7 +6,19 @@ return {
     keys = {
         { "<C-p>", [[<Cmd>lua require"fzf-lua".global()<CR>]], desc = "Global picker" },
         { "<C-S-p>", [[<Cmd>lua require"fzf-lua".files()<CR>]], desc = "Files" },
-        { "<C-f>", [[<Cmd>lua require"fzf-lua".live_grep({resume = true})<CR>]], desc = "Live Grep" },
+        { mode = { "n", "i" }, "<C-f>", [[<Cmd>lua require"fzf-lua".live_grep({resume = true})<CR>]], desc = "Search" },
+        {
+            mode = { "n", "i" },
+            "<C-S-f>",
+            [[<Cmd>lua require"fzf-lua".grep_cword()<CR>]],
+            desc = "Search current word",
+        },
+        {
+            mode = { "x" },
+            "<C-S-f>",
+            [[<Cmd>lua require"fzf-lua".grep_visual()<CR>]],
+            desc = "Search visual selection",
+        },
 
         { "<C-F1>", [[<Cmd>lua require"fzf-lua".help_tags()<CR>]], desc = "Help tags" },
         { "<Leader>fp", [[<Cmd>lua require"fzf-lua".builtin()<CR>]], desc = "Pickers" },
