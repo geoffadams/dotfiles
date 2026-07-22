@@ -1,10 +1,11 @@
 #!/usr/bin/env zsh
 #
-# Claude Code statusline. Reads the statusline JSON payload on stdin and
-# prints a 2-3 line summary: repo/dir + model/effort/thinking/context,
-# lines & files changed + cost/tokens, and (if present) rate limits.
+# Claude Code statusline. Reads the statusline JSON payload on stdin.
+# Run with no args for the main statusline; with "subagent" as $1, renders
+# subagentStatusLine rows instead (see subagent-statusline.zsh).
 
 setopt extendedglob
+zmodload zsh/datetime
 
 # ---------------------------------------------------------------------------
 # Colors
@@ -26,7 +27,6 @@ rgb() {
 }
 
 # Rose Pine Moon-derived truecolor ladder for usage readings (context window).
-# 0% -> default; 0-50% -> green; 50-70% -> yellow; 70-85% -> orange; 85%+ -> red
 USAGE_DEFAULT=$(rgb 224 222 244)  # text
 USAGE_GREEN=$(rgb 126 206 152)
 USAGE_YELLOW=$(rgb 246 193 119)   # gold
@@ -148,9 +148,16 @@ render_line() {
 # Input
 # ---------------------------------------------------------------------------
 
+mode="${1:-status}"
+
 input=$(cat)
 
 jq_input() { echo "$input" | jq -r "$1"; }
+
+if [[ "$mode" == "subagent" ]]; then
+    source "${0:A:h}/subagent-statusline.zsh"
+    exit 0
+fi
 
 lines=()
 

@@ -142,7 +142,8 @@ install_claude_settings() {
     tmp="$(mktemp)"
     jq '
         .cleanupPeriodDays //= 365 |
-        .statusLine //= {"type": "command", "command": "~/.claude/statusline.sh", "padding": 0}
+        .statusLine //= {"type": "command", "command": "~/.claude/statusline.sh", "padding": 0} |
+        .subagentStatusLine //= {"type": "command", "command": "~/.claude/statusline.sh subagent"}
     ' "$settings_file" >"$tmp"
     mv "$tmp" "$settings_file"
     echo "Updated $settings_file"
