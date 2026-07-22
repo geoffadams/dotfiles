@@ -8,9 +8,8 @@ eval "$(zoxide init zsh)"
 if (($+commands[fzf])); then
     # ── picker ─────────────────────────────────────────────────────────────────
 
-    # Generates a two-column fzf-ready list: full-path TAB colored-display-path.
-    # Colors are a heatmap relative to the score range of the matched set only.
-    # Called directly for the initial list and serialized into fzf's reload binding.
+    # Builds a two-column fzf list: full path TAB colored display path, heatmapped
+    # against the matched set's score range. Reused for the initial list and fzf's reload.
     _zoxide_colorize() {
         local query="$1"
         awk -v home="$HOME" \

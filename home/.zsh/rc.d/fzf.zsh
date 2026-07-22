@@ -5,7 +5,6 @@ fi
 
 source <(fzf --zsh)
 
-# base fzf config
 export FZF_CTRL_R_OPTS="--scheme history
     --layout=default
     --info=inline-right
@@ -24,8 +23,6 @@ if (($+commands[fd])); then
         fd --type d --hidden --follow --exclude ".git" . "$1"
     }
 fi
-
-# fzf helpers
 
 # Appends fzf selection(s) to the current line buffer, replacing the last word.
 _fzf_replace_last_args() {
@@ -46,8 +43,6 @@ _fzf_replace_last_args() {
     LBUFFER="${LBUFFER# }"
     zle redisplay
 }
-
-# fzf-driven tab completions
 
 _fzf_smart_tab_query() {
     [[ ${#@} > 0 && $@[-1] != ('**'|'--') ]] && echo $@[-1]
@@ -78,8 +73,8 @@ _fzf_smart_tab() {
             shift words
         fi
 
-        # '--' after the subcommand means everything following is a file path
-        # (I) returns the index of the last match, or 0 if not found
+        # '--' after the subcommand marks everything after it as a file path;
+        # (I) gives the index of the last match, or 0 if not found
         if ((${words[(I)\-\-]} > 0)); then
             zle _fzf_complete_git_files_widget "$(_fzf_smart_tab_query $words)"
             return
