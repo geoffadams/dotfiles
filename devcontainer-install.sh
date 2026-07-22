@@ -1,12 +1,7 @@
 #!/usr/bin/env zsh
-# Symlink the contents of home/ into $HOME, mirroring `homesick symlink`
-# but skipping the macOS-only Library tree. Lets the dotfiles work in
-# Linux devcontainers where homesick (Ruby) isn't available.
-# Also installs missing shell tools from GitHub releases into
-# $HOME/.local so they persist container rebuilds (already on $PATH via .zshenv).
-# Binaries are matched to the container's actual architecture (uname -m) since
-# release asset naming conventions vary by project (rust triples, go arch names,
-# neovim's own scheme, and vivid's mixed musl/gnu libc per arch).
+# Symlink home/ into $HOME (mirrors `homesick symlink`, skipping the macOS-only
+# Library tree) and install missing shell tools from GitHub releases, for Linux
+# devcontainers where homesick (Ruby) isn't available.
 
 setopt err_exit no_unset pipe_fail
 setopt dotglob nullglob
@@ -159,8 +154,8 @@ install_locales() {
     $SUDO dpkg-reconfigure --frontend=noninteractive locales
 }
 
-# Install zsh plugins via apt and wire them up via rc.private.d (Linux fallback
-# for the has_brew-gated sourcing in rc.d/zsh-highlighting.zsh etc.)
+# Install zsh plugins via apt, since the rc.d configs only source them via
+# Homebrew (rc.d/zsh-highlighting.zsh etc.).
 install_zsh_plugins() {
     local rc_file="$HOME/.zsh/rc.private.d/linux-plugins.zsh" pkg
 
@@ -174,8 +169,6 @@ install_zsh_plugins() {
     if [[ ! -f "$rc_file" ]]; then
         mkdir -p "${rc_file:h}"
         cat >"$rc_file" <<'EOF'
-# Linux devcontainer fallback: source zsh plugins installed via apt.
-# The rc.d configs gate these on has_brew, which is false on Linux.
 [[ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] &&
     source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh &&
     ZSH_HIGHLIGHT_HIGHLIGHTERS+=(brackets cursor root)
