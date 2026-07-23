@@ -47,7 +47,7 @@ if (($+commands[fzf])); then
             --with-nth=3 \
             --accept-nth=2 \
             --prompt 'z> ' \
-            --preview 'tree -C -L 2 --compress=3 {2} 2>/dev/null || ls -1F --color=always {2}' \
+            --preview 'tree -C -L 2 --compress=3 {2} 2>/dev/null || gls -1F --color=always {2}' \
             --preview-window 'right:50%:border-line:wrap:noinfo' \
             --bind 'ctrl-/:toggle-preview' \
             --bind "change:reload(zsh -c ${(q)inline} -- {q})" \
