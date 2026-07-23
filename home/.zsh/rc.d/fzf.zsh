@@ -101,7 +101,7 @@ _fzf_smart_tab() {
             ;;
         stash)
             local stash_subcmd=$words[1]
-            shift words
+            (($#words > 0)) && shift words
             case $stash_subcmd in
             show | drop | pop | apply | branch)
                 zle _fzf_complete_git_stash_widget "$(_fzf_smart_tab_query $words)"
@@ -116,6 +116,10 @@ _fzf_smart_tab() {
     fi
 
     if (($+commands[zoxide])) && [[ $cmd == "z" || $cmd == "zi" ]]; then
+        if [[ ${#words} < 1 && $LBUFFER[-1] != ' ' ]]; then
+            zle expand-or-complete
+            return
+        fi
         zle _fzf_complete_zoxide_widget "$(_fzf_smart_tab_query $words)"
         return
     fi

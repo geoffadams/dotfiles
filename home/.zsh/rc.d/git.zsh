@@ -265,10 +265,7 @@ zle -N _fzf_complete_git_refs_widget
 # fzf hooks
 _fzf_complete_git() {
     local args=("$@")
-    local subcmd=$(
-        echo "${args[@]}" |
-            awk '{for(i=1;i<=NF;i++) if($i!="git") {print $i; exit}}'
-    )
+    local subcmd=$args[2]
 
     # '--' after the subcommand means everything following is a file path
     if ((${args[(I)\-\-]} >= 3)); then
@@ -294,10 +291,7 @@ _fzf_complete_git() {
         return
         ;;
     stash)
-        local stash_subcmd=$(
-            echo "${args[@]}" |
-                awk '{for(i=1;i<=NF;i++) if($i!="git" && $i!="stash") {print $i; exit}}'
-        )
+        local stash_subcmd=$args[3]
         case $stash_subcmd in
         show | drop | pop | apply | branch)
             _fzf_git_stashes
