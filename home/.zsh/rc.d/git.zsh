@@ -29,7 +29,6 @@ _git_list_all_files() {
         _git_list_tracked_files $@
     } | sort -s -k 3 -u
 }
-export _FZF_GIT_LIST_ALL_FILES=$(functions _git_list_refs)
 
 _git_list_tracked_files() {
     git ls-files -t |
@@ -58,6 +57,8 @@ _git_list_unstaged_files() {
         gsed -r 's/^(.) (.)(.)(( [^ ]+ [[:digit:]]+ [[:digit:]]+ [[:digit:]]+ [[:xdigit:]]+ [[:xdigit:]]+)?) (.+?)$/\1\t\o033\[32m\2\o033\[31m\3\o033\[0m\t\6/'
 }
 export _FZF_GIT_LIST_UNSTAGED_FILES=$(functions _git_list_unstaged_files)
+
+export _FZF_GIT_LIST_ALL_FILES=$(functions _git_list_all_files _git_list_modified_files _git_list_unstaged_files _git_list_untracked_files _git_list_tracked_files)
 
 # picker previews
 _fzf_git_preview_ref() {
