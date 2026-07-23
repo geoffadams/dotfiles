@@ -63,7 +63,7 @@ export _FZF_GIT_LIST_ALL_FILES=$(functions _git_list_all_files _git_list_modifie
 # picker previews
 _fzf_git_preview_ref() {
     local line=("${(@Q)${(z)@}}")
-    git show --stat --color=always ${line[2]} 2>/dev/null | head -50
+    git show --stat --color=always ${line[3]} 2>/dev/null | head -50
 }
 export _FZF_GIT_PREVIEW_REF=$(functions _fzf_git_preview_ref)
 
