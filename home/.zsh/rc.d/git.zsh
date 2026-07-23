@@ -211,6 +211,7 @@ _fzf_git_stashes() {
             --prompt 'stash> ' \
             --preview "git stash show -p {1} --color=always | delta" \
             --preview-window 'right:60%:border-line:wrap' \
+            --accept-nth=1 \
             --query "$1"
 }
 
