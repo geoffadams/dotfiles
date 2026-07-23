@@ -50,10 +50,6 @@ u.keymap("t", "<Esc><Esc>", "<C-\\><C-n>", "Exit terminal mode")
 
 -- search
 u.keymap("n", "<Esc>", "<Cmd>nohlsearch<CR>", "Clear highlight")
-vim.keymap.del({ "n", "i", "x" }, "<C-d>")
-vim.keymap.del({ "n", "i", "x" }, "<C-S-d>")
-vim.keymap.del({ "n", "i", "x" }, "<C-f>")
-vim.keymap.del({ "n", "i", "x" }, "<C-S-f>")
 
 -- help
 vim.api.nvim_create_autocmd("FileType", {
