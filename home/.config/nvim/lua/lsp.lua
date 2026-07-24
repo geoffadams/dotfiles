@@ -1,4 +1,32 @@
 local u = require("util")
+local devcontainers = require("devcontainers")
+
+--- Ensure `bin` is on PATH inside the devcontainer for root_dir, installing
+--- `npm_package` globally if it's missing.
+---@param bin string
+---@param npm_package string
+---@return fun(config: vim.lsp.ClientConfig)
+local function ensure_installed_in_container(bin, npm_package)
+    return function(config)
+        local cli = require("devcontainers.cli")
+        local handle = require("fidget.progress").handle.create({
+            title = bin,
+            message = "Checking...",
+            lsp_client = { name = "devcontainers" },
+        })
+
+        local has_bin = pcall(cli.exec, config.root_dir, { "sh", "-c", "command -v " .. bin })
+
+        if has_bin then
+            handle.message = "Found"
+        else
+            handle.message = "Installing..."
+            cli.exec(config.root_dir, { "npm", "install", "-g", npm_package })
+            handle.message = "Installed"
+        end
+        handle:finish()
+    end
+end
 
 vim.lsp.enable("emmylua_ls")
 vim.lsp.config("basedpyright", {
@@ -13,8 +41,10 @@ vim.lsp.config("basedpyright", {
 vim.lsp.enable("basedpyright")
 vim.lsp.enable("bashls")
 vim.lsp.config("vtsls", {
-    -- devcontainers support
-    cmd = require("devcontainers").lsp_cmd({ "vtsls", "--stdio" }),
+    -- run inside the project's devcontainer, if it has one
+    cmd = devcontainers.lsp_cmd({ "vtsls", "--stdio" }, {
+        before_start = ensure_installed_in_container("vtsls", "@vtsls/language-server"),
+    }),
     -- general config
     settings = {
         typescript = {
@@ -45,6 +75,9 @@ vim.lsp.config("vtsls", {
 })
 vim.lsp.enable("vtsls")
 vim.lsp.config("eslint", {
+    cmd = devcontainers.lsp_cmd({ "vscode-eslint-language-server", "--stdio" }, {
+        before_start = ensure_installed_in_container("vscode-eslint-language-server", "vscode-langservers-extracted"),
+    }),
     settings = {
         -- workingDirectory = { mode = "location" },
     },
