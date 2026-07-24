@@ -5,6 +5,14 @@ return {
     config = function()
         require("devcontainers").setup({})
 
+        -- nvim may already be running inside a devcontainer (e.g. via VS Code or SSH),
+        -- so treat every dir as non-workspace to skip starting a container from within one.
+        if vim.uv.fs_stat("/.dockerenv") then
+            require("devcontainers.manager").is_workspace_dir = function()
+                return false
+            end
+        end
+
         -- `devcontainer` CLI is installed into an nvm-managed node, so switch to the
         -- project's node version (or the default alias) before running any CLI command.
         local nvm_wrapper = [[

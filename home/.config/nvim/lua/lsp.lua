@@ -1,8 +1,6 @@
 local u = require("util")
 local devcontainers = require("devcontainers")
 
-local in_docker_container = vim.uv.fs_stat("/.dockerenv") ~= nil
-
 --- Ensure `bin` is on PATH inside the devcontainer for root_dir, installing
 --- `npm_package` globally if it's missing.
 ---@param bin string
@@ -31,9 +29,6 @@ local function ensure_installed_in_container(bin, npm_package)
 end
 
 local function devcontainer_lsp_cmd(cmd, bin, npm_package)
-    if not in_docker_container then
-        return cmd
-    end
     return devcontainers.lsp_cmd(cmd, {
         before_start = ensure_installed_in_container(bin, npm_package),
     })
