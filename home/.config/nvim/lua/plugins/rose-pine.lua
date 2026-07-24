@@ -20,6 +20,7 @@ return {
                 MiniMapSymbolLine = { fg = "text" },
                 MiniStatuslineDiagnosticError = { fg = "love", bg = "overlay" },
                 MiniStatuslineDiagnosticWarn = { fg = "gold", bg = "overlay" },
+                TroubleFilename = { fg = "iris", bold = true },
             },
         })
         vim.cmd("colorscheme rose-pine-moon")

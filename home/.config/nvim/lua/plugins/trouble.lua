@@ -5,22 +5,22 @@ return {
     keys = {
         {
             "<Leader>td",
-            "<Cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+            "<Cmd>Trouble diagnostics toggle focus=false filter.buf=0<cr>",
             desc = "Diagnostics",
         },
         {
             "<Leader>tD",
-            "<Cmd>Trouble major_diagnostics toggle<cr>",
+            "<Cmd>Trouble major_diagnostics toggle focus=false<cr>",
             desc = "Workspace diagnostics",
         },
         {
             "<Leader>ts",
-            "<Cmd>Trouble lsp_document_symbols toggle focus=false win.position=bottom<cr>",
+            "<Cmd>Trouble lsp_document_symbols toggle<cr>",
             desc = "Document symbols",
         },
         {
             "<Leader>tc",
-            "<Cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+            "<Cmd>Trouble lsp toggle<cr>",
             desc = "Refs, defs, decls, impls, types",
         },
         {
@@ -43,6 +43,7 @@ return {
         require("trouble").setup({
             warn_no_results = false,
             open_no_results = true,
+            auto_follow = false,
             modes = {
                 diagnostics = {
                     preview = {
@@ -51,6 +52,7 @@ return {
                         position = "right",
                         size = 0.5,
                     },
+                    focus = false,
                 },
                 major_diagnostics = {
                     mode = "diagnostics",
@@ -68,6 +70,18 @@ return {
                             },
                         },
                     },
+                    focus = false,
+                },
+                lsp_references = {},
+                lsp_document_symbols = {
+                    auto_refresh = true,
+                    focus = false,
+                    win = { position = "right" },
+                },
+                lsp = {
+                    auto_refresh = false,
+                    focus = false,
+                    win = { position = "right" },
                 },
             },
         })

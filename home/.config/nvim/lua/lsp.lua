@@ -98,16 +98,18 @@ vim.lsp.enable("tombi")
 local function enable_lsp_functionality(event)
     u.keymap_buf("n", "grn", vim.lsp.buf.rename, "Rename", event.buf)
     u.keymap_buf({ "n", "x" }, "gra", vim.lsp.buf.code_action, "Code action", event.buf)
-    u.keymap_buf("n", "grd", vim.lsp.buf.definition, "Go to definition", event.buf)
-    u.keymap_buf("n", "grD", vim.lsp.buf.declaration, "Go to declaration", event.buf)
-    u.keymap_buf("n", "gri", vim.lsp.buf.implementation, "Go to implementation", event.buf)
-    u.keymap_buf("n", "grr", vim.lsp.buf.references, "Show references", event.buf)
-    u.keymap_buf("n", "grt", vim.lsp.buf.type_definition, "Type definition", event.buf)
-    u.keymap_buf("n", "grx", vim.lsp.codelens.run, "Codelens", event.buf)
-    u.keymap_buf("n", "gO", vim.lsp.buf.document_symbol, "Document symbols", event.buf)
+
     u.keymap_buf({ "n", "i" }, "<C-S-/>", vim.lsp.buf.signature_help, "Signature info", event.buf)
     u.keymap_buf({ "n", "i" }, "<C-S-.>", vim.lsp.buf.hover, "Symbol info", event.buf)
     u.keymap_buf("n", "K", vim.lsp.buf.hover, "Symbol info", event.buf)
+    u.keymap_buf("n", "grx", vim.lsp.codelens.run, "Codelens", event.buf)
+
+    u.keymap_buf("n", "grd", [[<Cmd>Trouble lsp_definitions open<CR>]], "Go to definition", event.buf)
+    u.keymap_buf("n", "grD", [[<Cmd>Trouble lsp_declarations open<CR>]], "Go to declaration", event.buf)
+    u.keymap_buf("n", "gri", [[<Cmd>Trouble lsp_implementations open<CR>]], "Go to implementation", event.buf)
+    u.keymap_buf("n", "grr", [[<Cmd>Trouble lsp_references open<CR>]], "Show references", event.buf)
+    u.keymap_buf("n", "grt", [[<Cmd>Trouble lsp_type_definitions open<CR>]], "Type definition", event.buf)
+    u.keymap_buf("n", "gO", [[<Cmd>Trouble lsp_document_symbols<CR>]], "Document symbols", event.buf)
 
     local client = vim.lsp.get_client_by_id(event.data.client_id)
     if client and client:supports_method("textDocument/documentHighlight", event.buf) then
@@ -130,3 +132,9 @@ local function enable_lsp_functionality(event)
     end
 end
 u.lsp_attach_autocmd(nil, enable_lsp_functionality, "Enable LSP functionality")
+
+vim.api.nvim_create_autocmd("QuickFixCmdPost", {
+    callback = function()
+        vim.cmd([[Trouble qflist open]])
+    end,
+})
