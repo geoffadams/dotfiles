@@ -1,12 +1,13 @@
 local u = require("util")
+
 local mkeymap = require("mini.keymap")
 mkeymap.setup()
+
 local pairs = require("mini.pairs")
 pairs.setup()
 
--- save
-u.keymap("n", "<C-s>", "<Cmd>silent! update | redraw<CR>", "Save buffer")
-u.keymap({ "i", "x" }, "<C-s>", "<Esc><Cmd>silent! update | redraw<CR>", "Save buffer")
+-- system
+u.keymap("n", "<Leader>sr", [[<Cmd>restart<CR>]], "Restart nvim")
 
 -- windows
 u.keymap("n", "<C-h>", "<Cmd>wincmd h<CR>", "Move to window to left")
@@ -19,6 +20,8 @@ u.keymap("n", "<C-S-k>", "<Cmd>wincmd K<CR>", "Move window up")
 u.keymap("n", "<C-S-l>", "<Cmd>wincmd L<CR>", "Move window right")
 
 -- buffers
+u.keymap("n", "<C-s>", "<Cmd>silent! update | redraw<CR>", "Save buffer")
+u.keymap({ "i", "x" }, "<C-s>", "<Esc><Cmd>silent! update | redraw<CR>", "Save buffer")
 u.keymap("n", "<C-[>", "<Cmd>bprev<CR>", "Previous buffer")
 u.keymap("n", "<C-]>", "<Cmd>bnext<CR>", "Next buffer")
 u.keymap("n", "<Leader>bd", "<Cmd>lua MiniBufremove.delete()<CR>", "Drop buffer")
