@@ -106,11 +106,21 @@ icon() {
 
 make_bar() {
     local pct=$1 width=${2:-10}
+    local -a shades=("░" "▒" "▓" "█")
+    local levels=$(( ${#shades} - 1 ))
     local filled=$(( pct * width / 100 ))
     local bar=""
     local i=0
     while (( i < filled )); do bar+="█"; (( i++ )); done
-    while (( i < width )); do bar+="░"; (( i++ )); done
+    if (( i < width )); then
+        local step_pct=$(( 100 / width ))
+        local into_step=$(( pct - i * step_pct ))
+        local shade_idx=$(( into_step * levels / step_pct ))
+        (( shade_idx > levels )) && shade_idx=$levels
+        bar+="${shades[shade_idx + 1]}"
+        (( i++ ))
+    fi
+    while (( i < width )); do bar+="${shades[1]}"; (( i++ )); done
     echo "$bar"
 }
 
