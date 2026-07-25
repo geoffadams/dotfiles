@@ -1,8 +1,9 @@
 #!/usr/bin/env zsh
 # set function paths
 if has_brew; then
-    fpath+=(${BREW_ZSH_SHARE_PREFIX}/zsh-completions)
     fpath+=(${BREW_ZSH_SHARE_PREFIX}/zsh/site-functions)
+    fpath+=(${BREW_ZSH_SHARE_PREFIX}/zsh/functions)
+    fpath+=(${BREW_ZSH_SHARE_PREFIX}/zsh-completions)
 fi
 
 # completion behaviour
