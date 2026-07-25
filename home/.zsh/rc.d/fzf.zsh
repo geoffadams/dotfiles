@@ -110,9 +110,6 @@ _fzf_smart_tab() {
             esac
             ;;
         esac
-
-        zle _fzf_complete_git_files_widget "$(_fzf_smart_tab_query $words)"
-        return
     fi
 
     if (($+commands[zoxide])) && [[ $cmd == "z" || $cmd == "zi" ]]; then
