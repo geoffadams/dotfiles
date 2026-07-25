@@ -4,37 +4,62 @@ return {
     cmd = "Trouble",
     keys = {
         {
-            "<Leader>td",
+            "<Leader>dd",
             "<Cmd>Trouble diagnostics toggle focus=false filter.buf=0<cr>",
             desc = "Diagnostics",
         },
         {
-            "<Leader>tD",
+            "<Leader>dD",
             "<Cmd>Trouble major_diagnostics toggle focus=false<cr>",
             desc = "Workspace diagnostics",
         },
         {
-            "<Leader>ts",
+            "<Leader>ra",
+            "<Cmd>Trouble lsp toggle<cr>",
+            desc = "Symbol details",
+        },
+        {
+            "<Leader>rd",
+            "<Cmd>Trouble lsp_definitions toggle<CR>",
+            desc = "Definitions",
+        },
+        {
+            "<Leader>rD",
+            "<Cmd>Trouble lsp_declarations toggle<CR>",
+            desc = "Declarations",
+        },
+        {
+            "<Leader>ri",
+            "<Cmd>Trouble lsp_implementations toggle<CR>",
+            desc = "Implementations",
+        },
+        {
+            "<Leader>rr",
+            "<Cmd>Trouble lsp_references toggle<CR>",
+            desc = "References",
+        },
+        {
+            "<Leader>rt",
+            "<Cmd>Trouble lsp_type_definitions toggle<CR>",
+            desc = "Type definitions",
+        },
+        {
+            "<Leader>rO",
             "<Cmd>Trouble lsp_document_symbols toggle<cr>",
             desc = "Document symbols",
         },
         {
-            "<Leader>tc",
-            "<Cmd>Trouble lsp toggle<cr>",
-            desc = "Refs, defs, decls, impls, types",
-        },
-        {
-            "<Leader>tl",
+            "<Leader>vl",
             "<Cmd>Trouble loclist toggle<cr>",
             desc = "Location list",
         },
         {
-            "<Leader>tq",
+            "<Leader>vq",
             "<Cmd>Trouble qflist toggle<cr>",
             desc = "Quickfix list",
         },
         {
-            "<Leader>fp",
+            "<Leader>vf",
             "<Cmd>Trouble fzf toggle<cr>",
             desc = "fzf file list",
         },

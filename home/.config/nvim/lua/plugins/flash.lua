@@ -2,8 +2,24 @@ return {
     "folke/flash.nvim",
     event = "VeryLazy",
     keys = {
-        { mode = { "n", "x", "o" }, "<Leader>g", [[<Cmd>lua require "flash".treesitter()<CR>]], desc = "Jump 🌳" },
-        { mode = { "n", "x", "o" }, "<Leader>G", [[<Cmd>lua require "flash".treesitter()<CR>]], desc = "Jump" },
+        {
+            mode = { "n", "x", "o" },
+            "<Leader>m",
+            [[<Cmd>lua require"flash".jump()<CR>]],
+            desc = "Flash",
+        },
+        {
+            mode = { "n", "x", "o" },
+            "<Leader>n",
+            [[<Cmd>lua require"flash".treesitter()<CR>]],
+            desc = "Treesitter Flash",
+        },
+        {
+            mode = { "n", "x", "o" },
+            "<Leader>,",
+            [[<Cmd>lua require"flash".jump({ pattern = vim.fn.expand("<cword>") })<CR>]],
+            desc = "Word Flash",
+        },
         { mode = { "c" }, "<C-s>", [[<Cmd>lua require("flash").toggle()<CR>]], desc = "Toggle Flash Search" },
     },
     ---@module "flash"
@@ -12,7 +28,7 @@ return {
     opts = {
         label = {
             before = true,
-            after = false,
+            after = true,
             rainbow = {
                 enabled = true,
             },
@@ -21,11 +37,7 @@ return {
             treesitter = {
                 label = {
                     before = true,
-                    after = false,
-                },
-                highlight = {
-                    -- backdrop = true,
-                    -- matches = true,
+                    after = true,
                 },
             },
         },

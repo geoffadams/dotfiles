@@ -9,14 +9,18 @@ return {
         require("which-key").setup({
             preset = "modern",
             spec = {
-                { "<Leader>b", group = "buffer" },
+                { "<Leader>n", icon = { icon = " ", color = "cyan" } },
+                { "<Leader>m", icon = { icon = "󰾹 ", color = "cyan" } },
+                { "<Leader>,", icon = { icon = " ", color = "cyan" } },
+                { "<Leader>f", group = "find", icon = { icon = " ", color = "yellow" } },
+                { "<Leader>b", group = "buffer", icon = { icon = " ", color = "blue" } },
+                { "<Leader>v", group = "view", icon = { icon = " ", color = "green" } },
+                { "<Leader>d", group = "diagnostics" },
+                { "<Leader>r", group = "lsp", icon = { icon = "󰅩 ", color = "orange" } },
+                { "<Leader>h", group = "git", icon = { cat = "filetype", name = "git", color = "purple" } },
                 { "<Leader>d", group = "debugger" },
-                { "<Leader>h", group = "git", icon = { cat = "filetype", name = "git" } },
-                { "<Leader>f", group = "finders", icon = { cat = "filetype", name = "fzf" } },
-                { "<Leader>s", group = "settings", icon = { cat = "default", name = "os" } },
-                { "<Leader>t", group = "trouble", icon = { cat = "filetype", name = "trouble" } },
-                { "<Leader>v", group = "view toggles" },
-                { "<Leader>w", group = "wrapping", icon = "󰖶" },
+                { "<Leader>w", group = "wrapping", icon = { icon = " ", color = "grey" } },
+                { "<Leader>s", group = "settings", icon = { cat = "default", name = "os", color = "grey" } },
                 { "<Leader>`", hidden = true },
             },
             icons = {
@@ -31,6 +35,7 @@ return {
                     { "<gitsigns>", "" },
                 },
             },
+            sort = { "manual" },
         })
     end,
 }
