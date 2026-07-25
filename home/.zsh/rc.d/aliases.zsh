@@ -1,9 +1,17 @@
 #!/usr/bin/env zsh
-# basics
+
+# filesystem
 export LS_COLORS=$(vivid generate rose-pine-moon)
-alias ls="ls -1 -Fh --color"
-(($+commands[gls])) && alias ls="gls -1 -Fh --color -N --group-directories-first"
-alias ll="ls -Al --time-style=long-iso"
+if is_linux; then
+    (($+commands[gls])) || alias gls="ls"
+fi
+if (($+commands[gls])); then
+    alias ls="gls -1 -Fh --color -N --group-directories-first"
+    alias ll="gls -Al --time-style=long-iso"
+elif is_mac; then
+    alias ls="ls -1 -FhG"
+    alias ll="ls -Al -D '%Y-%m-%d %H:%M'"
+fi
 alias lla="ll -a"
 alias mkdir="mkdir -pv"
 
@@ -12,6 +20,10 @@ alias zhist-sync="fc -AI && fc -R"
 alias zhist-reload="fc -R"
 
 # text tools
+if is_linux; then
+    (($+commands[ggrep])) || alias ggrep="grep"
+    (($+commands[gsed])) || alias gsed="sed"
+fi
 (($+commands[gsed])) && alias sed="gsed"
 alias grep="grep --color=auto"
 (($+commands[ggrep])) && alias grep="ggrep --color=auto"
