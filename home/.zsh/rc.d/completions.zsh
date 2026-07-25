@@ -44,21 +44,30 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect '^xi' vi-insert
 
-# grouping
-zstyle ':completion:*' group-name ''
-
 # completion styles
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*:options' description 'yes'
+zstyle ':completion:*:options' auto-description '%d'
+
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 zstyle ':completion:*:*:*:*:processes' command 'ps -u $LOGNAME -o pid,user,command -w'
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
 
+# git
+zstyle ':completion:*:git-*:*' group-name ''
+zstyle ':completion:*:git-*:*:descriptions' format '%F{green}:: %d%f'
+zstyle ':completion:*:git-*:*' tag-order 'options commands' '*'
+zstyle ':completion:*:git-*:*' group-order options commands
+zstyle ':completion:*:git:*' tag-order 'main-porcelain-commands aliases user-commands third-party-commands'
+
+# ssh/scp/rsync
+zstyle ':completion:*:(ssh|scp|rsync):*' group-name ''
 zstyle ':completion:*:(ssh|scp|rsync):*:descriptions' format '%F{green}:: %d%f'
 zstyle ':completion:*:(ssh|scp|rsync):*' sort false
 zstyle ':completion:*:(ssh|scp|rsync):*' tag-order 'hosts:-domain:domain hosts:-host:host hosts:-ipaddr:ip\ address files'
 zstyle ':completion:*:(scp|rsync):*' group-order hosts-domain hosts-host hosts-ipaddr files
 zstyle ':completion:*:ssh:*' group-order hosts-domain hosts-host hosts-ipaddr
-
 zstyle ':completion:*:(ssh|scp|rsync):*:hosts-domain' ignored-patterns '<->.<->.<->.<->' '^[-[:alnum:]]##(.[-[:alnum:]]##)##' '*@*'
 zstyle ':completion:*:(ssh|scp|rsync):*:hosts-host' ignored-patterns '*(.|:)*' loopback ip6-loopback localhost ip6-localhost broadcasthost
 zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns '^(<->.<->.<->.<->|(|::)([[:xdigit:].]##:(#c,2))##(|%*))' '127.0.0.<->' '255.255.255.255' '::1' 'fe80::*'
