@@ -48,6 +48,7 @@ zstyle ':completion:*' group-name ''
 # completion styles
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
+zstyle ':completion:*:*:*:*:processes' command 'ps -u $LOGNAME -o pid,user,command -w'
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
 
 zstyle ':completion:*:(ssh|scp|rsync):*:descriptions' format '%F{green}:: %d%f'
