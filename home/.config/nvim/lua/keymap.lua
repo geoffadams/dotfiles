@@ -39,14 +39,15 @@ end, "Go to alternate file")
 u.keymap("n", "<Leader>vm", "<Cmd>lua MiniMap.toggle()<CR>", "Toggle map")
 u.keymap("n", "<Leader>vM", "<Cmd>lua MiniMap.refresh()<CR>", "Refresh map")
 
--- habit-breaking
+-- navigation + motions
 u.keymap("n", "<Up>", "", "Disable arrow nav")
 u.keymap("n", "<Down>", "", "Disable arrow nav")
 u.keymap("n", "<Left>", "", "Disable arrow nav")
 u.keymap("n", "<Right>", "", "Disable arrow nav")
-
--- backspace nav
 vim.opt.backspace = { "indent", "eol", "start" }
+u.keymap("n", "H", "0", "To first character of the line")
+u.keymap("n", "M", "^", "To first non-blank character of the line")
+u.keymap("n", "L", "$", "To last character of the line")
 
 -- terminal
 u.keymap("t", "<Esc><Esc>", "<C-\\><C-n>", "Exit terminal mode")
