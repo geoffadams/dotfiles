@@ -6,11 +6,12 @@ if is_linux; then
     (($+commands[gls])) || alias gls="ls"
 fi
 if (($+commands[gls])); then
-    alias ls="gls -1 -Fh --color -N --group-directories-first"
-    alias ll="gls -Al --time-style=long-iso"
+    alias gls="gls -AFNh --color --group-directories-first"
+    alias ls="gls -1"
+    alias ll="gls -l --time-style=long-iso"
 elif is_mac; then
-    alias ls="ls -1 -FhG"
-    alias ll="ls -Al -D '%Y-%m-%d %H:%M'"
+    alias ls="ls -1 -AFGh"
+    alias ll="ls -l -D '%Y-%m-%d %H:%M'"
 fi
 alias lla="ll -a"
 alias mkdir="mkdir -pv"
