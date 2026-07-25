@@ -13,6 +13,7 @@ setopt complete_in_word
 setopt extended_glob
 setopt glob_dots
 setopt glob_complete
+setopt auto_param_slash
 
 # completers
 zstyle ':completion:*' completer _expand _complete _match _correct _approximate
