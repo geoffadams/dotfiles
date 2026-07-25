@@ -5,4 +5,3 @@
 --glob=!.git/*
 
 --smart-case
---ignore-file=/Users/geoff.adams/.rgignore
