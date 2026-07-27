@@ -61,6 +61,7 @@ return {
             defaults = {
                 formatter = "path.filename_first",
                 git_icons = true,
+                fd_opts = [[--color=never --type f --type l --hidden --exclude .git --exclude .jj ]],
             },
             buffers = {
                 winopts = {
