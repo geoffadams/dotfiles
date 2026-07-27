@@ -66,9 +66,20 @@ return {
     },
     config = function()
         require("trouble").setup({
-            warn_no_results = false,
-            open_no_results = true,
+            warn_no_results = true,
+            open_no_results = false,
             auto_follow = false,
+            preview = {
+                type = "float",
+                relative = "editor",
+                anchor = "SW",
+                border = "rounded",
+                title = "Preview",
+                title_pos = "center",
+                position = { 0, -2 },
+                size = { width = 1, height = 0.3 },
+                zindex = 200,
+            },
             modes = {
                 diagnostics = {
                     preview = {
@@ -97,7 +108,17 @@ return {
                     },
                     focus = false,
                 },
-                lsp_references = {},
+                lsp_base = {
+                    auto_refresh = false,
+                    focus = false,
+                    win = { position = "bottom" },
+                },
+                lsp_declaration = {
+                    auto_jump = true,
+                },
+                lsp_definition = {
+                    auto_jump = true,
+                },
                 lsp_document_symbols = {
                     auto_refresh = true,
                     focus = false,

@@ -21,6 +21,7 @@ return {
                 MiniStatuslineDiagnosticError = { fg = "love", bg = "overlay" },
                 MiniStatuslineDiagnosticWarn = { fg = "gold", bg = "overlay" },
                 TroubleFilename = { fg = "iris", bold = true },
+                TroubleLspItemClient = { link = "Comment" },
             },
         })
         vim.cmd("colorscheme rose-pine-moon")
