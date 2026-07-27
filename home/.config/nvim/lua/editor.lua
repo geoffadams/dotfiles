@@ -51,5 +51,13 @@ require("mini.surround").setup()
 vim.o.foldcolumn = "auto:1"
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
-require("origami").setup()
+require("origami").setup({
+    autoFold = {
+        enabled = false,
+        kinds = {},
+    },
+    foldKeymaps = {
+        closeOnlyOnFirstColumn = true,
+    },
+})
 require("statuscol").setup()
