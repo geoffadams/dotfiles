@@ -2,13 +2,13 @@
 
 # filesystem
 export LS_COLORS=$(vivid generate rose-pine-moon)
-if is_linux; then
-    (($+commands[gls])) || alias gls="ls"
-fi
-if (($+commands[gls])); then
-    alias gls="gls -AFNh --color --group-directories-first"
-    alias ls="gls -1"
-    alias ll="gls -l --time-style=long-iso"
+
+if (($+commands[gls])) || is_linux; then
+    local ls_target="ls"
+    (($+commands[gls])) && ls_target="gls"
+    local ls_shared="$ls_target -AFNh --color --group-directories-first"
+    alias ls="$ls_shared -1"
+    alias ll="$ls_shared -l --time-style=long-iso"
 elif is_mac; then
     alias ls="ls -1 -AFGh"
     alias ll="ls -l -D '%Y-%m-%d %H:%M'"
