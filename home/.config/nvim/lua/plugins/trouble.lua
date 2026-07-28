@@ -71,13 +71,13 @@ return {
             auto_follow = false,
             preview = {
                 type = "float",
-                relative = "editor",
+                relative = "win",
                 anchor = "SW",
                 border = "rounded",
                 title = "Preview",
                 title_pos = "center",
-                position = { 0, -2 },
-                size = { width = 1, height = 0.3 },
+                position = { 0, 0 },
+                size = { width = 1, height = 1 },
                 zindex = 200,
             },
             modes = {
