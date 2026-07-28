@@ -1,5 +1,5 @@
 -- clipboard
-if vim.env.SSH_TTY ~= nil then
+if vim.env.SSH_TTY ~= nil or vim.uv.fs_stat("/.dockerenv") then
     vim.notify("osc52 enabled", vim.log.levels.INFO)
     local osc52 = require("vim.ui.clipboard.osc52")
 
