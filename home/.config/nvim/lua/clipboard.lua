@@ -1,6 +1,6 @@
 -- clipboard
 if vim.env.SSH_TTY ~= nil or vim.uv.fs_stat("/.dockerenv") then
-    vim.notify("osc52 enabled", vim.log.levels.INFO)
+    vim.notify("osc52 clipboard handler enabled", vim.log.levels.INFO)
     local osc52 = require("vim.ui.clipboard.osc52")
 
     local function copy_reg(reg)
@@ -30,7 +30,7 @@ if vim.env.SSH_TTY ~= nil or vim.uv.fs_stat("/.dockerenv") then
             end,
         },
     }
-else
-    vim.notify("osc52 not enabled", vim.log.levels.INFO)
+elseif vim.g.clipboard == nil then
+    vim.notify("no clipboard handler enabled", vim.log.levels.WARN)
 end
 vim.opt.clipboard:append("unnamedplus")
