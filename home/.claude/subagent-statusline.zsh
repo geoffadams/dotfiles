@@ -95,11 +95,13 @@ for ((i = 0; i < task_count; i++)); do
     [[ -n "$type" ]] && type_label="${(C)${type//_/ }}"
 
     typeset -T left_str left_el " "
+    left_el=()
     left_el+=("$dot")
     [[ -n "$elapsed" ]] && left_el+=("${I_BLACK}${elapsed}${RESET}")
     [[ -n "$type_label" ]] && left_el+=("${I_BLACK}${type_label}${RESET}")
 
     typeset -T right_str right_el " "
+    right_el=()
     if [[ -n "$model" ]]; then
         model_col=$(model_color "$model")
         right_el+=("$(icon "$ICON_MODEL" "$model_col")" "$(printf "${model_col}$(model_short "$model")${RESET}")")
