@@ -83,6 +83,12 @@ _fzf_git_preview_file() {
 }
 export _FZF_GIT_PREVIEW_FILE=$(functions _fzf_git_preview_file)
 
+_fzf_git_preview_diff() {
+    local line=("${(@Q)${(z)@}}")
+    git diff --color=always ${line[1]} 2>/dev/null | delta --paging never
+}
+export _FZF_GIT_PREVIEW_DIFF=$(functions _fzf_git_preview_diff)
+
 # picker builders
 _fzf_bind_preview() {
     "$@" --bind "ctrl-/:toggle-preview"
@@ -111,6 +117,11 @@ _fzf_git_with_preview_ref() {
 _fzf_git_with_preview_file() {
     _fzf_bind_preview "$@" \
         --preview "eval $_FZF_GIT_PREVIEW_FILE && _fzf_git_preview_file {}" \
+        --preview-window 'right:60%:border-line:wrap'
+}
+_fzf_git_with_preview_diff() {
+    _fzf_bind_preview "$@" \
+        --preview "eval $_FZF_GIT_PREVIEW_DIFF && _fzf_git_preview_diff {}" \
         --preview-window 'right:60%:border-line:wrap'
 }
 
@@ -205,12 +216,10 @@ _fzf_git_tracked_files() {
 
 _fzf_git_stashes() {
     git stash list --format='%gd %s' 2>/dev/null |
-        _fzf_bind_preview \
+        _fzf_git_with_preview_diff \
             _fzf_git \
             --delimiter ' ' \
             --prompt 'stash> ' \
-            --preview "git stash show -p {1} --color=always | delta" \
-            --preview-window 'right:60%:border-line:wrap' \
             --accept-nth=1 \
             --query "$1"
 }
