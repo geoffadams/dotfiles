@@ -74,6 +74,11 @@ vim.lsp.config("vtsls", {
         },
         vtsls = {
             autoUseWorkspaceTsdk = true,
+            experimental = {
+                completion = {
+                    enableServerSideFuzzyMatch = true,
+                },
+            },
         },
     },
 })
