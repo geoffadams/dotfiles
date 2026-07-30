@@ -34,6 +34,15 @@ local function devcontainer_lsp_cmd(cmd, bin, npm_package)
     })
 end
 
+vim.lsp.config("emmylua_ls", {
+    settings = {
+        emmylua = {
+            completion = {
+                callSnippet = true,
+            },
+        },
+    },
+})
 vim.lsp.enable("emmylua_ls")
 vim.lsp.config("basedpyright", {
     settings = {

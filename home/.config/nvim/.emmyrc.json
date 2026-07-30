@@ -3,22 +3,31 @@
   "runtime": {
     "version": "LuaJIT",
     "requirePattern": [
+      "?.lua",
+      "?/init.lua",
       "lua/?.lua",
       "lua/?/init.lua",
-      "?/lua/?.lua",
-      "?/lua/?/init.lua"
+      "plugin/?.lua",
+      "ftplugin/?.lua",
+      "after/?.lua",
+      "after/?/?.lua",
+      "spec/?.lua"
     ]
   },
   "diagnostics": {
-    "globals": ["vim"]
+    "globals": [
+      "vim"
+    ]
   },
   "workspace": {
     "library": [
       "$VIMRUNTIME",
-      "$LLS_Addons/luvit",
       "$HOME/.local/share/nvim/lazy"
     ],
-    "ignoreDir": ["build", ".git", "test"],
-    "ignoreGlobs": ["**/*_spec.lua"]
+    "ignoreGlobs": [
+      "**/*_spec.lua",
+      "**/tests/**/*.lua",
+      "lua/plugins/*.lua"
+    ]
   }
 }
