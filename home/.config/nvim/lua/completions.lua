@@ -1,46 +1,47 @@
 local util = require("util")
 
-vim.opt.completeopt = "fuzzy,menu,noselect,popup"
+vim.opt.completeopt = { "fuzzy", "menuone", "noselect", "popup" }
+vim.opt.complete = { ".", "w", "b", "u" }
+vim.opt.autocomplete = false
 
 util.on_very_lazy(function()
+    local config_path = vim.fn.stdpath("config")
+    local snippets = require("mini.snippets")
+    snippets.setup({
+        snippets = {
+            snippets.gen_loader.from_file(config_path .. "/snippets/global.json"),
+        },
+        expand = {
+            select = function(snips, insert)
+                return snippets.default_select(snips, insert, { insert_single = false })
+            end,
+            insert = function(snip)
+                return snippets.default_insert(snip, { insert_single = false })
+            end,
+        },
+    })
+
+    snippets.start_lsp_server()
+
     local process_items_opts = { kind_priority = { Text = -1, Snippet = 99 } }
     local completion = require("mini.completion")
     completion.setup({
         lsp_completion = {
             auto_setup = false,
-            -- Without this config autocompletion is set up through `:h 'completefunc'`.
-            -- Although not needed, setting up through `:h 'omnifunc'` is cleaner
-            -- (sets up only when needed) and makes it possible to use `<C-u>`.
             source_func = "omnifunc",
             process_items = function(items, base)
-                -- Customize post-processing of LSP responses for a better user experience.
-                -- Don't show 'Text' suggestions (usually noisy) and show snippets last.
                 return completion.default_process_items(items, base, process_items_opts)
+            end,
+            snippet_insert = function(snip)
+                return snippets.default_insert({ body = snip }, { insert_single = false })
             end,
         },
     })
 
-    -- Set 'omnifunc' for LSP completion only when needed.
     local function set_omnifunc(ev)
         vim.bo[ev.buf].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
     end
     util.lsp_attach_autocmd(nil, set_omnifunc, "Set 'omnifunc'")
 
-    local config_path = vim.fn.stdpath("config")
-    local snippets = require("mini.snippets")
-    snippets.setup({
-        snippets = {
-            -- Always load 'snippets/global.json' from config directory
-            snippets.gen_loader.from_file(config_path .. "/snippets/global.json"),
-        },
-    })
-
-    -- By default snippets available at cursor are not shown as candidates in
-    -- 'mini.completion' menu. This requires a dedicated in-process LSP server
-    -- that will provide them. To have that, uncomment next line (use `gcc`).
-    snippets.start_lsp_server()
-
-    -- Advertise to servers that Neovim now supports certain set of completion and
-    -- signature features through 'mini.completion'.
     vim.lsp.config("*", { capabilities = completion.get_lsp_capabilities() })
 end)
