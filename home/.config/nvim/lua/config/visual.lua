@@ -1,6 +1,6 @@
 local M = {}
 
-local u = require("../util")
+local u = require("util")
 local severity_to_index = vim.diagnostic.severity
 local diagnostic_icons = {
     ERROR = "",

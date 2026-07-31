@@ -1,5 +1,3 @@
-local u = require("util")
-
 vim.filetype.add({
     extension = {
         urls = function()

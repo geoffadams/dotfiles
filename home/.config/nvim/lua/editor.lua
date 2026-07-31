@@ -1,5 +1,3 @@
-local u = require("util")
-
 vim.cmd("syntax enable")
 vim.o.encoding = "utf-8"
 
