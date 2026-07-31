@@ -21,8 +21,9 @@
   },
   "workspace": {
     "library": [
+      "$HOME/.local/share/nvim/lazy",
       "$VIMRUNTIME",
-      "$HOME/.local/share/nvim/lazy"
+      "/opt/homebrew/share/nvim/runtime/pack/dist/opt"
     ],
     "ignoreGlobs": [
       "**/*_spec.lua",
