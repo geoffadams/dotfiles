@@ -126,6 +126,11 @@ local function enable_lsp_functionality(event)
     u.keymap_buf("n", "gO", [[<Cmd>Trouble lsp_document_symbols<CR>]], "Document symbols", event.buf)
 
     local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+    if client and client.name == "vtsls" then
+        require("lsp-eager-resolve")(client)
+    end
+
     if client and client:supports_method("textDocument/documentHighlight", event.buf) then
         u.lsp_highlight_autocmd({ "CursorHold", "CursorHoldI" }, event.buf, vim.lsp.buf.document_highlight)
         u.lsp_highlight_autocmd({ "CursorMoved", "CursorMovedI" }, event.buf, vim.lsp.buf.clear_references)
