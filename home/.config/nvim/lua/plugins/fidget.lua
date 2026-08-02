@@ -9,6 +9,7 @@ return {
                 winblend = 40,
                 border = "rounded",
                 tabstop = 2,
+                zindex = 500,
             },
         },
     },

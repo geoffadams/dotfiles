@@ -1,10 +1,64 @@
--- interface
-require("vim._core.ui2").enable({})
-vim.o.mouse = "a" -- enable mouse in all modes
-vim.o.splitright = true -- split to right
-vim.o.splitbelow = true -- split to bottom
+vim.o.mouse = "a"
+
+-- appearance
 vim.opt.winborder = "rounded"
 vim.opt.pumborder = "rounded"
+
+local ui2 = require("vim._core.ui2")
+ui2.enable({
+    enable = true,
+    msg = {
+        targets = {
+            [""] = "msg",
+            bufwrite = "msg",
+            emsg = "msg",
+            wmsg = "msg",
+            echo = "msg",
+            echomsg = "msg",
+            echoerr = "msg",
+            verbose = "pager",
+            list_cmd = "pager",
+            lua_print = "msg",
+            lua_error = "pager",
+        },
+        pager = {
+            height = 0.5,
+        },
+    },
+})
+
+local msgs = require("vim._core.ui2.messages")
+local orig_set_pos = msgs.set_pos
+msgs.set_pos = function(tgt)
+    orig_set_pos(tgt)
+    if (tgt == "msg" or tgt == nil) and vim.api.nvim_win_is_valid(ui2.wins.msg) then
+        local line_count = vim.api.nvim_buf_line_count(vim.api.nvim_win_get_buf(ui2.wins.msg))
+        vim.wo[ui2.wins.msg].scrolloff = 0
+        pcall(vim.api.nvim_win_set_config, ui2.wins.msg, {
+            relative = "tabline",
+            height = math.min(line_count, math.floor(vim.o.lines / 4)),
+            row = 0,
+            col = 0,
+            anchor = "NW",
+            border = "rounded",
+            style = "minimal",
+        })
+        vim.api.nvim_win_set_cursor(ui2.wins.msg, { line_count, 0 })
+    end
+    if tgt == "pager" and vim.api.nvim_win_is_valid(ui2.wins.pager) then
+        vim.wo[ui2.wins.pager].scrolloff = 0
+        pcall(vim.api.nvim_win_set_config, ui2.wins.pager, {
+            relative = "editor",
+            width = math.floor(vim.o.columns * 1),
+            height = math.floor(vim.o.lines * 0.5),
+            row = vim.o.lines - 2,
+            col = 0,
+            anchor = "SW",
+            border = "rounded",
+            style = "minimal",
+        })
+    end
+end
 
 -- command line
 require("mini.cmdline").setup()
@@ -32,6 +86,10 @@ vim.o.cursorline = true -- active line highlight
 
 -- buffers
 require("mini.tabline").setup()
+
+-- windows
+vim.o.splitright = true
+vim.o.splitbelow = true
 
 -- theme
 vim.o.termguicolors = true
@@ -149,3 +207,5 @@ vim.api.nvim_create_autocmd("BufEnter", {
         end
     end,
 })
+
+-- ui2
