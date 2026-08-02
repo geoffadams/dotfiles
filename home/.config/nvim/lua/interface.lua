@@ -32,7 +32,6 @@ vim.o.cursorline = true -- active line highlight
 
 -- buffers
 require("mini.tabline").setup()
-require("mini.bufremove").setup()
 
 -- theme
 vim.o.termguicolors = true

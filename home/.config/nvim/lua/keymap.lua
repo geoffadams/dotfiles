@@ -6,6 +6,9 @@ mkeymap.setup()
 local pairs = require("mini.pairs")
 pairs.setup()
 
+local bufremove = require("mini.bufremove")
+bufremove.setup()
+
 -- system
 u.keymap("n", "<Leader>sr", [[<Cmd>restart<CR>]], "Restart nvim")
 
@@ -72,12 +75,20 @@ local quick_close_filetypes = {
     "nofile",
     "qf",
     "startuptime",
+    "canola",
 }
 local quick_close_buftypes = {
     "help",
     "nofile",
     "quickfix",
 }
+local close_window = function()
+    if #vim.api.nvim_list_wins() > 1 then
+        vim.api.nvim_win_close(0, false) --'<C-w>c'
+    else
+        bufremove.delete(0, true)
+    end
+end
 vim.api.nvim_create_autocmd("FileType", {
     callback = function(opts)
         if
@@ -85,13 +96,8 @@ vim.api.nvim_create_autocmd("FileType", {
             or vim.tbl_contains(quick_close_filetypes, vim.bo[opts.buf].filetype)
             or vim.tbl_contains(quick_close_buftypes, vim.bo[opts.buf].buftype)
         then
-            u.keymap_buf("n", "q", function()
-                if #vim.api.nvim_list_wins() > 1 then
-                    vim.api.nvim_win_close(0, false) --'<C-w>c'
-                else
-                    vim.cmd.normal("ga")
-                end
-            end, "Quick-close buffer", opts.buf)
+            u.keymap_buf("n", "q", close_window, "Close window", opts.buf)
+            u.keymap_buf("n", "<Esc>", close_window, "Close window", opts.buf)
         end
     end,
 })
