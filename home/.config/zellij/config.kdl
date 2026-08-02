@@ -293,9 +293,12 @@ plugins {
         mode_rename_tab    "#[fg=black,bg=blue,bold]  "
         mode_rename_pane   "#[fg=black,bg=blue,bold]  "
 
-        tab_normal   "#[fg=white,bg=black] {name} "
+        tab_normal   "#[fg=white,bg=black] {bell_indicator}{name} "
         tab_normal_fullscreen "#[fg=white,bg=black] {name} {fullscreen_indicator}"
         tab_normal_sync "#[fg=white,bg=black] {name} {sync_indicator}"
+
+        tab_normal_bell         "#[fg=yellow,bg=black,bold] {bell_indicator}{name} "
+        tab_normal_flashing_bell "#[fg=red,bg=black,bold] {bell_indicator}{name} "
 
         tab_active   "#[fg=bright_magenta,bg=black,bold] {name} "
         tab_active_fullscreen "#[fg=magenta,bg=black,bold] {name} {fullscreen_indicator}"
@@ -305,6 +308,8 @@ plugins {
         tab_sync_indicator       " "
         tab_fullscreen_indicator " "
         tab_floating_indicator   " "
+        tab_bell_indicator       "󰂜 "
+        tab_flashing_bell_indicator "󰂟 "
 
         tab_display_count         "5"
         tab_truncate_start_format "#[fg=bright_black,bg=black,bold] {count} "
