@@ -82,7 +82,11 @@ _fzf_git_preview_file() {
             git diff --color=always --no-index -- /dev/null "$f" | delta --file-style "omit" --paging never
         fi
     else
-        git diff --color=always HEAD -- "$f" 2>/dev/null | delta --file-style "omit" --paging never
+        if git diff --quiet -- "$f" 2>/dev/null; then
+            git diff --color=always --cached -- "$f" 2>/dev/null | delta --file-style "omit" --paging never
+        else
+            git diff --color=always -- "$f" 2>/dev/null | delta --file-style "omit" --paging never
+        fi
     fi
 }
 export _FZF_GIT_PREVIEW_FILE=$(functions _fzf_git_preview_file)
