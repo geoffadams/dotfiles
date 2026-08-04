@@ -38,8 +38,8 @@ msgs.set_pos = function(tgt)
             relative = "tabline",
             height = math.min(line_count, math.floor(vim.o.lines / 4)),
             row = 0,
-            col = 0,
-            anchor = "NW",
+            col = vim.o.columns - 1,
+            anchor = "NE",
             border = "rounded",
             style = "minimal",
         })
