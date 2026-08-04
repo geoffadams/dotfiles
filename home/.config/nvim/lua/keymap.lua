@@ -14,6 +14,14 @@ u.keymap("n", "<Leader>sr", [[<Cmd>restart<CR>]], "Restart nvim")
 u.keymap("n", "<Leader>sm", function()
     require("messages-history").toggle()
 end, "Messages history")
+u.keymap("n", "<Leader>sc", function()
+    local toggle = require("clipboard").toggle_osc52_paste
+    if toggle then
+        toggle()
+    else
+        vim.notify("osc52 clipboard handler not active", vim.log.levels.WARN)
+    end
+end, "Toggle OSC52 paste")
 
 -- windows
 u.keymap("n", "<C-h>", "<Cmd>wincmd h<CR>", "Move to window to left")

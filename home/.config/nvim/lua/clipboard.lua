@@ -1,3 +1,5 @@
+local M = {}
+
 if vim.env.SSH_TTY ~= nil or vim.uv.fs_stat("/.dockerenv") then
     vim.notify("osc52 clipboard handler enabled", vim.log.levels.INFO)
     local osc52 = require("vim.ui.clipboard.osc52")
@@ -24,19 +26,50 @@ if vim.env.SSH_TTY ~= nil or vim.uv.fs_stat("/.dockerenv") then
         end
     end
 
-    vim.g.clipboard = {
-        name = "OSC 52 with register sync",
-        copy = {
-            ["+"] = copy_reg("+"),
-            ["*"] = copy_reg("*"),
-        },
-        -- Do NOT use OSC52 paste, just use the cached copy
+    local copy_providers = {
+        ["+"] = copy_reg("+"),
+        ["*"] = copy_reg("*"),
+    }
+
+    local write_only = {
+        name = "OSC 52 (write-only)",
+        copy = copy_providers,
         paste = {
             ["+"] = paste_reg("+"),
             ["*"] = paste_reg("*"),
         },
     }
+
+    local full = {
+        name = "OSC 52",
+        copy = copy_providers,
+        paste = {
+            ["+"] = osc52.paste("+"),
+            ["*"] = osc52.paste("*"),
+        },
+    }
+
+    vim.g.clipboard = write_only
+
+    local osc52_paste_enabled = false
+
+    M.toggle_osc52_paste = function()
+        osc52_paste_enabled = not osc52_paste_enabled
+        vim.g.clipboard = osc52_paste_enabled and full or write_only
+
+        -- The provider resolves g:clipboard into its own script-locals on first
+        -- use and never re-reads it, so force it to pick up the new table.
+        vim.g.loaded_clipboard_provider = nil
+        vim.cmd("runtime autoload/provider/clipboard.vim")
+
+        vim.notify(
+            "osc52 paste " .. (osc52_paste_enabled and "enabled" or "disabled") .. " for this session",
+            vim.log.levels.INFO
+        )
+    end
 elseif vim.g.clipboard == nil then
     vim.notify("no clipboard handler enabled", vim.log.levels.WARN)
 end
 vim.opt.clipboard:append("unnamedplus")
+
+return M
