@@ -32,6 +32,8 @@ mouse-scroll-multiplier = precision:1,discrete:0.5
 macos-option-as-alt = right
 
 # keybinds
+## multiline input
+keybind = shift+enter=text:\x1b\r
 ## term control
 keybind = super+shift+k=clear_screen
 keybind = super+shift+r=reset
