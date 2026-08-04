@@ -13,4 +13,13 @@ return {
             },
         },
     },
+    keys = {
+        {
+            "<Leader>sn",
+            function()
+                require("fidget-history").toggle()
+            end,
+            desc = "Notification history",
+        },
+    },
 }

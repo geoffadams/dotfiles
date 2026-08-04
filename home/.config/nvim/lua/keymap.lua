@@ -11,6 +11,9 @@ bufremove.setup()
 
 -- system
 u.keymap("n", "<Leader>sr", [[<Cmd>restart<CR>]], "Restart nvim")
+u.keymap("n", "<Leader>sm", function()
+    require("messages-history").toggle()
+end, "Messages history")
 
 -- windows
 u.keymap("n", "<C-h>", "<Cmd>wincmd h<CR>", "Move to window to left")
