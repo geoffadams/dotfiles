@@ -268,7 +268,7 @@ plugins {
     welcome-screen location="zellij:session-manager" {
         welcome_screen true
     }
-    zjstatus location="file:~/.config/zellij/plugins/zjstatus.wasm" {
+    zjstatus location="file:~/.local/share/zellij/plugins/zjstatus.wasm" {
         format_left   "{mode}{command_pwd}{command_git_branch}"
         format_center "{tabs}"
         format_right  "{swap_layout}#[fg=magenta,bg=black,bold]  {session} "
@@ -329,15 +329,15 @@ plugins {
         command_git_branch_interval    "10"
         command_git_branch_rendermode  "static"
     }
-    // zjframes location="file:~/.config/zellij/plugins/zjframes.wasm" {
+    // zjframes location="file:~/.local/share/zellij/plugins/zjframes.wasm" {
     //     hide_frame_for_single_pane       "false"
     //     hide_frame_except_for_search     "true"
     //     hide_frame_except_for_scroll     "true"
     //     hide_frame_except_for_fullscreen "false"
     // }
-    zellij_forgot location="file:~/.config/zellij/plugins/zellij_forgot.wasm" {
+    zellij_forgot location="file:~/.local/share/zellij/plugins/zellij_forgot.wasm" {
     }
-    zsm location="file:~/.config/zellij/plugins/zsm.wasm" {
+    zsm location="file:~/.local/share/zellij/plugins/zsm.wasm" {
         session_separator "-"
         show_resurrectable_sessions true
         base_paths "/home/geoff.adams/Workspace|/Users/geoff.adams"
