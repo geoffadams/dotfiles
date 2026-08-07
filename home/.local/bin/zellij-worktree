@@ -1,0 +1,36 @@
+#!/usr/bin/env zsh
+# Open a git worktree as a new tab in the current Zellij session, split into
+# nvim + `devcontainer exec claude` + a shell.
+#
+# Usage: zellij-worktree <dir>
+#   <dir>  worktree directory
+set -euo pipefail
+
+layout="$HOME/.config/zellij/layouts/worktree.kdl"
+
+if [[ $# -ne 1 ]]; then
+    echo "usage: ${0:t} <worktree-dir>" >&2
+    exit 1
+fi
+
+if [[ -z ${ZELLIJ:-} ]]; then
+    echo "${0:t}: not inside a Zellij session" >&2
+    exit 1
+fi
+
+dir=${1:A}
+
+if [[ ! -d $dir ]]; then
+    echo "${0:t}: no such directory: $1" >&2
+    exit 1
+fi
+
+if ! git -C "$dir" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    echo "${0:t}: not a git worktree: $1" >&2
+    exit 1
+fi
+
+zellij action new-tab \
+    --layout "${layout}" \
+    --cwd "$dir" \
+    --name "${dir:t}"
