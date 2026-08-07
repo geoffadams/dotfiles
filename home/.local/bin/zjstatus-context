@@ -1,0 +1,17 @@
+#!/usr/bin/env zsh
+# Style git-context output for the zjstatus bar. The result embeds zjstatus
+# format specifiers, so its widget needs rendermode "dynamic".
+emulate -L zsh
+
+REPO_FMT="#[fg=cyan,bg=black,bold]"
+REF_FMT="#[fg=magenta,bg=black]"
+ICON_WORKTREE="󰙅"
+ICON_BRANCH=""
+
+IFS=$'\t' read -r kind name ref < <(git-context)
+
+case $kind in
+worktree) print -n "${REPO_FMT} ${name} ${REF_FMT}${ICON_WORKTREE} ${ref} " ;;
+repo)     print -n "${REPO_FMT} ${name} ${REF_FMT}${ICON_BRANCH} ${ref} " ;;
+*)        print -n "${REPO_FMT} ${name} " ;;
+esac

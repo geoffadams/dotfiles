@@ -269,7 +269,7 @@ plugins {
         welcome_screen true
     }
     zjstatus location="file:~/.local/share/zellij/plugins/zjstatus.wasm" {
-        format_left   "{mode}{command_pwd}{command_git_branch}"
+        format_left   "{mode}{command_context}"
         format_center "{tabs}"
         format_right  "{swap_layout}#[fg=magenta,bg=black,bold]  {session} "
         format_space  "#[bg=black]"
@@ -319,15 +319,11 @@ plugins {
         swap_layout_format          "#[fg=white,bg=black]  {name} "
         swap_layout_hide_if_empty   "true"
 
-        command_pwd_command "zsh -c 'grealpath -s --relative-base=\"$HOME\" \"$(pwd)\"'"
-        command_pwd_format      "#[fg=cyan,bg=black,bold] {stdout} "
-        command_pwd_interval    "10"
-        command_pwd_rendermode  "static"
-
-        command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
-        command_git_branch_format      "#[fg=magenta,bg=black] {stdout} "
-        command_git_branch_interval    "10"
-        command_git_branch_rendermode  "static"
+        // zjstatus-context emits its own format specifiers, hence "dynamic".
+        command_context_command     "zsh -c zjstatus-context"
+        command_context_format      "{stdout}"
+        command_context_interval    "10"
+        command_context_rendermode  "dynamic"
     }
     // zjframes location="file:~/.local/share/zellij/plugins/zjframes.wasm" {
     //     hide_frame_for_single_pane       "false"
