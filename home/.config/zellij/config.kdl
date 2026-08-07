@@ -7,6 +7,17 @@ keybinds clear-defaults=true {
             }
         }
 
+        bind "Super Ctrl Alt Shift F5" {
+            Run "zellij-worktree" {
+                floating true
+                close_on_exit true
+                x "49%"
+                y "49%"
+                width "1%"
+                height "1%"
+            }
+        }
+
         bind "Super Ctrl Alt Shift 0" { ToggleFocusFullscreen; }
         bind "Super Ctrl Alt Shift -" { Resize "Decrease"; }
         bind "Super Ctrl Alt Shift =" { Resize "Increase"; }
