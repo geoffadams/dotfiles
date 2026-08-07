@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+# Query the terminal's clipboard via OSC 52 and print the decoded contents.
+# Usage: osc52-paste-test [c|p]   (c = clipboard/"+", p = primary/"*"; default c)
+set -euo pipefail
+
+selection=${1:-c}
+case "$selection" in
+c | p) ;;
+*)
+    echo "usage: $(basename "$0") [c|p]" >&2
+    exit 1
+    ;;
+esac
+
+if [[ ! -t 0 || ! -t 1 ]]; then
+    echo "must be run in an interactive terminal" >&2
+    exit 1
+fi
+
+stty_save=$(stty -g)
+trap 'stty "$stty_save"' EXIT
+stty raw -echo
+
+printf '\033]52;%s;?\033\\' "$selection" >/dev/tty
+
+response=""
+while IFS= read -r -n1 -t 5 ch; do
+    response+="$ch"
+    [[ $response == *$'\033\\' ]] && break
+done
+
+stty "$stty_save"
+trap - EXIT
+
+if [[ -z $response ]]; then
+    echo "no response from terminal (timed out after 5s)" >&2
+    exit 1
+fi
+
+encoded=${response#*"52;"}
+encoded=${encoded#*;}
+encoded=${encoded%$'\033\\'}
+
+if [[ -z $encoded || $encoded == "$response" ]]; then
+    echo "unexpected response: $(printf '%q' "$response")" >&2
+    exit 1
+fi
+
+base64 -d <<<"$encoded"
