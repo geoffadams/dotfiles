@@ -1,0 +1,50 @@
+#!/usr/bin/env zsh
+# Describe a directory's git/filesystem context, preferring the most specific
+# form that applies. Prints one tab-separated line: <kind>\t<name>\t<ref>
+#
+#   worktree  <repo>  <worktree-dir>   inside a linked worktree
+#   repo      <repo>  <branch|sha>     inside a normal repo
+#   dir       <path>  (empty)          anywhere else
+#
+# Usage: git-context [dir]   (defaults to $PWD)
+#
+# Callers do their own formatting: see zjstatus-context and statusline.sh.
+emulate -L zsh
+
+TAB=$'\t'
+
+target=${1:-$PWD}
+cd -q -- "$target" 2>/dev/null || {
+    print -r -- "dir${TAB}${target}${TAB}"
+    exit 0
+}
+
+git_dir=$(git rev-parse --absolute-git-dir 2>/dev/null)
+
+# plain directories
+if [[ -z $git_dir ]]; then
+    realpath_cmd=realpath
+    (($+commands[grealpath])) && realpath_cmd=grealpath
+    print -r -- "dir${TAB}$($realpath_cmd -s --relative-base="$HOME" "$PWD")${TAB}"
+    exit 0
+fi
+
+# git repos
+common_dir=$(git rev-parse --path-format=absolute --git-common-dir)
+repo=${common_dir:t}
+if [[ $repo == .* ]]; then
+    repo=${${common_dir:h}:t}
+else
+    repo=${repo%.git}
+fi
+
+if [[ ${${git_dir:h}:t} == worktrees ]]; then
+    # worktree
+    toplevel=$(git rev-parse --show-toplevel)
+    print -r -- "worktree${TAB}${repo}${TAB}${toplevel:t}"
+else
+    # plain repo
+    ref=$(git branch --show-current)
+    [[ -z $ref ]] && ref=$(git rev-parse --short HEAD)
+    print -r -- "repo${TAB}${repo}${TAB}${ref}"
+fi
